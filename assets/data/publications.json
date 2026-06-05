@@ -126,18 +126,6 @@
       "focus": "Poster visual linking chronic air pollution exposure with mortality risk in a high-risk HIV cohort.",
       "featured_order": 9,
       "manual_only": true
-    },
-    {
-      "title": "Building a High-Resolution PM2.5 Map for Bhaktapur, Nepal: A Dynamic Spatiotemporal Calibration Model for Low-Cost Sensors",
-      "short_title": "High-resolution PM2.5 mapping in Bhaktapur, Nepal",
-      "authors": "Yang M, Nicolaou L",
-      "venue": "Manuscript in preparation",
-      "year": 2026,
-      "image": "images/publications/pm25-nepal.svg",
-      "tags": ["PM2.5", "Sensor calibration", "Geostatistics"],
-      "focus": "Develops dynamic spatiotemporal calibration models for low-cost PM2.5 sensors using reference monitors, meteorology, and geospatial methods.",
-      "featured_order": 10,
-      "manual_only": true
     }
   ],
   "fallbackImage": "images/publications/scholar-update.svg"
