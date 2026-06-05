@@ -60,34 +60,34 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 ## Research Experience
 
-**Johns Hopkins University School of Medicine**
+Johns Hopkins University School of Medicine
 
-*Senior Research Data Analyst, Prof. William Checkley | Sep 2023 - Present*
+Senior Research Data Analyst, Prof. William Checkley | Sep 2023 - Present
 
 - Serve as lead analyst across multinational environmental and respiratory health studies, harmonizing more than 100 million data points spanning exposure, clinical, questionnaire, biomarker, sensor, and social-network datasets.
 - Build reproducible R/SQL/Python workflows and internal tools for data integration, quality control, calibration, visualization, and statistical reporting across study sites.
 - Apply linear mixed models, Bayesian and multilevel models, causal DAGs, functional data analysis, geostatistics, random forests, and XGBoost to multi-level environmental health questions.
 - Design and maintain REDCap systems linking household, individual, facility, and clinical forms; train collaborators on data quality workflows and reporting.
 
-**Selected JHU projects**
+Selected JHU projects
 
-- **GECo - COPD and chronic bronchitis, Nepal, Peru, and Uganda:** quantified COPD burden, chronic bronchitis risk factors, population attributable fractions, and SGRQ-based screening performance in large LMIC cohorts.
-- **HAPIN - child growth and neurodevelopment, Puno, Peru:** evaluated PM2.5/CO exposure-response relationships for early child growth and Bayley-III neurodevelopmental outcomes using longitudinal and causal inference frameworks.
-- **CHAP - social networks and clean fuel adoption, Peru:** analyzed how network structure, tie strength, and aspirational ties shape sustained LPG stove use in rural communities.
-- **Global Lung Health / Chiesi projects, Nepal and Peru:** supported spirometry and oscillometry screening among brick-kiln workers through REDCap architecture, data quality control, and visualization workflows.
-- **Nocturnal hypoxia and cardiometabolic risk, Puno, Peru:** applied functional principal component analysis to continuous SpO2 curves to identify hypoxia phenotypes and their cardiometabolic correlates.
+- GECo - COPD and chronic bronchitis, Nepal, Peru, and Uganda: quantified COPD burden, chronic bronchitis risk factors, population attributable fractions, and SGRQ-based screening performance in large LMIC cohorts.
+- HAPIN - child growth and neurodevelopment, Puno, Peru: evaluated PM2.5/CO exposure-response relationships for early child growth and Bayley-III neurodevelopmental outcomes using longitudinal and causal inference frameworks.
+- CHAP - social networks and clean fuel adoption, Peru: analyzed how network structure, tie strength, and aspirational ties shape sustained LPG stove use in rural communities.
+- Global Lung Health / Chiesi projects, Nepal and Peru: supported spirometry and oscillometry screening among brick-kiln workers through REDCap architecture, data quality control, and visualization workflows.
+- Nocturnal hypoxia and cardiometabolic risk, Puno, Peru: applied functional principal component analysis to continuous SpO2 curves to identify hypoxia phenotypes and their cardiometabolic correlates.
 
-**Johns Hopkins Bloomberg School of Public Health**
+Johns Hopkins Bloomberg School of Public Health
 
-*Research Assistant, Dr. Laura Nicolaou | Dec 2023 - Present*
+Research Assistant, Dr. Laura Nicolaou | Dec 2023 - Present
 
 - Lead ambient air pollution projects using four years of monitoring-network and E-Sampler data in Nepal and Peru.
 - Develop cross-regional calibration models for co-located PurpleAir low-cost PM2.5 sensors against MetOne E-Sampler reference monitors using kriging, random forest, and XGBoost.
 - Generate hourly PM2.5 exposure maps integrating meteorological covariates to study seasonal variation and urban-rural disparities in LMIC settings.
 
-**Rollins School of Public Health, Emory University**
+Rollins School of Public Health, Emory University
 
-*Data Analyst, Prof. Kyle Steenland | Jan 2025 - Present*
+Data Analyst, Prof. Kyle Steenland | Jan 2025 - Present
 
 - Conduct HAPIN data management and socioeconomic index construction using Multiple Correspondence Analysis across Guatemala, India, Peru, and Rwanda.
 - Reproduce and validate analytic workflows in R Markdown and contribute to manuscript development for household air pollution and child health analyses.
