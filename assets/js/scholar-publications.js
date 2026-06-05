@@ -38,6 +38,7 @@
   }
 
   function publicationUrl(pub) {
+    if (pub.url) return pub.url;
     if (pub.doi) return doiUrl(pub.doi);
     if (pub.pmid) return "https://pubmed.ncbi.nlm.nih.gov/" + pub.pmid + "/";
     if (pub.citedby_url) return pub.citedby_url;
@@ -92,8 +93,8 @@
           short_title: item.title,
           venue: "Google Scholar",
           image: displayData.fallbackImage,
-          tags: ["Google Scholar", "Auto-added"],
-          focus: "This publication was added from Google Scholar. Curated journal details and a custom image can be added later.",
+          tags: ["Google Scholar", "Auto-synced"],
+          focus: "",
           source: "scholar-auto"
         });
       });
@@ -120,6 +121,9 @@
     var citationHtml = citation !== null
       ? "<span class=\"pub-card__metric\">" + citation + " citations</span>"
       : "";
+    var focusHtml = pub.focus
+      ? "    <p class=\"pub-card__focus\">" + escapeHtml(pub.focus) + "</p>"
+      : "";
     var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\">" : "";
     var linkClose = url ? "</a>" : "";
     return [
@@ -135,7 +139,7 @@
       "    </div>",
       "    <h3>" + linkOpen + escapeHtml(title) + linkClose + "</h3>",
       "    <p class=\"pub-card__authors\">" + escapeHtml(pub.authors || "") + "</p>",
-      "    <p class=\"pub-card__focus\">" + escapeHtml(pub.focus || "") + "</p>",
+      focusHtml,
       "    <div class=\"pub-card__tags\">" + renderTags(pub.tags) + "</div>",
       "  </div>",
       "</article>"

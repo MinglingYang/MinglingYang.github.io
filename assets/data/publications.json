@@ -15,7 +15,7 @@
       "venue": "The Lancet Regional Health - Americas",
       "year": 2026,
       "doi": "10.1016/j.lana.2026.101382",
-      "image": "images/publications/hapin-growth.svg",
+      "image": "images/publications/hapin-growth.png",
       "tags": ["HAPIN", "Child growth", "Household air pollution"],
       "focus": "Modeled linear growth trajectories after long-term follow-up of clean cooking intervention exposure in Puno, Peru.",
       "featured_order": 1
@@ -28,7 +28,7 @@
       "venue": "European Respiratory Journal",
       "year": 2026,
       "doi": "10.1183/13993003.01435-2025",
-      "image": "images/publications/chronic-bronchitis.svg",
+      "image": "images/publications/chronic-bronchitis.png",
       "tags": ["GECo", "Chronic bronchitis", "Respiratory epidemiology"],
       "focus": "Examined chronic bronchitis burden, modifiable risk factors, lung function, and clinical outcomes across LMIC populations.",
       "featured_order": 2
@@ -43,7 +43,7 @@
       "doi": "10.1164/rccm.202409-1862OC",
       "pmid": "40068167",
       "pmcid": "PMC12091018",
-      "image": "images/publications/copd-screening.svg",
+      "image": "images/publications/copd-screening.png",
       "tags": ["GECo", "COPD", "Screening"],
       "focus": "Evaluated a low-cost SGRQ-based COPD screening strategy for places where spirometry access is limited.",
       "featured_order": 3
@@ -58,7 +58,7 @@
       "doi": "10.1289/EHP15500",
       "pmid": "40354572",
       "pmcid": "PMC12142655",
-      "image": "images/publications/hapin-neurodevelopment.svg",
+      "image": "images/publications/hapin-neurodevelopment.png",
       "tags": ["HAPIN", "Neurodevelopment", "Exposure response"],
       "focus": "Assessed LPG intervention and PM2.5 exposure-response relationships with Bayley-III neurodevelopmental outcomes.",
       "featured_order": 4
@@ -70,10 +70,62 @@
       "authors": "HAPIN investigators with Yang M",
       "venue": "JAMA Network Open",
       "year": 2025,
-      "image": "images/publications/hapin-pneumonia.svg",
+      "doi": "10.1001/jamanetworkopen.2025.38721",
+      "pmid": "41160028",
+      "pmcid": "PMC12573034",
+      "image": "images/publications/hapin-pneumonia.png",
       "tags": ["HAPIN", "Pneumonia", "Child health"],
       "focus": "Connected household biomass cooking exposure with severe pneumonia risk in infant health analyses.",
       "featured_order": 5
+    },
+    {
+      "scholar_id": "cNanG64AAAAJ:2osOgNQ5qMEC",
+      "title": "Chronic bronchitis risk factors and outcomes in a multinational cohort",
+      "short_title": "Chronic bronchitis risk factors and outcomes",
+      "authors": "Robertson NM, Sharma AK, Yang M, Das SK, Siddharthan T, Pollard S, Rykiel NA, Alupo P, Flores-Flores O, Kirenga B, Chandyo RK, Quaderi SA, Shrestha L, Wise RA, Hurst JR, Checkley W",
+      "venue": "Conference poster and abstract",
+      "year": 2025,
+      "image": "images/publications/chronic-bronchitis.png",
+      "tags": ["Poster", "GECo", "Chronic bronchitis"],
+      "focus": "Poster presentation on chronic bronchitis risk factors, respiratory symptoms, lung function, and outcomes across multinational LMIC cohorts.",
+      "featured_order": 6
+    },
+    {
+      "scholar_id": "cNanG64AAAAJ:u-x6o8ySG0sC",
+      "title": "Screening for Chronic Obstructive Pulmonary Disease (COPD) Using the St. George's Respiratory Questionnaire",
+      "short_title": "ATS abstract: COPD screening with SGRQ",
+      "authors": "Checkley W, Yang M, Robertson NM, Sharma AK, Chandyo RK, Shrestha L, Das SK, Kirenga B, Alupo P, Gianella G, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR, Wise RA",
+      "venue": "American Thoracic Society International Conference Abstract",
+      "year": 2025,
+      "url": "https://www.atsjournals.org/doi/abs/10.1164/ajrccm-conference.2025.211.1_MeetingAbstracts.A1247",
+      "image": "images/publications/ats-copd-screening.png",
+      "tags": ["ATS", "Poster", "COPD screening"],
+      "focus": "Conference abstract presenting a low-cost SGRQ-based COPD screening strategy for resource-limited settings.",
+      "featured_order": 7
+    },
+    {
+      "title": "Characterization of Post-TB Lung Disease and Its Impact on Quality of Life in Uganda: A Prospective Cohort Study",
+      "short_title": "ATS 2024 poster: post-TB lung disease and quality of life",
+      "authors": "Robertson N, Mudarshira B, Siddharthan T, Zawedde-Muyanja S, Kirenga B, Gharai L, Helwig M, Jackson P",
+      "venue": "American Thoracic Society International Conference Poster",
+      "year": 2024,
+      "image": "images/publications/ats-2024-post-tb-poster.png",
+      "tags": ["ATS 2024", "Poster", "Post-TB lung disease"],
+      "focus": "Poster visual summarizing post-TB lung disease burden, lung function impairment, respiratory symptoms, and quality of life in Uganda.",
+      "featured_order": 8,
+      "manual_only": true
+    },
+    {
+      "title": "Air Pollution, HIV and Mortality",
+      "short_title": "ERS 2024 poster: air pollution, HIV, and mortality",
+      "authors": "Robertson N, Astemborski J, Koehler K, Kirk G, Wilks M, McCormack M, Raju S",
+      "venue": "European Respiratory Society Congress Poster",
+      "year": 2024,
+      "image": "images/publications/ers-2024-air-pollution-poster.png",
+      "tags": ["ERS 2024", "Poster", "Air pollution"],
+      "focus": "Poster visual linking chronic air pollution exposure with mortality risk in a high-risk HIV cohort.",
+      "featured_order": 9,
+      "manual_only": true
     },
     {
       "title": "Building a High-Resolution PM2.5 Map for Bhaktapur, Nepal: A Dynamic Spatiotemporal Calibration Model for Low-Cost Sensors",
@@ -84,7 +136,7 @@
       "image": "images/publications/pm25-nepal.svg",
       "tags": ["PM2.5", "Sensor calibration", "Geostatistics"],
       "focus": "Develops dynamic spatiotemporal calibration models for low-cost PM2.5 sensors using reference monitors, meteorology, and geospatial methods.",
-      "featured_order": 6,
+      "featured_order": 10,
       "manual_only": true
     }
   ],

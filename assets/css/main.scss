@@ -146,7 +146,7 @@ h1:before, .anchor:before {
 
 .pub-card {
     display: grid;
-    grid-template-columns: minmax(160px, 32%) 1fr;
+    grid-template-columns: minmax(230px, 40%) 1fr;
     gap: 1.25rem;
     align-items: stretch;
     padding: .9rem;
@@ -163,7 +163,7 @@ h1:before, .anchor:before {
 .pub-card__image-wrap {
     overflow: hidden;
     border-radius: 8px;
-    min-height: 190px;
+    min-height: 230px;
     background: #eef4f8;
 
     @include breakpoint(max-width $medium) {
@@ -175,7 +175,7 @@ h1:before, .anchor:before {
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 190px;
+    min-height: 230px;
     object-fit: cover;
 }
 
