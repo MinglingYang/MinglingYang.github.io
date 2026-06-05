@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Mingling (Mona) Yang"
-description              : "Environmental epidemiology, exposure science, PFAS/exposomics, and global respiratory health"
+description              : "Environmental epidemiology, exposure science, PFAS/exposomics, and global health"
 repository               : "MinglingYang/MinglingYang.github.io"
 google_scholar_stats_use_cdn : true
 
@@ -23,9 +23,9 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Mingling (Mona) Yang"
   avatar           : "images/android-chrome-512x512.png"
-  bio              : "Incoming Ph.D. Student in Epidemiology at USC; Senior Research Data Analyst at Johns Hopkins"
-  location         : "Baltimore, MD / Los Angeles, CA"
-  employer         :  "JHU School of Medicine; USC Keck School of Medicine"
+  bio              : "Incoming Ph.D. Student in Epidemiology"
+  location         : "Los Angeles, CA"
+  employer         :  "USC Keck School<br>of Medicine"
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=cNanG64AAAAJ"
   email            : "myang83@jh.edu"

@@ -107,3 +107,133 @@ h1:before, .anchor:before {
     background-color: #00369f;
     font-size: .8em;
 }
+
+.scholar-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: .8rem 0 1.4rem;
+
+    span {
+        display: inline-flex;
+        align-items: center;
+        gap: .25rem;
+        padding: .35rem .65rem;
+        border: 1px solid #d8e2ee;
+        border-radius: 999px;
+        background: #f8fbff;
+        color: #31465c;
+        font-size: .78em;
+    }
+}
+
+.auto-note {
+    color: #5f7184;
+    font-size: .88em;
+}
+
+.auto-scholar-block {
+    ul {
+        margin-top: .7rem;
+    }
+}
+
+.pub-grid {
+    display: grid;
+    gap: 1.35rem;
+    margin-top: 1.1rem;
+}
+
+.pub-card {
+    display: grid;
+    grid-template-columns: minmax(160px, 32%) 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+    padding: .9rem;
+    border: 1px solid #dce5ee;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #fbfdff 100%);
+    box-shadow: 0 10px 28px rgba(24, 43, 67, .08);
+
+    @include breakpoint(max-width $medium) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pub-card__image-wrap {
+    overflow: hidden;
+    border-radius: 8px;
+    min-height: 190px;
+    background: #eef4f8;
+
+    @include breakpoint(max-width $medium) {
+        min-height: auto;
+    }
+}
+
+.pub-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 190px;
+    object-fit: cover;
+}
+
+.pub-card__body {
+    min-width: 0;
+
+    h3 {
+        margin: .35rem 0 .45rem;
+        font-size: 1.05em;
+        line-height: 1.35;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.pub-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    align-items: center;
+    color: #51677d;
+    font-size: .78em;
+
+    span {
+        padding: .22rem .5rem;
+        border-radius: 999px;
+        background: #eef5fb;
+    }
+}
+
+.pub-card__metric {
+    background: #e8f7f2 !important;
+    color: #166854;
+}
+
+.pub-card__authors,
+.pub-card__focus {
+    margin-bottom: .55rem;
+    color: #45576a;
+    font-size: .9em;
+}
+
+.pub-card__focus {
+    color: #25384b;
+}
+
+.pub-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+
+    span {
+        padding: .24rem .5rem;
+        border-radius: 6px;
+        background: #f4f7fa;
+        color: #526476;
+        font-size: .72em;
+    }
+}

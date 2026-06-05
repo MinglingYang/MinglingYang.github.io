@@ -1,0 +1,92 @@
+{
+  "updatedBy": "Google Scholar metadata is merged at page load with this curated display layer.",
+  "pinnedNews": [
+    {
+      "date": "Fall 2026",
+      "text": "I will begin Ph.D. training in Epidemiology, Environmental Health Track, at the Keck School of Medicine of USC."
+    }
+  ],
+  "publications": [
+    {
+      "scholar_id": "cNanG64AAAAJ:IjCSPb-OGe4C",
+      "title": "Long-term effects of cooking with liquefied petroleum gas or biomass on linear growth trajectories from birth to the pre-school years in Puno, Peru: a prospective cohort study",
+      "short_title": "Long-term clean-fuel intervention and child growth trajectories",
+      "authors": "Nicolaou L, Reuland CJ, Yang M, Williams KN, Hartinger SM, Chiang M, Checkley W",
+      "venue": "The Lancet Regional Health - Americas",
+      "year": 2026,
+      "doi": "10.1016/j.lana.2026.101382",
+      "image": "images/publications/hapin-growth.svg",
+      "tags": ["HAPIN", "Child growth", "Household air pollution"],
+      "focus": "Modeled linear growth trajectories after long-term follow-up of clean cooking intervention exposure in Puno, Peru.",
+      "featured_order": 1
+    },
+    {
+      "scholar_id": "cNanG64AAAAJ:qjMakFHDy7sC",
+      "title": "A multi-country cohort study evaluating the prevalence, risk factors, lung function and clinical outcomes of chronic bronchitis in low-and middle-income countries",
+      "short_title": "Chronic bronchitis risk and outcomes in LMIC cohorts",
+      "authors": "Robertson NM, Sharma AK, Yang M, Das SK, Siddharthan T, Pollard S, Rykiel NA, Alupo P, Flores-Flores O, Kirenga B, Chandyo RK, Quaderi SA, Shrestha L, Wise RA, Hurst JR, Checkley W",
+      "venue": "European Respiratory Journal",
+      "year": 2026,
+      "doi": "10.1183/13993003.01435-2025",
+      "image": "images/publications/chronic-bronchitis.svg",
+      "tags": ["GECo", "Chronic bronchitis", "Respiratory epidemiology"],
+      "focus": "Examined chronic bronchitis burden, modifiable risk factors, lung function, and clinical outcomes across LMIC populations.",
+      "featured_order": 2
+    },
+    {
+      "scholar_id": "cNanG64AAAAJ:u5HHmVD_uO8C",
+      "title": "Population-based screening for chronic obstructive pulmonary disease using the St. George's respiratory questionnaire in resource-limited settings",
+      "short_title": "COPD screening with the St. George's Respiratory Questionnaire",
+      "authors": "Checkley W, Yang M, Robertson NM, Sharma AK, Chandyo RK, Shrestha L, Das SK, Kirenga B, Alupo P, Gianella G, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR, Wise RA",
+      "venue": "American Journal of Respiratory and Critical Care Medicine",
+      "year": 2025,
+      "doi": "10.1164/rccm.202409-1862OC",
+      "pmid": "40068167",
+      "pmcid": "PMC12091018",
+      "image": "images/publications/copd-screening.svg",
+      "tags": ["GECo", "COPD", "Screening"],
+      "focus": "Evaluated a low-cost SGRQ-based COPD screening strategy for places where spirometry access is limited.",
+      "featured_order": 3
+    },
+    {
+      "scholar_id": "cNanG64AAAAJ:d1gkVwhDpl0C",
+      "title": "Effects of cooking with liquefied petroleum gas or biomass fuels on neurodevelopmental outcomes in preschool-age children living in Puno, Peru",
+      "short_title": "Cooking fuel exposure and preschool neurodevelopment",
+      "authors": "Reuland CJ, Nicolaou L, Black MM, Yang M, McCord R, Alvarado M, Arana F, Sanchez PS, Williams KN, Hossen S, Chiang M, Hartinger SM, Checkley W",
+      "venue": "Environmental Health Perspectives",
+      "year": 2025,
+      "doi": "10.1289/EHP15500",
+      "pmid": "40354572",
+      "pmcid": "PMC12142655",
+      "image": "images/publications/hapin-neurodevelopment.svg",
+      "tags": ["HAPIN", "Neurodevelopment", "Exposure response"],
+      "focus": "Assessed LPG intervention and PM2.5 exposure-response relationships with Bayley-III neurodevelopmental outcomes.",
+      "featured_order": 4
+    },
+    {
+      "scholar_id": "cNanG64AAAAJ:zYLM7Y9cAGgC",
+      "title": "Exposure to Household Air Pollution From Biomass Cooking and Severe Pneumonia in Infants",
+      "short_title": "Household air pollution and severe pneumonia in infants",
+      "authors": "HAPIN investigators with Yang M",
+      "venue": "JAMA Network Open",
+      "year": 2025,
+      "image": "images/publications/hapin-pneumonia.svg",
+      "tags": ["HAPIN", "Pneumonia", "Child health"],
+      "focus": "Connected household biomass cooking exposure with severe pneumonia risk in infant health analyses.",
+      "featured_order": 5
+    },
+    {
+      "title": "Building a High-Resolution PM2.5 Map for Bhaktapur, Nepal: A Dynamic Spatiotemporal Calibration Model for Low-Cost Sensors",
+      "short_title": "High-resolution PM2.5 mapping in Bhaktapur, Nepal",
+      "authors": "Yang M, Nicolaou L",
+      "venue": "Manuscript in preparation",
+      "year": 2026,
+      "image": "images/publications/pm25-nepal.svg",
+      "tags": ["PM2.5", "Sensor calibration", "Geostatistics"],
+      "focus": "Develops dynamic spatiotemporal calibration models for low-cost PM2.5 sensors using reference monitors, meteorology, and geospatial methods.",
+      "featured_order": 6,
+      "manual_only": true
+    }
+  ],
+  "fallbackImage": "images/publications/scholar-update.svg"
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="COPD screening research visual">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#e6f4f3"/></linearGradient>
+    <linearGradient id="lung" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c7be5"/><stop offset="1" stop-color="#22b8a8"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1f3b57" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="640" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="505" cy="78" r="78" fill="#f9737a" opacity=".13"/>
+  <circle cx="108" cy="322" r="88" fill="#2c7be5" opacity=".10"/>
+  <path d="M80 245c70-47 127-52 181-17 58 37 117 37 199-1 44-20 82-23 120-8" fill="none" stroke="#b8c7d7" stroke-width="3" opacity=".65"/>
+  <g filter="url(#shadow)">
+    <rect x="54" y="58" width="176" height="254" rx="20" fill="#fff"/>
+    <rect x="86" y="100" width="100" height="10" rx="5" fill="#d7e2ef"/>
+    <rect x="86" y="140" width="104" height="10" rx="5" fill="#d7e2ef"/>
+    <rect x="86" y="180" width="84" height="10" rx="5" fill="#d7e2ef"/>
+    <circle cx="70" cy="105" r="8" fill="#22b8a8"/>
+    <circle cx="70" cy="145" r="8" fill="#22b8a8"/>
+    <circle cx="70" cy="185" r="8" fill="#f9737a"/>
+    <path d="M68 103l3 4 9-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    <path d="M68 143l3 4 9-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(262 74)" filter="url(#shadow)">
+    <path d="M64 66c-32 10-58 48-58 98 0 41 19 69 49 69 27 0 43-31 45-70 2-42-8-75-36-97z" fill="url(#lung)" opacity=".95"/>
+    <path d="M112 66c32 10 58 48 58 98 0 41-19 69-49 69-27 0-43-31-45-70-2-42 8-75 36-97z" fill="url(#lung)" opacity=".95"/>
+    <path d="M88 16v91M88 107c-21 12-30 32-33 63M88 107c21 12 30 32 33 63" fill="none" stroke="#144a74" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 121c20 12 33 24 39 43M113 121c-20 12-33 24-39 43" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".62"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="444" y="118" width="140" height="150" rx="18" fill="#fff"/>
+    <path d="M470 238V153M470 238h88" stroke="#9baec3" stroke-width="4" stroke-linecap="round"/>
+    <path d="M474 230c21-48 44-72 82-80" fill="none" stroke="#f9737a" stroke-width="7" stroke-linecap="round"/>
+    <path d="M474 223c30-7 55-27 82-67" fill="none" stroke="#22b8a8" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+    <circle cx="556" cy="151" r="7" fill="#f9737a"/>
+  </g>
+  <g fill="#31546f" opacity=".55">
+    <circle cx="329" cy="302" r="6"/><circle cx="389" cy="312" r="6"/><circle cx="468" cy="292" r="6"/>
+  </g>
+</svg>

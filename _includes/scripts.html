@@ -2,3 +2,10 @@
 
 {% include analytics.html %}
 {% include fetch_google_scholar_stats.html %}
+<script>
+  window.SITE_CONFIG = {
+    repository: "{{ site.repository }}",
+    googleScholarStatsUseCdn: {{ site.google_scholar_stats_use_cdn | default: true | jsonify }}
+  };
+</script>
+<script src="assets/js/scholar-publications.js"></script>

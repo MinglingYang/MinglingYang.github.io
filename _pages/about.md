@@ -17,16 +17,17 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am Mingling (Mona) Yang, an incoming Ph.D. student in Epidemiology on the Environmental Health Track at the Keck School of Medicine of the University of Southern California, beginning in Fall 2026. I am currently a Senior Research Data Analyst at the Johns Hopkins University School of Medicine and the Center for Global Non-Communicable Disease Research and Training.
+I am Mingling (Mona) Yang, an incoming Ph.D. student in Epidemiology on the Environmental Health Track at the Keck School of Medicine of the University of Southern California, beginning in Fall 2026.
 
 My work sits at the intersection of environmental epidemiology, exposure science, biostatistics, and reproducible data systems. At Johns Hopkins, I have worked with Dr. William Checkley and Dr. Laura Nicolaou on multinational studies including the Household Air Pollution Intervention Network (HAPIN), the Global Excellence in COPD Outcomes (GECo) study, CHAP, and ambient air pollution monitoring projects in Nepal and Peru. Across these projects, I have built harmonized multi-country databases, calibrated low-cost PM2.5 sensors against reference-grade monitors, modeled respiratory and child health outcomes, and developed reproducible R/Python/SQL pipelines for large environmental health datasets.
 
 At USC, my doctoral direction will connect this background in air pollution, global respiratory health, and causal/statistical modeling with Dr. Vaia Lida Chatzi's environmental health research program on PFAS, endocrine-disrupting chemicals, exposomics, multi-omics, and metabolic health across the life course. I am especially interested in developing statistical and geospatial frameworks that link complex environmental mixtures to respiratory, metabolic, liver, and child health outcomes, with an emphasis on prevention and policy-relevant environmental health evidence.
 
-My publication page is here: <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">Google Scholar</a>
+My publication profile is on <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">Google Scholar</a>
 <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">
   <img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations" alt="Google Scholar citations">
 </a>.
+<span id="scholar-summary" class="scholar-summary" aria-live="polite"></span>
 
 <span class='anchor' id='research-interests'></span>
 
@@ -41,35 +42,19 @@ My publication page is here: <a href="https://scholar.google.com/citations?user=
 
 ## News
 
-- *Fall 2026*: I will begin Ph.D. training in Epidemiology, Environmental Health Track, at the Keck School of Medicine of USC.
-- *2026.03*: Our chronic bronchitis study in low- and middle-income countries was published in the **European Respiratory Journal**.
-- *2026.03*: Our HAPIN study on long-term effects of cooking with LPG or biomass on child linear growth trajectories was published in **The Lancet Regional Health - Americas**.
-- *2025.06*: Our HAPIN neurodevelopment study was published in **Environmental Health Perspectives**.
-- *2025.05*: Our GECo COPD screening paper using the St. George's Respiratory Questionnaire was published in the **American Journal of Respiratory and Critical Care Medicine** and featured in an editorial.
+<div id="scholar-news" class="auto-scholar-block" aria-live="polite">
+  <p class="auto-note">Loading Google Scholar updates...</p>
+</div>
 
 <span class='anchor' id='publications'></span>
 
-## Selected Publications
+## Publications
 
-**Peer-reviewed journal articles**
+<p class="auto-note">This section merges Google Scholar metadata with a curated display layer for DOI links, journal names, research summaries, and representative visuals.</p>
 
-1. Checkley W, **Yang M**, Robertson NM, Sharma AK, Chandyo RK, Shrestha L, Das SK, Kirenga B, Alupo P, Gianella G, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR, Wise RA; GECo Study Investigators. [Population-based Screening for Chronic Obstructive Pulmonary Disease Using the St. George's Respiratory Questionnaire in Resource-limited Settings](https://doi.org/10.1164/rccm.202409-1862OC). **American Journal of Respiratory and Critical Care Medicine**. 2025;211(5):779-788. PMID: 40068167; PMCID: PMC12091018.<br><em>Focus:</em> evaluated a low-cost SGRQ-based COPD screening strategy for settings where spirometry is scarce.
-2. Reuland CJ, Nicolaou L, Black MM, **Yang M**, McCord R, Alvarado M, Arana F, Sanchez PS, Williams KN, Hossen S, Chiang M, Hartinger SM, Checkley W. [Effects of Cooking with Liquefied Petroleum Gas or Biomass Fuels on Neurodevelopmental Outcomes in Preschool-Age Children Living in Puno, Peru](https://doi.org/10.1289/EHP15500). **Environmental Health Perspectives**. 2025;133(6):067004. PMID: 40354572; PMCID: PMC12142655.<br><em>Focus:</em> assessed LPG intervention and PM2.5 exposure-response relationships with Bayley-III neurodevelopmental outcomes.
-3. Robertson NM\*, Sharma AK\*, **Yang M**, Das SK, Siddharthan T, Pollard S, Rykiel NA, Alupo P, Flores-Flores O, Kirenga B, Chandyo RK, Quaderi SA, Shrestha L, Wise RA, Hurst JR, Checkley W; GECo Study Investigators. [A Multi-country Cohort Study Evaluating the Prevalence, Risk Factors, Lung Function and Clinical Outcomes of Chronic Bronchitis in Low- and Middle-income Countries](https://doi.org/10.1183/13993003.01435-2025). **European Respiratory Journal**. 2026;67(3):2501435. PMID: 41381225.<br><em>Focus:</em> examined chronic bronchitis burden, modifiable risk factors, lung function, and clinical outcomes across LMIC cohorts.
-4. Nicolaou L, Reuland CJ, **Yang M**, Williams KN, Hartinger SM, Chiang M, Checkley W. [Long-Term Effects of Cooking with Liquefied Petroleum Gas or Biomass on Linear Growth Trajectories from Birth to the Pre-School Years in Puno, Peru](https://doi.org/10.1016/j.lana.2026.101382). **The Lancet Regional Health - Americas**. 2026;55:101382.<br><em>Focus:</em> modeled child linear growth trajectories after long-term clean-fuel intervention follow-up in Puno, Peru.
-
-**Accepted and under-review manuscripts**
-
-1. Checkley W, Robertson NM, **Yang M**, Nicolaou L, Wise RA, Sharma AK, Chandyo RK, Shrestha LP, Das SK, Kirenga B, Alupo P, Gianella G, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR; GECo Investigators. *Prevalence of Chronic Obstructive Pulmonary Disease and Population Attributable Risk across Three Resource-Limited Settings: The Global Excellence in COPD Outcomes Study*. **The Lancet Global Health**. Accepted.
-2. Robertson N, Sharma A, **Yang M**, Das S, Siddharthan T, Pollard S, Rykiel N, Alupo P, Flores-Flores O, Kirenga B, Chandyo R, Quaderi S, Shrestha L, Wise R, Hurst J, Checkley W. *Reframing bronchodilator responsiveness using Z-scores: Multi-country evaluation of Z-score-based criteria*. **European Respiratory Journal**. Accepted.
-3. Emetu SA, **Yang M**, Nicolaou L, Kephart JL, Fandino-Del-Rio M, Wise RA, Williams KN, Steenland K, Koehler K, Checkley W; CHAP Trial Investigators. *Effects of Cooking with Liquefied Petroleum Gas or Biomass on Lung Function in Adult Peruvian Women: A Randomized Controlled Trial*. **American Journal of Respiratory and Critical Care Medicine**. Under review.
-
-**Selected manuscripts in preparation**
-
-1. **Yang M**, Nicolaou L. *Building a High-Resolution PM2.5 Map for Bhaktapur, Nepal: A Dynamic Spatiotemporal Calibration Model for Low-Cost Sensors*.
-2. **Yang M**, Luu P, Nicolaou L, Williams K, Checkley W. *A Multilevel Functional Data Model for Nocturnal Oxygen Desaturation and Cardiometabolic Outcomes in High-altitude Populations*.
-3. Williams K\*, **Yang M**\*, Kephart JL, Mallikarachchi M, Fandino-del-Rio M, Koehler K, Harvey SA, Checkley W. *Social Networks and Clean Fuel Use Behaviours in Rural Peru: A Social Network Analysis of the CHAP Trial*.
-4. Wells M\*, Tarazona-Meza C\*, **Yang M**, Williams K, Nicolaou L, Steenland NK, Checkley W. *Assessing the Impact of Vitamin A and Omega-3 Fatty Acid Deficiencies on Eye Health Among Women Over 40 in the HAPIN Cohort*.
+<div id="scholar-publications" class="pub-grid" aria-live="polite">
+  <p class="auto-note">Loading publications from Google Scholar...</p>
+</div>
 
 <span class='anchor' id='research-experience'></span>
 
@@ -111,9 +96,9 @@ My publication page is here: <a href="https://scholar.google.com/citations?user=
 
 ## Education
 
-- *Beginning Fall 2026*, **University of Southern California**, Los Angeles, CA - Ph.D. in Epidemiology, Environmental Health Track, Keck School of Medicine.
-- *2021 - 2023*, **Johns Hopkins University**, Baltimore, MD - M.S.E. in Applied Mathematics and Statistics, Whiting School of Engineering.
-- *2017 - 2020*, **University of South Carolina**, Columbia, SC - B.S. in Statistics; minor in Risk Management and Insurance.
+- *Beginning Fall 2026*, **University of Southern California** - Ph.D. in Epidemiology, Environmental Health Track, Keck School of Medicine.
+- *2021 - 2023*, **Johns Hopkins University** - M.S.E. in Applied Mathematics and Statistics, Whiting School of Engineering.
+- *2017 - 2020*, **University of South Carolina** - B.S. in Statistics; minor in Risk Management and Insurance.
 
 <span class='anchor' id='honors-awards'></span>
 
