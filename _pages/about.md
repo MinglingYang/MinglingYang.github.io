@@ -94,15 +94,21 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <button type="button" id="research-globe-zoom-in" aria-label="Zoom in">+</button>
       <button type="button" id="research-globe-zoom-out" aria-label="Zoom out">-</button>
     </div>
-    <div class="research-globe__time-panel" aria-label="Timeline control">
+    <div class="research-globe__time-panel" aria-label="Time year control" tabindex="0">
       <span class="research-globe__time-kicker">Time</span>
       <output id="research-globe-year-label">2026</output>
-      <input id="research-globe-year" type="range" min="2017" max="2026" value="2026" aria-label="Filter map through year">
-      <div class="research-globe__time-ticks" aria-hidden="true">
-        <span>2026</span>
-        <span>2023</span>
-        <span>2020</span>
-        <span>2017</span>
+      <input id="research-globe-year" type="hidden" min="2017" max="2026" value="2026">
+      <div class="research-globe__year-wheel" role="listbox" aria-label="Filter map through year">
+        <button type="button" role="option" data-globe-year="2026" aria-selected="true">2026</button>
+        <button type="button" role="option" data-globe-year="2025">2025</button>
+        <button type="button" role="option" data-globe-year="2024">2024</button>
+        <button type="button" role="option" data-globe-year="2023">2023</button>
+        <button type="button" role="option" data-globe-year="2022">2022</button>
+        <button type="button" role="option" data-globe-year="2021">2021</button>
+        <button type="button" role="option" data-globe-year="2020">2020</button>
+        <button type="button" role="option" data-globe-year="2019">2019</button>
+        <button type="button" role="option" data-globe-year="2018">2018</button>
+        <button type="button" role="option" data-globe-year="2017">2017</button>
       </div>
     </div>
   </div>

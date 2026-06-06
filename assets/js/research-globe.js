@@ -17,6 +17,7 @@
   var yearInput = document.getElementById("research-globe-year");
   var yearLabel = document.getElementById("research-globe-year-label");
   var yearPanel = document.querySelector(".research-globe__time-panel");
+  var yearButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-year]"));
   var moduleButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-module]"));
   var cardNodes = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
   var worldFeatures = [];
@@ -149,6 +150,13 @@
       yearInput.setAttribute("aria-valuetext", "Through " + state.year);
     }
     if (yearLabel) yearLabel.textContent = String(state.year);
+    yearButtons.forEach(function (button) {
+      var buttonYear = Number(button.getAttribute("data-globe-year"));
+      var distance = Math.abs(buttonYear - state.year);
+      button.classList.toggle("is-active", distance === 0);
+      button.classList.toggle("is-near", distance > 0 && distance <= 1);
+      button.setAttribute("aria-selected", distance === 0 ? "true" : "false");
+    });
   }
 
   function siteIsVisible(site) {
@@ -589,15 +597,40 @@
     });
   }
 
+  function setYear(value) {
+    if (!yearInput) return;
+    var nextYear = clamp(Number(value), Number(yearInput.getAttribute("min")), Number(yearInput.getAttribute("max")));
+    if (nextYear === state.year) {
+      syncInputs();
+      return;
+    }
+    state.year = nextYear;
+    applyFilters();
+  }
+
+  yearButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      setYear(button.getAttribute("data-globe-year"));
+    });
+  });
+
   if (yearPanel && yearInput) {
     yearPanel.addEventListener("wheel", function (event) {
       event.preventDefault();
       var step = event.deltaY > 0 ? -1 : 1;
-      var nextYear = clamp(state.year + step, Number(yearInput.min), Number(yearInput.max));
-      if (nextYear === state.year) return;
-      state.year = nextYear;
-      applyFilters();
+      setYear(state.year + step);
     }, { passive: false });
+
+    yearPanel.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+        event.preventDefault();
+        setYear(state.year + 1);
+      }
+      if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+        event.preventDefault();
+        setYear(state.year - 1);
+      }
+    });
   }
 
   if (zoomInput) {
