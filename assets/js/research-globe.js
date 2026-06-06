@@ -96,10 +96,10 @@
   }
 
   function markerColor(count) {
-    if (count >= 4) return "#104a7b";
-    if (count >= 2) return "#2f78b7";
-    if (count === 1) return "#5f9fc8";
-    return "#8fb4ce";
+    if (count >= 4) return "#dffcff";
+    if (count >= 2) return "#48e6ff";
+    if (count === 1) return "#18b8e6";
+    return "#2f7ea8";
   }
 
   function markerRadius(count, active) {
@@ -181,23 +181,24 @@
 
   function drawSphere(width, height, radius) {
     var atmosphere = ctx.createRadialGradient(width / 2, height / 2, radius * .75, width / 2, height / 2, radius * 1.18);
-    atmosphere.addColorStop(0, "rgba(47, 120, 183, 0)");
-    atmosphere.addColorStop(1, "rgba(47, 120, 183, .18)");
+    atmosphere.addColorStop(0, "rgba(32, 217, 255, 0)");
+    atmosphere.addColorStop(.72, "rgba(32, 217, 255, .08)");
+    atmosphere.addColorStop(1, "rgba(32, 217, 255, .28)");
     ctx.fillStyle = atmosphere;
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius * 1.18, 0, Math.PI * 2);
     ctx.fill();
 
-    var gradient = ctx.createRadialGradient(width * .42, height * .34, radius * .12, width / 2, height / 2, radius);
-    gradient.addColorStop(0, "#ffffff");
-    gradient.addColorStop(.5, "#eaf7ff");
-    gradient.addColorStop(1, "#c6dceb");
+    var gradient = ctx.createRadialGradient(width * .38, height * .3, radius * .1, width / 2, height / 2, radius);
+    gradient.addColorStop(0, "#194b73");
+    gradient.addColorStop(.48, "#0d3358");
+    gradient.addColorStop(1, "#04152d");
     ctx.fillStyle = gradient;
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "#9fc2d8";
-    ctx.lineWidth = 1.3;
+    ctx.strokeStyle = "rgba(72, 230, 255, .5)";
+    ctx.lineWidth = 1.6;
     ctx.stroke();
   }
 
@@ -226,7 +227,7 @@
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.clip();
-    ctx.strokeStyle = "rgba(56, 92, 124, .24)";
+    ctx.strokeStyle = "rgba(72, 230, 255, .22)";
     ctx.lineWidth = 1;
     for (var lat = -60; lat <= 60; lat += 20) {
       drawLine(function (lon) { return [lat, lon]; }, -180, 180, width, height, radius);
@@ -242,8 +243,8 @@
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.clip();
-    ctx.fillStyle = "rgba(86, 146, 124, .28)";
-    ctx.strokeStyle = "rgba(39, 92, 87, .25)";
+    ctx.fillStyle = "rgba(27, 104, 132, .32)";
+    ctx.strokeStyle = "rgba(72, 230, 255, .22)";
     ctx.lineWidth = 1;
     land.forEach(function (poly) {
       var started = false;
@@ -270,7 +271,7 @@
   function drawOrbits(width, height, radius) {
     ctx.save();
     ctx.translate(width / 2, height / 2);
-    ctx.strokeStyle = "rgba(47, 120, 183, .13)";
+    ctx.strokeStyle = "rgba(72, 230, 255, .18)";
     ctx.lineWidth = 1;
     [-18, 18, 42].forEach(function (angle) {
       ctx.save();
@@ -292,19 +293,19 @@
       var active = site.id === activeId;
       var pulse = active ? 7 + Math.sin(time / 220) * 2 : 3 + Math.sin(time / 520 + site.index) * 1.2;
       var dotRadius = markerRadius(site.count, active);
-      ctx.fillStyle = "rgba(47, 120, 183, .12)";
+      ctx.fillStyle = "rgba(72, 230, 255, .13)";
       ctx.beginPath();
       ctx.arc(p.x, p.y, 14 + pulse + site.count * 1.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = markerColor(site.count);
-      ctx.strokeStyle = "#ffffff";
+      ctx.strokeStyle = active ? "#ffffff" : "rgba(226, 251, 255, .86)";
       ctx.lineWidth = active ? 3 : 2;
       ctx.beginPath();
       ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
       if (site.count > 0) {
-        ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = site.count >= 4 ? "#061728" : "#ffffff";
         ctx.font = "700 10px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -334,11 +335,11 @@
       var endX = (cardOnLeft ? cardRect.right : cardRect.left) - globeRect.left;
       var endY = cardRect.top - globeRect.top + Math.min(34, cardRect.height / 2);
       var bendX = cardOnLeft ? startX - 46 : startX + 46;
-      var color = site.id === activeId ? "#2f78b7" : "rgba(84, 125, 160, .28)";
+      var color = site.id === activeId ? "#48e6ff" : "rgba(72, 230, 255, .22)";
       var width = site.id === activeId ? 2.3 : 1.1;
       paths.push("<path d=\"M" + startX.toFixed(1) + " " + startY.toFixed(1) + " C " + bendX.toFixed(1) + " " + startY.toFixed(1) + ", " + bendX.toFixed(1) + " " + endY.toFixed(1) + ", " + endX.toFixed(1) + " " + endY.toFixed(1) + "\" fill=\"none\" stroke=\"" + color + "\" stroke-width=\"" + width + "\" stroke-linecap=\"round\"/>");
       if (site.id === activeId) {
-        paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#2f78b7\"/>");
+        paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#48e6ff\"/>");
       }
     });
     connectorLayer.innerHTML = paths.join("");
