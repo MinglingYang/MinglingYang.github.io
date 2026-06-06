@@ -19,6 +19,7 @@
   var yearPanel = document.querySelector(".research-globe__time-panel");
   var moduleButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-module]"));
   var cardNodes = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
+  var worldFeatures = [];
 
   var regionOrder = {
     "North America": 1,
@@ -26,6 +27,13 @@
     "Africa": 3,
     "Asia": 4
   };
+
+  var oceanLabels = [
+    { name: "Pacific Ocean", lat: 5, lon: -160 },
+    { name: "Atlantic Ocean", lat: 3, lon: -35 },
+    { name: "Indian Ocean", lat: -20, lon: 78 },
+    { name: "Arctic Ocean", lat: 74, lon: 10 }
+  ];
 
   var sites = cardNodes.map(function (card, index) {
     return {
@@ -36,6 +44,7 @@
       count: Number(card.getAttribute("data-count") || 0),
       start: Number(card.getAttribute("data-start") || 1900),
       end: Number(card.getAttribute("data-end") || 2026),
+      order: Number(card.getAttribute("data-order") || 99),
       name: card.querySelector("span") ? card.querySelector("span").textContent : "",
       lat: Number(card.getAttribute("data-lat")),
       lon: Number(card.getAttribute("data-lon")),
@@ -44,15 +53,14 @@
     };
   });
 
-  var land = [
-    [[-168, 72], [-135, 70], [-112, 54], [-95, 47], [-82, 32], [-96, 18], [-118, 22], [-137, 45]],
-    [[-82, 13], [-66, 8], [-54, -8], [-58, -24], [-70, -55], [-78, -38], [-76, -12]],
-    [[-10, 36], [8, 58], [42, 63], [78, 55], [112, 58], [145, 49], [124, 24], [77, 7], [38, 16], [20, 35]],
-    [[-18, 33], [14, 34], [34, 16], [41, -3], [31, -30], [18, -35], [4, -20], [-8, 5]],
-    [[68, 24], [90, 25], [96, 12], [79, 6], [72, 15]],
-    [[112, -10], [154, -24], [144, -42], [116, -35]],
-    [[-52, 76], [-22, 72], [-36, 60], [-58, 62]]
-  ];
+  var countryCounts = sites.reduce(function (counts, site) {
+    if (site.count > 0) counts[site.country] = Math.max(counts[site.country] || 0, site.count);
+    return counts;
+  }, {});
+
+  var focusTargets = {
+    education: { rotation: 98, tilt: 37, zoom: 1.38, activeId: "education-south-carolina" }
+  };
 
   var state = {
     module: "all",
@@ -62,7 +70,7 @@
   var rotation = rotationInput ? Number(rotationInput.value) : -25;
   var tilt = tiltInput ? Number(tiltInput.value) : 8;
   var zoom = zoomInput ? Number(zoomInput.value) / 100 : 1;
-  var activeId = "puno-peru";
+  var activeId = "peru";
   var visibleSites = [];
   var markerPositions = {};
   var isDragging = false;
@@ -96,16 +104,40 @@
     return ((value + 180) % 360 + 360) % 360 - 180;
   }
 
+  function siteHasModule(site, moduleName) {
+    return site.modules.indexOf(moduleName) !== -1;
+  }
+
+  function normalizeCountryName(name) {
+    if (name === "United States of America") return "United States";
+    return name || "";
+  }
+
   function markerColor(count) {
-    if (count >= 4) return "#dffcff";
-    if (count >= 2) return "#48e6ff";
-    if (count === 1) return "#18b8e6";
-    return "#2f7ea8";
+    if (count >= 4) return "#ff6bd6";
+    if (count >= 2) return "#32f0c8";
+    if (count === 1) return "#4aa3ff";
+    return "#ffd166";
   }
 
   function markerRadius(count, active) {
-    var base = count >= 4 ? 8 : count >= 2 ? 7 : count === 1 ? 6 : 5;
+    var base = count >= 4 ? 8 : count >= 2 ? 7 : count === 1 ? 6 : 5.5;
     return active ? base + 2 : base;
+  }
+
+  function countryFill(count, active) {
+    if (active && count > 0) return "rgba(255, 107, 214, .52)";
+    if (count >= 4) return "rgba(106, 62, 170, .62)";
+    if (count >= 2) return "rgba(8, 122, 142, .58)";
+    if (count === 1) return "rgba(28, 84, 135, .54)";
+    return "rgba(24, 83, 111, .2)";
+  }
+
+  function countryStroke(count, active) {
+    if (active && count > 0) return "rgba(255, 226, 255, .88)";
+    if (active) return "rgba(255, 209, 102, .72)";
+    if (count > 0) return "rgba(72, 230, 255, .46)";
+    return "rgba(72, 230, 255, .16)";
   }
 
   function syncInputs() {
@@ -127,6 +159,9 @@
 
   function sortSites(items) {
     return items.slice().sort(function (a, b) {
+      if (state.module === "education") {
+        if (a.order !== b.order) return a.order - b.order;
+      }
       if (state.sort === "count") {
         if (b.count !== a.count) return b.count - a.count;
       } else if (state.sort === "recent") {
@@ -155,8 +190,12 @@
     if (!leftColumn || !rightColumn) return;
     leftColumn.innerHTML = "";
     rightColumn.innerHTML = "";
-    var midpoint = Math.ceil(visibleSites.length / 2);
-    visibleSites.forEach(function (site, index) {
+    var displaySites = state.module === "education" ? visibleSites : visibleSites.filter(function (site) {
+      return site.id === activeId;
+    });
+    if (!displaySites.length && visibleSites.length) displaySites = [visibleSites[0]];
+    var midpoint = Math.ceil(displaySites.length / 2);
+    displaySites.forEach(function (site, index) {
       site.card.classList.remove("is-hidden");
       if (index < midpoint) {
         leftColumn.appendChild(site.card);
@@ -165,7 +204,7 @@
       }
     });
     sites.forEach(function (site) {
-      if (visibleSites.indexOf(site) === -1) site.card.classList.add("is-hidden");
+      if (displaySites.indexOf(site) === -1) site.card.classList.add("is-hidden");
     });
   }
 
@@ -243,32 +282,77 @@
     ctx.restore();
   }
 
+  function drawGeoRing(ring, width, height, radius, fillStyle, strokeStyle, lineWidth) {
+    var started = false;
+    var visibleCount = 0;
+    ctx.beginPath();
+    ring.forEach(function (pair) {
+      var p = project(pair[1], pair[0], width, height, radius);
+      if (!p.visible) {
+        if (started && visibleCount > 2) {
+          ctx.closePath();
+          ctx.fillStyle = fillStyle;
+          ctx.fill();
+          ctx.strokeStyle = strokeStyle;
+          ctx.lineWidth = lineWidth;
+          ctx.stroke();
+        }
+        started = false;
+        visibleCount = 0;
+        ctx.beginPath();
+        return;
+      }
+      if (!started) {
+        ctx.moveTo(p.x, p.y);
+        started = true;
+      } else {
+        ctx.lineTo(p.x, p.y);
+      }
+      visibleCount += 1;
+    });
+    if (started && visibleCount > 2) {
+      ctx.closePath();
+      ctx.fillStyle = fillStyle;
+      ctx.fill();
+      ctx.strokeStyle = strokeStyle;
+      ctx.lineWidth = lineWidth;
+      ctx.stroke();
+    }
+  }
+
   function drawLand(width, height, radius) {
     ctx.save();
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.clip();
-    ctx.fillStyle = "rgba(27, 104, 132, .32)";
-    ctx.strokeStyle = "rgba(72, 230, 255, .22)";
-    ctx.lineWidth = 1;
-    land.forEach(function (poly) {
-      var started = false;
-      ctx.beginPath();
-      poly.forEach(function (pair) {
-        var p = project(pair[1], pair[0], width, height, radius);
-        if (!p.visible) return;
-        if (!started) {
-          ctx.moveTo(p.x, p.y);
-          started = true;
-        } else {
-          ctx.lineTo(p.x, p.y);
-        }
+    worldFeatures.forEach(function (feature) {
+      if (!feature.geometry) return;
+      var country = normalizeCountryName(feature.properties && (feature.properties.ADMIN || feature.properties.NAME || feature.properties.name));
+      var count = countryCounts[country] || 0;
+      var activeSite = sites.filter(function (site) { return site.id === activeId; })[0];
+      var activeCountry = activeSite && activeSite.country === country;
+      var fillStyle = countryFill(count, activeCountry);
+      var strokeStyle = countryStroke(count, activeCountry);
+      var lineWidth = activeCountry ? 1.4 : .65;
+      var polygons = feature.geometry.type === "Polygon" ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+      polygons.forEach(function (polygon) {
+        if (!polygon || !polygon[0]) return;
+        drawGeoRing(polygon[0], width, height, radius, fillStyle, strokeStyle, lineWidth);
       });
-      if (started) {
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-      }
+    });
+    ctx.restore();
+  }
+
+  function drawOceanLabels(width, height, radius) {
+    ctx.save();
+    ctx.font = "700 10px Arial, sans-serif";
+    ctx.fillStyle = "rgba(143, 204, 230, .42)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    oceanLabels.forEach(function (item) {
+      var p = project(item.lat, item.lon, width, height, radius);
+      if (!p.visible) return;
+      ctx.fillText(item.name, p.x, p.y);
     });
     ctx.restore();
   }
@@ -285,6 +369,65 @@
       ctx.ellipse(0, 0, radius * 1.12, radius * .34, 0, 0, Math.PI * 2);
       ctx.stroke();
       ctx.restore();
+    });
+    ctx.restore();
+  }
+
+  function drawArrowHead(from, to, color) {
+    var angle = Math.atan2(to.y - from.y, to.x - from.x);
+    var size = 9;
+    ctx.save();
+    ctx.translate(to.x, to.y);
+    ctx.rotate(angle);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-size, -size * .48);
+    ctx.lineTo(-size, size * .48);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawEducationPath(width, height, radius) {
+    if (state.module !== "education") return;
+    var educationSites = visibleSites.filter(function (site) {
+      return siteHasModule(site, "education");
+    }).sort(function (a, b) {
+      return a.order - b.order;
+    });
+    if (educationSites.length < 2) return;
+    var points = educationSites.map(function (site) {
+      var p = project(site.lat, site.lon, width, height, radius);
+      p.site = site;
+      return p;
+    }).filter(function (p) {
+      return p.visible;
+    });
+    if (points.length < 2) return;
+    ctx.save();
+    ctx.strokeStyle = "rgba(255, 209, 102, .92)";
+    ctx.fillStyle = "rgba(255, 209, 102, .92)";
+    ctx.lineWidth = 2.2;
+    ctx.shadowColor = "rgba(255, 209, 102, .65)";
+    ctx.shadowBlur = 12;
+    for (var i = 0; i < points.length - 1; i += 1) {
+      var start = points[i];
+      var end = points[i + 1];
+      var midX = (start.x + end.x) / 2;
+      var midY = (start.y + end.y) / 2 - 28;
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.quadraticCurveTo(midX, midY, end.x, end.y);
+      ctx.stroke();
+      drawArrowHead({ x: midX, y: midY }, end, "rgba(255, 209, 102, .96)");
+    }
+    ctx.shadowBlur = 0;
+    ctx.font = "700 10px Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    points.forEach(function (point) {
+      ctx.fillText(String(point.site.start), point.x, point.y - 14);
     });
     ctx.restore();
   }
@@ -315,6 +458,12 @@
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(String(site.count), p.x, p.y + .5);
+      } else if (siteHasModule(site, "education")) {
+        ctx.fillStyle = "#061728";
+        ctx.font = "700 8px Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(String(site.order), p.x, p.y + .5);
       }
     });
   }
@@ -331,6 +480,7 @@
     var canvasRect = canvas.getBoundingClientRect();
     var paths = [];
     visibleSites.forEach(function (site) {
+      if (site.card.classList.contains("is-hidden")) return;
       var marker = markerPositions[site.id];
       if (!marker) return;
       var cardRect = site.card.getBoundingClientRect();
@@ -357,9 +507,19 @@
       var desired = normalizeRotation(-site.lon);
       var delta = normalizeRotation(desired - rotation);
       if (Math.abs(delta) > 78) rotation += delta * .35;
+      renderCards();
       updateCards();
       syncInputs();
     }
+  }
+
+  function focusModule(moduleName) {
+    var target = focusTargets[moduleName];
+    if (!target) return;
+    rotation = target.rotation;
+    tilt = target.tilt;
+    zoom = target.zoom;
+    activeId = target.activeId;
   }
 
   function nearestMarker(x, y) {
@@ -384,6 +544,8 @@
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
     drawGraticule(width, height, radius);
+    drawOceanLabels(width, height, radius);
+    drawEducationPath(width, height, radius);
     drawSites(width, height, radius, time || 0);
     updateConnectors();
     window.requestAnimationFrame(render);
@@ -405,6 +567,7 @@
   moduleButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       state.module = button.getAttribute("data-globe-module");
+      focusModule(state.module);
       moduleButtons.forEach(function (item) {
         item.classList.toggle("is-active", item === button);
       });
@@ -498,7 +661,23 @@
     updateConnectors();
   });
 
+  function loadWorld() {
+    if (!window.fetch) return;
+    window.fetch("/assets/data/world-countries.geojson")
+      .then(function (response) {
+        if (!response.ok) throw new Error("World map data unavailable");
+        return response.json();
+      })
+      .then(function (data) {
+        worldFeatures = data.features || [];
+      })
+      .catch(function () {
+        worldFeatures = [];
+      });
+  }
+
   resize();
+  loadWorld();
   applyFilters();
   window.requestAnimationFrame(render);
 })();

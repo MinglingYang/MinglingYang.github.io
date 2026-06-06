@@ -50,7 +50,7 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <button type="button" data-globe-module="publication">Articles</button>
   </div>
   <label>
-    <span>Sort</span>
+    <span class="screen-reader-text">Map sort order</span>
     <select id="research-globe-sort">
       <option value="region">Region</option>
       <option value="count">Article count</option>
@@ -60,38 +60,32 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
   </label>
 </div>
 
-<div class="research-map-legend" aria-label="Article count legend">
-  <span><i class="research-map-legend__dot research-map-legend__dot--low"></i>0-1 article</span>
-  <span><i class="research-map-legend__dot research-map-legend__dot--mid"></i>2-3 articles</span>
-  <span><i class="research-map-legend__dot research-map-legend__dot--high"></i>4+ articles</span>
-</div>
-
 <div class="research-globe" aria-label="Interactive globe showing education, projects, and published study locations">
   <svg class="research-globe__connectors" aria-hidden="true"></svg>
   <div class="research-globe__sites research-globe__sites--left" id="research-globe-left">
-    <article data-location="puno-peru" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="-15.84" data-lon="-70.02">
-      <span>Peru, Puno</span>
-      <em>Latin America</em>
-      <strong>HAPIN child growth, neurodevelopment, and household air pollution.</strong>
-      <p>Published work on clean cooking exposure, PM2.5, child growth trajectories, and preschool neurodevelopment.</p>
+    <article data-location="education-south-carolina" data-country="United States" data-region="North America" data-modules="education" data-count="0" data-start="2017" data-end="2020" data-order="1" data-lat="34.00" data-lon="-81.03">
+      <span>University of South Carolina</span>
+      <em>Columbia, South Carolina</em>
+      <strong>B.S. in Statistics.</strong>
+      <p>Undergraduate training in statistics with a minor in Risk Management and Insurance, 2017 to 2020.</p>
     </article>
-    <article data-location="peru-geco" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="-12.05" data-lon="-77.04">
+    <article data-location="education-johns-hopkins" data-country="United States" data-region="North America" data-modules="education" data-count="0" data-start="2021" data-end="2023" data-order="2" data-lat="39.33" data-lon="-76.62">
+      <span>Johns Hopkins University</span>
+      <em>Baltimore, Maryland</em>
+      <strong>M.S.E. in Applied Mathematics and Statistics.</strong>
+      <p>Graduate training through the Whiting School of Engineering, 2021 to 2023.</p>
+    </article>
+    <article data-location="education-usc" data-country="United States" data-region="North America" data-modules="education" data-count="0" data-start="2026" data-end="2031" data-order="3" data-lat="34.02" data-lon="-118.29">
+      <span>University of Southern California</span>
+      <em>Los Angeles, California</em>
+      <strong>Incoming Ph.D. student in Epidemiology.</strong>
+      <p>Environmental Health Track at the Keck School of Medicine, beginning Fall 2026.</p>
+    </article>
+    <article data-location="peru" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="4" data-start="2023" data-end="2026" data-lat="-9.19" data-lon="-75.02">
       <span>Peru</span>
       <em>Latin America</em>
-      <strong>GECo respiratory epidemiology cohorts.</strong>
-      <p>COPD screening with SGRQ, chronic bronchitis outcomes, lung function, and LMIC respiratory health evidence.</p>
-    </article>
-    <article data-location="guatemala" data-country="Guatemala" data-region="Latin America" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="14.63" data-lon="-90.51">
-      <span>Guatemala</span>
-      <em>Latin America</em>
-      <strong>HAPIN infant health analyses.</strong>
-      <p>Household air pollution, biomass cooking exposure, LPG intervention, and severe pneumonia outcomes.</p>
-    </article>
-    <article data-location="usa-education" data-country="United States" data-region="North America" data-modules="education project" data-count="0" data-start="2017" data-end="2026" data-lat="39.29" data-lon="-76.61">
-      <span>United States</span>
-      <em>North America</em>
-      <strong>Education and research training.</strong>
-      <p>University of South Carolina, Johns Hopkins, Emory collaborations, and incoming USC doctoral training.</p>
+      <strong>HAPIN, CHAP, GECo, and ambient PM2.5 projects.</strong>
+      <p>Puno field work and national Peru analyses on household air pollution, child growth, neurodevelopment, COPD screening, chronic bronchitis, clean fuel adoption, and exposure mapping.</p>
     </article>
   </div>
   <div class="research-globe__stage">
@@ -113,6 +107,12 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     </div>
   </div>
   <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
+    <article data-location="guatemala" data-country="Guatemala" data-region="Latin America" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="14.63" data-lon="-90.51">
+      <span>Guatemala</span>
+      <em>Latin America</em>
+      <strong>HAPIN infant health analyses.</strong>
+      <p>Household air pollution, biomass cooking exposure, LPG intervention, and severe pneumonia outcomes.</p>
+    </article>
     <article data-location="nepal" data-country="Nepal" data-region="Asia" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="27.72" data-lon="85.32">
       <span>Nepal</span>
       <em>Asia</em>
@@ -138,6 +138,12 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <p>Multi-country household air pollution analyses and severe pneumonia outcomes in infants.</p>
     </article>
   </div>
+</div>
+
+<div class="research-map-legend" aria-label="Article count legend">
+  <span><i class="research-map-legend__dot research-map-legend__dot--low"></i>0-1 article</span>
+  <span><i class="research-map-legend__dot research-map-legend__dot--mid"></i>2-3 articles</span>
+  <span><i class="research-map-legend__dot research-map-legend__dot--high"></i>4+ articles</span>
 </div>
 
 <span class='anchor' id='news'></span>

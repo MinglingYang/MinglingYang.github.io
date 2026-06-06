@@ -183,6 +183,18 @@ h1:before, .anchor:before {
     }
 }
 
+.research-map-toolbar .screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .research-map-toolbar__group {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -211,8 +223,9 @@ h1:before, .anchor:before {
 .research-map-legend {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: .65rem;
-    margin-bottom: .65rem;
+    margin: -.8rem 0 1.5rem;
     color: #8ebdd4;
     font-size: .74em;
 
@@ -231,16 +244,16 @@ h1:before, .anchor:before {
 }
 
 .research-map-legend__dot--low {
-    background: #2f7ea8;
+    background: #4aa3ff;
 }
 
 .research-map-legend__dot--mid {
-    background: #18b8e6;
+    background: #32f0c8;
 }
 
 .research-map-legend__dot--high {
-    background: #48e6ff;
-    box-shadow: 0 0 12px rgba(72, 230, 255, .72);
+    background: #ff6bd6;
+    box-shadow: 0 0 12px rgba(255, 107, 214, .72);
 }
 
 .research-globe {
@@ -537,15 +550,31 @@ h1:before, .anchor:before {
 }
 
 .research-globe__sites article[data-count="0"]:before {
-    background: #2f7ea8;
+    background: #ffd166;
+    box-shadow: 0 0 0 4px rgba(255, 209, 102, .12);
 }
 
 .research-globe__sites article[data-count="1"]:before {
-    background: #18b8e6;
+    background: #4aa3ff;
 }
 
 .research-globe__sites article[data-count="3"]:before {
-    background: #48e6ff;
+    background: #32f0c8;
+}
+
+.research-globe__sites article[data-count="4"]:before {
+    background: #ff6bd6;
+    box-shadow: 0 0 0 4px rgba(255, 107, 214, .12), 0 0 16px rgba(255, 107, 214, .62);
+}
+
+.research-globe__sites article[data-count="0"] {
+    border-color: rgba(132, 158, 182, .56);
+    background: linear-gradient(180deg, rgba(6, 21, 42, .66), rgba(4, 14, 31, .76));
+}
+
+.research-globe__sites article:not([data-count="0"]) {
+    border-color: rgba(72, 230, 255, .42);
+    background: linear-gradient(180deg, rgba(8, 35, 66, .9), rgba(4, 17, 39, .94));
 }
 
 .research-globe__sites--left article:before {
