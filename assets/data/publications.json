@@ -102,30 +102,6 @@
       "tags": ["ATS", "Poster", "COPD screening"],
       "focus": "Conference abstract presenting a low-cost SGRQ-based COPD screening strategy for resource-limited settings.",
       "featured_order": 7
-    },
-    {
-      "title": "Characterization of Post-TB Lung Disease and Its Impact on Quality of Life in Uganda: A Prospective Cohort Study",
-      "short_title": "ATS 2024 poster: post-TB lung disease and quality of life",
-      "authors": "Robertson N, Mudarshira B, Siddharthan T, Zawedde-Muyanja S, Kirenga B, Gharai L, Helwig M, Jackson P",
-      "venue": "American Thoracic Society International Conference Poster",
-      "year": 2024,
-      "image": "images/publications/ats-2024-post-tb-poster.png",
-      "tags": ["ATS 2024", "Poster", "Post-TB lung disease"],
-      "focus": "Poster visual summarizing post-TB lung disease burden, lung function impairment, respiratory symptoms, and quality of life in Uganda.",
-      "featured_order": 8,
-      "manual_only": true
-    },
-    {
-      "title": "Air Pollution, HIV and Mortality",
-      "short_title": "ERS 2024 poster: air pollution, HIV, and mortality",
-      "authors": "Robertson N, Astemborski J, Koehler K, Kirk G, Wilks M, McCormack M, Raju S",
-      "venue": "European Respiratory Society Congress Poster",
-      "year": 2024,
-      "image": "images/publications/ers-2024-air-pollution-poster.png",
-      "tags": ["ERS 2024", "Poster", "Air pollution"],
-      "focus": "Poster visual linking chronic air pollution exposure with mortality risk in a high-risk HIV cohort.",
-      "featured_order": 9,
-      "manual_only": true
     }
   ],
   "fallbackImage": "images/publications/scholar-update.svg"
