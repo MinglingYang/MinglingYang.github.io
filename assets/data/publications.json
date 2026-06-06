@@ -25,12 +25,12 @@
       "title": "A multi-country cohort study evaluating the prevalence, risk factors, lung function and clinical outcomes of chronic bronchitis in low-and middle-income countries",
       "short_title": "Chronic bronchitis risk and outcomes in LMIC cohorts",
       "authors": "Robertson NM, Sharma AK, Yang M, Das SK, Siddharthan T, Pollard S, Rykiel NA, Alupo P, Flores-Flores O, Kirenga B, Chandyo RK, Quaderi SA, Shrestha L, Wise RA, Hurst JR, Checkley W",
-      "venue": "European Respiratory Journal",
-      "year": 2026,
-      "doi": "10.1183/13993003.01435-2025",
-      "image": "images/publications/chronic-bronchitis.png",
-      "tags": ["GECo", "Chronic bronchitis", "Respiratory epidemiology"],
-      "focus": "Examined chronic bronchitis burden, modifiable risk factors, lung function, and clinical outcomes across LMIC populations.",
+      "venue": "The ERS Congress Abstract",
+      "year": 2025,
+      "url": "https://publications.ersnet.org/index.php/content/erj/66/suppl69/pa463",
+      "image": "images/publications/ERS2025-abstract-figure1.gif",
+      "tags": ["ERS Congress", "Published abstract", "GECo", "Chronic bronchitis"],
+      "focus": "ERS Congress abstract on chronic bronchitis burden, risk factors, lung function, and clinical outcomes across LMIC cohorts.",
       "featured_order": 2
     },
     {
@@ -86,7 +86,7 @@
       "venue": "European Respiratory Journal, 66(suppl 69), PA463",
       "year": 2025,
       "url": "https://publications.ersnet.org/index.php/content/erj/66/suppl69/pa463",
-      "image": "images/publications/F1.medium.gif",
+      "image": "images/publications/ERS2025-abstract-figure1.gif",
       "tags": ["Published abstract", "Poster", "GECo", "Chronic bronchitis"],
       "focus": "Published abstract and poster on chronic bronchitis risk factors, respiratory symptoms, lung function, and outcomes across multinational LMIC cohorts.",
       "featured_order": 6
