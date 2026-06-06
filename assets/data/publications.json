@@ -16,7 +16,7 @@
       "year": 2026,
       "doi": "10.1016/j.lana.2026.101382",
       "image": "images/publications/hapin-growth.png",
-      "tags": ["HAPIN", "Child growth", "Household air pollution"],
+      "tags": ["LPG intervention", "Child growth", "Linear trajectories", "Puno, Peru"],
       "focus": "Modeled linear growth trajectories after long-term follow-up of clean cooking intervention exposure in Puno, Peru.",
       "featured_order": 1
     },
@@ -30,7 +30,7 @@
       "doi": "10.1183/13993003.01435-2025",
       "url": "https://publications.ersnet.org/content/erj/67/3/2501435.abstract",
       "image": "images/publications/erj-2026-chronic-bronchitis.png",
-      "tags": ["GECo", "Chronic bronchitis", "Respiratory epidemiology"],
+      "tags": ["Chronic bronchitis", "LMIC cohorts", "Risk factors", "Clinical outcomes"],
       "focus": "Evaluated chronic bronchitis prevalence, risk factors, lung function, and clinical outcomes across low-and middle-income country cohorts.",
       "featured_order": 2
     },
@@ -45,7 +45,7 @@
       "pmid": "40068167",
       "pmcid": "PMC12091018",
       "image": "images/publications/copd-screening.png",
-      "tags": ["GECo", "COPD", "Screening"],
+      "tags": ["COPD screening", "SGRQ", "Spirometry", "Resource-limited settings"],
       "focus": "Evaluated a low-cost SGRQ-based COPD screening strategy for places where spirometry access is limited.",
       "featured_order": 3
     },
@@ -60,7 +60,7 @@
       "pmid": "40354572",
       "pmcid": "PMC12142655",
       "image": "images/publications/hapin-neurodevelopment.png",
-      "tags": ["HAPIN", "Neurodevelopment", "Exposure response"],
+      "tags": ["LPG intervention", "PM2.5 exposure", "Bayley-III", "Neurodevelopment"],
       "focus": "Assessed LPG intervention and PM2.5 exposure-response relationships with Bayley-III neurodevelopmental outcomes.",
       "featured_order": 4
     },
@@ -75,7 +75,7 @@
       "pmid": "41160028",
       "pmcid": "PMC12573034",
       "image": "images/publications/hapin-pneumonia.png",
-      "tags": ["HAPIN", "Pneumonia", "Child health"],
+      "tags": ["Household air pollution", "Biomass cooking", "Severe pneumonia", "Infant health"],
       "focus": "Connected household biomass cooking exposure with severe pneumonia risk in infant health analyses.",
       "featured_order": 5
     },
@@ -88,7 +88,7 @@
       "year": 2025,
       "url": "https://publications.ersnet.org/index.php/content/erj/66/suppl69/pa463",
       "image": "images/publications/ers-2025-chronic-bronchitis-abstract.png",
-      "tags": ["Published abstract", "Oral talk", "GECo", "Chronic bronchitis"],
+      "tags": ["Chronic bronchitis", "GECo cohorts", "Risk factors", "Oral talk"],
       "focus": "Published abstract and oral talk on chronic bronchitis risk factors, respiratory symptoms, lung function, and outcomes across multinational LMIC cohorts.",
       "featured_order": 6
     },
@@ -101,7 +101,7 @@
       "year": 2025,
       "url": "https://www.atsjournals.org/doi/abs/10.1164/ajrccm-conference.2025.211.1_MeetingAbstracts.A1247",
       "image": "images/publications/ats-copd-screening.png",
-      "tags": ["ATS", "Published abstract", "Poster", "COPD screening"],
+      "tags": ["COPD screening", "SGRQ", "PEF", "ATS poster"],
       "focus": "Published abstract and poster presenting a low-cost SGRQ-based COPD screening strategy for resource-limited settings.",
       "featured_order": 7
     }

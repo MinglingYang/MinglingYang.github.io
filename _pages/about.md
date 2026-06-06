@@ -50,8 +50,6 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 ## Publications
 
-<p class="auto-note">This section merges Google Scholar metadata with a curated display layer for DOI links, journal names, research summaries, and representative visuals.</p>
-
 <div id="scholar-publications" class="pub-grid" aria-live="polite">
   <p class="auto-note">Loading publications from Google Scholar...</p>
 </div>
