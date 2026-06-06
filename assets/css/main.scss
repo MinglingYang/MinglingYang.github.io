@@ -138,6 +138,69 @@ h1:before, .anchor:before {
     }
 }
 
+.research-globe {
+    display: grid;
+    grid-template-columns: minmax(280px, 56%) 1fr;
+    gap: 1.1rem;
+    align-items: stretch;
+    margin: 1rem 0 1.7rem;
+
+    @include breakpoint(max-width $medium) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.research-globe__stage {
+    min-height: 360px;
+    overflow: hidden;
+    border: 1px solid #dce5ee;
+    border-radius: 8px;
+    background: radial-gradient(circle at 50% 45%, #ffffff 0%, #f7fbff 48%, #edf5fb 100%);
+    box-shadow: 0 12px 30px rgba(24, 43, 67, .08);
+}
+
+#research-globe-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+}
+
+.research-globe__sites {
+    display: grid;
+    gap: .55rem;
+}
+
+.research-globe__sites article {
+    padding: .72rem .78rem;
+    border: 1px solid #dce5ee;
+    border-radius: 8px;
+    background: #fbfdff;
+    color: #41546a;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+
+    span {
+        display: block;
+        margin-bottom: .18rem;
+        color: #1f4f88;
+        font-size: .78em;
+        font-weight: 700;
+    }
+
+    strong {
+        display: block;
+        color: #26384a;
+        font-size: .82em;
+        line-height: 1.35;
+    }
+}
+
+.research-globe__sites article.is-active {
+    border-color: #2f78b7;
+    box-shadow: 0 8px 18px rgba(47, 120, 183, .16);
+    transform: translateY(-1px);
+}
+
 .experience-role {
     display: flex;
     justify-content: space-between;

@@ -38,6 +38,46 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 - **Respiratory and child health:** COPD, chronic bronchitis, lung function, high-altitude hypoxia, early child growth, neurodevelopment, and cardiometabolic outcomes.
 - **Methods:** causal inference, directed acyclic graphs, longitudinal mixed-effects models, Bayesian and multilevel modeling, functional data analysis, machine learning, geostatistics, GIS, and reproducible research infrastructure.
 
+<span class='anchor' id='research-geography'></span>
+
+## Research Geography
+
+<div class="research-globe" aria-label="Rotating globe showing published study locations">
+  <div class="research-globe__stage">
+    <canvas id="research-globe-canvas" width="900" height="620" role="img" aria-label="Published study locations across Peru, Nepal, Uganda, Guatemala, India, and Rwanda"></canvas>
+  </div>
+  <div class="research-globe__sites" id="research-globe-sites">
+    <article data-location="puno-peru">
+      <span>Puno, Peru</span>
+      <strong>HAPIN child growth, neurodevelopment, and household air pollution studies.</strong>
+    </article>
+    <article data-location="nepal">
+      <span>Nepal</span>
+      <strong>GECo COPD screening, chronic bronchitis, spirometry, and ambient PM2.5 projects.</strong>
+    </article>
+    <article data-location="peru-geco">
+      <span>Peru</span>
+      <strong>GECo chronic bronchitis, COPD screening, and respiratory epidemiology cohorts.</strong>
+    </article>
+    <article data-location="uganda">
+      <span>Uganda</span>
+      <strong>GECo chronic bronchitis, COPD burden, symptoms, and clinical outcomes.</strong>
+    </article>
+    <article data-location="guatemala">
+      <span>Guatemala</span>
+      <strong>HAPIN household air pollution and infant severe pneumonia analyses.</strong>
+    </article>
+    <article data-location="india">
+      <span>India</span>
+      <strong>HAPIN biomass cooking exposure, LPG intervention, and infant health outcomes.</strong>
+    </article>
+    <article data-location="rwanda">
+      <span>Rwanda</span>
+      <strong>HAPIN multi-country child health and severe pneumonia evidence.</strong>
+    </article>
+  </div>
+</div>
+
 <span class='anchor' id='news'></span>
 
 ## News
