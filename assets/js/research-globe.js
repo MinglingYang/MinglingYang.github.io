@@ -16,6 +16,7 @@
   var sortInput = document.getElementById("research-globe-sort");
   var yearInput = document.getElementById("research-globe-year");
   var yearLabel = document.getElementById("research-globe-year-label");
+  var yearPanel = document.querySelector(".research-globe__time-panel");
   var moduleButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-module]"));
   var cardNodes = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
 
@@ -111,7 +112,11 @@
     if (rotationInput) rotationInput.value = String(Math.round(normalizeRotation(rotation)));
     if (tiltInput) tiltInput.value = String(Math.round(tilt));
     if (zoomInput) zoomInput.value = String(Math.round(zoom * 100));
-    if (yearLabel) yearLabel.textContent = "Through " + state.year;
+    if (yearInput) {
+      yearInput.value = String(state.year);
+      yearInput.setAttribute("aria-valuetext", "Through " + state.year);
+    }
+    if (yearLabel) yearLabel.textContent = String(state.year);
   }
 
   function siteIsVisible(site) {
@@ -419,6 +424,17 @@
       state.year = Number(yearInput.value);
       applyFilters();
     });
+  }
+
+  if (yearPanel && yearInput) {
+    yearPanel.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      var step = event.deltaY > 0 ? -1 : 1;
+      var nextYear = clamp(state.year + step, Number(yearInput.min), Number(yearInput.max));
+      if (nextYear === state.year) return;
+      state.year = nextYear;
+      applyFilters();
+    }, { passive: false });
   }
 
   if (zoomInput) {

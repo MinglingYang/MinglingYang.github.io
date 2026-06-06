@@ -58,11 +58,6 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <option value="country">Country</option>
     </select>
   </label>
-  <label>
-    <span>Timeline</span>
-    <input id="research-globe-year" type="range" min="2017" max="2026" value="2026">
-    <output id="research-globe-year-label">Through 2026</output>
-  </label>
 </div>
 
 <div class="research-map-legend" aria-label="Article count legend">
@@ -104,6 +99,17 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <div class="research-globe__zoom" aria-label="Map zoom controls">
       <button type="button" id="research-globe-zoom-in" aria-label="Zoom in">+</button>
       <button type="button" id="research-globe-zoom-out" aria-label="Zoom out">-</button>
+    </div>
+    <div class="research-globe__time-panel" aria-label="Timeline control">
+      <span class="research-globe__time-kicker">Time</span>
+      <output id="research-globe-year-label">2026</output>
+      <input id="research-globe-year" type="range" min="2017" max="2026" value="2026" aria-label="Filter map through year">
+      <div class="research-globe__time-ticks" aria-hidden="true">
+        <span>2026</span>
+        <span>2023</span>
+        <span>2020</span>
+        <span>2017</span>
+      </div>
     </div>
   </div>
   <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
