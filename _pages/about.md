@@ -42,38 +42,58 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 ## Research Geography
 
-<div class="research-globe" aria-label="Rotating globe showing published study locations">
+<div class="research-globe" aria-label="Interactive globe showing published study locations">
+  <svg class="research-globe__connectors" aria-hidden="true"></svg>
+  <div class="research-globe__sites research-globe__sites--left" id="research-globe-left">
+    <article data-location="puno-peru" data-lat="-15.84" data-lon="-70.02">
+      <span>Puno, Peru</span>
+      <strong>HAPIN child growth, neurodevelopment, and household air pollution.</strong>
+      <p>Published work on clean cooking exposure, PM2.5, child growth trajectories, and preschool neurodevelopment.</p>
+    </article>
+    <article data-location="peru-geco" data-lat="-12.05" data-lon="-77.04">
+      <span>Peru</span>
+      <strong>GECo respiratory epidemiology cohorts.</strong>
+      <p>COPD screening with SGRQ, chronic bronchitis outcomes, lung function, and LMIC respiratory health evidence.</p>
+    </article>
+    <article data-location="guatemala" data-lat="14.63" data-lon="-90.51">
+      <span>Guatemala</span>
+      <strong>HAPIN infant health analyses.</strong>
+      <p>Household air pollution, biomass cooking exposure, LPG intervention, and severe pneumonia outcomes.</p>
+    </article>
+  </div>
   <div class="research-globe__stage">
     <canvas id="research-globe-canvas" width="900" height="620" role="img" aria-label="Published study locations across Peru, Nepal, Uganda, Guatemala, India, and Rwanda"></canvas>
+    <div class="research-globe__controls" aria-label="Globe view controls">
+      <label>
+        <span>Longitude</span>
+        <input id="research-globe-rotation" type="range" min="-180" max="180" value="-25">
+      </label>
+      <label>
+        <span>Tilt</span>
+        <input id="research-globe-tilt" type="range" min="-35" max="35" value="8">
+      </label>
+    </div>
   </div>
-  <div class="research-globe__sites" id="research-globe-sites">
-    <article data-location="puno-peru">
-      <span>Puno, Peru</span>
-      <strong>HAPIN child growth, neurodevelopment, and household air pollution studies.</strong>
-    </article>
-    <article data-location="nepal">
+  <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
+    <article data-location="nepal" data-lat="27.72" data-lon="85.32">
       <span>Nepal</span>
-      <strong>GECo COPD screening, chronic bronchitis, spirometry, and ambient PM2.5 projects.</strong>
+      <strong>GECo and ambient PM2.5 projects.</strong>
+      <p>COPD screening, chronic bronchitis, spirometry workflows, sensor calibration, and exposure mapping.</p>
     </article>
-    <article data-location="peru-geco">
-      <span>Peru</span>
-      <strong>GECo chronic bronchitis, COPD screening, and respiratory epidemiology cohorts.</strong>
-    </article>
-    <article data-location="uganda">
+    <article data-location="uganda" data-lat="0.35" data-lon="32.58">
       <span>Uganda</span>
-      <strong>GECo chronic bronchitis, COPD burden, symptoms, and clinical outcomes.</strong>
+      <strong>GECo chronic bronchitis outcomes.</strong>
+      <p>Chronic bronchitis burden, risk factors, respiratory symptoms, quality of life, and clinical outcomes.</p>
     </article>
-    <article data-location="guatemala">
-      <span>Guatemala</span>
-      <strong>HAPIN household air pollution and infant severe pneumonia analyses.</strong>
-    </article>
-    <article data-location="india">
+    <article data-location="india" data-lat="20.59" data-lon="78.96">
       <span>India</span>
-      <strong>HAPIN biomass cooking exposure, LPG intervention, and infant health outcomes.</strong>
+      <strong>HAPIN household energy intervention.</strong>
+      <p>Biomass cooking exposure, LPG intervention, infant health, and multi-country child health evidence.</p>
     </article>
-    <article data-location="rwanda">
+    <article data-location="rwanda" data-lat="-1.94" data-lon="30.06">
       <span>Rwanda</span>
-      <strong>HAPIN multi-country child health and severe pneumonia evidence.</strong>
+      <strong>HAPIN child health evidence.</strong>
+      <p>Multi-country household air pollution analyses and severe pneumonia outcomes in infants.</p>
     </article>
   </div>
 </div>
