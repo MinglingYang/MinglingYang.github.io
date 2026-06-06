@@ -5,3 +5,4 @@ material/
 .asset-cache/
 images/*.pptx
 images/*.pdf
+images/publications/*.pdf
