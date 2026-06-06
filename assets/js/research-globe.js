@@ -71,7 +71,7 @@
   function resize() {
     var rect = stage.getBoundingClientRect();
     var width = Math.max(320, Math.floor(rect.width));
-    var height = Math.max(356, Math.floor(rect.height - 82));
+    var height = Math.max(430, Math.floor(rect.height));
     var ratio = window.devicePixelRatio || 1;
     canvas.width = Math.floor(width * ratio);
     canvas.height = Math.floor(height * ratio);

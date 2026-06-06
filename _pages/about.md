@@ -105,20 +105,6 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <button type="button" id="research-globe-zoom-in" aria-label="Zoom in">+</button>
       <button type="button" id="research-globe-zoom-out" aria-label="Zoom out">-</button>
     </div>
-    <div class="research-globe__controls" aria-label="Globe view controls">
-      <label>
-        <span>Longitude</span>
-        <input id="research-globe-rotation" type="range" min="-180" max="180" value="-25">
-      </label>
-      <label>
-        <span>Tilt</span>
-        <input id="research-globe-tilt" type="range" min="-35" max="35" value="8">
-      </label>
-      <label>
-        <span>Zoom</span>
-        <input id="research-globe-zoom" type="range" min="82" max="145" value="100">
-      </label>
-    </div>
   </div>
   <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
     <article data-location="nepal" data-country="Nepal" data-region="Asia" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="27.72" data-lon="85.32">

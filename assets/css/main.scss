@@ -318,39 +318,14 @@ h1:before, .anchor:before {
     z-index: 1;
     display: block;
     width: 100%;
-    height: calc(100% - 74px);
-    min-height: 356px;
+    height: 100%;
+    min-height: 430px;
     cursor: grab;
     touch-action: none;
 }
 
 #research-globe-canvas.is-dragging {
     cursor: grabbing;
-}
-
-.research-globe__controls {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: .65rem;
-    padding: .65rem .75rem .75rem;
-    border-top: 1px solid rgba(72, 230, 255, .22);
-    background: rgba(2, 12, 28, .78);
-    backdrop-filter: blur(10px);
-
-    label {
-        display: grid;
-        gap: .25rem;
-        color: #8fd8f4;
-        font-size: .72em;
-        font-weight: 700;
-    }
-
-    input {
-        width: 100%;
-        accent-color: #20d9ff;
-    }
 }
 
 .research-globe__zoom {
@@ -491,10 +466,6 @@ h1:before, .anchor:before {
 
     .research-globe__stage {
         min-height: 390px;
-    }
-
-    .research-globe__controls {
-        grid-template-columns: 1fr;
     }
 
     .research-map-toolbar__group {
