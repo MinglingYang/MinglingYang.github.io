@@ -4,3 +4,4 @@ push.sh
 material/
 .asset-cache/
 images/*.pptx
+images/*.pdf
