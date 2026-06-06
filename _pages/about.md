@@ -115,7 +115,7 @@ Data Analyst, Prof. Kyle Steenland | Jan 2025 - Present
 ## Presentations
 
 - **Yang M**, Robertson NM, Sharma AK, Chandyo RK, Shrestha L, Das SK, Kirenga B, Alupo P, Gianella GE, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR, Wise RA, Checkley W. *Screening for Chronic Obstructive Pulmonary Disease (COPD) Using the St. George's Respiratory Questionnaire*. American Thoracic Society International Conference, San Francisco, CA, May 18, 2025. [AJRCCM abstract](https://doi.org/10.1164/ajrccm.2025.211.Abstracts.A1247).
-- Robertson N\*, **Yang M**, et al. *Chronic Bronchitis Prevalence, Risk Factors, and Outcomes in a Multinational Cohort*. European Respiratory Society Congress, Amsterdam, Netherlands, Oct 1, 2025. [ERS abstract](https://doi.org/10.1183/13993003.congress-2025.PA463).
+- Robertson N, **Yang M**, et al. *Chronic Bronchitis Prevalence, Risk Factors, and Outcomes in a Multinational Cohort*. European Respiratory Society Congress, Amsterdam, Netherlands, Oct 1, 2025. [ERS abstract](https://doi.org/10.1183/13993003.congress-2025.PA463).
 - Wells M, **Yang M**, Nicolaou L, Williams K, Checkley W. *Dry Eye Symptoms and Household Air Pollution: Findings from the HAPIN Trial in Peru*. Women in Ophthalmology Summer Symposium, Amelia Island, FL, Aug 12, 2025.
 - Emetu S, **Yang M**, Nicolaou L, Kephart J, Fandino-del-Rio M, Williams K, Steenland NK, Koehler K, Checkley W. *Cooking with Liquefied Petroleum Gas versus Biomass on Lung Function in Adult Peruvian Women*. Accepted for CHEST Annual Meeting, Phoenix, AZ, Oct 18-21, 2026.
 
