@@ -62,7 +62,10 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 Johns Hopkins University School of Medicine
 
-Senior Research Data Analyst, Prof. William Checkley | Sep 2023 - Present
+<div class="experience-role">
+  <span>Senior Research Data Analyst, Prof. William Checkley</span>
+  <span class="experience-role__date">Sep 2023 - Present</span>
+</div>
 
 - Serve as lead analyst across multinational environmental and respiratory health studies, harmonizing more than 100 million data points spanning exposure, clinical, questionnaire, biomarker, sensor, and social-network datasets.
 - Build reproducible R/SQL/Python workflows and internal tools for data integration, quality control, calibration, visualization, and statistical reporting across study sites.
@@ -79,7 +82,10 @@ Selected JHU projects
 
 Johns Hopkins Bloomberg School of Public Health
 
-Research Assistant, Dr. Laura Nicolaou | Dec 2023 - Present
+<div class="experience-role">
+  <span>Research Assistant, Dr. Laura Nicolaou</span>
+  <span class="experience-role__date">Dec 2023 - Present</span>
+</div>
 
 - Lead ambient air pollution projects using four years of monitoring-network and E-Sampler data in Nepal and Peru.
 - Develop cross-regional calibration models for co-located PurpleAir low-cost PM2.5 sensors against MetOne E-Sampler reference monitors using kriging, random forest, and XGBoost.
@@ -87,7 +93,10 @@ Research Assistant, Dr. Laura Nicolaou | Dec 2023 - Present
 
 Rollins School of Public Health, Emory University
 
-Data Analyst, Prof. Kyle Steenland | Jan 2025 - Present
+<div class="experience-role">
+  <span>Data Analyst, Prof. Kyle Steenland</span>
+  <span class="experience-role__date">Jan 2025 - Present</span>
+</div>
 
 - Conduct HAPIN data management and socioeconomic index construction using Multiple Correspondence Analysis across Guatemala, India, Peru, and Rwanda.
 - Reproduce and validate analytic workflows in R Markdown and contribute to manuscript development for household air pollution and child health analyses.

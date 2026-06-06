@@ -138,6 +138,31 @@ h1:before, .anchor:before {
     }
 }
 
+.experience-role {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin: .75rem 0 .4rem;
+    font-weight: 600;
+    color: #25384b;
+}
+
+.experience-role__date {
+    flex: 0 0 auto;
+    margin-left: auto;
+    text-align: right;
+    white-space: nowrap;
+    color: #51677d;
+    font-weight: 500;
+}
+
+@include breakpoint(max-width $medium) {
+    .experience-role {
+        align-items: flex-start;
+        gap: .8rem;
+    }
+}
+
 .pub-grid {
     display: grid;
     gap: 1.35rem;
