@@ -42,27 +42,69 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 ## Research Geography
 
-<div class="research-globe" aria-label="Interactive globe showing published study locations">
+<div class="research-map-toolbar" aria-label="Research geography controls">
+  <div class="research-map-toolbar__group" role="group" aria-label="Module filter">
+    <button type="button" class="is-active" data-globe-module="all">All</button>
+    <button type="button" data-globe-module="education">Education</button>
+    <button type="button" data-globe-module="project">Projects</button>
+    <button type="button" data-globe-module="publication">Articles</button>
+  </div>
+  <label>
+    <span>Sort</span>
+    <select id="research-globe-sort">
+      <option value="region">Region</option>
+      <option value="count">Article count</option>
+      <option value="recent">Recent</option>
+      <option value="country">Country</option>
+    </select>
+  </label>
+  <label>
+    <span>Timeline</span>
+    <input id="research-globe-year" type="range" min="2017" max="2026" value="2026">
+    <output id="research-globe-year-label">Through 2026</output>
+  </label>
+</div>
+
+<div class="research-map-legend" aria-label="Article count legend">
+  <span><i class="research-map-legend__dot research-map-legend__dot--low"></i>0-1 article</span>
+  <span><i class="research-map-legend__dot research-map-legend__dot--mid"></i>2-3 articles</span>
+  <span><i class="research-map-legend__dot research-map-legend__dot--high"></i>4+ articles</span>
+</div>
+
+<div class="research-globe" aria-label="Interactive globe showing education, projects, and published study locations">
   <svg class="research-globe__connectors" aria-hidden="true"></svg>
   <div class="research-globe__sites research-globe__sites--left" id="research-globe-left">
-    <article data-location="puno-peru" data-lat="-15.84" data-lon="-70.02">
-      <span>Puno, Peru</span>
+    <article data-location="puno-peru" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="-15.84" data-lon="-70.02">
+      <span>Peru, Puno</span>
+      <em>Latin America</em>
       <strong>HAPIN child growth, neurodevelopment, and household air pollution.</strong>
       <p>Published work on clean cooking exposure, PM2.5, child growth trajectories, and preschool neurodevelopment.</p>
     </article>
-    <article data-location="peru-geco" data-lat="-12.05" data-lon="-77.04">
+    <article data-location="peru-geco" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="-12.05" data-lon="-77.04">
       <span>Peru</span>
+      <em>Latin America</em>
       <strong>GECo respiratory epidemiology cohorts.</strong>
       <p>COPD screening with SGRQ, chronic bronchitis outcomes, lung function, and LMIC respiratory health evidence.</p>
     </article>
-    <article data-location="guatemala" data-lat="14.63" data-lon="-90.51">
+    <article data-location="guatemala" data-country="Guatemala" data-region="Latin America" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="14.63" data-lon="-90.51">
       <span>Guatemala</span>
+      <em>Latin America</em>
       <strong>HAPIN infant health analyses.</strong>
       <p>Household air pollution, biomass cooking exposure, LPG intervention, and severe pneumonia outcomes.</p>
+    </article>
+    <article data-location="usa-education" data-country="United States" data-region="North America" data-modules="education project" data-count="0" data-start="2017" data-end="2026" data-lat="39.29" data-lon="-76.61">
+      <span>United States</span>
+      <em>North America</em>
+      <strong>Education and research training.</strong>
+      <p>University of South Carolina, Johns Hopkins, Emory collaborations, and incoming USC doctoral training.</p>
     </article>
   </div>
   <div class="research-globe__stage">
     <canvas id="research-globe-canvas" width="900" height="620" role="img" aria-label="Published study locations across Peru, Nepal, Uganda, Guatemala, India, and Rwanda"></canvas>
+    <div class="research-globe__zoom" aria-label="Map zoom controls">
+      <button type="button" id="research-globe-zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" id="research-globe-zoom-out" aria-label="Zoom out">-</button>
+    </div>
     <div class="research-globe__controls" aria-label="Globe view controls">
       <label>
         <span>Longitude</span>
@@ -72,26 +114,34 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
         <span>Tilt</span>
         <input id="research-globe-tilt" type="range" min="-35" max="35" value="8">
       </label>
+      <label>
+        <span>Zoom</span>
+        <input id="research-globe-zoom" type="range" min="82" max="145" value="100">
+      </label>
     </div>
   </div>
   <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
-    <article data-location="nepal" data-lat="27.72" data-lon="85.32">
+    <article data-location="nepal" data-country="Nepal" data-region="Asia" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="27.72" data-lon="85.32">
       <span>Nepal</span>
+      <em>Asia</em>
       <strong>GECo and ambient PM2.5 projects.</strong>
       <p>COPD screening, chronic bronchitis, spirometry workflows, sensor calibration, and exposure mapping.</p>
     </article>
-    <article data-location="uganda" data-lat="0.35" data-lon="32.58">
+    <article data-location="uganda" data-country="Uganda" data-region="Africa" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="0.35" data-lon="32.58">
       <span>Uganda</span>
+      <em>Africa</em>
       <strong>GECo chronic bronchitis outcomes.</strong>
       <p>Chronic bronchitis burden, risk factors, respiratory symptoms, quality of life, and clinical outcomes.</p>
     </article>
-    <article data-location="india" data-lat="20.59" data-lon="78.96">
+    <article data-location="india" data-country="India" data-region="Asia" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="20.59" data-lon="78.96">
       <span>India</span>
+      <em>Asia</em>
       <strong>HAPIN household energy intervention.</strong>
       <p>Biomass cooking exposure, LPG intervention, infant health, and multi-country child health evidence.</p>
     </article>
-    <article data-location="rwanda" data-lat="-1.94" data-lon="30.06">
+    <article data-location="rwanda" data-country="Rwanda" data-region="Africa" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="-1.94" data-lon="30.06">
       <span>Rwanda</span>
+      <em>Africa</em>
       <strong>HAPIN child health evidence.</strong>
       <p>Multi-country household air pollution analyses and severe pneumonia outcomes in infants.</p>
     </article>

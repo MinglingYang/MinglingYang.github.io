@@ -6,19 +6,40 @@
   var globe = canvas.closest(".research-globe");
   var stage = canvas.closest(".research-globe__stage");
   var connectorLayer = globe && globe.querySelector(".research-globe__connectors");
+  var leftColumn = document.getElementById("research-globe-left");
+  var rightColumn = document.getElementById("research-globe-right");
   var rotationInput = document.getElementById("research-globe-rotation");
   var tiltInput = document.getElementById("research-globe-tilt");
-  var cards = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
+  var zoomInput = document.getElementById("research-globe-zoom");
+  var zoomIn = document.getElementById("research-globe-zoom-in");
+  var zoomOut = document.getElementById("research-globe-zoom-out");
+  var sortInput = document.getElementById("research-globe-sort");
+  var yearInput = document.getElementById("research-globe-year");
+  var yearLabel = document.getElementById("research-globe-year-label");
+  var moduleButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-module]"));
+  var cardNodes = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
 
-  var sites = cards.map(function (card, index) {
+  var regionOrder = {
+    "North America": 1,
+    "Latin America": 2,
+    "Africa": 3,
+    "Asia": 4
+  };
+
+  var sites = cardNodes.map(function (card, index) {
     return {
       id: card.getAttribute("data-location"),
+      country: card.getAttribute("data-country") || "",
+      region: card.getAttribute("data-region") || "",
+      modules: String(card.getAttribute("data-modules") || "").split(/\s+/),
+      count: Number(card.getAttribute("data-count") || 0),
+      start: Number(card.getAttribute("data-start") || 1900),
+      end: Number(card.getAttribute("data-end") || 2026),
       name: card.querySelector("span") ? card.querySelector("span").textContent : "",
       lat: Number(card.getAttribute("data-lat")),
       lon: Number(card.getAttribute("data-lon")),
       card: card,
-      index: index,
-      color: ["#2f78b7", "#7c5cc4", "#d56a8a", "#20a486", "#ef9b20", "#4aa5d8", "#82b84a"][index % 7]
+      index: index
     };
   });
 
@@ -32,9 +53,16 @@
     [[-52, 76], [-22, 72], [-36, 60], [-58, 62]]
   ];
 
+  var state = {
+    module: "all",
+    sort: sortInput ? sortInput.value : "region",
+    year: yearInput ? Number(yearInput.value) : 2026
+  };
   var rotation = rotationInput ? Number(rotationInput.value) : -25;
   var tilt = tiltInput ? Number(tiltInput.value) : 8;
+  var zoom = zoomInput ? Number(zoomInput.value) / 100 : 1;
   var activeId = "puno-peru";
+  var visibleSites = [];
   var markerPositions = {};
   var isDragging = false;
   var dragStart = null;
@@ -43,7 +71,7 @@
   function resize() {
     var rect = stage.getBoundingClientRect();
     var width = Math.max(320, Math.floor(rect.width));
-    var height = Math.max(356, Math.floor(rect.height - 74));
+    var height = Math.max(356, Math.floor(rect.height - 82));
     var ratio = window.devicePixelRatio || 1;
     canvas.width = Math.floor(width * ratio);
     canvas.height = Math.floor(height * ratio);
@@ -63,14 +91,77 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  function normalizeRotation(value) {
+    return ((value + 180) % 360 + 360) % 360 - 180;
+  }
+
+  function markerColor(count) {
+    if (count >= 4) return "#104a7b";
+    if (count >= 2) return "#2f78b7";
+    if (count === 1) return "#5f9fc8";
+    return "#8fb4ce";
+  }
+
+  function markerRadius(count, active) {
+    var base = count >= 4 ? 8 : count >= 2 ? 7 : count === 1 ? 6 : 5;
+    return active ? base + 2 : base;
+  }
+
   function syncInputs() {
     if (rotationInput) rotationInput.value = String(Math.round(normalizeRotation(rotation)));
     if (tiltInput) tiltInput.value = String(Math.round(tilt));
+    if (zoomInput) zoomInput.value = String(Math.round(zoom * 100));
+    if (yearLabel) yearLabel.textContent = "Through " + state.year;
   }
 
-  function normalizeRotation(value) {
-    var next = ((value + 180) % 360 + 360) % 360 - 180;
-    return next;
+  function siteIsVisible(site) {
+    var moduleMatch = state.module === "all" || site.modules.indexOf(state.module) !== -1;
+    var yearMatch = site.start <= state.year;
+    return moduleMatch && yearMatch;
+  }
+
+  function sortSites(items) {
+    return items.slice().sort(function (a, b) {
+      if (state.sort === "count") {
+        if (b.count !== a.count) return b.count - a.count;
+      } else if (state.sort === "recent") {
+        if (b.end !== a.end) return b.end - a.end;
+      } else if (state.sort === "country") {
+        return a.country.localeCompare(b.country) || a.name.localeCompare(b.name);
+      } else {
+        var regionDiff = (regionOrder[a.region] || 99) - (regionOrder[b.region] || 99);
+        if (regionDiff) return regionDiff;
+      }
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  function applyFilters() {
+    visibleSites = sortSites(sites.filter(siteIsVisible));
+    if (!visibleSites.some(function (site) { return site.id === activeId; }) && visibleSites.length) {
+      activeId = visibleSites[0].id;
+    }
+    renderCards();
+    updateCards();
+    syncInputs();
+  }
+
+  function renderCards() {
+    if (!leftColumn || !rightColumn) return;
+    leftColumn.innerHTML = "";
+    rightColumn.innerHTML = "";
+    var midpoint = Math.ceil(visibleSites.length / 2);
+    visibleSites.forEach(function (site, index) {
+      site.card.classList.remove("is-hidden");
+      if (index < midpoint) {
+        leftColumn.appendChild(site.card);
+      } else {
+        rightColumn.appendChild(site.card);
+      }
+    });
+    sites.forEach(function (site) {
+      if (visibleSites.indexOf(site) === -1) site.card.classList.add("is-hidden");
+    });
   }
 
   function project(lat, lon, width, height, radius) {
@@ -105,27 +196,9 @@
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.fill();
-
     ctx.strokeStyle = "#9fc2d8";
     ctx.lineWidth = 1.3;
     ctx.stroke();
-  }
-
-  function drawGraticule(width, height, radius) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.strokeStyle = "rgba(56, 92, 124, .24)";
-    ctx.lineWidth = 1;
-
-    for (var lat = -60; lat <= 60; lat += 20) {
-      drawLine(function (lon) { return [lat, lon]; }, -180, 180, width, height, radius);
-    }
-    for (var lon = -150; lon <= 180; lon += 30) {
-      drawLine(function (lat) { return [lat, lon]; }, -80, 80, width, height, radius);
-    }
-    ctx.restore();
   }
 
   function drawLine(pointAt, start, end, width, height, radius) {
@@ -146,6 +219,22 @@
       }
     }
     ctx.stroke();
+  }
+
+  function drawGraticule(width, height, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.strokeStyle = "rgba(56, 92, 124, .24)";
+    ctx.lineWidth = 1;
+    for (var lat = -60; lat <= 60; lat += 20) {
+      drawLine(function (lon) { return [lat, lon]; }, -180, 180, width, height, radius);
+    }
+    for (var lon = -150; lon <= 180; lon += 30) {
+      drawLine(function (lat) { return [lat, lon]; }, -80, 80, width, height, radius);
+    }
+    ctx.restore();
   }
 
   function drawLand(width, height, radius) {
@@ -196,23 +285,31 @@
 
   function drawSites(width, height, radius, time) {
     markerPositions = {};
-    sites.forEach(function (site) {
+    visibleSites.forEach(function (site) {
       var p = project(site.lat, site.lon, width, height, radius);
       if (!p.visible) return;
       markerPositions[site.id] = { x: p.x, y: p.y };
       var active = site.id === activeId;
       var pulse = active ? 7 + Math.sin(time / 220) * 2 : 3 + Math.sin(time / 520 + site.index) * 1.2;
+      var dotRadius = markerRadius(site.count, active);
       ctx.fillStyle = "rgba(47, 120, 183, .12)";
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 14 + pulse, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 14 + pulse + site.count * 1.4, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = site.color;
+      ctx.fillStyle = markerColor(site.count);
       ctx.strokeStyle = "#ffffff";
       ctx.lineWidth = active ? 3 : 2;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, active ? 7.5 : 5.5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
+      if (site.count > 0) {
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "700 10px Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(String(site.count), p.x, p.y + .5);
+      }
     });
   }
 
@@ -227,7 +324,7 @@
     var globeRect = globe.getBoundingClientRect();
     var canvasRect = canvas.getBoundingClientRect();
     var paths = [];
-    sites.forEach(function (site) {
+    visibleSites.forEach(function (site) {
       var marker = markerPositions[site.id];
       if (!marker) return;
       var cardRect = site.card.getBoundingClientRect();
@@ -235,10 +332,10 @@
       var startY = canvasRect.top - globeRect.top + marker.y;
       var cardOnLeft = cardRect.left < canvasRect.left;
       var endX = (cardOnLeft ? cardRect.right : cardRect.left) - globeRect.left;
-      var endY = cardRect.top - globeRect.top + Math.min(28, cardRect.height / 2);
+      var endY = cardRect.top - globeRect.top + Math.min(34, cardRect.height / 2);
       var bendX = cardOnLeft ? startX - 46 : startX + 46;
-      var color = site.id === activeId ? "#2f78b7" : "rgba(84, 125, 160, .34)";
-      var width = site.id === activeId ? 2.2 : 1.1;
+      var color = site.id === activeId ? "#2f78b7" : "rgba(84, 125, 160, .28)";
+      var width = site.id === activeId ? 2.3 : 1.1;
       paths.push("<path d=\"M" + startX.toFixed(1) + " " + startY.toFixed(1) + " C " + bendX.toFixed(1) + " " + startY.toFixed(1) + ", " + bendX.toFixed(1) + " " + endY.toFixed(1) + ", " + endX.toFixed(1) + " " + endY.toFixed(1) + "\" fill=\"none\" stroke=\"" + color + "\" stroke-width=\"" + width + "\" stroke-linecap=\"round\"/>");
       if (site.id === activeId) {
         paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#2f78b7\"/>");
@@ -266,7 +363,7 @@
       var dx = marker.x - x;
       var dy = marker.y - y;
       var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 24 && (!best || dist < best.dist)) best = { id: id, dist: dist };
+      if (dist < 26 && (!best || dist < best.dist)) best = { id: id, dist: dist };
     });
     return best && best.id;
   }
@@ -274,9 +371,9 @@
   function render(time) {
     var width = canvas.clientWidth;
     var height = canvas.clientHeight;
-    var radius = Math.min(width, height) * .39;
+    var radius = Math.min(width, height) * .35 * zoom;
     ctx.clearRect(0, 0, width, height);
-    if (!reduceMotion && !isDragging) rotation += .025;
+    if (!reduceMotion && !isDragging) rotation += .018;
     drawOrbits(width, height, radius);
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
@@ -286,18 +383,57 @@
     window.requestAnimationFrame(render);
   }
 
-  cards.forEach(function (card) {
-    card.setAttribute("tabindex", "0");
-    card.addEventListener("click", function () {
-      setActive(card.getAttribute("data-location"));
+  sites.forEach(function (site) {
+    site.card.setAttribute("tabindex", "0");
+    site.card.addEventListener("click", function () {
+      setActive(site.id);
     });
-    card.addEventListener("keydown", function (event) {
+    site.card.addEventListener("keydown", function (event) {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        setActive(card.getAttribute("data-location"));
+        setActive(site.id);
       }
     });
   });
+
+  moduleButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      state.module = button.getAttribute("data-globe-module");
+      moduleButtons.forEach(function (item) {
+        item.classList.toggle("is-active", item === button);
+      });
+      applyFilters();
+    });
+  });
+
+  if (sortInput) {
+    sortInput.addEventListener("change", function () {
+      state.sort = sortInput.value;
+      applyFilters();
+    });
+  }
+
+  if (yearInput) {
+    yearInput.addEventListener("input", function () {
+      state.year = Number(yearInput.value);
+      applyFilters();
+    });
+  }
+
+  if (zoomInput) {
+    zoomInput.addEventListener("input", function () {
+      zoom = Number(zoomInput.value) / 100;
+      syncInputs();
+    });
+  }
+
+  function changeZoom(delta) {
+    zoom = clamp(zoom + delta, .82, 1.45);
+    syncInputs();
+  }
+
+  if (zoomIn) zoomIn.addEventListener("click", function () { changeZoom(.08); });
+  if (zoomOut) zoomOut.addEventListener("click", function () { changeZoom(-.08); });
 
   canvas.addEventListener("pointerdown", function (event) {
     isDragging = true;
@@ -346,6 +482,6 @@
   });
 
   resize();
-  updateCards();
+  applyFilters();
   window.requestAnimationFrame(render);
 })();
