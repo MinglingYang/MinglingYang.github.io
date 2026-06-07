@@ -90,6 +90,29 @@
   var lastFrameTime = 0;
   var spinPausedUntil = 0;
   var timeWheelArmed = false;
+  var earthTexture = {
+    canvas: null,
+    data: null,
+    image: new Image(),
+    ready: false,
+    width: 0,
+    height: 0
+  };
+  var textureFrameCanvas = document.createElement("canvas");
+  var textureFrameCtx = textureFrameCanvas.getContext("2d");
+
+  earthTexture.image.onload = function () {
+    earthTexture.canvas = document.createElement("canvas");
+    earthTexture.width = earthTexture.image.naturalWidth || earthTexture.image.width;
+    earthTexture.height = earthTexture.image.naturalHeight || earthTexture.image.height;
+    earthTexture.canvas.width = earthTexture.width;
+    earthTexture.canvas.height = earthTexture.height;
+    var textureCtx = earthTexture.canvas.getContext("2d");
+    textureCtx.drawImage(earthTexture.image, 0, 0, earthTexture.width, earthTexture.height);
+    earthTexture.data = textureCtx.getImageData(0, 0, earthTexture.width, earthTexture.height).data;
+    earthTexture.ready = true;
+  };
+  earthTexture.image.src = "/assets/images/earth-blue-marble-topography.jpg";
 
   function resize() {
     var rect = stage.getBoundingClientRect();
@@ -175,15 +198,15 @@
   }
 
   function countryFill(count, active) {
-    if (active && count >= 4) return "rgba(255, 176, 46, .72)";
-    if (active && count >= 2) return "rgba(155, 92, 255, .62)";
-    if (active && count === 1) return "rgba(66, 245, 155, .56)";
-    if (active && state.module === "education") return "rgba(255, 209, 102, .5)";
-    if (active && state.module === "presentation") return "rgba(255, 90, 179, .5)";
-    if (count >= 4) return "rgba(255, 176, 46, .62)";
-    if (count >= 2) return "rgba(155, 92, 255, .5)";
-    if (count === 1) return "rgba(66, 245, 155, .44)";
-    return "rgba(18, 62, 74, .46)";
+    if (active && count >= 4) return "rgba(255, 176, 46, .42)";
+    if (active && count >= 2) return "rgba(155, 92, 255, .36)";
+    if (active && count === 1) return "rgba(66, 245, 155, .32)";
+    if (active && state.module === "education") return "rgba(255, 209, 102, .3)";
+    if (active && state.module === "presentation") return "rgba(255, 90, 179, .34)";
+    if (count >= 4) return "rgba(255, 176, 46, .34)";
+    if (count >= 2) return "rgba(155, 92, 255, .28)";
+    if (count === 1) return "rgba(66, 245, 155, .24)";
+    return "rgba(14, 52, 66, .12)";
   }
 
   function countryStroke(count, active) {
@@ -354,6 +377,75 @@
     ctx.strokeStyle = "rgba(0, 213, 255, .72)";
     ctx.lineWidth = 1.6;
     ctx.stroke();
+  }
+
+  function drawEarthTexture(width, height, radius) {
+    if (!earthTexture.ready || !earthTexture.data || !textureFrameCtx) return;
+    if (textureFrameCanvas.width !== width || textureFrameCanvas.height !== height) {
+      textureFrameCanvas.width = width;
+      textureFrameCanvas.height = height;
+    }
+    var frame = textureFrameCtx.createImageData(width, height);
+    var output = frame.data;
+    var source = earthTexture.data;
+    var textureWidth = earthTexture.width;
+    var textureHeight = earthTexture.height;
+    var centerX = width / 2;
+    var centerY = height / 2;
+    var minX = Math.max(0, Math.floor(centerX - radius));
+    var maxX = Math.min(width - 1, Math.ceil(centerX + radius));
+    var minY = Math.max(0, Math.floor(centerY - radius));
+    var maxY = Math.min(height - 1, Math.ceil(centerY + radius));
+    var tiltRadians = tilt * Math.PI / 180;
+    var sinTilt = Math.sin(tiltRadians);
+    var cosTilt = Math.cos(tiltRadians);
+    for (var y = minY; y <= maxY; y += 1) {
+      var normalizedY = (centerY - (y + .5)) / radius;
+      for (var x = minX; x <= maxX; x += 1) {
+        var normalizedX = ((x + .5) - centerX) / radius;
+        var distance = normalizedX * normalizedX + normalizedY * normalizedY;
+        if (distance > 1) continue;
+        var z = Math.sqrt(1 - distance);
+        var sinPhi = clamp(cosTilt * normalizedY + sinTilt * z, -1, 1);
+        var cosPhiCosLambda = -sinTilt * normalizedY + cosTilt * z;
+        var latitude = Math.asin(sinPhi) * 180 / Math.PI;
+        var longitude = normalizeRotation(Math.atan2(normalizedX, cosPhiCosLambda) * 180 / Math.PI - rotation);
+        var textureX = Math.floor((longitude + 180) / 360 * (textureWidth - 1));
+        var textureY = Math.floor((90 - latitude) / 180 * (textureHeight - 1));
+        var sourceIndex = (textureY * textureWidth + textureX) * 4;
+        var targetIndex = (y * width + x) * 4;
+        var depth = .52 + z * .48;
+        var haze = (1 - z) * .22;
+        output[targetIndex] = clamp(source[sourceIndex] * .48 * depth + 6, 0, 255);
+        output[targetIndex + 1] = clamp(source[sourceIndex + 1] * .62 * depth + 12, 0, 255);
+        output[targetIndex + 2] = clamp(source[sourceIndex + 2] * .82 * depth + 26 + haze * 38, 0, 255);
+        output[targetIndex + 3] = 232;
+      }
+    }
+    textureFrameCtx.putImageData(frame, 0, 0);
+    ctx.drawImage(textureFrameCanvas, 0, 0, width, height);
+  }
+
+  function drawGlobeLighting(width, height, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    var highlight = ctx.createRadialGradient(width * .36, height * .28, radius * .08, width * .38, height * .3, radius * .82);
+    highlight.addColorStop(0, "rgba(170, 245, 255, .24)");
+    highlight.addColorStop(.38, "rgba(74, 211, 246, .08)");
+    highlight.addColorStop(1, "rgba(0, 213, 255, 0)");
+    ctx.fillStyle = highlight;
+    ctx.fillRect(width / 2 - radius, height / 2 - radius, radius * 2, radius * 2);
+    ctx.globalCompositeOperation = "source-over";
+    var shade = ctx.createRadialGradient(width * .38, height * .3, radius * .14, width * .62, height * .6, radius * 1.1);
+    shade.addColorStop(0, "rgba(0, 0, 0, 0)");
+    shade.addColorStop(.56, "rgba(0, 0, 0, .03)");
+    shade.addColorStop(1, "rgba(0, 0, 0, .34)");
+    ctx.fillStyle = shade;
+    ctx.fillRect(width / 2 - radius, height / 2 - radius, radius * 2, radius * 2);
+    ctx.restore();
   }
 
   function drawLine(pointAt, start, end, width, height, radius) {
@@ -638,6 +730,8 @@
     }
     ctx.clearRect(0, 0, width, height);
     drawSphere(width, height, radius);
+    drawEarthTexture(width, height, radius);
+    drawGlobeLighting(width, height, radius);
     drawLand(width, height, radius);
     drawGraticule(width, height, radius);
     drawEducationPath(width, height, radius);
