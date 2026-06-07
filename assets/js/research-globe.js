@@ -39,6 +39,22 @@
     { name: "Arctic Ocean", lat: 74, lon: 10 }
   ];
 
+  var cityLights = [
+    { name: "Los Angeles", lat: 34.05, lon: -118.24, glow: 1.1 },
+    { name: "San Francisco", lat: 37.77, lon: -122.42, glow: 1 },
+    { name: "Phoenix", lat: 33.45, lon: -112.07, glow: .85 },
+    { name: "Baltimore", lat: 39.29, lon: -76.61, glow: .82 },
+    { name: "New York", lat: 40.71, lon: -74.01, glow: 1.15 },
+    { name: "Amsterdam", lat: 52.37, lon: 4.9, glow: .9 },
+    { name: "Lima", lat: -12.05, lon: -77.04, glow: .9 },
+    { name: "Puno", lat: -15.84, lon: -70.02, glow: .74 },
+    { name: "Kathmandu", lat: 27.72, lon: 85.32, glow: .82 },
+    { name: "Kampala", lat: .35, lon: 32.58, glow: .78 },
+    { name: "Guatemala City", lat: 14.63, lon: -90.51, glow: .78 },
+    { name: "Kigali", lat: -1.94, lon: 30.06, glow: .68 },
+    { name: "Delhi", lat: 28.61, lon: 77.21, glow: 1.05 }
+  ];
+
   function parseCities(value) {
     return String(value || "").split(";").map(function (entry) {
       var parts = entry.split("|");
@@ -153,11 +169,11 @@
 
   function markerColor(site) {
     var count = site.count;
-    if (siteHasModule(site, "presentation")) return "#5fafd8";
-    if (count >= 4) return "#5fafd8";
-    if (count >= 2) return "#83c4e6";
-    if (count === 1) return "#a7d4ef";
-    return "#bdbdbd";
+    if (siteHasModule(site, "presentation")) return "#00d5ff";
+    if (count >= 4) return "#ffd166";
+    if (count >= 2) return "#42f59b";
+    if (count === 1) return "#00d5ff";
+    return "#8ca3b0";
   }
 
   function markerRadius(count, active) {
@@ -166,18 +182,18 @@
   }
 
   function countryFill(count, active) {
-    if (active && (count > 0 || state.module === "presentation")) return "rgba(120, 190, 226, .82)";
-    if (count >= 4) return "rgba(159, 207, 232, .76)";
-    if (count >= 2) return "rgba(174, 215, 236, .68)";
-    if (count === 1) return "rgba(190, 225, 242, .62)";
-    return "rgba(218, 218, 218, .86)";
+    if (active && (count > 0 || state.module === "presentation")) return "rgba(0, 213, 255, .54)";
+    if (count >= 4) return "rgba(255, 209, 102, .46)";
+    if (count >= 2) return "rgba(66, 245, 155, .38)";
+    if (count === 1) return "rgba(0, 213, 255, .34)";
+    return "rgba(18, 62, 74, .46)";
   }
 
   function countryStroke(count, active) {
-    if (active && count > 0) return "rgba(75, 139, 176, .92)";
-    if (active) return "rgba(105, 145, 166, .76)";
-    if (count > 0) return "rgba(255, 255, 255, .92)";
-    return "rgba(197, 197, 197, .82)";
+    if (active && count > 0) return "rgba(234, 255, 255, .96)";
+    if (active) return "rgba(0, 213, 255, .86)";
+    if (count > 0) return "rgba(0, 213, 255, .72)";
+    return "rgba(49, 182, 218, .28)";
   }
 
   function syncInputs() {
@@ -261,6 +277,7 @@
     sites.forEach(function (site) {
       if (displaySites.indexOf(site) === -1) site.card.classList.add("is-hidden");
     });
+    resize();
   }
 
   function project(lat, lon, width, height, radius) {
@@ -278,27 +295,172 @@
     };
   }
 
+  function fract(value) {
+    return value - Math.floor(value);
+  }
+
+  function terrainNoise(lat, lon) {
+    var fine = fract(Math.sin(lat * 12.9898 + lon * 78.233) * 43758.5453);
+    var broad = fract(Math.sin(lat * 3.71 - lon * 9.43) * 12972.349);
+    return fine * .58 + broad * .42;
+  }
+
   function drawSphere(width, height, radius) {
     var atmosphere = ctx.createRadialGradient(width / 2, height / 2, radius * .75, width / 2, height / 2, radius * 1.18);
-    atmosphere.addColorStop(0, "rgba(255, 255, 255, 0)");
-    atmosphere.addColorStop(.78, "rgba(222, 226, 229, .2)");
-    atmosphere.addColorStop(1, "rgba(190, 197, 202, .36)");
+    atmosphere.addColorStop(0, "rgba(0, 213, 255, 0)");
+    atmosphere.addColorStop(.72, "rgba(0, 213, 255, .14)");
+    atmosphere.addColorStop(1, "rgba(0, 213, 255, .48)");
     ctx.fillStyle = atmosphere;
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius * 1.18, 0, Math.PI * 2);
     ctx.fill();
 
-    var gradient = ctx.createRadialGradient(width * .38, height * .3, radius * .1, width / 2, height / 2, radius);
-    gradient.addColorStop(0, "#ffffff");
-    gradient.addColorStop(.56, "#fbfbfb");
-    gradient.addColorStop(1, "#eceeef");
+    var gradient = ctx.createRadialGradient(width * .36, height * .28, radius * .08, width / 2, height / 2, radius);
+    gradient.addColorStop(0, "#1c6f8d");
+    gradient.addColorStop(.34, "#0c385f");
+    gradient.addColorStop(.72, "#061d3d");
+    gradient.addColorStop(1, "#020816");
     ctx.fillStyle = gradient;
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "rgba(188, 194, 198, .82)";
-    ctx.lineWidth = 1.2;
+    var shade = ctx.createRadialGradient(width * .38, height * .3, radius * .15, width * .6, height * .58, radius * 1.08);
+    shade.addColorStop(0, "rgba(255, 255, 255, .22)");
+    shade.addColorStop(.48, "rgba(0, 0, 0, 0)");
+    shade.addColorStop(1, "rgba(0, 0, 0, .38)");
+    ctx.fillStyle = shade;
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(0, 213, 255, .72)";
+    ctx.lineWidth = 1.6;
     ctx.stroke();
+  }
+
+  function drawSurfaceTexture(width, height, radius, time) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    for (var lat = -72; lat <= 72; lat += 5) {
+      for (var lon = -180; lon <= 180; lon += 6) {
+        var p = project(lat, lon + (time || 0) * .0008, width, height, radius);
+        if (!p.visible) continue;
+        var noise = terrainNoise(lat, lon);
+        var polar = Math.abs(lat) > 56;
+        var alpha = polar ? .14 : .06 + noise * .16;
+        ctx.fillStyle = polar
+          ? "rgba(210, 250, 255, " + alpha.toFixed(3) + ")"
+          : noise > .68
+            ? "rgba(125, 255, 198, " + alpha.toFixed(3) + ")"
+            : "rgba(0, 213, 255, " + alpha.toFixed(3) + ")";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, noise > .72 ? 1.35 : .82, 0, Math.PI * 2);
+        ctx.fill();
+        if (noise > .76) {
+          var p2 = project(lat + 1.8, lon + 2.6, width, height, radius);
+          if (p2.visible) {
+            ctx.strokeStyle = "rgba(230, 255, 255, .16)";
+            ctx.lineWidth = .7;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    ctx.globalCompositeOperation = "source-over";
+    ctx.restore();
+  }
+
+  function drawNightLights(width, height, radius, time) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    cityLights.forEach(function (city, index) {
+      var p = project(city.lat, city.lon, width, height, radius);
+      if (!p.visible) return;
+      var pulse = .75 + Math.sin((time || 0) / 420 + index) * .18;
+      var glow = city.glow * pulse;
+      var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 10 * glow);
+      gradient.addColorStop(0, "rgba(255, 229, 153, .9)");
+      gradient.addColorStop(.3, "rgba(255, 209, 102, .42)");
+      gradient.addColorStop(1, "rgba(255, 209, 102, 0)");
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 10 * glow, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255, 246, 210, .9)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.15 * glow, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalCompositeOperation = "source-over";
+    ctx.restore();
+  }
+
+  function drawHologramScan(width, height, radius, time) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    var offset = ((time || 0) / 38) % 14;
+    for (var y = height / 2 - radius; y <= height / 2 + radius; y += 14) {
+      ctx.strokeStyle = "rgba(0, 213, 255, .07)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(width / 2 - radius, y + offset);
+      ctx.lineTo(width / 2 + radius, y + offset);
+      ctx.stroke();
+    }
+    var sweepY = height / 2 - radius + ((time || 0) / 20) % (radius * 2);
+    var sweep = ctx.createLinearGradient(width / 2 - radius, sweepY, width / 2 + radius, sweepY);
+    sweep.addColorStop(0, "rgba(0, 213, 255, 0)");
+    sweep.addColorStop(.5, "rgba(0, 213, 255, .22)");
+    sweep.addColorStop(1, "rgba(0, 213, 255, 0)");
+    ctx.strokeStyle = sweep;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(width / 2 - radius, sweepY);
+    ctx.lineTo(width / 2 + radius, sweepY);
+    ctx.stroke();
+    ctx.globalCompositeOperation = "source-over";
+    ctx.restore();
+  }
+
+  function drawHudOverlay(width, height, radius, time) {
+    var cx = width / 2;
+    var cy = height / 2;
+    ctx.save();
+    ctx.strokeStyle = "rgba(0, 213, 255, .2)";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([6, 8]);
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 1.07, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.strokeStyle = "rgba(66, 245, 155, .24)";
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * .74, ((time || 0) / 1600) % (Math.PI * 2), Math.PI * 1.12 + ((time || 0) / 1600) % (Math.PI * 2));
+    ctx.stroke();
+    ctx.strokeStyle = "rgba(0, 213, 255, .16)";
+    ctx.beginPath();
+    ctx.moveTo(cx - radius * 1.18, cy);
+    ctx.lineTo(cx - radius * .92, cy);
+    ctx.moveTo(cx + radius * .92, cy);
+    ctx.lineTo(cx + radius * 1.18, cy);
+    ctx.moveTo(cx, cy - radius * 1.18);
+    ctx.lineTo(cx, cy - radius * .92);
+    ctx.moveTo(cx, cy + radius * .92);
+    ctx.lineTo(cx, cy + radius * 1.18);
+    ctx.stroke();
+    ctx.restore();
   }
 
   function drawLine(pointAt, start, end, width, height, radius) {
@@ -326,7 +488,7 @@
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.clip();
-    ctx.strokeStyle = "rgba(196, 205, 211, .46)";
+    ctx.strokeStyle = "rgba(0, 213, 255, .22)";
     ctx.lineWidth = .9;
     for (var lat = -60; lat <= 60; lat += 20) {
       drawLine(function (lon) { return [lat, lon]; }, -180, 180, width, height, radius);
@@ -388,7 +550,7 @@
       var activeCountry = activeSite && activeSite.country === country;
       var fillStyle = countryFill(count, activeCountry);
       var strokeStyle = countryStroke(count, activeCountry);
-      var lineWidth = activeCountry ? 1.4 : .65;
+      var lineWidth = activeCountry ? 1.55 : .72;
       var polygons = feature.geometry.type === "Polygon" ? [feature.geometry.coordinates] : feature.geometry.coordinates;
       polygons.forEach(function (polygon) {
         if (!polygon || !polygon[0]) return;
@@ -401,7 +563,7 @@
   function drawOceanLabels(width, height, radius) {
     ctx.save();
     ctx.font = "700 10px Arial, sans-serif";
-    ctx.fillStyle = "rgba(150, 154, 158, .5)";
+    ctx.fillStyle = "rgba(126, 224, 255, .42)";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     oceanLabels.forEach(function (item) {
@@ -415,7 +577,7 @@
   function drawOrbits(width, height, radius) {
     ctx.save();
     ctx.translate(width / 2, height / 2);
-    ctx.strokeStyle = "rgba(177, 200, 212, .24)";
+    ctx.strokeStyle = "rgba(0, 213, 255, .24)";
     ctx.lineWidth = .9;
     [-18, 18, 42].forEach(function (angle) {
       ctx.save();
@@ -461,11 +623,11 @@
     });
     if (points.length < 2) return;
     ctx.save();
-    ctx.strokeStyle = "rgba(82, 152, 190, .92)";
-    ctx.fillStyle = "rgba(82, 152, 190, .92)";
+    ctx.strokeStyle = "rgba(0, 213, 255, .86)";
+    ctx.fillStyle = "rgba(0, 213, 255, .9)";
     ctx.lineWidth = 2.2;
-    ctx.shadowColor = "rgba(159, 207, 232, .7)";
-    ctx.shadowBlur = 8;
+    ctx.shadowColor = "rgba(0, 213, 255, .72)";
+    ctx.shadowBlur = 14;
     for (var i = 0; i < points.length - 1; i += 1) {
       var start = points[i];
       var end = points[i + 1];
@@ -475,7 +637,7 @@
       ctx.moveTo(start.x, start.y);
       ctx.quadraticCurveTo(midX, midY, end.x, end.y);
       ctx.stroke();
-      drawArrowHead({ x: midX, y: midY }, end, "rgba(82, 152, 190, .96)");
+      drawArrowHead({ x: midX, y: midY }, end, "rgba(0, 213, 255, .96)");
     }
     ctx.shadowBlur = 0;
     ctx.font = "700 10px Arial, sans-serif";
@@ -504,11 +666,11 @@
     });
     if (points.length < 2) return;
     ctx.save();
-    ctx.strokeStyle = "rgba(82, 152, 190, .82)";
-    ctx.fillStyle = "rgba(82, 152, 190, .9)";
+    ctx.strokeStyle = "rgba(0, 213, 255, .82)";
+    ctx.fillStyle = "rgba(0, 213, 255, .9)";
     ctx.lineWidth = 2;
-    ctx.shadowColor = "rgba(159, 207, 232, .75)";
-    ctx.shadowBlur = 8;
+    ctx.shadowColor = "rgba(0, 213, 255, .74)";
+    ctx.shadowBlur = 14;
     for (var i = 0; i < points.length - 1; i += 1) {
       var start = points[i];
       var end = points[i + 1];
@@ -518,7 +680,7 @@
       ctx.moveTo(start.x, start.y);
       ctx.quadraticCurveTo(midX, midY, end.x, end.y);
       ctx.stroke();
-      drawArrowHead({ x: midX, y: midY }, end, "rgba(82, 152, 190, .92)");
+      drawArrowHead({ x: midX, y: midY }, end, "rgba(0, 213, 255, .92)");
     }
     ctx.shadowBlur = 0;
     ctx.font = "700 10px Arial, sans-serif";
@@ -539,25 +701,25 @@
       var active = site.id === activeId;
       var pulse = active ? 7 + Math.sin(time / 220) * 2 : 3 + Math.sin(time / 520 + site.index) * 1.2;
       var dotRadius = markerRadius(site.count, active);
-      ctx.fillStyle = "rgba(159, 207, 232, .22)";
+      ctx.fillStyle = "rgba(0, 213, 255, .16)";
       ctx.beginPath();
       ctx.arc(p.x, p.y, 14 + pulse + site.count * 1.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = markerColor(site);
-      ctx.strokeStyle = active ? "#4f8faf" : "#ffffff";
+      ctx.strokeStyle = active ? "#eaffff" : "rgba(234, 255, 255, .86)";
       ctx.lineWidth = active ? 2.4 : 2;
       ctx.beginPath();
       ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
       if (site.count > 0) {
-        ctx.fillStyle = "#30343b";
+        ctx.fillStyle = "#03121f";
         ctx.font = "700 10px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(String(site.count), p.x, p.y + .5);
       } else if (siteHasModule(site, "education") || siteHasModule(site, "presentation")) {
-        ctx.fillStyle = "#30343b";
+        ctx.fillStyle = "#03121f";
         ctx.font = "700 8px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -577,18 +739,18 @@
       if (!p.visible) return;
       var pulse = 3 + Math.sin((time || 0) / 240 + index) * 1.4;
       if (origin) {
-        ctx.strokeStyle = "rgba(82, 152, 190, .5)";
+        ctx.strokeStyle = "rgba(0, 213, 255, .52)";
         ctx.lineWidth = 1.1;
         ctx.beginPath();
         ctx.moveTo(origin.x, origin.y);
         ctx.lineTo(p.x, p.y);
         ctx.stroke();
       }
-      ctx.fillStyle = "rgba(159, 207, 232, .28)";
+      ctx.fillStyle = "rgba(0, 213, 255, .26)";
       ctx.beginPath();
       ctx.arc(p.x, p.y, 10 + pulse, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = "#5fafd8";
+      ctx.fillStyle = "#42f59b";
       ctx.strokeStyle = "#ffffff";
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -598,8 +760,8 @@
       ctx.font = "800 10px Arial, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "bottom";
-      ctx.fillStyle = "#30343b";
-      ctx.shadowColor = "rgba(255, 255, 255, .86)";
+      ctx.fillStyle = "#dfffff";
+      ctx.shadowColor = "rgba(0, 16, 32, .9)";
       ctx.shadowBlur = 6;
       ctx.fillText(city.name, p.x, p.y - 11);
     });
@@ -628,11 +790,11 @@
       var endX = (cardOnLeft ? cardRect.right : cardRect.left) - globeRect.left;
       var endY = cardRect.top - globeRect.top + Math.min(34, cardRect.height / 2);
       var bendX = cardOnLeft ? startX - 46 : startX + 46;
-      var color = site.id === activeId ? "#6aaed4" : "rgba(154, 182, 198, .32)";
+      var color = site.id === activeId ? "#00d5ff" : "rgba(0, 213, 255, .26)";
       var width = site.id === activeId ? 2.3 : 1.1;
       paths.push("<path d=\"M" + startX.toFixed(1) + " " + startY.toFixed(1) + " C " + bendX.toFixed(1) + " " + startY.toFixed(1) + ", " + bendX.toFixed(1) + " " + endY.toFixed(1) + ", " + endX.toFixed(1) + " " + endY.toFixed(1) + "\" fill=\"none\" stroke=\"" + color + "\" stroke-width=\"" + width + "\" stroke-linecap=\"round\"/>");
       if (site.id === activeId) {
-        paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#6aaed4\"/>");
+        paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#00d5ff\"/>");
       }
     });
     connectorLayer.innerHTML = paths.join("");
@@ -701,12 +863,16 @@
     drawOrbits(width, height, radius);
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
+    drawSurfaceTexture(width, height, radius, time || 0);
     drawGraticule(width, height, radius);
     drawOceanLabels(width, height, radius);
+    drawNightLights(width, height, radius, time || 0);
     drawEducationPath(width, height, radius);
     drawPresentationPath(width, height, radius);
     drawSites(width, height, radius, time || 0);
     drawArticleCities(width, height, radius, time || 0);
+    drawHologramScan(width, height, radius, time || 0);
+    drawHudOverlay(width, height, radius, time || 0);
     updateConnectors();
     window.requestAnimationFrame(render);
   }
