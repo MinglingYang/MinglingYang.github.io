@@ -160,6 +160,16 @@
     ].join("");
   }
 
+  function scrollToHashTarget(hash) {
+    var id = String(hash || "").replace(/^#/, "");
+    var target = id ? document.getElementById(id) : null;
+    if (!target) return;
+    window.scrollTo({
+      top: Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - 96),
+      behavior: "smooth"
+    });
+  }
+
   function renderNews(displayData, publications, scholarData) {
     var target = document.getElementById("scholar-news");
     if (!target) return;
@@ -191,7 +201,7 @@
     target.innerHTML = publications.map(renderPublicationCard).join("");
     if (window.location.hash && document.getElementById(window.location.hash.slice(1))) {
       window.setTimeout(function () {
-        document.getElementById(window.location.hash.slice(1)).scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollToHashTarget(window.location.hash);
       }, 60);
     }
   }

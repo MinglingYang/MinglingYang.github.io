@@ -220,6 +220,37 @@
     }
   }
 
+  function scrollToPublicationTarget(hash, attempts) {
+    var id = String(hash || "").replace(/^#/, "");
+    var target = id ? document.getElementById(id) : null;
+    if (!target) {
+      if (attempts > 0) {
+        window.setTimeout(function () {
+          scrollToPublicationTarget(hash, attempts - 1);
+        }, 120);
+      }
+      return;
+    }
+    var top = target.getBoundingClientRect().top + window.pageYOffset - 96;
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, "", "#" + id);
+    } else {
+      window.location.hash = id;
+    }
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: "smooth"
+    });
+  }
+
+  function handlePublicationLinkClick(event) {
+    var link = event.target.closest && event.target.closest(".research-globe__article-list a[href^='#publication-']");
+    if (!link || !globe || !globe.contains(link)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    scrollToPublicationTarget(link.getAttribute("href"), 12);
+  }
+
   function siteIsVisible(site) {
     var moduleMatch = state.module === "all" || site.modules.indexOf(state.module) !== -1;
     var yearMatch = site.start <= state.year;
@@ -889,6 +920,10 @@
       }
     });
   });
+
+  if (globe) {
+    globe.addEventListener("click", handlePublicationLinkClick, true);
+  }
 
   moduleButtons.forEach(function (button) {
     button.addEventListener("click", function () {
