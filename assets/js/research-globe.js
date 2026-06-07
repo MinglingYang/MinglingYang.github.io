@@ -144,8 +144,8 @@
 
   function markerColor(site) {
     var count = site.count;
-    if (siteHasModule(site, "education")) return "#2ee7ff";
-    if (siteHasModule(site, "presentation")) return "#8c7cff";
+    if (siteHasModule(site, "education")) return "#ffd166";
+    if (siteHasModule(site, "presentation")) return "#ff5ab3";
     if (count >= 4) return "#ffb02e";
     if (count >= 2) return "#9b5cff";
     if (count === 1) return "#42f59b";
@@ -153,8 +153,8 @@
   }
 
   function markerHaloColor(site, active) {
-    if (siteHasModule(site, "education")) return active ? "rgba(46, 231, 255, .28)" : "rgba(46, 231, 255, .14)";
-    if (siteHasModule(site, "presentation")) return active ? "rgba(140, 124, 255, .3)" : "rgba(140, 124, 255, .16)";
+    if (siteHasModule(site, "education")) return active ? "rgba(255, 209, 102, .32)" : "rgba(255, 209, 102, .16)";
+    if (siteHasModule(site, "presentation")) return active ? "rgba(255, 90, 179, .32)" : "rgba(255, 90, 179, .16)";
     if (site.count >= 4) return active ? "rgba(255, 176, 46, .3)" : "rgba(255, 176, 46, .16)";
     if (site.count >= 2) return active ? "rgba(155, 92, 255, .3)" : "rgba(155, 92, 255, .16)";
     if (site.count === 1) return active ? "rgba(66, 245, 155, .3)" : "rgba(66, 245, 155, .16)";
@@ -170,7 +170,8 @@
     if (active && count >= 4) return "rgba(255, 176, 46, .72)";
     if (active && count >= 2) return "rgba(155, 92, 255, .62)";
     if (active && count === 1) return "rgba(66, 245, 155, .56)";
-    if (active && state.module === "presentation") return "rgba(140, 124, 255, .54)";
+    if (active && state.module === "education") return "rgba(255, 209, 102, .5)";
+    if (active && state.module === "presentation") return "rgba(255, 90, 179, .5)";
     if (count >= 4) return "rgba(255, 176, 46, .62)";
     if (count >= 2) return "rgba(155, 92, 255, .5)";
     if (count === 1) return "rgba(66, 245, 155, .44)";
@@ -181,6 +182,8 @@
     if (active && count >= 4) return "rgba(255, 238, 190, .98)";
     if (active && count >= 2) return "rgba(232, 220, 255, .98)";
     if (active && count === 1) return "rgba(215, 255, 232, .98)";
+    if (active && state.module === "education") return "rgba(255, 238, 190, .98)";
+    if (active && state.module === "presentation") return "rgba(255, 214, 236, .98)";
     if (active) return "rgba(103, 232, 255, .9)";
     if (count >= 4) return "rgba(255, 176, 46, .86)";
     if (count >= 2) return "rgba(155, 92, 255, .78)";
@@ -442,6 +445,57 @@
     ctx.restore();
   }
 
+  function drawArrowHead(from, to, color) {
+    var angle = Math.atan2(to.y - from.y, to.x - from.x);
+    var size = 8.5;
+    ctx.save();
+    ctx.translate(to.x, to.y);
+    ctx.rotate(angle);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-size, -size * .48);
+    ctx.lineTo(-size, size * .48);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawEducationPath(width, height, radius) {
+    if (state.module !== "education") return;
+    var educationSites = visibleSites.filter(function (site) {
+      return siteHasModule(site, "education");
+    }).sort(function (a, b) {
+      return a.order - b.order;
+    });
+    if (educationSites.length < 2) return;
+    var points = educationSites.map(function (site) {
+      var p = project(site.lat, site.lon, width, height, radius);
+      p.site = site;
+      return p;
+    }).filter(function (point) {
+      return point.visible;
+    });
+    if (points.length < 2) return;
+    ctx.save();
+    ctx.strokeStyle = "rgba(255, 209, 102, .86)";
+    ctx.lineWidth = 2.2;
+    ctx.shadowColor = "rgba(255, 209, 102, .58)";
+    ctx.shadowBlur = 12;
+    for (var i = 0; i < points.length - 1; i += 1) {
+      var start = points[i];
+      var end = points[i + 1];
+      var midX = (start.x + end.x) / 2;
+      var midY = (start.y + end.y) / 2 - 26;
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.quadraticCurveTo(midX, midY, end.x, end.y);
+      ctx.stroke();
+      drawArrowHead({ x: midX, y: midY }, end, "rgba(255, 224, 146, .96)");
+    }
+    ctx.restore();
+  }
+
   function drawSites(width, height, radius) {
     markerPositions = {};
     visibleSites.forEach(function (site) {
@@ -569,6 +623,7 @@
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
     drawGraticule(width, height, radius);
+    drawEducationPath(width, height, radius);
     drawSites(width, height, radius);
     updateConnectors();
     window.requestAnimationFrame(render);

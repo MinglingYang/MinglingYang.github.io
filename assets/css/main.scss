@@ -243,11 +243,11 @@ h1:before, .anchor:before {
 
 .research-globe {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 230px);
     gap: .62rem;
     align-items: stretch;
     position: relative;
-    height: clamp(480px, 64vh, 590px);
+    height: clamp(560px, 72vh, 720px);
     margin: .7rem 0 0;
     padding: .62rem;
     overflow: hidden;
@@ -471,6 +471,15 @@ h1:before, .anchor:before {
         color: #f3fdff;
         font-size: .82em;
         line-height: 1.35;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     }
 
     p {
@@ -532,13 +541,13 @@ h1:before, .anchor:before {
 }
 
 .research-globe__sites article[data-modules~="education"]:before {
-    background: #2ee7ff;
-    box-shadow: 0 0 0 4px rgba(46, 231, 255, .16), 0 0 15px rgba(46, 231, 255, .62);
+    background: #ffd166;
+    box-shadow: 0 0 0 4px rgba(255, 209, 102, .16), 0 0 15px rgba(255, 209, 102, .62);
 }
 
 .research-globe__sites article[data-modules~="presentation"]:before {
-    background: #8c7cff;
-    box-shadow: 0 0 0 4px rgba(140, 124, 255, .18), 0 0 16px rgba(140, 124, 255, .66);
+    background: #ff5ab3;
+    box-shadow: 0 0 0 4px rgba(255, 90, 179, .18), 0 0 16px rgba(255, 90, 179, .66);
 }
 
 .research-globe__sites article[data-count="0"] {
@@ -590,13 +599,13 @@ h1:before, .anchor:before {
 }
 
 .research-globe__sites article.is-active[data-modules~="education"]:before {
-    background: #2ee7ff;
-    box-shadow: 0 0 0 5px rgba(46, 231, 255, .2), 0 0 18px rgba(46, 231, 255, .82);
+    background: #ffd166;
+    box-shadow: 0 0 0 5px rgba(255, 209, 102, .22), 0 0 18px rgba(255, 209, 102, .82);
 }
 
 .research-globe__sites article.is-active[data-modules~="presentation"]:before {
-    background: #8c7cff;
-    box-shadow: 0 0 0 5px rgba(140, 124, 255, .22), 0 0 18px rgba(140, 124, 255, .82);
+    background: #ff5ab3;
+    box-shadow: 0 0 0 5px rgba(255, 90, 179, .22), 0 0 18px rgba(255, 90, 179, .82);
 }
 
 .research-globe.is-publication-mode {
@@ -648,9 +657,9 @@ h1:before, .anchor:before {
             align-items: center;
             margin-top: .52rem;
             padding: .28rem .46rem;
-            border: 1px solid rgba(140, 124, 255, .5);
+            border: 1px solid rgba(255, 90, 179, .54);
             border-radius: 5px;
-            background: rgba(140, 124, 255, .16);
+            background: rgba(255, 90, 179, .14);
             color: #f3fdff;
             font-size: .68em;
             font-weight: 800;

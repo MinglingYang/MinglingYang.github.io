@@ -90,14 +90,14 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <em>San Francisco, California</em>
       <strong>COPD screening with SGRQ.</strong>
       <p>Published abstract and poster presentation, May 18, 2025.</p>
-      <a class="research-globe__jump-link" href="#presentation-ats-copd-screening" target="_self">View presentation</a>
+      <a class="research-globe__jump-link" href="images/publications/ATS%202025%20poster_2025-05-13.pdf" target="_blank" rel="noopener">View presentation</a>
     </article>
     <article data-location="presentation-ers-2025" data-country="Netherlands" data-region="Europe" data-modules="presentation" data-count="0" data-start="2025" data-end="2025" data-order="2" data-lat="52.37" data-lon="4.90">
       <span>ERS Congress</span>
       <em>Amsterdam, Netherlands</em>
-      <strong>Chronic bronchitis risk factors and outcomes.</strong>
+      <strong><a href="images/publications/ATS%202025%20poster_2025-05-13.pdf" target="_blank" rel="noopener">Chronic bronchitis risk factors and outcomes.</a></strong>
       <p>Published abstract and oral talk, October 1, 2025.</p>
-      <a class="research-globe__jump-link" href="#presentation-ers-chronic-bronchitis" target="_self">View presentation</a>
+      <a class="research-globe__jump-link" href="images/publications/ATS%202025%20poster_2025-05-13.pdf" target="_blank" rel="noopener">View presentation</a>
     </article>
   </div>
   <div class="research-globe__stage">
@@ -165,9 +165,9 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <article data-location="presentation-wio-2025" data-country="United States" data-region="North America" data-modules="presentation" data-count="0" data-start="2025" data-end="2025" data-order="3" data-lat="30.67" data-lon="-81.46">
       <span>Women in Ophthalmology Summer Symposium</span>
       <em>Amelia Island, Florida</em>
-      <strong>Dry eye symptoms and household air pollution.</strong>
+      <strong><a href="images/publications/HAPINWM_Poster.pptx" target="_blank" rel="noopener">Dry eye symptoms and household air pollution.</a></strong>
       <p>Symposium presentation on findings from the HAPIN Trial in Peru, August 12, 2025.</p>
-      <a class="research-globe__jump-link" href="#presentation-wio-dry-eye" target="_self">View presentation</a>
+      <a class="research-globe__jump-link" href="images/publications/HAPINWM_Poster.pptx" target="_blank" rel="noopener">View presentation</a>
     </article>
     <article data-location="presentation-chest-2026" data-country="United States" data-region="North America" data-modules="presentation" data-count="0" data-start="2026" data-end="2026" data-order="4" data-lat="33.45" data-lon="-112.07">
       <span>CHEST Annual Meeting</span>
@@ -269,9 +269,9 @@ Rollins School of Public Health, Emory University
 ## Presentations
 
 <ul class="presentation-list">
-  <li id="presentation-ats-copd-screening"><strong>Yang M</strong>, Robertson NM, Sharma AK, Chandyo RK, Shrestha L, Das SK, Kirenga B, Alupo P, Gianella GE, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR, Wise RA, Checkley W. <em>Screening for Chronic Obstructive Pulmonary Disease (COPD) Using the St. George's Respiratory Questionnaire</em>. American Thoracic Society International Conference, San Francisco, CA, May 18, 2025. <a href="https://doi.org/10.1164/ajrccm.2025.211.Abstracts.A1247">AJRCCM abstract</a>.</li>
-  <li id="presentation-ers-chronic-bronchitis">Robertson N, <strong>Yang M</strong>, et al. <em>Chronic Bronchitis Prevalence, Risk Factors, and Outcomes in a Multinational Cohort</em>. European Respiratory Society Congress, Amsterdam, Netherlands, Oct 1, 2025. <a href="https://doi.org/10.1183/13993003.congress-2025.PA463">ERS abstract</a>.</li>
-  <li id="presentation-wio-dry-eye">Wells M, <strong>Yang M</strong>, Nicolaou L, Williams K, Checkley W. <em>Dry Eye Symptoms and Household Air Pollution: Findings from the HAPIN Trial in Peru</em>. Women in Ophthalmology Summer Symposium, Amelia Island, FL, Aug 12, 2025.</li>
+  <li id="presentation-ats-copd-screening"><strong>Yang M</strong>, Robertson NM, Sharma AK, Chandyo RK, Shrestha L, Das SK, Kirenga B, Alupo P, Gianella GE, Siddharthan T, Pollard SL, Quaderi S, Rykiel N, Flores-Flores O, Hurst JR, Wise RA, Checkley W. <em><a href="images/publications/ATS%202025%20poster_2025-05-13.pdf" target="_blank" rel="noopener">Screening for Chronic Obstructive Pulmonary Disease (COPD) Using the St. George's Respiratory Questionnaire</a></em>. American Thoracic Society International Conference, San Francisco, CA, May 18, 2025. <a href="https://doi.org/10.1164/ajrccm.2025.211.Abstracts.A1247">AJRCCM abstract</a>.</li>
+  <li id="presentation-ers-chronic-bronchitis">Robertson N, <strong>Yang M</strong>, et al. <em><a href="images/publications/ATS%202025%20poster_2025-05-13.pdf" target="_blank" rel="noopener">Chronic Bronchitis Prevalence, Risk Factors, and Outcomes in a Multinational Cohort</a></em>. European Respiratory Society Congress, Amsterdam, Netherlands, Oct 1, 2025. <a href="https://doi.org/10.1183/13993003.congress-2025.PA463">ERS abstract</a>.</li>
+  <li id="presentation-wio-dry-eye">Wells M, <strong>Yang M</strong>, Nicolaou L, Williams K, Checkley W. <em><a href="images/publications/HAPINWM_Poster.pptx" target="_blank" rel="noopener">Dry Eye Symptoms and Household Air Pollution: Findings from the HAPIN Trial in Peru</a></em>. Women in Ophthalmology Summer Symposium, Amelia Island, FL, Aug 12, 2025.</li>
   <li id="presentation-chest-lpg-lung-function">Emetu S, <strong>Yang M</strong>, Nicolaou L, Kephart J, Fandino-del-Rio M, Williams K, Steenland NK, Koehler K, Checkley W. <em>Cooking with Liquefied Petroleum Gas versus Biomass on Lung Function in Adult Peruvian Women</em>. Accepted for CHEST Annual Meeting, Phoenix, AZ, Oct 18 to 21, 2026.</li>
 </ul>
 
