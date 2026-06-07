@@ -16,10 +16,13 @@
   var yearInput = document.getElementById("research-globe-year");
   var yearLabel = document.getElementById("research-globe-year-label");
   var yearPanel = document.querySelector(".research-globe__time-panel");
-  var yearButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-year]"));
+  var yearWheel = document.querySelector(".research-globe__year-wheel");
+  var yearButtons = [];
   var moduleButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-module]"));
   var cardNodes = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
   var worldFeatures = [];
+  var minYear = yearInput ? Number(yearInput.getAttribute("min") || 2017) : 2017;
+  var maxYear = Math.max(new Date().getFullYear(), minYear);
 
   var regionOrder = {
     "North America": 1,
@@ -78,7 +81,7 @@
 
   var state = {
     module: "all",
-    year: yearInput ? Number(yearInput.value) : 2026
+    year: maxYear
   };
   var rotation = rotationInput ? Number(rotationInput.value) : -25;
   var tilt = tiltInput ? Number(tiltInput.value) : 8;
@@ -118,6 +121,25 @@
     return ((value + 180) % 360 + 360) % 360 - 180;
   }
 
+  function buildYearWheel() {
+    if (!yearWheel) return;
+    yearWheel.innerHTML = "";
+    yearButtons = [];
+    for (var year = maxYear; year >= minYear; year -= 1) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("role", "option");
+      button.setAttribute("data-globe-year", String(year));
+      button.textContent = String(year);
+      yearWheel.appendChild(button);
+      yearButtons.push(button);
+    }
+    if (yearInput) {
+      yearInput.setAttribute("max", String(maxYear));
+      yearInput.value = String(maxYear);
+    }
+  }
+
   function siteHasModule(site, moduleName) {
     return site.modules.indexOf(moduleName) !== -1;
   }
@@ -128,10 +150,10 @@
   }
 
   function markerColor(count) {
-    if (count >= 4) return "#ff6bd6";
-    if (count >= 2) return "#32f0c8";
-    if (count === 1) return "#4aa3ff";
-    return "#ffd166";
+    if (count >= 4) return "#5fafd8";
+    if (count >= 2) return "#83c4e6";
+    if (count === 1) return "#a7d4ef";
+    return "#bdbdbd";
   }
 
   function markerRadius(count, active) {
@@ -140,18 +162,18 @@
   }
 
   function countryFill(count, active) {
-    if (active && count > 0) return "rgba(255, 107, 214, .52)";
-    if (count >= 4) return "rgba(106, 62, 170, .62)";
-    if (count >= 2) return "rgba(8, 122, 142, .58)";
-    if (count === 1) return "rgba(28, 84, 135, .54)";
-    return "rgba(24, 83, 111, .2)";
+    if (active && count > 0) return "rgba(120, 190, 226, .82)";
+    if (count >= 4) return "rgba(159, 207, 232, .76)";
+    if (count >= 2) return "rgba(174, 215, 236, .68)";
+    if (count === 1) return "rgba(190, 225, 242, .62)";
+    return "rgba(218, 218, 218, .86)";
   }
 
   function countryStroke(count, active) {
-    if (active && count > 0) return "rgba(255, 226, 255, .88)";
-    if (active) return "rgba(255, 209, 102, .72)";
-    if (count > 0) return "rgba(72, 230, 255, .46)";
-    return "rgba(72, 230, 255, .16)";
+    if (active && count > 0) return "rgba(75, 139, 176, .92)";
+    if (active) return "rgba(105, 145, 166, .76)";
+    if (count > 0) return "rgba(255, 255, 255, .92)";
+    return "rgba(197, 197, 197, .82)";
   }
 
   function syncInputs() {
@@ -249,24 +271,24 @@
 
   function drawSphere(width, height, radius) {
     var atmosphere = ctx.createRadialGradient(width / 2, height / 2, radius * .75, width / 2, height / 2, radius * 1.18);
-    atmosphere.addColorStop(0, "rgba(32, 217, 255, 0)");
-    atmosphere.addColorStop(.72, "rgba(32, 217, 255, .08)");
-    atmosphere.addColorStop(1, "rgba(32, 217, 255, .28)");
+    atmosphere.addColorStop(0, "rgba(255, 255, 255, 0)");
+    atmosphere.addColorStop(.78, "rgba(222, 226, 229, .2)");
+    atmosphere.addColorStop(1, "rgba(190, 197, 202, .36)");
     ctx.fillStyle = atmosphere;
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius * 1.18, 0, Math.PI * 2);
     ctx.fill();
 
     var gradient = ctx.createRadialGradient(width * .38, height * .3, radius * .1, width / 2, height / 2, radius);
-    gradient.addColorStop(0, "#194b73");
-    gradient.addColorStop(.48, "#0d3358");
-    gradient.addColorStop(1, "#04152d");
+    gradient.addColorStop(0, "#ffffff");
+    gradient.addColorStop(.56, "#fbfbfb");
+    gradient.addColorStop(1, "#eceeef");
     ctx.fillStyle = gradient;
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "rgba(72, 230, 255, .5)";
-    ctx.lineWidth = 1.6;
+    ctx.strokeStyle = "rgba(188, 194, 198, .82)";
+    ctx.lineWidth = 1.2;
     ctx.stroke();
   }
 
@@ -295,8 +317,8 @@
     ctx.beginPath();
     ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
     ctx.clip();
-    ctx.strokeStyle = "rgba(72, 230, 255, .22)";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(196, 205, 211, .46)";
+    ctx.lineWidth = .9;
     for (var lat = -60; lat <= 60; lat += 20) {
       drawLine(function (lon) { return [lat, lon]; }, -180, 180, width, height, radius);
     }
@@ -370,7 +392,7 @@
   function drawOceanLabels(width, height, radius) {
     ctx.save();
     ctx.font = "700 10px Arial, sans-serif";
-    ctx.fillStyle = "rgba(143, 204, 230, .42)";
+    ctx.fillStyle = "rgba(150, 154, 158, .5)";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     oceanLabels.forEach(function (item) {
@@ -384,8 +406,8 @@
   function drawOrbits(width, height, radius) {
     ctx.save();
     ctx.translate(width / 2, height / 2);
-    ctx.strokeStyle = "rgba(72, 230, 255, .18)";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(177, 200, 212, .24)";
+    ctx.lineWidth = .9;
     [-18, 18, 42].forEach(function (angle) {
       ctx.save();
       ctx.rotate(angle * Math.PI / 180);
@@ -430,11 +452,11 @@
     });
     if (points.length < 2) return;
     ctx.save();
-    ctx.strokeStyle = "rgba(255, 209, 102, .92)";
-    ctx.fillStyle = "rgba(255, 209, 102, .92)";
+    ctx.strokeStyle = "rgba(82, 152, 190, .92)";
+    ctx.fillStyle = "rgba(82, 152, 190, .92)";
     ctx.lineWidth = 2.2;
-    ctx.shadowColor = "rgba(255, 209, 102, .65)";
-    ctx.shadowBlur = 12;
+    ctx.shadowColor = "rgba(159, 207, 232, .7)";
+    ctx.shadowBlur = 8;
     for (var i = 0; i < points.length - 1; i += 1) {
       var start = points[i];
       var end = points[i + 1];
@@ -444,7 +466,7 @@
       ctx.moveTo(start.x, start.y);
       ctx.quadraticCurveTo(midX, midY, end.x, end.y);
       ctx.stroke();
-      drawArrowHead({ x: midX, y: midY }, end, "rgba(255, 209, 102, .96)");
+      drawArrowHead({ x: midX, y: midY }, end, "rgba(82, 152, 190, .96)");
     }
     ctx.shadowBlur = 0;
     ctx.font = "700 10px Arial, sans-serif";
@@ -465,25 +487,25 @@
       var active = site.id === activeId;
       var pulse = active ? 7 + Math.sin(time / 220) * 2 : 3 + Math.sin(time / 520 + site.index) * 1.2;
       var dotRadius = markerRadius(site.count, active);
-      ctx.fillStyle = "rgba(72, 230, 255, .13)";
+      ctx.fillStyle = "rgba(159, 207, 232, .22)";
       ctx.beginPath();
       ctx.arc(p.x, p.y, 14 + pulse + site.count * 1.4, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = markerColor(site.count);
-      ctx.strokeStyle = active ? "#ffffff" : "rgba(226, 251, 255, .86)";
-      ctx.lineWidth = active ? 3 : 2;
+      ctx.strokeStyle = active ? "#4f8faf" : "#ffffff";
+      ctx.lineWidth = active ? 2.4 : 2;
       ctx.beginPath();
       ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
       if (site.count > 0) {
-        ctx.fillStyle = site.count >= 4 ? "#061728" : "#ffffff";
+        ctx.fillStyle = "#30343b";
         ctx.font = "700 10px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(String(site.count), p.x, p.y + .5);
       } else if (siteHasModule(site, "education")) {
-        ctx.fillStyle = "#061728";
+        ctx.fillStyle = "#30343b";
         ctx.font = "700 8px Arial, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -503,19 +525,19 @@
       if (!p.visible) return;
       var pulse = 3 + Math.sin((time || 0) / 240 + index) * 1.4;
       if (origin) {
-        ctx.strokeStyle = "rgba(255, 209, 102, .55)";
+        ctx.strokeStyle = "rgba(82, 152, 190, .5)";
         ctx.lineWidth = 1.1;
         ctx.beginPath();
         ctx.moveTo(origin.x, origin.y);
         ctx.lineTo(p.x, p.y);
         ctx.stroke();
       }
-      ctx.fillStyle = "rgba(255, 209, 102, .16)";
+      ctx.fillStyle = "rgba(159, 207, 232, .28)";
       ctx.beginPath();
       ctx.arc(p.x, p.y, 10 + pulse, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = "#ffd166";
-      ctx.strokeStyle = "#07172a";
+      ctx.fillStyle = "#5fafd8";
+      ctx.strokeStyle = "#ffffff";
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.arc(p.x, p.y, 4.6, 0, Math.PI * 2);
@@ -524,9 +546,9 @@
       ctx.font = "800 10px Arial, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "bottom";
-      ctx.fillStyle = "#fff7d6";
-      ctx.shadowColor = "rgba(255, 209, 102, .55)";
-      ctx.shadowBlur = 10;
+      ctx.fillStyle = "#30343b";
+      ctx.shadowColor = "rgba(255, 255, 255, .86)";
+      ctx.shadowBlur = 6;
       ctx.fillText(city.name, p.x, p.y - 11);
     });
     ctx.restore();
@@ -554,11 +576,11 @@
       var endX = (cardOnLeft ? cardRect.right : cardRect.left) - globeRect.left;
       var endY = cardRect.top - globeRect.top + Math.min(34, cardRect.height / 2);
       var bendX = cardOnLeft ? startX - 46 : startX + 46;
-      var color = site.id === activeId ? "#48e6ff" : "rgba(72, 230, 255, .22)";
+      var color = site.id === activeId ? "#6aaed4" : "rgba(154, 182, 198, .32)";
       var width = site.id === activeId ? 2.3 : 1.1;
       paths.push("<path d=\"M" + startX.toFixed(1) + " " + startY.toFixed(1) + " C " + bendX.toFixed(1) + " " + startY.toFixed(1) + ", " + bendX.toFixed(1) + " " + endY.toFixed(1) + ", " + endX.toFixed(1) + " " + endY.toFixed(1) + "\" fill=\"none\" stroke=\"" + color + "\" stroke-width=\"" + width + "\" stroke-linecap=\"round\"/>");
       if (site.id === activeId) {
-        paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#48e6ff\"/>");
+        paths.push("<circle cx=\"" + endX.toFixed(1) + "\" cy=\"" + endY.toFixed(1) + "\" r=\"3.2\" fill=\"#6aaed4\"/>");
       }
     });
     connectorLayer.innerHTML = paths.join("");
@@ -686,9 +708,14 @@
     });
   }
 
+  buildYearWheel();
+
   yearButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      setYear(button.getAttribute("data-globe-year"), true);
+      var buttonYear = Number(button.getAttribute("data-globe-year"));
+      var nextYear = buttonYear === state.year ? state.year - 1 : buttonYear;
+      if (nextYear < minYear) nextYear = maxYear;
+      setYear(nextYear, true);
     });
   });
 

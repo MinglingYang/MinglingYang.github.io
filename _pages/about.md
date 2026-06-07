@@ -94,18 +94,7 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <div class="research-globe__time-panel" aria-label="Year control" tabindex="0">
       <output id="research-globe-year-label">2026</output>
       <input id="research-globe-year" type="hidden" min="2017" max="2026" value="2026">
-      <div class="research-globe__year-wheel" role="listbox" aria-label="Filter map through year">
-        <button type="button" role="option" data-globe-year="2026" aria-selected="true">2026</button>
-        <button type="button" role="option" data-globe-year="2025">2025</button>
-        <button type="button" role="option" data-globe-year="2024">2024</button>
-        <button type="button" role="option" data-globe-year="2023">2023</button>
-        <button type="button" role="option" data-globe-year="2022">2022</button>
-        <button type="button" role="option" data-globe-year="2021">2021</button>
-        <button type="button" role="option" data-globe-year="2020">2020</button>
-        <button type="button" role="option" data-globe-year="2019">2019</button>
-        <button type="button" role="option" data-globe-year="2018">2018</button>
-        <button type="button" role="option" data-globe-year="2017">2017</button>
-      </div>
+      <div class="research-globe__year-wheel" role="listbox" aria-label="Filter map through year"></div>
     </div>
   </div>
   <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
