@@ -91,21 +91,6 @@
   var spinPausedUntil = 0;
   var timeWheelArmed = false;
 
-  var metroLights = [
-    { lat: 40.71, lon: -74.01, glow: 1.4 }, { lat: 34.05, lon: -118.24, glow: 1.25 },
-    { lat: 41.88, lon: -87.63, glow: 1.05 }, { lat: 19.43, lon: -99.13, glow: 1.24 },
-    { lat: -23.55, lon: -46.63, glow: 1.3 }, { lat: -34.6, lon: -58.38, glow: 1.05 },
-    { lat: 51.51, lon: -.13, glow: 1.18 }, { lat: 48.86, lon: 2.35, glow: 1.08 },
-    { lat: 52.52, lon: 13.4, glow: 1.02 }, { lat: 55.75, lon: 37.62, glow: 1.08 },
-    { lat: 30.04, lon: 31.24, glow: 1.05 }, { lat: 6.52, lon: 3.38, glow: 1.15 },
-    { lat: -1.29, lon: 36.82, glow: .86 }, { lat: 28.61, lon: 77.21, glow: 1.32 },
-    { lat: 19.07, lon: 72.88, glow: 1.24 }, { lat: 23.81, lon: 90.41, glow: 1.2 },
-    { lat: 39.9, lon: 116.4, glow: 1.32 }, { lat: 31.23, lon: 121.47, glow: 1.28 },
-    { lat: 35.68, lon: 139.65, glow: 1.26 }, { lat: 37.57, lon: 126.98, glow: 1.1 },
-    { lat: 1.35, lon: 103.82, glow: .96 }, { lat: -6.21, lon: 106.85, glow: 1.08 },
-    { lat: -33.87, lon: 151.21, glow: .96 }
-  ];
-
   function resize() {
     var rect = stage.getBoundingClientRect();
     var width = Math.max(320, Math.floor(rect.width));
@@ -135,11 +120,6 @@
 
   function pauseSpin(duration) {
     spinPausedUntil = Math.max(spinPausedUntil, Date.now() + (duration || 9000));
-  }
-
-  function textureNoise(lat, lon) {
-    var value = Math.sin(lat * 12.9898 + lon * 78.233) * 43758.5453;
-    return value - Math.floor(value);
   }
 
   function buildYearWheel() {
@@ -374,56 +354,6 @@
     ctx.strokeStyle = "rgba(0, 213, 255, .72)";
     ctx.lineWidth = 1.6;
     ctx.stroke();
-  }
-
-  function drawSatelliteTexture(width, height, radius) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.globalCompositeOperation = "screen";
-    for (var lat = -70; lat <= 72; lat += 5) {
-      for (var lon = -180; lon <= 180; lon += 6) {
-        var p = project(lat, lon, width, height, radius);
-        if (!p.visible) continue;
-        var noise = textureNoise(lat, lon);
-        var absLat = Math.abs(lat);
-        var alpha = absLat > 58 ? .1 : .035 + noise * .08;
-        var tone = noise > .68 ? "rgba(143, 231, 190, " : "rgba(83, 178, 214, ";
-        ctx.fillStyle = tone + alpha.toFixed(3) + ")";
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, noise > .76 ? 1.4 : .85, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    ctx.globalCompositeOperation = "source-over";
-    ctx.restore();
-  }
-
-  function drawNightLights(width, height, radius) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.globalCompositeOperation = "screen";
-    metroLights.forEach(function (city) {
-      var p = project(city.lat, city.lon, width, height, radius);
-      if (!p.visible) return;
-      var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 12 * city.glow);
-      gradient.addColorStop(0, "rgba(255, 238, 180, .86)");
-      gradient.addColorStop(.28, "rgba(255, 187, 82, .42)");
-      gradient.addColorStop(1, "rgba(255, 164, 61, 0)");
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 12 * city.glow, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "rgba(255, 246, 210, .9)";
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(1.1, 1.8 * city.glow), 0, Math.PI * 2);
-      ctx.fill();
-    });
-    ctx.globalCompositeOperation = "source-over";
-    ctx.restore();
   }
 
   function drawLine(pointAt, start, end, width, height, radius) {
@@ -709,8 +639,6 @@
     ctx.clearRect(0, 0, width, height);
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
-    drawSatelliteTexture(width, height, radius);
-    drawNightLights(width, height, radius);
     drawGraticule(width, height, radius);
     drawEducationPath(width, height, radius);
     drawSites(width, height, radius);
