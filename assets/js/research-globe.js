@@ -32,29 +32,6 @@
     "Asia": 5
   };
 
-  var oceanLabels = [
-    { name: "Pacific Ocean", lat: 5, lon: -160 },
-    { name: "Atlantic Ocean", lat: 3, lon: -35 },
-    { name: "Indian Ocean", lat: -20, lon: 78 },
-    { name: "Arctic Ocean", lat: 74, lon: 10 }
-  ];
-
-  var cityLights = [
-    { name: "Los Angeles", lat: 34.05, lon: -118.24, glow: 1.1 },
-    { name: "San Francisco", lat: 37.77, lon: -122.42, glow: 1 },
-    { name: "Phoenix", lat: 33.45, lon: -112.07, glow: .85 },
-    { name: "Baltimore", lat: 39.29, lon: -76.61, glow: .82 },
-    { name: "New York", lat: 40.71, lon: -74.01, glow: 1.15 },
-    { name: "Amsterdam", lat: 52.37, lon: 4.9, glow: .9 },
-    { name: "Lima", lat: -12.05, lon: -77.04, glow: .9 },
-    { name: "Puno", lat: -15.84, lon: -70.02, glow: .74 },
-    { name: "Kathmandu", lat: 27.72, lon: 85.32, glow: .82 },
-    { name: "Kampala", lat: .35, lon: 32.58, glow: .78 },
-    { name: "Guatemala City", lat: 14.63, lon: -90.51, glow: .78 },
-    { name: "Kigali", lat: -1.94, lon: 30.06, glow: .68 },
-    { name: "Delhi", lat: 28.61, lon: 77.21, glow: 1.05 }
-  ];
-
   function parseCities(value) {
     return String(value || "").split(";").map(function (entry) {
       var parts = entry.split("|");
@@ -109,8 +86,6 @@
   var markerPositions = {};
   var isDragging = false;
   var dragStart = null;
-  var autoSpin = true;
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function resize() {
     var rect = stage.getBoundingClientRect();
@@ -169,11 +144,21 @@
 
   function markerColor(site) {
     var count = site.count;
-    if (siteHasModule(site, "presentation")) return "#00d5ff";
-    if (count >= 4) return "#ffd166";
-    if (count >= 2) return "#42f59b";
-    if (count === 1) return "#00d5ff";
+    if (siteHasModule(site, "education")) return "#2ee7ff";
+    if (siteHasModule(site, "presentation")) return "#8c7cff";
+    if (count >= 4) return "#ffb02e";
+    if (count >= 2) return "#9b5cff";
+    if (count === 1) return "#18c8ff";
     return "#8ca3b0";
+  }
+
+  function markerHaloColor(site, active) {
+    if (siteHasModule(site, "education")) return active ? "rgba(46, 231, 255, .28)" : "rgba(46, 231, 255, .14)";
+    if (siteHasModule(site, "presentation")) return active ? "rgba(140, 124, 255, .3)" : "rgba(140, 124, 255, .16)";
+    if (site.count >= 4) return active ? "rgba(255, 176, 46, .3)" : "rgba(255, 176, 46, .16)";
+    if (site.count >= 2) return active ? "rgba(155, 92, 255, .3)" : "rgba(155, 92, 255, .16)";
+    if (site.count === 1) return active ? "rgba(24, 200, 255, .3)" : "rgba(24, 200, 255, .16)";
+    return active ? "rgba(140, 163, 176, .24)" : "rgba(140, 163, 176, .12)";
   }
 
   function markerRadius(count, active) {
@@ -182,17 +167,19 @@
   }
 
   function countryFill(count, active) {
-    if (active && (count > 0 || state.module === "presentation")) return "rgba(0, 213, 255, .54)";
-    if (count >= 4) return "rgba(255, 209, 102, .46)";
-    if (count >= 2) return "rgba(66, 245, 155, .38)";
-    if (count === 1) return "rgba(0, 213, 255, .34)";
+    if (active && (count > 0 || state.module === "presentation")) return "rgba(103, 232, 255, .56)";
+    if (count >= 4) return "rgba(255, 176, 46, .62)";
+    if (count >= 2) return "rgba(155, 92, 255, .5)";
+    if (count === 1) return "rgba(24, 200, 255, .44)";
     return "rgba(18, 62, 74, .46)";
   }
 
   function countryStroke(count, active) {
     if (active && count > 0) return "rgba(234, 255, 255, .96)";
-    if (active) return "rgba(0, 213, 255, .86)";
-    if (count > 0) return "rgba(0, 213, 255, .72)";
+    if (active) return "rgba(103, 232, 255, .9)";
+    if (count >= 4) return "rgba(255, 176, 46, .86)";
+    if (count >= 2) return "rgba(155, 92, 255, .78)";
+    if (count > 0) return "rgba(24, 200, 255, .78)";
     return "rgba(49, 182, 218, .28)";
   }
 
@@ -220,13 +207,13 @@
     }
   }
 
-  function scrollToPublicationTarget(hash, attempts) {
+  function scrollToPageTarget(hash, attempts) {
     var id = String(hash || "").replace(/^#/, "");
     var target = id ? document.getElementById(id) : null;
     if (!target) {
       if (attempts > 0) {
         window.setTimeout(function () {
-          scrollToPublicationTarget(hash, attempts - 1);
+          scrollToPageTarget(hash, attempts - 1);
         }, 120);
       }
       return;
@@ -243,12 +230,12 @@
     });
   }
 
-  function handlePublicationLinkClick(event) {
-    var link = event.target.closest && event.target.closest(".research-globe__article-list a[href^='#publication-']");
+  function handleInternalJumpClick(event) {
+    var link = event.target.closest && event.target.closest(".research-globe__article-list a[href^='#publication-'], .research-globe__jump-link[href^='#presentation-']");
     if (!link || !globe || !globe.contains(link)) return;
     event.preventDefault();
     event.stopPropagation();
-    scrollToPublicationTarget(link.getAttribute("href"), 12);
+    scrollToPageTarget(link.getAttribute("href"), 12);
   }
 
   function siteIsVisible(site) {
@@ -326,16 +313,6 @@
     };
   }
 
-  function fract(value) {
-    return value - Math.floor(value);
-  }
-
-  function terrainNoise(lat, lon) {
-    var fine = fract(Math.sin(lat * 12.9898 + lon * 78.233) * 43758.5453);
-    var broad = fract(Math.sin(lat * 3.71 - lon * 9.43) * 12972.349);
-    return fine * .58 + broad * .42;
-  }
-
   function drawSphere(width, height, radius) {
     var atmosphere = ctx.createRadialGradient(width / 2, height / 2, radius * .75, width / 2, height / 2, radius * 1.18);
     atmosphere.addColorStop(0, "rgba(0, 213, 255, 0)");
@@ -367,131 +344,6 @@
     ctx.strokeStyle = "rgba(0, 213, 255, .72)";
     ctx.lineWidth = 1.6;
     ctx.stroke();
-  }
-
-  function drawSurfaceTexture(width, height, radius, time) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.globalCompositeOperation = "screen";
-    for (var lat = -72; lat <= 72; lat += 5) {
-      for (var lon = -180; lon <= 180; lon += 6) {
-        var p = project(lat, lon + (time || 0) * .0008, width, height, radius);
-        if (!p.visible) continue;
-        var noise = terrainNoise(lat, lon);
-        var polar = Math.abs(lat) > 56;
-        var alpha = polar ? .14 : .06 + noise * .16;
-        ctx.fillStyle = polar
-          ? "rgba(210, 250, 255, " + alpha.toFixed(3) + ")"
-          : noise > .68
-            ? "rgba(125, 255, 198, " + alpha.toFixed(3) + ")"
-            : "rgba(0, 213, 255, " + alpha.toFixed(3) + ")";
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, noise > .72 ? 1.35 : .82, 0, Math.PI * 2);
-        ctx.fill();
-        if (noise > .76) {
-          var p2 = project(lat + 1.8, lon + 2.6, width, height, radius);
-          if (p2.visible) {
-            ctx.strokeStyle = "rgba(230, 255, 255, .16)";
-            ctx.lineWidth = .7;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-    ctx.globalCompositeOperation = "source-over";
-    ctx.restore();
-  }
-
-  function drawNightLights(width, height, radius, time) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.globalCompositeOperation = "screen";
-    cityLights.forEach(function (city, index) {
-      var p = project(city.lat, city.lon, width, height, radius);
-      if (!p.visible) return;
-      var pulse = .75 + Math.sin((time || 0) / 420 + index) * .18;
-      var glow = city.glow * pulse;
-      var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 10 * glow);
-      gradient.addColorStop(0, "rgba(255, 229, 153, .9)");
-      gradient.addColorStop(.3, "rgba(255, 209, 102, .42)");
-      gradient.addColorStop(1, "rgba(255, 209, 102, 0)");
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 10 * glow, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "rgba(255, 246, 210, .9)";
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 1.15 * glow, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    ctx.globalCompositeOperation = "source-over";
-    ctx.restore();
-  }
-
-  function drawHologramScan(width, height, radius, time) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.globalCompositeOperation = "screen";
-    var offset = ((time || 0) / 38) % 14;
-    for (var y = height / 2 - radius; y <= height / 2 + radius; y += 14) {
-      ctx.strokeStyle = "rgba(0, 213, 255, .07)";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(width / 2 - radius, y + offset);
-      ctx.lineTo(width / 2 + radius, y + offset);
-      ctx.stroke();
-    }
-    var sweepY = height / 2 - radius + ((time || 0) / 20) % (radius * 2);
-    var sweep = ctx.createLinearGradient(width / 2 - radius, sweepY, width / 2 + radius, sweepY);
-    sweep.addColorStop(0, "rgba(0, 213, 255, 0)");
-    sweep.addColorStop(.5, "rgba(0, 213, 255, .22)");
-    sweep.addColorStop(1, "rgba(0, 213, 255, 0)");
-    ctx.strokeStyle = sweep;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(width / 2 - radius, sweepY);
-    ctx.lineTo(width / 2 + radius, sweepY);
-    ctx.stroke();
-    ctx.globalCompositeOperation = "source-over";
-    ctx.restore();
-  }
-
-  function drawHudOverlay(width, height, radius, time) {
-    var cx = width / 2;
-    var cy = height / 2;
-    ctx.save();
-    ctx.strokeStyle = "rgba(0, 213, 255, .2)";
-    ctx.lineWidth = 1;
-    ctx.setLineDash([6, 8]);
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * 1.07, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.strokeStyle = "rgba(66, 245, 155, .24)";
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * .74, ((time || 0) / 1600) % (Math.PI * 2), Math.PI * 1.12 + ((time || 0) / 1600) % (Math.PI * 2));
-    ctx.stroke();
-    ctx.strokeStyle = "rgba(0, 213, 255, .16)";
-    ctx.beginPath();
-    ctx.moveTo(cx - radius * 1.18, cy);
-    ctx.lineTo(cx - radius * .92, cy);
-    ctx.moveTo(cx + radius * .92, cy);
-    ctx.lineTo(cx + radius * 1.18, cy);
-    ctx.moveTo(cx, cy - radius * 1.18);
-    ctx.lineTo(cx, cy - radius * .92);
-    ctx.moveTo(cx, cy + radius * .92);
-    ctx.lineTo(cx, cy + radius * 1.18);
-    ctx.stroke();
-    ctx.restore();
   }
 
   function drawLine(pointAt, start, end, width, height, radius) {
@@ -591,150 +443,17 @@
     ctx.restore();
   }
 
-  function drawOceanLabels(width, height, radius) {
-    ctx.save();
-    ctx.font = "700 10px Arial, sans-serif";
-    ctx.fillStyle = "rgba(126, 224, 255, .42)";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    oceanLabels.forEach(function (item) {
-      var p = project(item.lat, item.lon, width, height, radius);
-      if (!p.visible) return;
-      ctx.fillText(item.name, p.x, p.y);
-    });
-    ctx.restore();
-  }
-
-  function drawOrbits(width, height, radius) {
-    ctx.save();
-    ctx.translate(width / 2, height / 2);
-    ctx.strokeStyle = "rgba(0, 213, 255, .24)";
-    ctx.lineWidth = .9;
-    [-18, 18, 42].forEach(function (angle) {
-      ctx.save();
-      ctx.rotate(angle * Math.PI / 180);
-      ctx.beginPath();
-      ctx.ellipse(0, 0, radius * 1.12, radius * .34, 0, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
-    });
-    ctx.restore();
-  }
-
-  function drawArrowHead(from, to, color) {
-    var angle = Math.atan2(to.y - from.y, to.x - from.x);
-    var size = 9;
-    ctx.save();
-    ctx.translate(to.x, to.y);
-    ctx.rotate(angle);
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(-size, -size * .48);
-    ctx.lineTo(-size, size * .48);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawEducationPath(width, height, radius) {
-    if (state.module !== "education") return;
-    var educationSites = visibleSites.filter(function (site) {
-      return siteHasModule(site, "education");
-    }).sort(function (a, b) {
-      return a.order - b.order;
-    });
-    if (educationSites.length < 2) return;
-    var points = educationSites.map(function (site) {
-      var p = project(site.lat, site.lon, width, height, radius);
-      p.site = site;
-      return p;
-    }).filter(function (p) {
-      return p.visible;
-    });
-    if (points.length < 2) return;
-    ctx.save();
-    ctx.strokeStyle = "rgba(0, 213, 255, .86)";
-    ctx.fillStyle = "rgba(0, 213, 255, .9)";
-    ctx.lineWidth = 2.2;
-    ctx.shadowColor = "rgba(0, 213, 255, .72)";
-    ctx.shadowBlur = 14;
-    for (var i = 0; i < points.length - 1; i += 1) {
-      var start = points[i];
-      var end = points[i + 1];
-      var midX = (start.x + end.x) / 2;
-      var midY = (start.y + end.y) / 2 - 28;
-      ctx.beginPath();
-      ctx.moveTo(start.x, start.y);
-      ctx.quadraticCurveTo(midX, midY, end.x, end.y);
-      ctx.stroke();
-      drawArrowHead({ x: midX, y: midY }, end, "rgba(0, 213, 255, .96)");
-    }
-    ctx.shadowBlur = 0;
-    ctx.font = "700 10px Arial, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    points.forEach(function (point) {
-      ctx.fillText(String(point.site.start), point.x, point.y - 14);
-    });
-    ctx.restore();
-  }
-
-  function drawPresentationPath(width, height, radius) {
-    if (state.module !== "presentation") return;
-    var presentationSites = visibleSites.filter(function (site) {
-      return siteHasModule(site, "presentation");
-    }).sort(function (a, b) {
-      return a.order - b.order;
-    });
-    if (presentationSites.length < 2) return;
-    var points = presentationSites.map(function (site) {
-      var p = project(site.lat, site.lon, width, height, radius);
-      p.site = site;
-      return p;
-    }).filter(function (p) {
-      return p.visible;
-    });
-    if (points.length < 2) return;
-    ctx.save();
-    ctx.strokeStyle = "rgba(0, 213, 255, .82)";
-    ctx.fillStyle = "rgba(0, 213, 255, .9)";
-    ctx.lineWidth = 2;
-    ctx.shadowColor = "rgba(0, 213, 255, .74)";
-    ctx.shadowBlur = 14;
-    for (var i = 0; i < points.length - 1; i += 1) {
-      var start = points[i];
-      var end = points[i + 1];
-      var midX = (start.x + end.x) / 2;
-      var midY = (start.y + end.y) / 2 - 20;
-      ctx.beginPath();
-      ctx.moveTo(start.x, start.y);
-      ctx.quadraticCurveTo(midX, midY, end.x, end.y);
-      ctx.stroke();
-      drawArrowHead({ x: midX, y: midY }, end, "rgba(0, 213, 255, .92)");
-    }
-    ctx.shadowBlur = 0;
-    ctx.font = "700 10px Arial, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    points.forEach(function (point) {
-      ctx.fillText(String(point.site.start), point.x, point.y - 14);
-    });
-    ctx.restore();
-  }
-
-  function drawSites(width, height, radius, time) {
+  function drawSites(width, height, radius) {
     markerPositions = {};
     visibleSites.forEach(function (site) {
       var p = project(site.lat, site.lon, width, height, radius);
       if (!p.visible) return;
       markerPositions[site.id] = { x: p.x, y: p.y };
       var active = site.id === activeId;
-      var pulse = active ? 7 + Math.sin(time / 220) * 2 : 3 + Math.sin(time / 520 + site.index) * 1.2;
       var dotRadius = markerRadius(site.count, active);
-      ctx.fillStyle = "rgba(0, 213, 255, .16)";
+      ctx.fillStyle = markerHaloColor(site, active);
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 14 + pulse + site.count * 1.4, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, (active ? 18 : 13) + site.count * 1.35, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = markerColor(site);
       ctx.strokeStyle = active ? "#eaffff" : "rgba(234, 255, 255, .86)";
@@ -757,46 +476,6 @@
         ctx.fillText(String(site.order), p.x, p.y + .5);
       }
     });
-  }
-
-  function drawArticleCities(width, height, radius, time) {
-    if (state.module !== "publication") return;
-    var site = visibleSites.filter(function (item) { return item.id === activeId; })[0];
-    if (!site || !site.cities.length) return;
-    var origin = markerPositions[site.id];
-    ctx.save();
-    site.cities.forEach(function (city, index) {
-      var p = project(city.lat, city.lon, width, height, radius);
-      if (!p.visible) return;
-      var pulse = 3 + Math.sin((time || 0) / 240 + index) * 1.4;
-      if (origin) {
-        ctx.strokeStyle = "rgba(0, 213, 255, .52)";
-        ctx.lineWidth = 1.1;
-        ctx.beginPath();
-        ctx.moveTo(origin.x, origin.y);
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
-      }
-      ctx.fillStyle = "rgba(0, 213, 255, .26)";
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 10 + pulse, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#42f59b";
-      ctx.strokeStyle = "#ffffff";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 4.6, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-      ctx.font = "800 10px Arial, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "bottom";
-      ctx.fillStyle = "#dfffff";
-      ctx.shadowColor = "rgba(0, 16, 32, .9)";
-      ctx.shadowBlur = 6;
-      ctx.fillText(city.name, p.x, p.y - 11);
-    });
-    ctx.restore();
   }
 
   function updateCards() {
@@ -851,7 +530,6 @@
 
   function focusSite(site, targetZoom) {
     if (!site) return;
-    autoSpin = false;
     rotation = normalizeRotation(-site.lon);
     tilt = clamp(site.lat, -46, 56);
     zoom = clamp(targetZoom || focusZoomForSite(site), .82, 1.72);
@@ -866,7 +544,6 @@
   function focusModule(moduleName) {
     var target = focusTargets[moduleName];
     if (!target) return;
-    autoSpin = false;
     rotation = target.rotation;
     tilt = target.tilt;
     zoom = target.zoom;
@@ -890,20 +567,10 @@
     var height = canvas.clientHeight;
     var radius = Math.min(width, height) * .36 * zoom;
     ctx.clearRect(0, 0, width, height);
-    if (!reduceMotion && !isDragging && autoSpin) rotation += .018;
-    drawOrbits(width, height, radius);
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
-    drawSurfaceTexture(width, height, radius, time || 0);
     drawGraticule(width, height, radius);
-    drawOceanLabels(width, height, radius);
-    drawNightLights(width, height, radius, time || 0);
-    drawEducationPath(width, height, radius);
-    drawPresentationPath(width, height, radius);
-    drawSites(width, height, radius, time || 0);
-    drawArticleCities(width, height, radius, time || 0);
-    drawHologramScan(width, height, radius, time || 0);
-    drawHudOverlay(width, height, radius, time || 0);
+    drawSites(width, height, radius);
     updateConnectors();
     window.requestAnimationFrame(render);
   }
@@ -922,7 +589,7 @@
   });
 
   if (globe) {
-    globe.addEventListener("click", handlePublicationLinkClick, true);
+    globe.addEventListener("click", handleInternalJumpClick, true);
   }
 
   moduleButtons.forEach(function (button) {
@@ -941,7 +608,6 @@
 
   if (yearInput) {
     yearInput.addEventListener("input", function () {
-      autoSpin = false;
       state.year = Number(yearInput.value);
       applyFilters({ focusActive: true });
     });
@@ -950,7 +616,6 @@
   function setYear(value, shouldFocus) {
     if (!yearInput) return;
     var nextYear = clamp(Number(value), Number(yearInput.getAttribute("min")), Number(yearInput.getAttribute("max")));
-    if (shouldFocus) autoSpin = false;
     if (nextYear === state.year) {
       syncInputs();
       if (shouldFocus) focusActiveSite(state.module === "publication" ? 1.4 : 1.3);
@@ -995,14 +660,12 @@
 
   if (zoomInput) {
     zoomInput.addEventListener("input", function () {
-      autoSpin = false;
       zoom = Number(zoomInput.value) / 100;
       syncInputs();
     });
   }
 
   function changeZoom(delta) {
-    autoSpin = false;
     zoom = clamp(zoom + delta, .82, 1.72);
     syncInputs();
   }
@@ -1011,7 +674,6 @@
   if (zoomOut) zoomOut.addEventListener("click", function () { changeZoom(-.08); });
 
   canvas.addEventListener("pointerdown", function (event) {
-    autoSpin = false;
     isDragging = true;
     dragStart = { x: event.clientX, y: event.clientY, rotation: rotation, tilt: tilt };
     canvas.classList.add("is-dragging");
