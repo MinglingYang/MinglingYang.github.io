@@ -106,14 +106,6 @@
     { lat: -33.87, lon: 151.21, glow: .96 }
   ];
 
-  var activityCorridors = [
-    [40.71, -74.01, 51.51, -.13], [34.05, -118.24, 35.68, 139.65],
-    [48.86, 2.35, 52.52, 13.4], [55.75, 37.62, 39.9, 116.4],
-    [28.61, 77.21, 23.81, 90.41], [31.23, 121.47, 35.68, 139.65],
-    [1.35, 103.82, -6.21, 106.85], [-23.55, -46.63, -34.6, -58.38],
-    [30.04, 31.24, 6.52, 3.38], [19.43, -99.13, 40.71, -74.01]
-  ];
-
   function resize() {
     var rect = stage.getBoundingClientRect();
     var width = Math.max(320, Math.floor(rect.width));
@@ -434,46 +426,6 @@
     ctx.restore();
   }
 
-  function drawSurfaceArc(startLat, startLon, endLat, endLon, width, height, radius) {
-    var started = false;
-    ctx.beginPath();
-    for (var i = 0; i <= 32; i += 1) {
-      var t = i / 32;
-      var lat = startLat + (endLat - startLat) * t;
-      var lon = startLon + (endLon - startLon) * t;
-      var p = project(lat, lon, width, height, radius);
-      if (!p.visible) {
-        started = false;
-        continue;
-      }
-      if (!started) {
-        ctx.moveTo(p.x, p.y);
-        started = true;
-      } else {
-        ctx.lineTo(p.x, p.y);
-      }
-    }
-    ctx.stroke();
-  }
-
-  function drawActivityTexture(width, height, radius) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.globalCompositeOperation = "screen";
-    ctx.strokeStyle = "rgba(97, 238, 255, .22)";
-    ctx.lineWidth = 1.15;
-    ctx.shadowColor = "rgba(97, 238, 255, .32)";
-    ctx.shadowBlur = 8;
-    activityCorridors.forEach(function (route) {
-      drawSurfaceArc(route[0], route[1], route[2], route[3], width, height, radius);
-    });
-    ctx.shadowBlur = 0;
-    ctx.globalCompositeOperation = "source-over";
-    ctx.restore();
-  }
-
   function drawLine(pointAt, start, end, width, height, radius) {
     var started = false;
     ctx.beginPath();
@@ -758,7 +710,6 @@
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
     drawSatelliteTexture(width, height, radius);
-    drawActivityTexture(width, height, radius);
     drawNightLights(width, height, radius);
     drawGraticule(width, height, radius);
     drawEducationPath(width, height, radius);
@@ -855,6 +806,9 @@
     yearPanel.addEventListener("click", function (event) {
       event.stopPropagation();
       armTimeWheel();
+      var rect = yearPanel.getBoundingClientRect();
+      var centerY = rect.top + rect.height / 2;
+      setYear(state.year + (event.clientY > centerY ? -1 : 1), true);
     });
 
     yearPanel.addEventListener("wheel", handleTimeWheel, { passive: false });
