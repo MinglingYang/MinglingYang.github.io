@@ -27,8 +27,9 @@
   var regionOrder = {
     "North America": 1,
     "Latin America": 2,
-    "Africa": 3,
-    "Asia": 4
+    "Europe": 3,
+    "Africa": 4,
+    "Asia": 5
   };
 
   var oceanLabels = [
@@ -76,7 +77,8 @@
   }, {});
 
   var focusTargets = {
-    education: { rotation: 98, tilt: 37, zoom: 1.34, activeId: "education-south-carolina" }
+    education: { rotation: 98, tilt: 37, zoom: 1.34, activeId: "education-south-carolina" },
+    presentation: { rotation: 66, tilt: 36, zoom: 1.12, activeId: "presentation-ats-2025" }
   };
 
   var state = {
@@ -149,7 +151,9 @@
     return name || "";
   }
 
-  function markerColor(count) {
+  function markerColor(site) {
+    var count = site.count;
+    if (siteHasModule(site, "presentation")) return "#5fafd8";
     if (count >= 4) return "#5fafd8";
     if (count >= 2) return "#83c4e6";
     if (count === 1) return "#a7d4ef";
@@ -162,7 +166,7 @@
   }
 
   function countryFill(count, active) {
-    if (active && count > 0) return "rgba(120, 190, 226, .82)";
+    if (active && (count > 0 || state.module === "presentation")) return "rgba(120, 190, 226, .82)";
     if (count >= 4) return "rgba(159, 207, 232, .76)";
     if (count >= 2) return "rgba(174, 215, 236, .68)";
     if (count === 1) return "rgba(190, 225, 242, .62)";
@@ -196,6 +200,7 @@
       globe.classList.toggle("is-education-mode", state.module === "education");
       globe.classList.toggle("is-project-mode", state.module === "project");
       globe.classList.toggle("is-publication-mode", state.module === "publication");
+      globe.classList.toggle("is-presentation-mode", state.module === "presentation");
     }
   }
 
@@ -208,6 +213,9 @@
   function sortSites(items) {
     return items.slice().sort(function (a, b) {
       if (state.module === "education") {
+        if (a.order !== b.order) return a.order - b.order;
+      }
+      if (state.module === "presentation") {
         if (a.order !== b.order) return a.order - b.order;
       }
       if (state.module === "publication") {
@@ -236,7 +244,8 @@
     if (!leftColumn || !rightColumn) return;
     leftColumn.innerHTML = "";
     rightColumn.innerHTML = "";
-    var displaySites = state.module === "education" ? visibleSites : visibleSites.filter(function (site) {
+    var showAllCards = state.module === "education" || state.module === "presentation";
+    var displaySites = showAllCards ? visibleSites : visibleSites.filter(function (site) {
       return site.id === activeId;
     });
     if (!displaySites.length && visibleSites.length) displaySites = [visibleSites[0]];
@@ -478,6 +487,49 @@
     ctx.restore();
   }
 
+  function drawPresentationPath(width, height, radius) {
+    if (state.module !== "presentation") return;
+    var presentationSites = visibleSites.filter(function (site) {
+      return siteHasModule(site, "presentation");
+    }).sort(function (a, b) {
+      return a.order - b.order;
+    });
+    if (presentationSites.length < 2) return;
+    var points = presentationSites.map(function (site) {
+      var p = project(site.lat, site.lon, width, height, radius);
+      p.site = site;
+      return p;
+    }).filter(function (p) {
+      return p.visible;
+    });
+    if (points.length < 2) return;
+    ctx.save();
+    ctx.strokeStyle = "rgba(82, 152, 190, .82)";
+    ctx.fillStyle = "rgba(82, 152, 190, .9)";
+    ctx.lineWidth = 2;
+    ctx.shadowColor = "rgba(159, 207, 232, .75)";
+    ctx.shadowBlur = 8;
+    for (var i = 0; i < points.length - 1; i += 1) {
+      var start = points[i];
+      var end = points[i + 1];
+      var midX = (start.x + end.x) / 2;
+      var midY = (start.y + end.y) / 2 - 20;
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.quadraticCurveTo(midX, midY, end.x, end.y);
+      ctx.stroke();
+      drawArrowHead({ x: midX, y: midY }, end, "rgba(82, 152, 190, .92)");
+    }
+    ctx.shadowBlur = 0;
+    ctx.font = "700 10px Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    points.forEach(function (point) {
+      ctx.fillText(String(point.site.start), point.x, point.y - 14);
+    });
+    ctx.restore();
+  }
+
   function drawSites(width, height, radius, time) {
     markerPositions = {};
     visibleSites.forEach(function (site) {
@@ -491,7 +543,7 @@
       ctx.beginPath();
       ctx.arc(p.x, p.y, 14 + pulse + site.count * 1.4, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = markerColor(site.count);
+      ctx.fillStyle = markerColor(site);
       ctx.strokeStyle = active ? "#4f8faf" : "#ffffff";
       ctx.lineWidth = active ? 2.4 : 2;
       ctx.beginPath();
@@ -504,7 +556,7 @@
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(String(site.count), p.x, p.y + .5);
-      } else if (siteHasModule(site, "education")) {
+      } else if (siteHasModule(site, "education") || siteHasModule(site, "presentation")) {
         ctx.fillStyle = "#30343b";
         ctx.font = "700 8px Arial, sans-serif";
         ctx.textAlign = "center";
@@ -599,6 +651,7 @@
 
   function focusZoomForSite(site) {
     if (state.module === "publication") return site.count >= 3 ? 1.4 : 1.34;
+    if (state.module === "presentation") return 1.28;
     if (state.module === "education") return 1.34;
     return site.count >= 3 ? 1.32 : 1.26;
   }
@@ -651,6 +704,7 @@
     drawGraticule(width, height, radius);
     drawOceanLabels(width, height, radius);
     drawEducationPath(width, height, radius);
+    drawPresentationPath(width, height, radius);
     drawSites(width, height, radius, time || 0);
     drawArticleCities(width, height, radius, time || 0);
     updateConnectors();
@@ -678,7 +732,7 @@
         item.classList.toggle("is-active", item === button);
       });
       applyFilters({
-        focusActive: state.module !== "all" && state.module !== "education",
+        focusActive: state.module !== "all" && state.module !== "education" && state.module !== "presentation",
         zoom: state.module === "publication" ? 1.4 : 1.3
       });
     });

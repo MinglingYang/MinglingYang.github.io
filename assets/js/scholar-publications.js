@@ -6,6 +6,14 @@
       .trim();
   }
 
+  function slugify(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80);
+  }
+
   function escapeHtml(value) {
     return String(value || "").replace(/[&<>"']/g, function (char) {
       return {
@@ -43,6 +51,11 @@
     if (pub.pmid) return "https://pubmed.ncbi.nlm.nih.gov/" + pub.pmid + "/";
     if (pub.citedby_url) return pub.citedby_url;
     return "";
+  }
+
+  function publicationId(pub) {
+    if (pub.id) return pub.id;
+    return "publication-" + slugify(pub.short_title || pub.title || pub.scholar_id || "item");
   }
 
   function mergePublications(displayData, scholarData) {
@@ -117,6 +130,7 @@
   function renderPublicationCard(pub) {
     var url = publicationUrl(pub);
     var title = pub.short_title || pub.title;
+    var id = publicationId(pub);
     var citation = typeof pub.citations === "number" ? pub.citations : null;
     var citationHtml = citation !== null
       ? "<span class=\"pub-card__metric\">" + citation + " citations</span>"
@@ -127,7 +141,7 @@
     var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\">" : "";
     var linkClose = url ? "</a>" : "";
     return [
-      "<article class=\"pub-card\">",
+      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\">",
       "  <div class=\"pub-card__image-wrap\">",
       "    <img class=\"pub-card__image\" src=\"" + escapeHtml(pub.image || "images/publications/scholar-update.svg") + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
       "  </div>",
@@ -175,6 +189,11 @@
     var target = document.getElementById("scholar-publications");
     if (!target) return;
     target.innerHTML = publications.map(renderPublicationCard).join("");
+    if (window.location.hash && document.getElementById(window.location.hash.slice(1))) {
+      window.setTimeout(function () {
+        document.getElementById(window.location.hash.slice(1)).scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 60);
+    }
   }
 
   function renderScholarSummary(scholarData) {

@@ -48,6 +48,7 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <button type="button" data-globe-module="education">Education</button>
     <button type="button" data-globe-module="project">Projects</button>
     <button type="button" data-globe-module="publication">Articles</button>
+    <button type="button" data-globe-module="presentation">Presentations</button>
   </div>
 </div>
 
@@ -78,11 +79,23 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>HAPIN, CHAP, GECo, and ambient PM2.5 projects.</strong>
       <p>Puno field work and national Peru analyses on household air pollution, child growth, neurodevelopment, COPD screening, chronic bronchitis, clean fuel adoption, and exposure mapping.</p>
       <ul class="research-globe__article-list">
-        <li>HAPIN growth trajectories in Puno.</li>
-        <li>Preschool neurodevelopment and household air pollution.</li>
-        <li>GECo COPD screening and chronic bronchitis abstracts.</li>
+        <li><a href="#publication-hapin-growth">Long-term clean-fuel intervention and child growth trajectories.</a></li>
+        <li><a href="#publication-hapin-neurodevelopment">Cooking fuel exposure and preschool neurodevelopment.</a></li>
+        <li><a href="#publication-copd-screening">COPD screening with the St. George's Respiratory Questionnaire.</a></li>
+        <li><a href="#publication-erj-2026-chronic-bronchitis">Chronic bronchitis risk and outcomes in LMIC cohorts.</a></li>
       </ul>
-      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
+    </article>
+    <article data-location="presentation-ats-2025" data-country="United States" data-region="North America" data-modules="presentation" data-count="0" data-start="2025" data-end="2025" data-order="1" data-lat="37.77" data-lon="-122.42">
+      <span>ATS International Conference</span>
+      <em>San Francisco, California</em>
+      <strong>COPD screening with SGRQ.</strong>
+      <p>Published abstract and poster presentation, May 18, 2025.</p>
+    </article>
+    <article data-location="presentation-ers-2025" data-country="Netherlands" data-region="Europe" data-modules="presentation" data-count="0" data-start="2025" data-end="2025" data-order="2" data-lat="52.37" data-lon="4.90">
+      <span>ERS Congress</span>
+      <em>Amsterdam, Netherlands</em>
+      <strong>Chronic bronchitis risk factors and outcomes.</strong>
+      <p>Published abstract and oral talk, October 1, 2025.</p>
     </article>
   </div>
   <div class="research-globe__stage">
@@ -104,9 +117,8 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>HAPIN infant health analyses.</strong>
       <p>Household air pollution, biomass cooking exposure, LPG intervention, and severe pneumonia outcomes.</p>
       <ul class="research-globe__article-list">
-        <li>HAPIN infant health and severe pneumonia analyses.</li>
+        <li><a href="#publication-hapin-pneumonia">Household air pollution and severe pneumonia in infants.</a></li>
       </ul>
-      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
     <article data-location="nepal" data-country="Nepal" data-region="Asia" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="27.72" data-lon="85.32" data-cities="Kathmandu|27.72|85.32">
       <span>Nepal</span>
@@ -114,11 +126,10 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>GECo and ambient PM2.5 projects.</strong>
       <p>COPD screening, chronic bronchitis, spirometry workflows, sensor calibration, and exposure mapping.</p>
       <ul class="research-globe__article-list">
-        <li>GECo COPD screening with SGRQ.</li>
-        <li>Chronic bronchitis risk and outcomes.</li>
-        <li>Ambient PM2.5 monitoring and calibration.</li>
+        <li><a href="#publication-copd-screening">COPD screening with the St. George's Respiratory Questionnaire.</a></li>
+        <li><a href="#publication-erj-2026-chronic-bronchitis">Chronic bronchitis risk and outcomes in LMIC cohorts.</a></li>
+        <li><a href="#publication-ers-2025-chronic-bronchitis-abstract">Chronic bronchitis risk factors and outcomes.</a></li>
       </ul>
-      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
     <article data-location="uganda" data-country="Uganda" data-region="Africa" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="0.35" data-lon="32.58" data-cities="Kampala|0.35|32.58">
       <span>Uganda</span>
@@ -126,11 +137,10 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>GECo chronic bronchitis outcomes.</strong>
       <p>Chronic bronchitis burden, risk factors, respiratory symptoms, quality of life, and clinical outcomes.</p>
       <ul class="research-globe__article-list">
-        <li>Chronic bronchitis risk and clinical outcomes.</li>
-        <li>GECo COPD screening with SGRQ.</li>
-        <li>Respiratory symptoms and quality of life.</li>
+        <li><a href="#publication-copd-screening">COPD screening with the St. George's Respiratory Questionnaire.</a></li>
+        <li><a href="#publication-erj-2026-chronic-bronchitis">Chronic bronchitis risk and outcomes in LMIC cohorts.</a></li>
+        <li><a href="#publication-ers-2025-chronic-bronchitis-abstract">Chronic bronchitis risk factors and outcomes.</a></li>
       </ul>
-      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
     <article data-location="india" data-country="India" data-region="Asia" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="20.59" data-lon="78.96" data-cities="India HAPIN site|20.59|78.96">
       <span>India</span>
@@ -138,9 +148,8 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>HAPIN household energy intervention.</strong>
       <p>Biomass cooking exposure, LPG intervention, infant health, and multi-country child health evidence.</p>
       <ul class="research-globe__article-list">
-        <li>HAPIN infant health and severe pneumonia analyses.</li>
+        <li><a href="#publication-hapin-pneumonia">Household air pollution and severe pneumonia in infants.</a></li>
       </ul>
-      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
     <article data-location="rwanda" data-country="Rwanda" data-region="Africa" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="-1.94" data-lon="30.06" data-cities="Rwanda HAPIN site|-1.94|30.06">
       <span>Rwanda</span>
@@ -148,9 +157,20 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>HAPIN child health evidence.</strong>
       <p>Multi-country household air pollution analyses and severe pneumonia outcomes in infants.</p>
       <ul class="research-globe__article-list">
-        <li>HAPIN infant health and severe pneumonia analyses.</li>
+        <li><a href="#publication-hapin-pneumonia">Household air pollution and severe pneumonia in infants.</a></li>
       </ul>
-      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
+    </article>
+    <article data-location="presentation-wio-2025" data-country="United States" data-region="North America" data-modules="presentation" data-count="0" data-start="2025" data-end="2025" data-order="3" data-lat="30.67" data-lon="-81.46">
+      <span>Women in Ophthalmology Summer Symposium</span>
+      <em>Amelia Island, Florida</em>
+      <strong>Dry eye symptoms and household air pollution.</strong>
+      <p>Symposium presentation on findings from the HAPIN Trial in Peru, August 12, 2025.</p>
+    </article>
+    <article data-location="presentation-chest-2026" data-country="United States" data-region="North America" data-modules="presentation" data-count="0" data-start="2026" data-end="2026" data-order="4" data-lat="33.45" data-lon="-112.07">
+      <span>CHEST Annual Meeting</span>
+      <em>Phoenix, Arizona</em>
+      <strong>LPG versus biomass cooking and lung function.</strong>
+      <p>Accepted meeting presentation, October 18 to 21, 2026.</p>
     </article>
   </div>
 </div>
