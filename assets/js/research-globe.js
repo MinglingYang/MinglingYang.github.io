@@ -86,6 +86,33 @@
   var markerPositions = {};
   var isDragging = false;
   var dragStart = null;
+  var autoSpin = true;
+  var lastFrameTime = 0;
+  var spinPausedUntil = 0;
+  var timeWheelArmed = false;
+
+  var metroLights = [
+    { lat: 40.71, lon: -74.01, glow: 1.4 }, { lat: 34.05, lon: -118.24, glow: 1.25 },
+    { lat: 41.88, lon: -87.63, glow: 1.05 }, { lat: 19.43, lon: -99.13, glow: 1.24 },
+    { lat: -23.55, lon: -46.63, glow: 1.3 }, { lat: -34.6, lon: -58.38, glow: 1.05 },
+    { lat: 51.51, lon: -.13, glow: 1.18 }, { lat: 48.86, lon: 2.35, glow: 1.08 },
+    { lat: 52.52, lon: 13.4, glow: 1.02 }, { lat: 55.75, lon: 37.62, glow: 1.08 },
+    { lat: 30.04, lon: 31.24, glow: 1.05 }, { lat: 6.52, lon: 3.38, glow: 1.15 },
+    { lat: -1.29, lon: 36.82, glow: .86 }, { lat: 28.61, lon: 77.21, glow: 1.32 },
+    { lat: 19.07, lon: 72.88, glow: 1.24 }, { lat: 23.81, lon: 90.41, glow: 1.2 },
+    { lat: 39.9, lon: 116.4, glow: 1.32 }, { lat: 31.23, lon: 121.47, glow: 1.28 },
+    { lat: 35.68, lon: 139.65, glow: 1.26 }, { lat: 37.57, lon: 126.98, glow: 1.1 },
+    { lat: 1.35, lon: 103.82, glow: .96 }, { lat: -6.21, lon: 106.85, glow: 1.08 },
+    { lat: -33.87, lon: 151.21, glow: .96 }
+  ];
+
+  var activityCorridors = [
+    [40.71, -74.01, 51.51, -.13], [34.05, -118.24, 35.68, 139.65],
+    [48.86, 2.35, 52.52, 13.4], [55.75, 37.62, 39.9, 116.4],
+    [28.61, 77.21, 23.81, 90.41], [31.23, 121.47, 35.68, 139.65],
+    [1.35, 103.82, -6.21, 106.85], [-23.55, -46.63, -34.6, -58.38],
+    [30.04, 31.24, 6.52, 3.38], [19.43, -99.13, 40.71, -74.01]
+  ];
 
   function resize() {
     var rect = stage.getBoundingClientRect();
@@ -112,6 +139,15 @@
 
   function normalizeRotation(value) {
     return ((value + 180) % 360 + 360) % 360 - 180;
+  }
+
+  function pauseSpin(duration) {
+    spinPausedUntil = Math.max(spinPausedUntil, Date.now() + (duration || 9000));
+  }
+
+  function textureNoise(lat, lon) {
+    var value = Math.sin(lat * 12.9898 + lon * 78.233) * 43758.5453;
+    return value - Math.floor(value);
   }
 
   function buildYearWheel() {
@@ -348,6 +384,96 @@
     ctx.stroke();
   }
 
+  function drawSatelliteTexture(width, height, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    for (var lat = -70; lat <= 72; lat += 5) {
+      for (var lon = -180; lon <= 180; lon += 6) {
+        var p = project(lat, lon, width, height, radius);
+        if (!p.visible) continue;
+        var noise = textureNoise(lat, lon);
+        var absLat = Math.abs(lat);
+        var alpha = absLat > 58 ? .1 : .035 + noise * .08;
+        var tone = noise > .68 ? "rgba(143, 231, 190, " : "rgba(83, 178, 214, ";
+        ctx.fillStyle = tone + alpha.toFixed(3) + ")";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, noise > .76 ? 1.4 : .85, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.globalCompositeOperation = "source-over";
+    ctx.restore();
+  }
+
+  function drawNightLights(width, height, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    metroLights.forEach(function (city) {
+      var p = project(city.lat, city.lon, width, height, radius);
+      if (!p.visible) return;
+      var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 12 * city.glow);
+      gradient.addColorStop(0, "rgba(255, 238, 180, .86)");
+      gradient.addColorStop(.28, "rgba(255, 187, 82, .42)");
+      gradient.addColorStop(1, "rgba(255, 164, 61, 0)");
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 12 * city.glow, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255, 246, 210, .9)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(1.1, 1.8 * city.glow), 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalCompositeOperation = "source-over";
+    ctx.restore();
+  }
+
+  function drawSurfaceArc(startLat, startLon, endLat, endLon, width, height, radius) {
+    var started = false;
+    ctx.beginPath();
+    for (var i = 0; i <= 32; i += 1) {
+      var t = i / 32;
+      var lat = startLat + (endLat - startLat) * t;
+      var lon = startLon + (endLon - startLon) * t;
+      var p = project(lat, lon, width, height, radius);
+      if (!p.visible) {
+        started = false;
+        continue;
+      }
+      if (!started) {
+        ctx.moveTo(p.x, p.y);
+        started = true;
+      } else {
+        ctx.lineTo(p.x, p.y);
+      }
+    }
+    ctx.stroke();
+  }
+
+  function drawActivityTexture(width, height, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = "rgba(97, 238, 255, .22)";
+    ctx.lineWidth = 1.15;
+    ctx.shadowColor = "rgba(97, 238, 255, .32)";
+    ctx.shadowBlur = 8;
+    activityCorridors.forEach(function (route) {
+      drawSurfaceArc(route[0], route[1], route[2], route[3], width, height, radius);
+    });
+    ctx.shadowBlur = 0;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.restore();
+  }
+
   function drawLine(pointAt, start, end, width, height, radius) {
     var started = false;
     ctx.beginPath();
@@ -567,6 +693,7 @@
     activeId = id;
     var site = sites.filter(function (item) { return item.id === id; })[0];
     if (site) {
+      pauseSpin(9000);
       focusSite(site);
       renderCards();
       updateCards();
@@ -583,6 +710,7 @@
 
   function focusSite(site, targetZoom) {
     if (!site) return;
+    pauseSpin(9000);
     rotation = normalizeRotation(-site.lon);
     tilt = clamp(site.lat, -46, 56);
     zoom = clamp(targetZoom || focusZoomForSite(site), .82, 1.72);
@@ -597,6 +725,7 @@
   function focusModule(moduleName) {
     var target = focusTargets[moduleName];
     if (!target) return;
+    pauseSpin(9000);
     rotation = target.rotation;
     tilt = target.tilt;
     zoom = target.zoom;
@@ -615,13 +744,22 @@
     return best && best.id;
   }
 
-  function render(time) {
+  function render() {
     var width = canvas.clientWidth;
     var height = canvas.clientHeight;
     var radius = Math.min(width, height) * .36 * zoom;
+    var now = Date.now();
+    var delta = lastFrameTime ? Math.min(40, now - lastFrameTime) : 16;
+    lastFrameTime = now;
+    if (autoSpin && !isDragging && now > spinPausedUntil) {
+      rotation = normalizeRotation(rotation + delta * .0006);
+    }
     ctx.clearRect(0, 0, width, height);
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
+    drawSatelliteTexture(width, height, radius);
+    drawActivityTexture(width, height, radius);
+    drawNightLights(width, height, radius);
     drawGraticule(width, height, radius);
     drawEducationPath(width, height, radius);
     drawSites(width, height, radius);
@@ -682,6 +820,26 @@
     });
   }
 
+  function armTimeWheel() {
+    if (!yearPanel) return;
+    timeWheelArmed = true;
+    yearPanel.classList.add("is-active");
+    if (yearPanel.focus) yearPanel.focus({ preventScroll: true });
+  }
+
+  function disarmTimeWheel() {
+    timeWheelArmed = false;
+    if (yearPanel) yearPanel.classList.remove("is-active");
+  }
+
+  function handleTimeWheel(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    pauseSpin(3500);
+    var step = event.deltaY > 0 ? -1 : 1;
+    setYear(state.year + step, true);
+  }
+
   buildYearWheel();
 
   yearButtons.forEach(function (button) {
@@ -694,23 +852,39 @@
   });
 
   if (yearPanel && yearInput) {
-    yearPanel.addEventListener("wheel", function (event) {
-      event.preventDefault();
-      var step = event.deltaY > 0 ? -1 : 1;
-      setYear(state.year + step, true);
-    }, { passive: false });
+    yearPanel.addEventListener("click", function (event) {
+      event.stopPropagation();
+      armTimeWheel();
+    });
+
+    yearPanel.addEventListener("wheel", handleTimeWheel, { passive: false });
 
     yearPanel.addEventListener("keydown", function (event) {
       if (event.key === "ArrowRight" || event.key === "ArrowUp") {
         event.preventDefault();
+        armTimeWheel();
         setYear(state.year + 1, true);
       }
       if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
         event.preventDefault();
+        armTimeWheel();
         setYear(state.year - 1, true);
+      }
+      if (event.key === "Escape") {
+        disarmTimeWheel();
       }
     });
   }
+
+  window.addEventListener("click", function (event) {
+    if (!yearPanel || yearPanel.contains(event.target)) return;
+    disarmTimeWheel();
+  });
+
+  window.addEventListener("wheel", function (event) {
+    if (!timeWheelArmed || !yearPanel) return;
+    handleTimeWheel(event);
+  }, { passive: false });
 
   if (zoomInput) {
     zoomInput.addEventListener("input", function () {
@@ -720,6 +894,7 @@
   }
 
   function changeZoom(delta) {
+    pauseSpin(3000);
     zoom = clamp(zoom + delta, .82, 1.72);
     syncInputs();
   }
@@ -728,6 +903,7 @@
   if (zoomOut) zoomOut.addEventListener("click", function () { changeZoom(-.08); });
 
   canvas.addEventListener("pointerdown", function (event) {
+    pauseSpin(8000);
     isDragging = true;
     dragStart = { x: event.clientX, y: event.clientY, rotation: rotation, tilt: tilt };
     canvas.classList.add("is-dragging");

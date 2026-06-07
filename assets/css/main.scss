@@ -360,14 +360,30 @@ h1:before, .anchor:before {
         position: absolute;
         width: 1px;
         height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
         overflow: hidden;
-        clip: rect(0, 0, 0, 0);
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
     }
 }
 
 .research-globe__time-panel:focus {
     outline: 2px solid rgba(118, 180, 214, .55);
     outline-offset: 3px;
+}
+
+.research-globe__time-panel.is-active {
+    border-color: rgba(255, 209, 102, .74);
+    box-shadow: 0 0 22px rgba(255, 209, 102, .24), inset 0 1px 0 rgba(255, 255, 255, .14);
+
+    &:before {
+        background: #ffd166;
+    }
 }
 
 .research-globe__year-wheel {
@@ -411,7 +427,6 @@ h1:before, .anchor:before {
     button.is-active {
         color: #ffffff;
         opacity: 1;
-        pointer-events: auto;
         transform: translateY(0);
     }
 }
