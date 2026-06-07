@@ -140,8 +140,8 @@ h1:before, .anchor:before {
 
 .research-map-toolbar {
     display: block;
-    margin: 1rem 0 .65rem;
-    padding: .65rem;
+    margin: .75rem 0 .45rem;
+    padding: .5rem;
     border: 1px solid rgba(0, 213, 255, .24);
     border-radius: 8px;
     background: linear-gradient(135deg, rgba(4, 18, 38, .96), rgba(8, 37, 66, .9));
@@ -175,7 +175,7 @@ h1:before, .anchor:before {
     gap: .35rem;
 
     button {
-        min-height: 2.15rem;
+        min-height: 1.95rem;
         border: 1px solid rgba(108, 201, 236, .34);
         border-radius: 6px;
         background: rgba(7, 27, 52, .86);
@@ -199,7 +199,7 @@ h1:before, .anchor:before {
     flex-wrap: wrap;
     justify-content: center;
     gap: .65rem;
-    margin: -.8rem 0 1.5rem;
+    margin: .45rem 0 1.1rem;
     color: #b7d8e8;
     font-size: .74em;
 
@@ -223,8 +223,8 @@ h1:before, .anchor:before {
 }
 
 .research-map-legend__dot--low {
-    background: #18c8ff;
-    box-shadow: 0 0 10px rgba(24, 200, 255, .6);
+    background: #42f59b;
+    box-shadow: 0 0 10px rgba(66, 245, 155, .6);
 }
 
 .research-map-legend__dot--mid {
@@ -243,12 +243,13 @@ h1:before, .anchor:before {
 
 .research-globe {
     display: grid;
-    grid-template-columns: minmax(120px, 16%) minmax(420px, 1fr) minmax(120px, 16%);
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
     gap: .62rem;
     align-items: stretch;
     position: relative;
-    margin: 1rem 0 1.7rem;
-    padding: .72rem;
+    height: clamp(480px, 64vh, 590px);
+    margin: .7rem 0 0;
+    padding: .62rem;
     overflow: hidden;
     border: 1px solid rgba(0, 213, 255, .22);
     border-radius: 8px;
@@ -276,7 +277,8 @@ h1:before, .anchor:before {
 .research-globe__stage {
     position: relative;
     z-index: 3;
-    min-height: 458px;
+    min-height: 0;
+    height: 100%;
     overflow: hidden;
     border: 1px solid rgba(0, 213, 255, .3);
     border-radius: 8px;
@@ -292,7 +294,7 @@ h1:before, .anchor:before {
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 458px;
+    min-height: 0;
     cursor: grab;
     touch-action: none;
 }
@@ -424,7 +426,15 @@ h1:before, .anchor:before {
     z-index: 4;
     display: grid;
     gap: .48rem;
+    max-height: 100%;
+    overflow-y: auto;
     align-content: center;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 213, 255, .44) rgba(4, 15, 32, .5);
+}
+
+.research-globe__sites--left {
+    display: none;
 }
 
 .research-globe__sites article {
@@ -502,8 +512,8 @@ h1:before, .anchor:before {
 }
 
 .research-globe__sites article[data-count="1"]:before {
-    background: #18c8ff;
-    box-shadow: 0 0 0 4px rgba(24, 200, 255, .16), 0 0 13px rgba(24, 200, 255, .58);
+    background: #42f59b;
+    box-shadow: 0 0 0 4px rgba(66, 245, 155, .16), 0 0 13px rgba(66, 245, 155, .58);
 }
 
 .research-globe__sites article[data-count="2"]:before,
@@ -541,10 +551,6 @@ h1:before, .anchor:before {
     background: linear-gradient(180deg, rgba(8, 34, 62, .92), rgba(4, 17, 38, .96));
 }
 
-.research-globe__sites--left article:before {
-    right: -.28rem;
-}
-
 .research-globe__sites--right article:before {
     left: -.28rem;
 }
@@ -565,6 +571,32 @@ h1:before, .anchor:before {
         background: #ffffff;
         box-shadow: 0 0 0 5px rgba(0, 213, 255, .18), 0 0 18px rgba(0, 213, 255, .82);
     }
+}
+
+.research-globe__sites article.is-active[data-count="1"]:before {
+    background: #42f59b;
+    box-shadow: 0 0 0 5px rgba(66, 245, 155, .18), 0 0 18px rgba(66, 245, 155, .82);
+}
+
+.research-globe__sites article.is-active[data-count="2"]:before,
+.research-globe__sites article.is-active[data-count="3"]:before {
+    background: #9b5cff;
+    box-shadow: 0 0 0 5px rgba(155, 92, 255, .2), 0 0 18px rgba(155, 92, 255, .82);
+}
+
+.research-globe__sites article.is-active[data-count="4"]:before {
+    background: #ffb02e;
+    box-shadow: 0 0 0 5px rgba(255, 176, 46, .22), 0 0 18px rgba(255, 176, 46, .82);
+}
+
+.research-globe__sites article.is-active[data-modules~="education"]:before {
+    background: #2ee7ff;
+    box-shadow: 0 0 0 5px rgba(46, 231, 255, .2), 0 0 18px rgba(46, 231, 255, .82);
+}
+
+.research-globe__sites article.is-active[data-modules~="presentation"]:before {
+    background: #8c7cff;
+    box-shadow: 0 0 0 5px rgba(140, 124, 255, .22), 0 0 18px rgba(140, 124, 255, .82);
 }
 
 .research-globe.is-publication-mode {
@@ -636,8 +668,13 @@ h1:before, .anchor:before {
         display: none;
     }
 
+    .research-globe {
+        height: auto;
+    }
+
     .research-globe__stage {
-        min-height: 390px;
+        min-height: 360px;
+        height: 360px;
     }
 
     .research-globe__time-panel {

@@ -148,7 +148,7 @@
     if (siteHasModule(site, "presentation")) return "#8c7cff";
     if (count >= 4) return "#ffb02e";
     if (count >= 2) return "#9b5cff";
-    if (count === 1) return "#18c8ff";
+    if (count === 1) return "#42f59b";
     return "#8ca3b0";
   }
 
@@ -157,7 +157,7 @@
     if (siteHasModule(site, "presentation")) return active ? "rgba(140, 124, 255, .3)" : "rgba(140, 124, 255, .16)";
     if (site.count >= 4) return active ? "rgba(255, 176, 46, .3)" : "rgba(255, 176, 46, .16)";
     if (site.count >= 2) return active ? "rgba(155, 92, 255, .3)" : "rgba(155, 92, 255, .16)";
-    if (site.count === 1) return active ? "rgba(24, 200, 255, .3)" : "rgba(24, 200, 255, .16)";
+    if (site.count === 1) return active ? "rgba(66, 245, 155, .3)" : "rgba(66, 245, 155, .16)";
     return active ? "rgba(140, 163, 176, .24)" : "rgba(140, 163, 176, .12)";
   }
 
@@ -167,19 +167,24 @@
   }
 
   function countryFill(count, active) {
-    if (active && (count > 0 || state.module === "presentation")) return "rgba(103, 232, 255, .56)";
+    if (active && count >= 4) return "rgba(255, 176, 46, .72)";
+    if (active && count >= 2) return "rgba(155, 92, 255, .62)";
+    if (active && count === 1) return "rgba(66, 245, 155, .56)";
+    if (active && state.module === "presentation") return "rgba(140, 124, 255, .54)";
     if (count >= 4) return "rgba(255, 176, 46, .62)";
     if (count >= 2) return "rgba(155, 92, 255, .5)";
-    if (count === 1) return "rgba(24, 200, 255, .44)";
+    if (count === 1) return "rgba(66, 245, 155, .44)";
     return "rgba(18, 62, 74, .46)";
   }
 
   function countryStroke(count, active) {
-    if (active && count > 0) return "rgba(234, 255, 255, .96)";
+    if (active && count >= 4) return "rgba(255, 238, 190, .98)";
+    if (active && count >= 2) return "rgba(232, 220, 255, .98)";
+    if (active && count === 1) return "rgba(215, 255, 232, .98)";
     if (active) return "rgba(103, 232, 255, .9)";
     if (count >= 4) return "rgba(255, 176, 46, .86)";
     if (count >= 2) return "rgba(155, 92, 255, .78)";
-    if (count > 0) return "rgba(24, 200, 255, .78)";
+    if (count > 0) return "rgba(66, 245, 155, .78)";
     return "rgba(49, 182, 218, .28)";
   }
 
@@ -275,22 +280,16 @@
   }
 
   function renderCards() {
-    if (!leftColumn || !rightColumn) return;
-    leftColumn.innerHTML = "";
+    if (!rightColumn) return;
+    if (leftColumn) leftColumn.innerHTML = "";
     rightColumn.innerHTML = "";
-    var showAllCards = state.module === "education" || state.module === "presentation";
-    var displaySites = showAllCards ? visibleSites : visibleSites.filter(function (site) {
+    var displaySites = visibleSites.filter(function (site) {
       return site.id === activeId;
     });
     if (!displaySites.length && visibleSites.length) displaySites = [visibleSites[0]];
-    var midpoint = Math.ceil(displaySites.length / 2);
-    displaySites.forEach(function (site, index) {
+    displaySites.forEach(function (site) {
       site.card.classList.remove("is-hidden");
-      if (index < midpoint) {
-        leftColumn.appendChild(site.card);
-      } else {
-        rightColumn.appendChild(site.card);
-      }
+      rightColumn.appendChild(site.card);
     });
     sites.forEach(function (site) {
       if (displaySites.indexOf(site) === -1) site.card.classList.add("is-hidden");
