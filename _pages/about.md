@@ -49,15 +49,6 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <button type="button" data-globe-module="project">Projects</button>
     <button type="button" data-globe-module="publication">Articles</button>
   </div>
-  <label>
-    <span class="screen-reader-text">Map sort order</span>
-    <select id="research-globe-sort">
-      <option value="region">Region</option>
-      <option value="count">Article count</option>
-      <option value="recent">Recent</option>
-      <option value="country">Country</option>
-    </select>
-  </label>
 </div>
 
 <div class="research-globe" aria-label="Interactive globe showing education, projects, and published study locations">
@@ -81,11 +72,17 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>Incoming Ph.D. student in Epidemiology.</strong>
       <p>Environmental Health Track at the Keck School of Medicine, beginning Fall 2026.</p>
     </article>
-    <article data-location="peru" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="4" data-start="2023" data-end="2026" data-lat="-9.19" data-lon="-75.02">
+    <article data-location="peru" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="4" data-start="2023" data-end="2026" data-lat="-9.19" data-lon="-75.02" data-cities="Puno|-15.84|-70.02;Lima|-12.05|-77.04">
       <span>Peru</span>
       <em>Latin America</em>
       <strong>HAPIN, CHAP, GECo, and ambient PM2.5 projects.</strong>
       <p>Puno field work and national Peru analyses on household air pollution, child growth, neurodevelopment, COPD screening, chronic bronchitis, clean fuel adoption, and exposure mapping.</p>
+      <ul class="research-globe__article-list">
+        <li>HAPIN growth trajectories in Puno.</li>
+        <li>Preschool neurodevelopment and household air pollution.</li>
+        <li>GECo COPD screening and chronic bronchitis abstracts.</li>
+      </ul>
+      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
   </div>
   <div class="research-globe__stage">
@@ -94,8 +91,7 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <button type="button" id="research-globe-zoom-in" aria-label="Zoom in">+</button>
       <button type="button" id="research-globe-zoom-out" aria-label="Zoom out">-</button>
     </div>
-    <div class="research-globe__time-panel" aria-label="Time year control" tabindex="0">
-      <span class="research-globe__time-kicker">Time</span>
+    <div class="research-globe__time-panel" aria-label="Year control" tabindex="0">
       <output id="research-globe-year-label">2026</output>
       <input id="research-globe-year" type="hidden" min="2017" max="2026" value="2026">
       <div class="research-globe__year-wheel" role="listbox" aria-label="Filter map through year">
@@ -113,35 +109,59 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     </div>
   </div>
   <div class="research-globe__sites research-globe__sites--right" id="research-globe-right">
-    <article data-location="guatemala" data-country="Guatemala" data-region="Latin America" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="14.63" data-lon="-90.51">
+    <article data-location="guatemala" data-country="Guatemala" data-region="Latin America" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="14.63" data-lon="-90.51" data-cities="Guatemala City|14.63|-90.51">
       <span>Guatemala</span>
       <em>Latin America</em>
       <strong>HAPIN infant health analyses.</strong>
       <p>Household air pollution, biomass cooking exposure, LPG intervention, and severe pneumonia outcomes.</p>
+      <ul class="research-globe__article-list">
+        <li>HAPIN infant health and severe pneumonia analyses.</li>
+      </ul>
+      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
-    <article data-location="nepal" data-country="Nepal" data-region="Asia" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="27.72" data-lon="85.32">
+    <article data-location="nepal" data-country="Nepal" data-region="Asia" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="27.72" data-lon="85.32" data-cities="Kathmandu|27.72|85.32">
       <span>Nepal</span>
       <em>Asia</em>
       <strong>GECo and ambient PM2.5 projects.</strong>
       <p>COPD screening, chronic bronchitis, spirometry workflows, sensor calibration, and exposure mapping.</p>
+      <ul class="research-globe__article-list">
+        <li>GECo COPD screening with SGRQ.</li>
+        <li>Chronic bronchitis risk and outcomes.</li>
+        <li>Ambient PM2.5 monitoring and calibration.</li>
+      </ul>
+      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
-    <article data-location="uganda" data-country="Uganda" data-region="Africa" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="0.35" data-lon="32.58">
+    <article data-location="uganda" data-country="Uganda" data-region="Africa" data-modules="project publication" data-count="3" data-start="2025" data-end="2026" data-lat="0.35" data-lon="32.58" data-cities="Kampala|0.35|32.58">
       <span>Uganda</span>
       <em>Africa</em>
       <strong>GECo chronic bronchitis outcomes.</strong>
       <p>Chronic bronchitis burden, risk factors, respiratory symptoms, quality of life, and clinical outcomes.</p>
+      <ul class="research-globe__article-list">
+        <li>Chronic bronchitis risk and clinical outcomes.</li>
+        <li>GECo COPD screening with SGRQ.</li>
+        <li>Respiratory symptoms and quality of life.</li>
+      </ul>
+      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
-    <article data-location="india" data-country="India" data-region="Asia" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="20.59" data-lon="78.96">
+    <article data-location="india" data-country="India" data-region="Asia" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="20.59" data-lon="78.96" data-cities="India HAPIN site|20.59|78.96">
       <span>India</span>
       <em>Asia</em>
       <strong>HAPIN household energy intervention.</strong>
       <p>Biomass cooking exposure, LPG intervention, infant health, and multi-country child health evidence.</p>
+      <ul class="research-globe__article-list">
+        <li>HAPIN infant health and severe pneumonia analyses.</li>
+      </ul>
+      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
-    <article data-location="rwanda" data-country="Rwanda" data-region="Africa" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="-1.94" data-lon="30.06">
+    <article data-location="rwanda" data-country="Rwanda" data-region="Africa" data-modules="project publication" data-count="1" data-start="2025" data-end="2025" data-lat="-1.94" data-lon="30.06" data-cities="Rwanda HAPIN site|-1.94|30.06">
       <span>Rwanda</span>
       <em>Africa</em>
       <strong>HAPIN child health evidence.</strong>
       <p>Multi-country household air pollution analyses and severe pneumonia outcomes in infants.</p>
+      <ul class="research-globe__article-list">
+        <li>HAPIN infant health and severe pneumonia analyses.</li>
+      </ul>
+      <a class="research-globe__pub-link" href="#publications">Open Publications</a>
     </article>
   </div>
 </div>

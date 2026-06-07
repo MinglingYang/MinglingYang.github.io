@@ -13,7 +13,6 @@
   var zoomInput = document.getElementById("research-globe-zoom");
   var zoomIn = document.getElementById("research-globe-zoom-in");
   var zoomOut = document.getElementById("research-globe-zoom-out");
-  var sortInput = document.getElementById("research-globe-sort");
   var yearInput = document.getElementById("research-globe-year");
   var yearLabel = document.getElementById("research-globe-year-label");
   var yearPanel = document.querySelector(".research-globe__time-panel");
@@ -36,6 +35,19 @@
     { name: "Arctic Ocean", lat: 74, lon: 10 }
   ];
 
+  function parseCities(value) {
+    return String(value || "").split(";").map(function (entry) {
+      var parts = entry.split("|");
+      return {
+        name: parts[0] || "",
+        lat: Number(parts[1]),
+        lon: Number(parts[2])
+      };
+    }).filter(function (city) {
+      return city.name && !Number.isNaN(city.lat) && !Number.isNaN(city.lon);
+    });
+  }
+
   var sites = cardNodes.map(function (card, index) {
     return {
       id: card.getAttribute("data-location"),
@@ -49,6 +61,7 @@
       name: card.querySelector("span") ? card.querySelector("span").textContent : "",
       lat: Number(card.getAttribute("data-lat")),
       lon: Number(card.getAttribute("data-lon")),
+      cities: parseCities(card.getAttribute("data-cities")),
       card: card,
       index: index
     };
@@ -60,12 +73,11 @@
   }, {});
 
   var focusTargets = {
-    education: { rotation: 98, tilt: 37, zoom: 1.38, activeId: "education-south-carolina" }
+    education: { rotation: 98, tilt: 37, zoom: 1.34, activeId: "education-south-carolina" }
   };
 
   var state = {
     module: "all",
-    sort: sortInput ? sortInput.value : "region",
     year: yearInput ? Number(yearInput.value) : 2026
   };
   var rotation = rotationInput ? Number(rotationInput.value) : -25;
@@ -76,6 +88,7 @@
   var markerPositions = {};
   var isDragging = false;
   var dragStart = null;
+  var autoSpin = true;
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function resize() {
@@ -157,6 +170,11 @@
       button.classList.toggle("is-near", distance > 0 && distance <= 1);
       button.setAttribute("aria-selected", distance === 0 ? "true" : "false");
     });
+    if (globe) {
+      globe.classList.toggle("is-education-mode", state.module === "education");
+      globe.classList.toggle("is-project-mode", state.module === "project");
+      globe.classList.toggle("is-publication-mode", state.module === "publication");
+    }
   }
 
   function siteIsVisible(site) {
@@ -170,21 +188,18 @@
       if (state.module === "education") {
         if (a.order !== b.order) return a.order - b.order;
       }
-      if (state.sort === "count") {
+      if (state.module === "publication") {
         if (b.count !== a.count) return b.count - a.count;
-      } else if (state.sort === "recent") {
-        if (b.end !== a.end) return b.end - a.end;
-      } else if (state.sort === "country") {
-        return a.country.localeCompare(b.country) || a.name.localeCompare(b.name);
-      } else {
-        var regionDiff = (regionOrder[a.region] || 99) - (regionOrder[b.region] || 99);
-        if (regionDiff) return regionDiff;
       }
+      var regionDiff = (regionOrder[a.region] || 99) - (regionOrder[b.region] || 99);
+      if (regionDiff) return regionDiff;
+      if (b.end !== a.end) return b.end - a.end;
       return a.name.localeCompare(b.name);
     });
   }
 
-  function applyFilters() {
+  function applyFilters(options) {
+    options = options || {};
     visibleSites = sortSites(sites.filter(siteIsVisible));
     if (!visibleSites.some(function (site) { return site.id === activeId; }) && visibleSites.length) {
       activeId = visibleSites[0].id;
@@ -192,6 +207,7 @@
     renderCards();
     updateCards();
     syncInputs();
+    if (options.focusActive) focusActiveSite(options.zoom);
   }
 
   function renderCards() {
@@ -476,6 +492,46 @@
     });
   }
 
+  function drawArticleCities(width, height, radius, time) {
+    if (state.module !== "publication") return;
+    var site = visibleSites.filter(function (item) { return item.id === activeId; })[0];
+    if (!site || !site.cities.length) return;
+    var origin = markerPositions[site.id];
+    ctx.save();
+    site.cities.forEach(function (city, index) {
+      var p = project(city.lat, city.lon, width, height, radius);
+      if (!p.visible) return;
+      var pulse = 3 + Math.sin((time || 0) / 240 + index) * 1.4;
+      if (origin) {
+        ctx.strokeStyle = "rgba(255, 209, 102, .55)";
+        ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.moveTo(origin.x, origin.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      }
+      ctx.fillStyle = "rgba(255, 209, 102, .16)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 10 + pulse, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#ffd166";
+      ctx.strokeStyle = "#07172a";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4.6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.font = "800 10px Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
+      ctx.fillStyle = "#fff7d6";
+      ctx.shadowColor = "rgba(255, 209, 102, .55)";
+      ctx.shadowBlur = 10;
+      ctx.fillText(city.name, p.x, p.y - 11);
+    });
+    ctx.restore();
+  }
+
   function updateCards() {
     sites.forEach(function (site) {
       site.card.classList.toggle("is-active", site.id === activeId);
@@ -512,18 +568,37 @@
     activeId = id;
     var site = sites.filter(function (item) { return item.id === id; })[0];
     if (site) {
-      var desired = normalizeRotation(-site.lon);
-      var delta = normalizeRotation(desired - rotation);
-      if (Math.abs(delta) > 78) rotation += delta * .35;
+      focusSite(site);
       renderCards();
       updateCards();
       syncInputs();
     }
   }
 
+  function focusZoomForSite(site) {
+    if (state.module === "publication") return site.count >= 3 ? 1.4 : 1.34;
+    if (state.module === "education") return 1.34;
+    return site.count >= 3 ? 1.32 : 1.26;
+  }
+
+  function focusSite(site, targetZoom) {
+    if (!site) return;
+    autoSpin = false;
+    rotation = normalizeRotation(-site.lon);
+    tilt = clamp(site.lat, -46, 56);
+    zoom = clamp(targetZoom || focusZoomForSite(site), .82, 1.72);
+    syncInputs();
+  }
+
+  function focusActiveSite(targetZoom) {
+    var site = visibleSites.filter(function (item) { return item.id === activeId; })[0];
+    if (site) focusSite(site, targetZoom);
+  }
+
   function focusModule(moduleName) {
     var target = focusTargets[moduleName];
     if (!target) return;
+    autoSpin = false;
     rotation = target.rotation;
     tilt = target.tilt;
     zoom = target.zoom;
@@ -537,7 +612,7 @@
       var dx = marker.x - x;
       var dy = marker.y - y;
       var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 26 && (!best || dist < best.dist)) best = { id: id, dist: dist };
+      if (dist < 34 && (!best || dist < best.dist)) best = { id: id, dist: dist };
     });
     return best && best.id;
   }
@@ -545,9 +620,9 @@
   function render(time) {
     var width = canvas.clientWidth;
     var height = canvas.clientHeight;
-    var radius = Math.min(width, height) * .35 * zoom;
+    var radius = Math.min(width, height) * .36 * zoom;
     ctx.clearRect(0, 0, width, height);
-    if (!reduceMotion && !isDragging) rotation += .018;
+    if (!reduceMotion && !isDragging && autoSpin) rotation += .018;
     drawOrbits(width, height, radius);
     drawSphere(width, height, radius);
     drawLand(width, height, radius);
@@ -555,6 +630,7 @@
     drawOceanLabels(width, height, radius);
     drawEducationPath(width, height, radius);
     drawSites(width, height, radius, time || 0);
+    drawArticleCities(width, height, radius, time || 0);
     updateConnectors();
     window.requestAnimationFrame(render);
   }
@@ -579,38 +655,40 @@
       moduleButtons.forEach(function (item) {
         item.classList.toggle("is-active", item === button);
       });
-      applyFilters();
+      applyFilters({
+        focusActive: state.module !== "all" && state.module !== "education",
+        zoom: state.module === "publication" ? 1.4 : 1.3
+      });
     });
   });
 
-  if (sortInput) {
-    sortInput.addEventListener("change", function () {
-      state.sort = sortInput.value;
-      applyFilters();
-    });
-  }
-
   if (yearInput) {
     yearInput.addEventListener("input", function () {
+      autoSpin = false;
       state.year = Number(yearInput.value);
-      applyFilters();
+      applyFilters({ focusActive: true });
     });
   }
 
-  function setYear(value) {
+  function setYear(value, shouldFocus) {
     if (!yearInput) return;
     var nextYear = clamp(Number(value), Number(yearInput.getAttribute("min")), Number(yearInput.getAttribute("max")));
+    if (shouldFocus) autoSpin = false;
     if (nextYear === state.year) {
       syncInputs();
+      if (shouldFocus) focusActiveSite(state.module === "publication" ? 1.4 : 1.3);
       return;
     }
     state.year = nextYear;
-    applyFilters();
+    applyFilters({
+      focusActive: Boolean(shouldFocus),
+      zoom: state.module === "publication" ? 1.4 : 1.3
+    });
   }
 
   yearButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      setYear(button.getAttribute("data-globe-year"));
+      setYear(button.getAttribute("data-globe-year"), true);
     });
   });
 
@@ -618,30 +696,32 @@
     yearPanel.addEventListener("wheel", function (event) {
       event.preventDefault();
       var step = event.deltaY > 0 ? -1 : 1;
-      setYear(state.year + step);
+      setYear(state.year + step, true);
     }, { passive: false });
 
     yearPanel.addEventListener("keydown", function (event) {
       if (event.key === "ArrowRight" || event.key === "ArrowUp") {
         event.preventDefault();
-        setYear(state.year + 1);
+        setYear(state.year + 1, true);
       }
       if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
         event.preventDefault();
-        setYear(state.year - 1);
+        setYear(state.year - 1, true);
       }
     });
   }
 
   if (zoomInput) {
     zoomInput.addEventListener("input", function () {
+      autoSpin = false;
       zoom = Number(zoomInput.value) / 100;
       syncInputs();
     });
   }
 
   function changeZoom(delta) {
-    zoom = clamp(zoom + delta, .82, 1.45);
+    autoSpin = false;
+    zoom = clamp(zoom + delta, .82, 1.72);
     syncInputs();
   }
 
@@ -649,6 +729,7 @@
   if (zoomOut) zoomOut.addEventListener("click", function () { changeZoom(-.08); });
 
   canvas.addEventListener("pointerdown", function (event) {
+    autoSpin = false;
     isDragging = true;
     dragStart = { x: event.clientX, y: event.clientY, rotation: rotation, tilt: tilt };
     canvas.classList.add("is-dragging");
