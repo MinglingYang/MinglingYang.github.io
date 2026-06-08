@@ -5,6 +5,7 @@
 
   var transitionTimer = null;
   var touchStartY = null;
+  var isTransitioning = false;
 
   function afterTop() {
     return window.pageYOffset + after.getBoundingClientRect().top;
@@ -20,11 +21,13 @@
 
   function moveTo(targetTop) {
     window.clearTimeout(transitionTimer);
+    isTransitioning = true;
     document.body.classList.add("is-home-panel-transition");
     window.scrollTo({ top: Math.max(0, Math.round(targetTop)), behavior: "smooth" });
     transitionTimer = window.setTimeout(function () {
+      isTransitioning = false;
       document.body.classList.remove("is-home-panel-transition");
-    }, 850);
+    }, 760);
   }
 
   function goToLanding() {
@@ -37,6 +40,10 @@
 
   window.addEventListener("wheel", function (event) {
     if (Math.abs(event.deltaY) < 18 || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+    if (isTransitioning) {
+      event.preventDefault();
+      return;
+    }
     if (event.deltaY > 0 && isNearLanding()) {
       event.preventDefault();
       goToAfter();
@@ -49,6 +56,10 @@
   window.addEventListener("keydown", function (event) {
     var downKeys = ["ArrowDown", "PageDown", " "];
     var upKeys = ["ArrowUp", "PageUp"];
+    if (isTransitioning && (downKeys.indexOf(event.key) !== -1 || upKeys.indexOf(event.key) !== -1)) {
+      event.preventDefault();
+      return;
+    }
     if (downKeys.indexOf(event.key) !== -1 && isNearLanding()) {
       event.preventDefault();
       goToAfter();
@@ -68,6 +79,7 @@
     var delta = touchStartY - event.changedTouches[0].clientY;
     touchStartY = null;
     if (Math.abs(delta) < 42) return;
+    if (isTransitioning) return;
     if (delta > 0 && isNearLanding()) {
       goToAfter();
     } else if (delta < 0 && isNearAfterTop()) {

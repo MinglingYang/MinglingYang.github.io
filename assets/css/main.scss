@@ -971,7 +971,6 @@ h1:before, .anchor:before {
 body.home-page {
     background: linear-gradient(180deg, #ffffff 0%, #f5f8fb 42%, #eef3f7 100%);
     color: #1f2f3f;
-    scroll-snap-type: y proximity;
 }
 
 body.home-page #main {
@@ -1005,7 +1004,6 @@ body.home-page .page__content {
     margin: 0;
     padding: 0 clamp(1.2rem, 4vw, 3.4rem) clamp(1.8rem, 3vw, 2.8rem);
     scroll-margin-top: 5rem;
-    scroll-snap-align: start;
 }
 
 .page__content .home-landing#about-me {
@@ -1039,18 +1037,16 @@ body.home-page.is-home-panel-transition .home-after-landing {
 }
 
 body.home-page.is-home-panel-transition .home-after-landing {
-    animation: home-panel-slide-in .62s cubic-bezier(.22, .8, .24, 1) both;
+    animation: home-panel-fade-in .46s ease both;
 }
 
-@keyframes home-panel-slide-in {
+@keyframes home-panel-fade-in {
     0% {
-        opacity: .72;
-        transform: translateY(2.2rem);
+        opacity: .82;
     }
 
     100% {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -1140,7 +1136,6 @@ body.home-page.is-home-panel-transition .home-after-landing {
     background: linear-gradient(180deg, rgba(255, 255, 255, .99), rgba(242, 248, 252, .95));
     box-shadow: 0 -28px 60px rgba(54, 84, 112, .11);
     scroll-margin-top: 0;
-    scroll-snap-align: start;
 
     &::before {
         content: "";
