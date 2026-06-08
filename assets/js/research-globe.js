@@ -92,6 +92,29 @@
   var lastFrameTime = 0;
   var spinPausedUntil = 0;
   var timeWheelArmed = false;
+
+  function versionedAssetUrl(url) {
+    var version = window.MINGLING_ASSET_VERSION;
+    if (!version) return url;
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(version);
+  }
+
+  function createImageAsset(src) {
+    var asset = {
+      image: new Image(),
+      ready: false,
+      width: 0,
+      height: 0
+    };
+    asset.image.onload = function () {
+      asset.width = asset.image.naturalWidth || asset.image.width;
+      asset.height = asset.image.naturalHeight || asset.image.height;
+      asset.ready = true;
+    };
+    asset.image.src = src;
+    return asset;
+  }
+
   function createRasterTexture(src) {
     var texture = {
       canvas: null,
@@ -116,37 +139,12 @@
     return texture;
   }
 
-  var earthTexture = createRasterTexture("/assets/images/earth-blue-marble-topography.jpg");
-  var populationTexture = createRasterTexture("/assets/images/earth-night-lights-population.jpg");
+  var earthTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-blue-marble-topography.jpg"));
+  var populationTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-night-lights-population.jpg"));
+  var spaceBackdrop = createImageAsset(versionedAssetUrl("/assets/images/space-deep-field.jpg"));
   var textureFrameCanvas = document.createElement("canvas");
   var textureFrameCtx = textureFrameCanvas.getContext("2d");
   var textureFrameSignature = "";
-  var starField = [];
-
-  function seededStarValue(seed) {
-    var value = Math.sin(seed * 12.9898) * 43758.5453;
-    return value - Math.floor(value);
-  }
-
-  function buildStarField(width, height) {
-    var count = Math.max(90, Math.round(width * height / 3600));
-    var stars = [];
-    for (var index = 0; index < count; index += 1) {
-      var x = seededStarValue(index + 11);
-      var y = seededStarValue(index + 37);
-      var size = .55 + seededStarValue(index + 73) * 1.45;
-      var alpha = .18 + seededStarValue(index + 109) * .66;
-      var hue = seededStarValue(index + 151);
-      stars.push({
-        x: x,
-        y: y,
-        size: size,
-        alpha: alpha,
-        tint: hue > .82 ? "255, 246, 210" : hue > .58 ? "166, 237, 255" : "223, 243, 255"
-      });
-    }
-    starField = stars;
-  }
 
   function resize() {
     var rect = stage.getBoundingClientRect();
@@ -158,7 +156,6 @@
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    buildStarField(width, height);
     updateConnectorBox();
   }
 
@@ -382,40 +379,32 @@
   }
 
   function drawStarfield(width, height, radius) {
-    var centerX = width / 2;
-    var centerY = height / 2;
     ctx.save();
     ctx.fillStyle = "#020712";
     ctx.fillRect(0, 0, width, height);
-    starField.forEach(function (star) {
-      var x = star.x * width;
-      var y = star.y * height;
-      var dx = x - centerX;
-      var dy = y - centerY;
-      var distance = Math.sqrt(dx * dx + dy * dy);
-      var blockedByGlobe = distance < radius * 1.06;
-      var alpha = blockedByGlobe ? star.alpha * .08 : star.alpha;
-      if (alpha < .08) return;
-      ctx.fillStyle = "rgba(" + star.tint + ", " + alpha.toFixed(3) + ")";
-      ctx.beginPath();
-      ctx.arc(x, y, star.size, 0, Math.PI * 2);
-      ctx.fill();
-      if (star.size > 1.3 && !blockedByGlobe) {
-        ctx.strokeStyle = "rgba(115, 220, 255, " + (alpha * .26).toFixed(3) + ")";
-        ctx.lineWidth = .6;
-        ctx.beginPath();
-        ctx.moveTo(x - star.size * 2.8, y);
-        ctx.lineTo(x + star.size * 2.8, y);
-        ctx.moveTo(x, y - star.size * 2.8);
-        ctx.lineTo(x, y + star.size * 2.8);
-        ctx.stroke();
-      }
-    });
+    if (spaceBackdrop.ready) {
+      var scale = Math.max(width / spaceBackdrop.width, height / spaceBackdrop.height);
+      var drawWidth = spaceBackdrop.width * scale;
+      var drawHeight = spaceBackdrop.height * scale;
+      var drawX = (width - drawWidth) / 2;
+      var drawY = (height - drawHeight) / 2;
+      ctx.globalAlpha = .78;
+      ctx.drawImage(spaceBackdrop.image, drawX, drawY, drawWidth, drawHeight);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = "rgba(1, 7, 18, .36)";
+      ctx.fillRect(0, 0, width, height);
+    }
     var nebula = ctx.createRadialGradient(width * .78, height * .18, 0, width * .78, height * .18, Math.max(width, height) * .62);
-    nebula.addColorStop(0, "rgba(0, 213, 255, .13)");
-    nebula.addColorStop(.42, "rgba(43, 101, 255, .055)");
+    nebula.addColorStop(0, "rgba(0, 213, 255, .1)");
+    nebula.addColorStop(.42, "rgba(43, 101, 255, .045)");
     nebula.addColorStop(1, "rgba(2, 7, 18, 0)");
     ctx.fillStyle = nebula;
+    ctx.fillRect(0, 0, width, height);
+    var vignette = ctx.createRadialGradient(width / 2, height / 2, radius * .58, width / 2, height / 2, Math.max(width, height) * .68);
+    vignette.addColorStop(0, "rgba(0, 0, 0, 0)");
+    vignette.addColorStop(.7, "rgba(0, 4, 16, .14)");
+    vignette.addColorStop(1, "rgba(0, 4, 16, .5)");
+    ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, width, height);
     ctx.restore();
   }
