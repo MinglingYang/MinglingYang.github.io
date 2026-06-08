@@ -25,8 +25,10 @@ redirect_from:
       <p>Environmental Health Track, Keck School of Medicine</p>
       <div class="home-landing__links">
         <a href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">CV</a>
-        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">Google Scholar</a>
         <a href="mailto:mingling493790100@gmail.com">Email</a>
+        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview">ResearchGate</a>
+        <a href="https://github.com/MinglingYang">GitHub</a>
+        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">Google Scholar</a>
       </div>
     </div>
   </div>
