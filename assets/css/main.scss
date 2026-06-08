@@ -825,14 +825,23 @@ h1:before, .anchor:before {
 }
 
 .pub-card__authors,
+.pub-card__summary,
 .pub-card__focus {
     margin-bottom: .55rem;
     color: #45576a;
     font-size: .9em;
 }
 
+.pub-card__authors {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pub-card__summary,
 .pub-card__focus {
     color: #25384b;
+    line-height: 1.55;
 }
 
 .pub-card__tags {

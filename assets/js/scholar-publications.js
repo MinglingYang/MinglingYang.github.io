@@ -135,8 +135,9 @@
     var citationHtml = citation !== null
       ? "<span class=\"pub-card__metric\">" + citation + " citations</span>"
       : "";
-    var focusHtml = pub.focus
-      ? "    <p class=\"pub-card__focus\">" + escapeHtml(pub.focus) + "</p>"
+    var summary = pub.summary || pub.focus;
+    var focusHtml = summary
+      ? "    <p class=\"pub-card__summary\">" + escapeHtml(summary) + "</p>"
       : "";
     var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\">" : "";
     var linkClose = url ? "</a>" : "";

@@ -80,6 +80,8 @@
   };
   var rotation = rotationInput ? Number(rotationInput.value) : -25;
   var tilt = tiltInput ? Number(tiltInput.value) : 8;
+  var renderRotation = rotation;
+  var renderTilt = tilt;
   var zoom = zoomInput ? Number(zoomInput.value) / 100 : 1;
   var activeId = "peru";
   var visibleSites = [];
@@ -338,9 +340,9 @@
   }
 
   function project(lat, lon, width, height, radius) {
-    var centerLat = tilt * Math.PI / 180;
+    var centerLat = renderTilt * Math.PI / 180;
     var phi = lat * Math.PI / 180;
-    var lambda = (lon + rotation) * Math.PI / 180;
+    var lambda = (lon + renderRotation) * Math.PI / 180;
     var sinPhi = Math.sin(phi);
     var cosPhi = Math.cos(phi);
     var cosLambda = Math.cos(lambda);
@@ -395,16 +397,16 @@
 
   function drawEarthTexture(width, height, radius) {
     if (!earthTexture.ready || !earthTexture.data || !textureFrameCtx) return;
-    var renderScale = Math.min(1, 340 / Math.max(width, 1));
-    var renderWidth = Math.max(260, Math.round(width * renderScale));
-    var renderHeight = Math.max(260, Math.round(height * renderScale));
+    var renderScale = Math.min(1, 620 / Math.max(width, 1));
+    var renderWidth = Math.max(360, Math.round(width * renderScale));
+    var renderHeight = Math.max(300, Math.round(height * renderScale));
     var renderRadius = radius * renderWidth / width;
     var signature = [
       renderWidth,
       renderHeight,
       Math.round(renderRadius),
-      Math.round(rotation),
-      Math.round(tilt)
+      renderRotation.toFixed(1),
+      renderTilt.toFixed(1)
     ].join(":");
     if (textureFrameCanvas.width && textureFrameSignature === signature) {
       ctx.drawImage(textureFrameCanvas, 0, 0, width, height);
@@ -422,7 +424,7 @@
     var maxX = Math.min(renderWidth - 1, Math.ceil(centerX + renderRadius));
     var minY = Math.max(0, Math.floor(centerY - renderRadius));
     var maxY = Math.min(renderHeight - 1, Math.ceil(centerY + renderRadius));
-    var tiltRadians = tilt * Math.PI / 180;
+    var tiltRadians = renderTilt * Math.PI / 180;
     var sinTilt = Math.sin(tiltRadians);
     var cosTilt = Math.cos(tiltRadians);
     for (var y = minY; y <= maxY; y += 1) {
@@ -435,14 +437,14 @@
         var sinPhi = clamp(cosTilt * normalizedY + sinTilt * z, -1, 1);
         var cosPhiCosLambda = -sinTilt * normalizedY + cosTilt * z;
         var latitude = Math.asin(sinPhi) * 180 / Math.PI;
-        var longitude = normalizeRotation(Math.atan2(normalizedX, cosPhiCosLambda) * 180 / Math.PI - rotation);
+        var longitude = normalizeRotation(Math.atan2(normalizedX, cosPhiCosLambda) * 180 / Math.PI - renderRotation);
         var earthSample = sampleTexture(earthTexture, longitude, latitude);
         if (!earthSample) continue;
         var populationSample = sampleTexture(populationTexture, longitude, latitude);
         var populationSignal = 0;
         if (populationSample) {
-          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .88 + populationSample[2] * .18 - 14) / 190, 0, 1);
-          populationSignal = Math.pow(populationSignal, 1.18);
+          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .85 + populationSample[2] * .18 - 22) / 210, 0, 1);
+          populationSignal = Math.pow(populationSignal, 1.28);
         }
         var targetIndex = (y * renderWidth + x) * 4;
         var depth = .52 + z * .48;
@@ -450,10 +452,10 @@
         var baseRed = earthSample[0] * .48 * depth + 6;
         var baseGreen = earthSample[1] * .62 * depth + 12;
         var baseBlue = earthSample[2] * .82 * depth + 26 + haze * 38;
-        var glowStrength = populationSignal * (.24 + z * .56);
-        output[targetIndex] = clamp(baseRed + glowStrength * 142, 0, 255);
-        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 148, 0, 255);
-        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 34, 0, 255);
+        var glowStrength = populationSignal * (.2 + z * .42);
+        output[targetIndex] = clamp(baseRed + glowStrength * 108, 0, 255);
+        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 112, 0, 255);
+        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 26, 0, 255);
         output[targetIndex + 3] = 232;
       }
     }
@@ -766,6 +768,8 @@
     if (autoSpin && !isDragging && now > spinPausedUntil) {
       rotation = normalizeRotation(rotation + delta * .0006);
     }
+    renderRotation = normalizeRotation(Math.round(rotation * 10) / 10);
+    renderTilt = Math.round(tilt * 10) / 10;
     ctx.clearRect(0, 0, width, height);
     drawSphere(width, height, radius);
     drawEarthTexture(width, height, radius);
