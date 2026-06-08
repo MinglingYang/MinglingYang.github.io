@@ -753,6 +753,56 @@ h1:before, .anchor:before {
     margin-top: 1.1rem;
 }
 
+.publication-filter {
+    display: flex;
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .1rem;
+}
+
+.publication-filter__chip {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    gap: .28rem;
+    padding: .38rem .78rem;
+    border: 1px solid rgba(142, 163, 187, .34);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f7fafc, #edf3f8);
+    color: #334b62;
+    font-size: .78em;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
+
+    span {
+        color: #6a7b8c;
+        font-weight: 700;
+    }
+
+    &:hover,
+    &.is-active {
+        border-color: rgba(213, 164, 56, .56);
+        background: linear-gradient(135deg, #eaf6fc, #fff7e7);
+        color: #173c63;
+        box-shadow: 0 8px 18px rgba(47, 125, 183, .14);
+    }
+}
+
+.publication-filter__empty {
+    grid-column: 1 / -1;
+    margin: .5rem 0 0;
+    padding: 1rem;
+    border: 1px dashed rgba(142, 163, 187, .5);
+    border-radius: 8px;
+    background: rgba(248, 251, 253, .82);
+    color: #536577;
+    text-align: center;
+}
+
 .pub-card {
     display: grid;
     grid-template-columns: minmax(230px, 40%) 1fr;
@@ -768,6 +818,10 @@ h1:before, .anchor:before {
     @include breakpoint(max-width $medium) {
         grid-template-columns: 1fr;
     }
+}
+
+.pub-card.is-hidden-by-filter {
+    display: none;
 }
 
 .pub-card__image-wrap {
@@ -854,12 +908,24 @@ h1:before, .anchor:before {
     flex-wrap: wrap;
     gap: .35rem;
 
-    span {
+    .pub-card__tag {
         padding: .24rem .5rem;
+        border: 1px solid transparent;
         border-radius: 6px;
         background: #f4f7fa;
         color: #526476;
         font-size: .72em;
+        font-weight: 700;
+        line-height: 1.2;
+        cursor: pointer;
+    }
+
+    .pub-card__tag:hover,
+    .pub-card__tag.is-selected {
+        border-color: rgba(47, 125, 183, .38);
+        background: linear-gradient(135deg, #e7f5fb, #fff8e8);
+        color: #173c63;
+        box-shadow: 0 4px 10px rgba(47, 125, 183, .1);
     }
 }
 

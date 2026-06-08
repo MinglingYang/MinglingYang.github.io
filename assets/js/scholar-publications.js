@@ -131,9 +131,17 @@
   }
 
   function renderTags(tags) {
-    return (tags || []).slice(0, 4).map(function (tag) {
-      return "<span>" + escapeHtml(tag) + "</span>";
+    return (tags || []).map(function (tag) {
+      return "<button type=\"button\" class=\"pub-card__tag\" data-publication-tag=\"" + escapeHtml(tagKey(tag)) + "\">" + escapeHtml(tag) + "</button>";
     }).join("");
+  }
+
+  function tagKey(value) {
+    return slugify(value);
+  }
+
+  function publicationTagKeys(pub) {
+    return (pub.tags || []).map(tagKey).filter(Boolean);
   }
 
   function renderAuthors(authors) {
@@ -155,7 +163,7 @@
     var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\">" : "";
     var linkClose = url ? "</a>" : "";
     return [
-      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\">",
+      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\">",
       "  <div class=\"pub-card__image-wrap\">",
       "    <img class=\"pub-card__image\" src=\"" + escapeHtml(versionedAssetUrl(pub.image || "images/publications/scholar-update.svg")) + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
       "  </div>",
@@ -209,10 +217,94 @@
     target.innerHTML = updated + "<ul>" + pinned.concat(scholarNews).join("") + "</ul>";
   }
 
+  function countPublicationTags(publications) {
+    var byKey = {};
+    publications.forEach(function (pub) {
+      (pub.tags || []).forEach(function (tag) {
+        var key = tagKey(tag);
+        if (!key) return;
+        if (!byKey[key]) byKey[key] = { key: key, label: tag, count: 0 };
+        byKey[key].count += 1;
+      });
+    });
+    return Object.keys(byKey).map(function (key) {
+      return byKey[key];
+    }).sort(function (a, b) {
+      if (b.count !== a.count) return b.count - a.count;
+      return a.label.localeCompare(b.label);
+    });
+  }
+
+  function renderPublicationFilters(publications) {
+    var tags = countPublicationTags(publications);
+    if (!tags.length) return "";
+    return [
+      "<div class=\"publication-filter\" id=\"publication-filter\" aria-label=\"Publication tag filters\">",
+      "  <button type=\"button\" class=\"publication-filter__chip is-active\" data-publication-filter=\"__all\">All (" + publications.length + ")</button>",
+      tags.map(function (tag) {
+        return "  <button type=\"button\" class=\"publication-filter__chip\" data-publication-filter=\"" + escapeHtml(tag.key) + "\">" + escapeHtml(tag.label) + " <span>" + tag.count + "</span></button>";
+      }).join(""),
+      "</div>"
+    ].join("");
+  }
+
+  function applyPublicationFilters(container, activeTags) {
+    var cards = Array.prototype.slice.call(container.querySelectorAll(".pub-card"));
+    var activeKeys = Object.keys(activeTags).filter(function (key) { return activeTags[key]; });
+    var hasFilters = activeKeys.length > 0;
+    var visibleCount = 0;
+
+    cards.forEach(function (card) {
+      var cardTags = String(card.getAttribute("data-publication-tags") || "").split("|").filter(Boolean);
+      var show = !hasFilters || activeKeys.some(function (key) {
+        return cardTags.indexOf(key) !== -1;
+      });
+      card.classList.toggle("is-hidden-by-filter", !show);
+      if (show) visibleCount += 1;
+      Array.prototype.slice.call(card.querySelectorAll("[data-publication-tag]")).forEach(function (tagButton) {
+        var key = tagButton.getAttribute("data-publication-tag");
+        tagButton.classList.toggle("is-selected", !!activeTags[key]);
+      });
+    });
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-publication-filter]")).forEach(function (button) {
+      var key = button.getAttribute("data-publication-filter");
+      button.classList.toggle("is-active", key === "__all" ? !hasFilters : !!activeTags[key]);
+    });
+
+    var empty = document.getElementById("publication-filter-empty");
+    if (empty) empty.hidden = visibleCount !== 0;
+  }
+
+  function bindPublicationFilters(target) {
+    var activeTags = {};
+    target.addEventListener("click", function (event) {
+      var trigger = event.target.closest("[data-publication-filter], [data-publication-tag]");
+      if (!trigger) return;
+      var filterKey = trigger.getAttribute("data-publication-filter");
+      var tagKeyValue = trigger.getAttribute("data-publication-tag");
+      if (filterKey === "__all") {
+        activeTags = {};
+      } else {
+        var key = filterKey || tagKeyValue;
+        if (!key) return;
+        activeTags[key] = !activeTags[key];
+        if (!activeTags[key]) delete activeTags[key];
+      }
+      applyPublicationFilters(target, activeTags);
+    });
+    applyPublicationFilters(target, activeTags);
+  }
+
   function renderPublications(publications) {
     var target = document.getElementById("scholar-publications");
     if (!target) return;
-    target.innerHTML = publications.map(renderPublicationCard).join("");
+    target.innerHTML = [
+      renderPublicationFilters(publications),
+      publications.map(renderPublicationCard).join(""),
+      "<p class=\"publication-filter__empty\" id=\"publication-filter-empty\" hidden>No publications match the selected tags.</p>"
+    ].join("");
+    bindPublicationFilters(target);
     if (window.location.hash && document.getElementById(window.location.hash.slice(1))) {
       window.setTimeout(function () {
         scrollToHashTarget(window.location.hash);
