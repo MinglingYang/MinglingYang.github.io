@@ -92,13 +92,6 @@
   var lastFrameTime = 0;
   var spinPausedUntil = 0;
   var timeWheelArmed = false;
-
-  function versionedAssetUrl(url) {
-    var version = window.MINGLING_ASSET_VERSION;
-    if (!version) return url;
-    return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(version);
-  }
-
   function createRasterTexture(src) {
     var texture = {
       canvas: null,
@@ -123,11 +116,37 @@
     return texture;
   }
 
-  var earthTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-blue-marble-topography.jpg"));
-  var populationTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-night-lights-population.jpg"));
+  var earthTexture = createRasterTexture("/assets/images/earth-blue-marble-topography.jpg");
+  var populationTexture = createRasterTexture("/assets/images/earth-night-lights-population.jpg");
   var textureFrameCanvas = document.createElement("canvas");
   var textureFrameCtx = textureFrameCanvas.getContext("2d");
   var textureFrameSignature = "";
+  var starField = [];
+
+  function seededStarValue(seed) {
+    var value = Math.sin(seed * 12.9898) * 43758.5453;
+    return value - Math.floor(value);
+  }
+
+  function buildStarField(width, height) {
+    var count = Math.max(90, Math.round(width * height / 3600));
+    var stars = [];
+    for (var index = 0; index < count; index += 1) {
+      var x = seededStarValue(index + 11);
+      var y = seededStarValue(index + 37);
+      var size = .55 + seededStarValue(index + 73) * 1.45;
+      var alpha = .18 + seededStarValue(index + 109) * .66;
+      var hue = seededStarValue(index + 151);
+      stars.push({
+        x: x,
+        y: y,
+        size: size,
+        alpha: alpha,
+        tint: hue > .82 ? "255, 246, 210" : hue > .58 ? "166, 237, 255" : "223, 243, 255"
+      });
+    }
+    starField = stars;
+  }
 
   function resize() {
     var rect = stage.getBoundingClientRect();
@@ -139,6 +158,7 @@
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    buildStarField(width, height);
     updateConnectorBox();
   }
 
@@ -361,6 +381,45 @@
     };
   }
 
+  function drawStarfield(width, height, radius) {
+    var centerX = width / 2;
+    var centerY = height / 2;
+    ctx.save();
+    ctx.fillStyle = "#020712";
+    ctx.fillRect(0, 0, width, height);
+    starField.forEach(function (star) {
+      var x = star.x * width;
+      var y = star.y * height;
+      var dx = x - centerX;
+      var dy = y - centerY;
+      var distance = Math.sqrt(dx * dx + dy * dy);
+      var blockedByGlobe = distance < radius * 1.06;
+      var alpha = blockedByGlobe ? star.alpha * .08 : star.alpha;
+      if (alpha < .08) return;
+      ctx.fillStyle = "rgba(" + star.tint + ", " + alpha.toFixed(3) + ")";
+      ctx.beginPath();
+      ctx.arc(x, y, star.size, 0, Math.PI * 2);
+      ctx.fill();
+      if (star.size > 1.3 && !blockedByGlobe) {
+        ctx.strokeStyle = "rgba(115, 220, 255, " + (alpha * .26).toFixed(3) + ")";
+        ctx.lineWidth = .6;
+        ctx.beginPath();
+        ctx.moveTo(x - star.size * 2.8, y);
+        ctx.lineTo(x + star.size * 2.8, y);
+        ctx.moveTo(x, y - star.size * 2.8);
+        ctx.lineTo(x, y + star.size * 2.8);
+        ctx.stroke();
+      }
+    });
+    var nebula = ctx.createRadialGradient(width * .78, height * .18, 0, width * .78, height * .18, Math.max(width, height) * .62);
+    nebula.addColorStop(0, "rgba(0, 213, 255, .13)");
+    nebula.addColorStop(.42, "rgba(43, 101, 255, .055)");
+    nebula.addColorStop(1, "rgba(2, 7, 18, 0)");
+    ctx.fillStyle = nebula;
+    ctx.fillRect(0, 0, width, height);
+    ctx.restore();
+  }
+
   function drawSphere(width, height, radius) {
     var atmosphere = ctx.createRadialGradient(width / 2, height / 2, radius * .75, width / 2, height / 2, radius * 1.18);
     atmosphere.addColorStop(0, "rgba(0, 213, 255, 0)");
@@ -404,9 +463,9 @@
 
   function drawEarthTexture(width, height, radius) {
     if (!earthTexture.ready || !earthTexture.data || !textureFrameCtx) return;
-    var renderScale = Math.min(1.8, 1280 / Math.max(width, 1));
-    var renderWidth = Math.max(620, Math.round(width * renderScale));
-    var renderHeight = Math.max(460, Math.round(height * renderScale));
+    var renderScale = Math.min(1, 620 / Math.max(width, 1));
+    var renderWidth = Math.max(360, Math.round(width * renderScale));
+    var renderHeight = Math.max(300, Math.round(height * renderScale));
     var renderRadius = radius * renderWidth / width;
     var signature = [
       renderWidth,
@@ -450,22 +509,19 @@
         var populationSample = sampleTexture(populationTexture, longitude, latitude);
         var populationSignal = 0;
         if (populationSample) {
-          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .95 + populationSample[2] * .24 - 5) / 160, 0, 1);
-          populationSignal = Math.pow(populationSignal, .62);
+          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .85 + populationSample[2] * .18 - 22) / 210, 0, 1);
+          populationSignal = Math.pow(populationSignal, 1.28);
         }
         var targetIndex = (y * renderWidth + x) * 4;
         var depth = .52 + z * .48;
         var haze = (1 - z) * .22;
-        var nightRed = populationSample ? populationSample[0] : 0;
-        var nightGreen = populationSample ? populationSample[1] : 0;
-        var nightBlue = populationSample ? populationSample[2] : 0;
-        var baseRed = (nightRed * .72 + earthSample[0] * .16) * depth + 2;
-        var baseGreen = (nightGreen * .78 + earthSample[1] * .18) * depth + 6;
-        var baseBlue = (nightBlue * .94 + earthSample[2] * .26) * depth + 20 + haze * 22;
-        var glowStrength = populationSignal * (.44 + z * .88);
-        output[targetIndex] = clamp(baseRed + glowStrength * 224, 0, 255);
-        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 210, 0, 255);
-        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 70, 0, 255);
+        var baseRed = earthSample[0] * .48 * depth + 6;
+        var baseGreen = earthSample[1] * .62 * depth + 12;
+        var baseBlue = earthSample[2] * .82 * depth + 26 + haze * 38;
+        var glowStrength = populationSignal * (.2 + z * .42);
+        output[targetIndex] = clamp(baseRed + glowStrength * 108, 0, 255);
+        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 112, 0, 255);
+        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 26, 0, 255);
         output[targetIndex + 3] = 232;
       }
     }
@@ -781,6 +837,7 @@
     renderRotation = normalizeRotation(Math.round(rotation * 10) / 10);
     renderTilt = Math.round(tilt * 10) / 10;
     ctx.clearRect(0, 0, width, height);
+    drawStarfield(width, height, radius);
     drawSphere(width, height, radius);
     drawEarthTexture(width, height, radius);
     drawGlobeLighting(width, height, radius);

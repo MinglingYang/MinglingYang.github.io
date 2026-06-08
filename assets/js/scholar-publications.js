@@ -136,6 +136,10 @@
     }).join("");
   }
 
+  function renderAuthors(authors) {
+    return escapeHtml(authors || "").replace(/\b(Yang M|Mingling Yang)\b/g, "<strong class=\"pub-card__author-me\">$1</strong>");
+  }
+
   function renderPublicationCard(pub) {
     var url = publicationUrl(pub);
     var title = pub.short_title || pub.title;
@@ -162,7 +166,7 @@
       citationHtml,
       "    </div>",
       "    <h3>" + linkOpen + escapeHtml(title) + linkClose + "</h3>",
-      "    <p class=\"pub-card__authors\">" + escapeHtml(pub.authors || "") + "</p>",
+      "    <p class=\"pub-card__authors\">" + renderAuthors(pub.authors) + "</p>",
       focusHtml,
       "    <div class=\"pub-card__tags\">" + renderTags(pub.tags) + "</div>",
       "  </div>",
