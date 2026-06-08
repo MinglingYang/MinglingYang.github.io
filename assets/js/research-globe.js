@@ -99,22 +99,6 @@
     return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(version);
   }
 
-  function createImageAsset(src) {
-    var asset = {
-      image: new Image(),
-      ready: false,
-      width: 0,
-      height: 0
-    };
-    asset.image.onload = function () {
-      asset.width = asset.image.naturalWidth || asset.image.width;
-      asset.height = asset.image.naturalHeight || asset.image.height;
-      asset.ready = true;
-    };
-    asset.image.src = src;
-    return asset;
-  }
-
   function createRasterTexture(src) {
     var texture = {
       canvas: null,
@@ -141,7 +125,6 @@
 
   var earthTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-blue-marble-topography.jpg"));
   var populationTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-night-lights-population.jpg"));
-  var spaceBackdrop = createImageAsset(versionedAssetUrl("/assets/images/space-deep-field.jpg"));
   var textureFrameCanvas = document.createElement("canvas");
   var textureFrameCtx = textureFrameCanvas.getContext("2d");
   var textureFrameSignature = "";
@@ -380,20 +363,12 @@
 
   function drawStarfield(width, height, radius) {
     ctx.save();
-    ctx.fillStyle = "#020712";
+    var base = ctx.createLinearGradient(0, 0, width, height);
+    base.addColorStop(0, "#010713");
+    base.addColorStop(.5, "#061225");
+    base.addColorStop(1, "#010616");
+    ctx.fillStyle = base;
     ctx.fillRect(0, 0, width, height);
-    if (spaceBackdrop.ready) {
-      var scale = Math.max(width / spaceBackdrop.width, height / spaceBackdrop.height);
-      var drawWidth = spaceBackdrop.width * scale;
-      var drawHeight = spaceBackdrop.height * scale;
-      var drawX = (width - drawWidth) / 2;
-      var drawY = (height - drawHeight) / 2;
-      ctx.globalAlpha = .78;
-      ctx.drawImage(spaceBackdrop.image, drawX, drawY, drawWidth, drawHeight);
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = "rgba(1, 7, 18, .36)";
-      ctx.fillRect(0, 0, width, height);
-    }
     var nebula = ctx.createRadialGradient(width * .78, height * .18, 0, width * .78, height * .18, Math.max(width, height) * .62);
     nebula.addColorStop(0, "rgba(0, 213, 255, .1)");
     nebula.addColorStop(.42, "rgba(43, 101, 255, .045)");
