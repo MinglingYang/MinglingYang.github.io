@@ -1,4 +1,4 @@
-<script src="assets/js/main.min.js"></script>
+<script src="assets/js/main.min.js?v={{ site.github.build_revision | default: site.time | uri_escape }}"></script>
 
 {% include analytics.html %}
 {% include fetch_google_scholar_stats.html %}
@@ -8,5 +8,5 @@
     googleScholarStatsUseCdn: {{ site.google_scholar_stats_use_cdn | default: true | jsonify }}
   };
 </script>
-<script src="assets/js/scholar-publications.js"></script>
-<script src="assets/js/research-globe.js"></script>
+<script src="assets/js/scholar-publications.js?v={{ site.github.build_revision | default: site.time | uri_escape }}"></script>
+<script src="assets/js/research-globe.js?v={{ site.github.build_revision | default: site.time | uri_escape }}"></script>

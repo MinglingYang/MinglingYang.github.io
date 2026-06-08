@@ -34,6 +34,15 @@
     return "https://raw.githubusercontent.com/" + repository + "/";
   }
 
+  function assetVersion() {
+    return window.MINGLING_ASSET_VERSION || "20260608";
+  }
+
+  function versionedAssetUrl(url) {
+    if (!url || /^(https?:|data:|#)/i.test(url)) return url;
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(assetVersion());
+  }
+
   function fetchJson(url) {
     return fetch(url, { cache: "no-store" }).then(function (response) {
       if (!response.ok) throw new Error("Unable to load " + url);
@@ -144,7 +153,7 @@
     return [
       "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\">",
       "  <div class=\"pub-card__image-wrap\">",
-      "    <img class=\"pub-card__image\" src=\"" + escapeHtml(pub.image || "images/publications/scholar-update.svg") + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
+      "    <img class=\"pub-card__image\" src=\"" + escapeHtml(versionedAssetUrl(pub.image || "images/publications/scholar-update.svg")) + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
       "  </div>",
       "  <div class=\"pub-card__body\">",
       "    <div class=\"pub-card__meta\">",
@@ -218,7 +227,7 @@
   }
 
   function initScholarPublications() {
-    var displayUrl = "assets/data/publications.json";
+    var displayUrl = versionedAssetUrl("assets/data/publications.json");
     var baseUrl = scholarBaseUrl();
     var scholarUrl = baseUrl ? baseUrl + "google-scholar-stats/gs_data.json" : null;
     Promise.all([

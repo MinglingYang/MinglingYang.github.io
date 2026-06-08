@@ -8,10 +8,11 @@
 
 <script>
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.MINGLING_ASSET_VERSION = "{{ site.github.build_revision | default: site.time | uri_escape }}";
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/main.css?v={{ site.github.build_revision | default: site.time | uri_escape }}">
 
 <meta http-equiv="cleartype" content="on">
 <head>
