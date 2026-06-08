@@ -972,7 +972,7 @@ body.home-page .page__content {
     gap: 1.15rem;
     align-items: center;
     width: min(48rem, calc(100% - 2rem));
-    margin: 1.15rem auto 0;
+    margin: -2.2rem auto 0;
     padding: 1.15rem 1.25rem;
     border: 1px solid rgba(142, 163, 187, .32);
     border-radius: 8px;
@@ -1038,12 +1038,27 @@ body.home-page .page__content {
 }
 
 .home-after-landing {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
     gap: clamp(1.25rem, 2.6vw, 2.4rem);
     max-width: $x-large;
-    margin: 1.25rem auto 0;
-    padding: 2rem 1rem 3rem;
+    margin: 0 auto;
+    padding: 3.25rem 1rem 3rem;
+    border-top: 1px solid rgba(142, 163, 187, .32);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(246, 250, 253, .92));
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 1rem;
+        right: 1rem;
+        height: .42rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(47, 125, 183, 0), rgba(47, 125, 183, .48), rgba(213, 164, 56, .42), rgba(47, 125, 183, 0));
+        box-shadow: 0 0 24px rgba(47, 125, 183, .18);
+    }
 }
 
 .home-after-sidebar {
