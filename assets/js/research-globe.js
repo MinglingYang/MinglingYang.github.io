@@ -90,29 +90,35 @@
   var lastFrameTime = 0;
   var spinPausedUntil = 0;
   var timeWheelArmed = false;
-  var earthTexture = {
-    canvas: null,
-    data: null,
-    image: new Image(),
-    ready: false,
-    width: 0,
-    height: 0
-  };
+  function createRasterTexture(src) {
+    var texture = {
+      canvas: null,
+      data: null,
+      image: new Image(),
+      ready: false,
+      width: 0,
+      height: 0
+    };
+    texture.image.onload = function () {
+      texture.canvas = document.createElement("canvas");
+      texture.width = texture.image.naturalWidth || texture.image.width;
+      texture.height = texture.image.naturalHeight || texture.image.height;
+      texture.canvas.width = texture.width;
+      texture.canvas.height = texture.height;
+      var textureCtx = texture.canvas.getContext("2d");
+      textureCtx.drawImage(texture.image, 0, 0, texture.width, texture.height);
+      texture.data = textureCtx.getImageData(0, 0, texture.width, texture.height).data;
+      texture.ready = true;
+    };
+    texture.image.src = src;
+    return texture;
+  }
+
+  var earthTexture = createRasterTexture("/assets/images/earth-blue-marble-topography.jpg");
+  var populationTexture = createRasterTexture("/assets/images/earth-night-lights-population.jpg");
   var textureFrameCanvas = document.createElement("canvas");
   var textureFrameCtx = textureFrameCanvas.getContext("2d");
-
-  earthTexture.image.onload = function () {
-    earthTexture.canvas = document.createElement("canvas");
-    earthTexture.width = earthTexture.image.naturalWidth || earthTexture.image.width;
-    earthTexture.height = earthTexture.image.naturalHeight || earthTexture.image.height;
-    earthTexture.canvas.width = earthTexture.width;
-    earthTexture.canvas.height = earthTexture.height;
-    var textureCtx = earthTexture.canvas.getContext("2d");
-    textureCtx.drawImage(earthTexture.image, 0, 0, earthTexture.width, earthTexture.height);
-    earthTexture.data = textureCtx.getImageData(0, 0, earthTexture.width, earthTexture.height).data;
-    earthTexture.ready = true;
-  };
-  earthTexture.image.src = "/assets/images/earth-blue-marble-topography.jpg";
+  var textureFrameSignature = "";
 
   function resize() {
     var rect = stage.getBoundingClientRect();
@@ -379,30 +385,50 @@
     ctx.stroke();
   }
 
+  function sampleTexture(texture, longitude, latitude) {
+    if (!texture.ready || !texture.data) return null;
+    var textureX = Math.floor((longitude + 180) / 360 * (texture.width - 1));
+    var textureY = Math.floor((90 - latitude) / 180 * (texture.height - 1));
+    var index = (textureY * texture.width + textureX) * 4;
+    return [texture.data[index], texture.data[index + 1], texture.data[index + 2]];
+  }
+
   function drawEarthTexture(width, height, radius) {
     if (!earthTexture.ready || !earthTexture.data || !textureFrameCtx) return;
-    if (textureFrameCanvas.width !== width || textureFrameCanvas.height !== height) {
-      textureFrameCanvas.width = width;
-      textureFrameCanvas.height = height;
+    var renderScale = Math.min(1, 340 / Math.max(width, 1));
+    var renderWidth = Math.max(260, Math.round(width * renderScale));
+    var renderHeight = Math.max(260, Math.round(height * renderScale));
+    var renderRadius = radius * renderWidth / width;
+    var signature = [
+      renderWidth,
+      renderHeight,
+      Math.round(renderRadius),
+      Math.round(rotation),
+      Math.round(tilt)
+    ].join(":");
+    if (textureFrameCanvas.width && textureFrameSignature === signature) {
+      ctx.drawImage(textureFrameCanvas, 0, 0, width, height);
+      return;
     }
-    var frame = textureFrameCtx.createImageData(width, height);
+    if (textureFrameCanvas.width !== renderWidth || textureFrameCanvas.height !== renderHeight) {
+      textureFrameCanvas.width = renderWidth;
+      textureFrameCanvas.height = renderHeight;
+    }
+    var frame = textureFrameCtx.createImageData(renderWidth, renderHeight);
     var output = frame.data;
-    var source = earthTexture.data;
-    var textureWidth = earthTexture.width;
-    var textureHeight = earthTexture.height;
-    var centerX = width / 2;
-    var centerY = height / 2;
-    var minX = Math.max(0, Math.floor(centerX - radius));
-    var maxX = Math.min(width - 1, Math.ceil(centerX + radius));
-    var minY = Math.max(0, Math.floor(centerY - radius));
-    var maxY = Math.min(height - 1, Math.ceil(centerY + radius));
+    var centerX = renderWidth / 2;
+    var centerY = renderHeight / 2;
+    var minX = Math.max(0, Math.floor(centerX - renderRadius));
+    var maxX = Math.min(renderWidth - 1, Math.ceil(centerX + renderRadius));
+    var minY = Math.max(0, Math.floor(centerY - renderRadius));
+    var maxY = Math.min(renderHeight - 1, Math.ceil(centerY + renderRadius));
     var tiltRadians = tilt * Math.PI / 180;
     var sinTilt = Math.sin(tiltRadians);
     var cosTilt = Math.cos(tiltRadians);
     for (var y = minY; y <= maxY; y += 1) {
-      var normalizedY = (centerY - (y + .5)) / radius;
+      var normalizedY = (centerY - (y + .5)) / renderRadius;
       for (var x = minX; x <= maxX; x += 1) {
-        var normalizedX = ((x + .5) - centerX) / radius;
+        var normalizedX = ((x + .5) - centerX) / renderRadius;
         var distance = normalizedX * normalizedX + normalizedY * normalizedY;
         if (distance > 1) continue;
         var z = Math.sqrt(1 - distance);
@@ -410,19 +436,31 @@
         var cosPhiCosLambda = -sinTilt * normalizedY + cosTilt * z;
         var latitude = Math.asin(sinPhi) * 180 / Math.PI;
         var longitude = normalizeRotation(Math.atan2(normalizedX, cosPhiCosLambda) * 180 / Math.PI - rotation);
-        var textureX = Math.floor((longitude + 180) / 360 * (textureWidth - 1));
-        var textureY = Math.floor((90 - latitude) / 180 * (textureHeight - 1));
-        var sourceIndex = (textureY * textureWidth + textureX) * 4;
-        var targetIndex = (y * width + x) * 4;
+        var earthSample = sampleTexture(earthTexture, longitude, latitude);
+        if (!earthSample) continue;
+        var populationSample = sampleTexture(populationTexture, longitude, latitude);
+        var populationSignal = 0;
+        if (populationSample) {
+          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .88 + populationSample[2] * .18 - 14) / 190, 0, 1);
+          populationSignal = Math.pow(populationSignal, 1.18);
+        }
+        var targetIndex = (y * renderWidth + x) * 4;
         var depth = .52 + z * .48;
         var haze = (1 - z) * .22;
-        output[targetIndex] = clamp(source[sourceIndex] * .48 * depth + 6, 0, 255);
-        output[targetIndex + 1] = clamp(source[sourceIndex + 1] * .62 * depth + 12, 0, 255);
-        output[targetIndex + 2] = clamp(source[sourceIndex + 2] * .82 * depth + 26 + haze * 38, 0, 255);
+        var baseRed = earthSample[0] * .48 * depth + 6;
+        var baseGreen = earthSample[1] * .62 * depth + 12;
+        var baseBlue = earthSample[2] * .82 * depth + 26 + haze * 38;
+        var glowStrength = populationSignal * (.24 + z * .56);
+        output[targetIndex] = clamp(baseRed + glowStrength * 142, 0, 255);
+        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 148, 0, 255);
+        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 34, 0, 255);
         output[targetIndex + 3] = 232;
       }
     }
     textureFrameCtx.putImageData(frame, 0, 0);
+    textureFrameSignature = signature;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     ctx.drawImage(textureFrameCanvas, 0, 0, width, height);
   }
 
