@@ -16,12 +16,7 @@ redirect_from:
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
 
 <section class="home-landing" id="about-me">
-  <div class="home-landing__hero" role="img" aria-label="Environmental health, exposure science, and life-course epidemiology background">
-    <div class="home-landing__copy">
-      <span>Environmental Health · Exposure Science · Data Systems</span>
-      <p>I study how environmental exposures shape respiratory, metabolic, and child health across the life course.</p>
-    </div>
-  </div>
+  <div class="home-landing__hero" role="img" aria-label="Environmental health, exposure science, and life-course epidemiology background"></div>
   <div class="home-landing__profile">
     <img src="images/android-chrome-512x512.png" alt="Mingling Mona Yang">
     <div>
@@ -36,6 +31,12 @@ redirect_from:
     </div>
   </div>
 </section>
+
+<div class="home-after-landing">
+  <aside class="home-after-sidebar" aria-label="Profile summary">
+    {% include author-profile.html %}
+  </aside>
+  <div class="home-after-content" markdown="1">
 
 I am Mingling (Mona) Yang, an incoming Ph.D. student in Epidemiology on the Environmental Health Track at the Keck School of Medicine of the University of Southern California, beginning in Fall 2026.
 
@@ -346,3 +347,6 @@ Rollins School of Public Health, Emory University
 - **Statistical methods:** causal inference, DAGs, mixed-effects models, Bayesian hierarchical models, functional data analysis, machine learning, random forest, XGBoost, simulation, and sensitivity analysis.
 - **Geospatial and exposure science:** ArcGIS, `sf`, `terra`, `raster`, kriging, spatial interpolation, exposure surface generation, PurpleAir sensor co-location, MetOne E-Sampler calibration, and LMIC monitoring-network quality control.
 - **Research infrastructure:** reproducible pipelines, codebooks, automated reporting, manuscript supplements, data harmonization, REDCap database design, and collaborative analysis workflows.
+
+  </div>
+</div>

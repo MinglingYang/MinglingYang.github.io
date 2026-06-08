@@ -8,6 +8,10 @@
           {% for link in site.data.navigation.main %}
             <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
+          <li class="masthead__menu-item masthead__language-toggle" aria-label="Language toggle">
+            <a class="is-active" href="#lang-en" data-language-choice="en" target="_self">EN</a>
+            <a href="#lang-zh" data-language-choice="zh" target="_self">中文</a>
+          </li>
         </ul>
         <ul class="hidden-links hidden"></ul>
       </nav>
