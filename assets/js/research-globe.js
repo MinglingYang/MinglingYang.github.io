@@ -92,6 +92,13 @@
   var lastFrameTime = 0;
   var spinPausedUntil = 0;
   var timeWheelArmed = false;
+
+  function versionedAssetUrl(url) {
+    var version = window.MINGLING_ASSET_VERSION;
+    if (!version) return url;
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(version);
+  }
+
   function createRasterTexture(src) {
     var texture = {
       canvas: null,
@@ -116,8 +123,8 @@
     return texture;
   }
 
-  var earthTexture = createRasterTexture("/assets/images/earth-blue-marble-topography.jpg");
-  var populationTexture = createRasterTexture("/assets/images/earth-night-lights-population.jpg");
+  var earthTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-blue-marble-topography.jpg"));
+  var populationTexture = createRasterTexture(versionedAssetUrl("/assets/images/earth-night-lights-population.jpg"));
   var textureFrameCanvas = document.createElement("canvas");
   var textureFrameCtx = textureFrameCanvas.getContext("2d");
   var textureFrameSignature = "";
@@ -397,9 +404,9 @@
 
   function drawEarthTexture(width, height, radius) {
     if (!earthTexture.ready || !earthTexture.data || !textureFrameCtx) return;
-    var renderScale = Math.min(1, 620 / Math.max(width, 1));
-    var renderWidth = Math.max(360, Math.round(width * renderScale));
-    var renderHeight = Math.max(300, Math.round(height * renderScale));
+    var renderScale = Math.min(1.8, 1280 / Math.max(width, 1));
+    var renderWidth = Math.max(620, Math.round(width * renderScale));
+    var renderHeight = Math.max(460, Math.round(height * renderScale));
     var renderRadius = radius * renderWidth / width;
     var signature = [
       renderWidth,
@@ -443,19 +450,22 @@
         var populationSample = sampleTexture(populationTexture, longitude, latitude);
         var populationSignal = 0;
         if (populationSample) {
-          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .85 + populationSample[2] * .18 - 22) / 210, 0, 1);
-          populationSignal = Math.pow(populationSignal, 1.28);
+          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .95 + populationSample[2] * .24 - 5) / 160, 0, 1);
+          populationSignal = Math.pow(populationSignal, .62);
         }
         var targetIndex = (y * renderWidth + x) * 4;
         var depth = .52 + z * .48;
         var haze = (1 - z) * .22;
-        var baseRed = earthSample[0] * .48 * depth + 6;
-        var baseGreen = earthSample[1] * .62 * depth + 12;
-        var baseBlue = earthSample[2] * .82 * depth + 26 + haze * 38;
-        var glowStrength = populationSignal * (.2 + z * .42);
-        output[targetIndex] = clamp(baseRed + glowStrength * 108, 0, 255);
-        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 112, 0, 255);
-        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 26, 0, 255);
+        var nightRed = populationSample ? populationSample[0] : 0;
+        var nightGreen = populationSample ? populationSample[1] : 0;
+        var nightBlue = populationSample ? populationSample[2] : 0;
+        var baseRed = (nightRed * .72 + earthSample[0] * .16) * depth + 2;
+        var baseGreen = (nightGreen * .78 + earthSample[1] * .18) * depth + 6;
+        var baseBlue = (nightBlue * .94 + earthSample[2] * .26) * depth + 20 + haze * 22;
+        var glowStrength = populationSignal * (.44 + z * .88);
+        output[targetIndex] = clamp(baseRed + glowStrength * 224, 0, 255);
+        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 210, 0, 255);
+        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 70, 0, 255);
         output[targetIndex + 3] = 232;
       }
     }
