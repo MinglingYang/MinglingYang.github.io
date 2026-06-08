@@ -463,16 +463,16 @@
 
   function drawEarthTexture(width, height, radius) {
     if (!earthTexture.ready || !earthTexture.data || !textureFrameCtx) return;
-    var renderScale = Math.min(1, 620 / Math.max(width, 1));
-    var renderWidth = Math.max(360, Math.round(width * renderScale));
-    var renderHeight = Math.max(300, Math.round(height * renderScale));
+    var renderScale = Math.min(1.35, 980 / Math.max(width, 1));
+    var renderWidth = Math.max(520, Math.round(width * renderScale));
+    var renderHeight = Math.max(390, Math.round(height * renderScale));
     var renderRadius = radius * renderWidth / width;
     var signature = [
       renderWidth,
       renderHeight,
       Math.round(renderRadius),
-      renderRotation.toFixed(1),
-      renderTilt.toFixed(1)
+      renderRotation.toFixed(2),
+      renderTilt.toFixed(2)
     ].join(":");
     if (textureFrameCanvas.width && textureFrameSignature === signature) {
       ctx.drawImage(textureFrameCanvas, 0, 0, width, height);
@@ -509,19 +509,20 @@
         var populationSample = sampleTexture(populationTexture, longitude, latitude);
         var populationSignal = 0;
         if (populationSample) {
-          populationSignal = clamp((populationSample[0] * .55 + populationSample[1] * .85 + populationSample[2] * .18 - 22) / 210, 0, 1);
-          populationSignal = Math.pow(populationSignal, 1.28);
+          var nightLum = populationSample[0] * .5 + populationSample[1] * .95 + populationSample[2] * .22;
+          populationSignal = clamp((nightLum - 48) / 160, 0, 1);
+          populationSignal = Math.pow(populationSignal, .72);
         }
         var targetIndex = (y * renderWidth + x) * 4;
         var depth = .52 + z * .48;
         var haze = (1 - z) * .22;
-        var baseRed = earthSample[0] * .48 * depth + 6;
-        var baseGreen = earthSample[1] * .62 * depth + 12;
-        var baseBlue = earthSample[2] * .82 * depth + 26 + haze * 38;
-        var glowStrength = populationSignal * (.2 + z * .42);
-        output[targetIndex] = clamp(baseRed + glowStrength * 108, 0, 255);
-        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 112, 0, 255);
-        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 26, 0, 255);
+        var baseRed = earthSample[0] * .3 * depth + 4;
+        var baseGreen = earthSample[1] * .48 * depth + 12;
+        var baseBlue = earthSample[2] * .98 * depth + 36 + haze * 42;
+        var glowStrength = populationSignal * (.28 + z * .68);
+        output[targetIndex] = clamp(baseRed + glowStrength * 168, 0, 255);
+        output[targetIndex + 1] = clamp(baseGreen + glowStrength * 142, 0, 255);
+        output[targetIndex + 2] = clamp(baseBlue + glowStrength * 38, 0, 255);
         output[targetIndex + 3] = 232;
       }
     }
@@ -834,8 +835,8 @@
     if (autoSpin && !isDragging && now > spinPausedUntil) {
       rotation = normalizeRotation(rotation + delta * .0006);
     }
-    renderRotation = normalizeRotation(Math.round(rotation * 10) / 10);
-    renderTilt = Math.round(tilt * 10) / 10;
+    renderRotation = normalizeRotation(rotation);
+    renderTilt = tilt;
     ctx.clearRect(0, 0, width, height);
     drawStarfield(width, height, radius);
     drawSphere(width, height, radius);
