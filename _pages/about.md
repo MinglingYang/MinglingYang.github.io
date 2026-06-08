@@ -33,10 +33,54 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 ## Research Interests
 
-- **PFAS, chemical mixtures, and exposomics:** per- and polyfluoroalkyl substances, endocrine-disrupting chemicals, persistent organic pollutants, metabolic disruption, liver disease, and life-course environmental health.
-- **Air pollution and exposure assessment:** household air pollution, ambient PM2.5, CO, low-cost sensor calibration, geostatistical exposure surfaces, and environmental monitoring in low- and middle-income countries.
-- **Respiratory and child health:** COPD, chronic bronchitis, lung function, high-altitude hypoxia, early child growth, neurodevelopment, and cardiometabolic outcomes.
-- **Methods:** causal inference, directed acyclic graphs, longitudinal mixed-effects models, Bayesian and multilevel modeling, functional data analysis, machine learning, geostatistics, GIS, and reproducible research infrastructure.
+<section class="research-interest">
+  <div class="research-interest__thrust">
+    <span>Research Thrust</span>
+    <p>My research connects environmental epidemiology, exposure science, and data science to understand how chemical and air pollution exposures shape health across vulnerable populations and across the life course.</p>
+  </div>
+
+  <div class="research-interest__tiles" aria-label="Research interest areas">
+    <a class="research-interest-tile research-interest-tile--pfas" href="#interest-pfas" target="_self">
+      <span>Future Ph.D. Direction</span>
+      <strong>PFAS &amp; Exposomics</strong>
+    </a>
+    <a class="research-interest-tile research-interest-tile--air" href="#interest-air" target="_self">
+      <span>JHU Research Portfolio</span>
+      <strong>Air Pollution &amp; Respiratory Health</strong>
+    </a>
+    <a class="research-interest-tile research-interest-tile--maternal" href="#interest-maternal" target="_self">
+      <span>Vulnerable Populations</span>
+      <strong>Maternal, Child &amp; Adolescent Health</strong>
+    </a>
+    <a class="research-interest-tile research-interest-tile--data" href="#interest-data" target="_self">
+      <span>Methods &amp; Infrastructure</span>
+      <strong>Data Science &amp; Statistics</strong>
+    </a>
+  </div>
+
+  <div class="research-interest__details">
+    <article id="interest-pfas">
+      <span>01</span>
+      <h3>PFAS, exposomics, and environmental mixtures</h3>
+      <p>Fall 2026 onward, I hope to develop this direction through USC doctoral training, with attention to PFAS, endocrine-disrupting chemicals, exposomics, multi-omics, metabolic health, liver disease, and life-course epidemiology.</p>
+    </article>
+    <article id="interest-air">
+      <span>02</span>
+      <h3>Air pollution and respiratory health</h3>
+      <p>This direction reflects three years of JHU-based work on household and ambient air pollution, PM2.5 exposure assessment, low-cost sensor calibration, COPD screening, chronic bronchitis, lung function, and global respiratory health.</p>
+    </article>
+    <article id="interest-maternal">
+      <span>03</span>
+      <h3>Maternal, child, and adolescent health</h3>
+      <p>I am interested in how environmental exposures affect pregnancy, early childhood, adolescence, neurodevelopment, growth, cardiometabolic risk, and long-term health across sensitive developmental windows.</p>
+    </article>
+    <article id="interest-data">
+      <span>04</span>
+      <h3>Data science, statistics, and reproducible research</h3>
+      <p>This methods direction brings together my undergraduate and graduate training, internship experience, teaching assistant work, and applied research practice in R, Python, SQL, causal inference, machine learning, GIS, longitudinal models, database harmonization, and reproducible pipelines.</p>
+    </article>
+  </div>
+</section>
 
 <span class='anchor' id='research-geography'></span>
 
