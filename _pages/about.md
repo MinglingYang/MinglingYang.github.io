@@ -45,7 +45,7 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
       <strong>PFAS &amp; Exposomics</strong>
     </a>
     <a class="research-interest-tile research-interest-tile--air" href="#interest-air" target="_self">
-      <span>JHU Research Portfolio</span>
+      <span>Research Portfolio</span>
       <strong>Air Pollution &amp; Respiratory Health</strong>
     </a>
     <a class="research-interest-tile research-interest-tile--maternal" href="#interest-maternal" target="_self">
@@ -67,7 +67,7 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
     <article id="interest-air">
       <span>02</span>
       <h3>Air pollution and respiratory health</h3>
-      <p>This direction reflects three years of JHU-based work on household and ambient air pollution, PM2.5 exposure assessment, low-cost sensor calibration, COPD screening, chronic bronchitis, lung function, and global respiratory health.</p>
+      <p>This direction reflects three years of applied work on household and ambient air pollution, PM2.5 exposure assessment, low-cost sensor calibration, COPD screening, chronic bronchitis, lung function, and global respiratory health.</p>
     </article>
     <article id="interest-maternal">
       <span>03</span>
@@ -88,8 +88,8 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 <div class="research-map-toolbar" aria-label="Research geography controls">
   <div class="research-map-toolbar__group" role="group" aria-label="Module filter">
-    <button type="button" class="is-active" data-globe-module="all">All</button>
-    <button type="button" data-globe-module="education">Education</button>
+    <button type="button" data-globe-module="all">All</button>
+    <button type="button" class="is-active" data-globe-module="education">Education</button>
     <button type="button" data-globe-module="project">Projects</button>
     <button type="button" data-globe-module="publication">Articles</button>
     <button type="button" data-globe-module="presentation">Presentations</button>

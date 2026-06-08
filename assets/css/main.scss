@@ -915,13 +915,14 @@ h1:before, .anchor:before {
     justify-content: flex-end;
     padding: 1rem;
     border-radius: 8px;
-    background-color: #07182a;
+    background-color: #0b365c;
     background-position: center;
     background-size: cover;
     box-shadow: 0 14px 30px rgba(20, 42, 61, .16);
     color: #fff;
     text-decoration: none !important;
     isolation: isolate;
+    outline: none;
 
     @include breakpoint(max-width $small) {
         min-height: 14.5rem;
@@ -932,7 +933,15 @@ h1:before, .anchor:before {
         position: absolute;
         inset: 0;
         z-index: -1;
-        background: linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 0, 0, .72));
+        background:
+            radial-gradient(circle at 25% 18%, rgba(108, 218, 255, .26), rgba(108, 218, 255, 0) 34%),
+            linear-gradient(135deg, rgba(21, 138, 196, .46) 0%, rgba(10, 73, 118, .58) 38%, rgba(5, 24, 50, .76) 100%);
+        mix-blend-mode: normal;
+    }
+
+    > * {
+        position: relative;
+        z-index: 1;
     }
 
     &::after {
@@ -967,7 +976,12 @@ h1:before, .anchor:before {
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 18px 34px rgba(20, 42, 61, .2);
+        box-shadow: 0 18px 34px rgba(20, 42, 61, .2), 0 0 0 1px rgba(96, 203, 236, .28);
+    }
+
+    &:focus,
+    &:focus-visible {
+        box-shadow: 0 18px 34px rgba(20, 42, 61, .2), 0 0 0 3px rgba(93, 213, 246, .58), 0 0 24px rgba(93, 213, 246, .38);
     }
 }
 
@@ -997,12 +1011,36 @@ h1:before, .anchor:before {
     }
 
     article {
+        position: relative;
         min-height: 12rem;
         padding: 1rem 1rem 1.05rem;
         border: 1px solid #dce7f0;
         border-radius: 8px;
         background: #fbfdff;
         box-shadow: 0 10px 24px rgba(24, 43, 67, .06);
+        scroll-margin-top: 42vh;
+        transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+
+    article.is-interest-highlight {
+        border-color: rgba(67, 184, 231, .86);
+        box-shadow: 0 0 0 6px rgba(83, 202, 246, .24), 0 0 32px rgba(83, 202, 246, .28), 0 18px 36px rgba(35, 111, 165, .18);
+        transform: translateY(-2px);
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: -.55rem;
+            border: 2px solid rgba(83, 202, 246, .82);
+            border-radius: 12px;
+            animation: interestHalo 1.5s ease-out 1;
+            pointer-events: none;
+        }
+
+        span {
+            background: #d9f5ff;
+            box-shadow: 0 0 0 5px rgba(83, 202, 246, .18), 0 0 18px rgba(83, 202, 246, .42);
+        }
     }
 
     span {
@@ -1031,5 +1069,19 @@ h1:before, .anchor:before {
         color: #465b70;
         font-size: .9em;
         line-height: 1.6;
+    }
+}
+
+@keyframes interestHalo {
+    0% {
+        opacity: .95;
+        transform: scale(.985);
+        box-shadow: 0 0 0 0 rgba(83, 202, 246, .38);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.035);
+        box-shadow: 0 0 0 16px rgba(83, 202, 246, 0);
     }
 }

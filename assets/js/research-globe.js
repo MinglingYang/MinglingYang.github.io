@@ -75,15 +75,15 @@
   };
 
   var state = {
-    module: "all",
+    module: "education",
     year: maxYear
   };
-  var rotation = rotationInput ? Number(rotationInput.value) : -25;
-  var tilt = tiltInput ? Number(tiltInput.value) : 8;
+  var rotation = focusTargets.education.rotation;
+  var tilt = focusTargets.education.tilt;
   var renderRotation = rotation;
   var renderTilt = tilt;
-  var zoom = zoomInput ? Number(zoomInput.value) / 100 : 1;
-  var activeId = "peru";
+  var zoom = focusTargets.education.zoom;
+  var activeId = focusTargets.education.activeId;
   var visibleSites = [];
   var markerPositions = {};
   var isDragging = false;
@@ -332,9 +332,9 @@
     if (!rightColumn) return;
     if (leftColumn) leftColumn.innerHTML = "";
     rightColumn.innerHTML = "";
-    var displaySites = visibleSites.filter(function (site) {
-      return site.id === activeId;
-    });
+    var displaySites = state.module === "education"
+      ? visibleSites.filter(function (site) { return siteHasModule(site, "education"); })
+      : visibleSites.filter(function (site) { return site.id === activeId; });
     if (!displaySites.length && visibleSites.length) displaySites = [visibleSites[0]];
     displaySites.forEach(function (site) {
       site.card.classList.remove("is-hidden");
