@@ -8,13 +8,6 @@ redirect_from:
   - /about.html
 ---
 
-{% if site.google_scholar_stats_use_cdn %}
-{% assign gsDataBaseUrl = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: "@" %}
-{% else %}
-{% assign gsDataBaseUrl = "https://raw.githubusercontent.com/" | append: site.repository | append: "/" %}
-{% endif %}
-{% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
-
 <section class="home-landing" id="about-me">
   <div class="home-landing__hero" role="img" aria-label="Environmental health, exposure science, and life-course epidemiology background"></div>
   <div class="home-landing__profile">
@@ -40,17 +33,19 @@ redirect_from:
   </aside>
   <div class="home-after-content" markdown="1">
 
-I am Mingling (Mona) Yang, an incoming Ph.D. student in Epidemiology on the Environmental Health Track at the Keck School of Medicine of the University of Southern California, beginning in Fall 2026.
+I am Mingling (Mona) Yang, an incoming Ph.D. student in Epidemiology at USC Keck School of Medicine. My research connects environmental epidemiology, exposure science, and data systems to study how air pollution and chemical exposures shape respiratory, metabolic, and child health.
 
-My work sits at the intersection of environmental epidemiology, exposure science, biostatistics, and reproducible data systems. At Johns Hopkins, I have worked with Dr. William Checkley and Dr. Laura Nicolaou on multinational studies including the Household Air Pollution Intervention Network (HAPIN), the Global Excellence in COPD Outcomes (GECo) study, CHAP, and ambient air pollution monitoring projects in Nepal and Peru. Across these projects, I have built harmonized multi-country databases, calibrated low-cost PM2.5 sensors against reference-grade monitors, modeled respiratory and child health outcomes, and developed reproducible R/Python/SQL pipelines for large environmental health datasets.
+At Johns Hopkins, I have worked across HAPIN, GECo, CHAP, and ambient PM2.5 projects in Nepal, Peru, Uganda, Guatemala, India, and Rwanda. My doctoral work will build from this global air pollution portfolio toward PFAS, exposomics, multi-omics, and life-course environmental health with Dr. Vaia Lida Chatzi.
 
-At USC, my doctoral direction will connect this background in air pollution, global respiratory health, and causal/statistical modeling with Dr. Vaia Lida Chatzi's environmental health research program on PFAS, endocrine-disrupting chemicals, exposomics, multi-omics, and metabolic health across the life course. I am especially interested in developing statistical and geospatial frameworks that link complex environmental mixtures to respiratory, metabolic, liver, and child health outcomes, with an emphasis on prevention and policy-relevant environmental health evidence.
-
-My publication profile is on <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">Google Scholar</a>
-<a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">
-  <img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations" alt="Google Scholar citations">
-</a>.
-<span id="scholar-summary" class="scholar-summary" aria-live="polite"></span>
+<div id="scholar-summary" class="scholar-summary scholar-matrix" aria-live="polite">
+  <a class="scholar-matrix__cell scholar-matrix__cell--profile" href="https://scholar.google.com/citations?user=cNanG64AAAAJ">
+    <strong>Google Scholar</strong>
+    <span>Publication profile</span>
+  </a>
+  <span class="scholar-matrix__cell"><strong>Loading</strong><em>citations</em></span>
+  <span class="scholar-matrix__cell"><strong>Loading</strong><em>h-index</em></span>
+  <span class="scholar-matrix__cell"><strong>Loading</strong><em>Scholar items</em></span>
+</div>
 
 <span class='anchor' id='research-interests'></span>
 

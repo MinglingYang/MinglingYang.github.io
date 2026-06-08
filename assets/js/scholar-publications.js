@@ -192,29 +192,72 @@
     });
   }
 
+  function newsDateFromItem(item) {
+    var raw = item.news_date || item.date_iso || "";
+    if (raw) {
+      var parsed = new Date(raw + (/^\d{4}-\d{2}-\d{2}$/.test(raw) ? "T00:00:00" : ""));
+      if (!isNaN(parsed.getTime())) return parsed;
+    }
+    if (item.year) {
+      var currentYear = new Date().getFullYear();
+      if (Number(item.year) === currentYear) return new Date(currentYear, 0, 1);
+    }
+    return null;
+  }
+
+  function isRecentNewsDate(date) {
+    if (!date) return false;
+    var now = new Date();
+    var cutoff = new Date(now);
+    cutoff.setMonth(cutoff.getMonth() - 6);
+    return date >= cutoff && date <= now;
+  }
+
+  function newsDateLabel(date) {
+    if (!date) return "";
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+  }
+
   function renderNews(displayData, publications, scholarData) {
     var target = document.getElementById("scholar-news");
     if (!target) return;
     var pinned = (displayData.pinnedNews || []).map(function (item) {
-      return "<li><strong>" + escapeHtml(item.date) + ":</strong> " + escapeHtml(item.text) + "</li>";
+      var date = newsDateFromItem(item);
+      return { date: date, html: "<li><strong>" + escapeHtml(item.date) + ":</strong> " + escapeHtml(item.text) + "</li>" };
+    }).filter(function (item) {
+      return isRecentNewsDate(item.date);
     });
     var scholarNews = publications
       .filter(function (pub) { return !pub.manual_only && pub.year; })
       .slice()
       .sort(function (a, b) {
+        var dateA = newsDateFromItem(a);
+        var dateB = newsDateFromItem(b);
+        if (dateA && dateB && dateA.getTime() !== dateB.getTime()) return dateB - dateA;
+        if (dateB && !dateA) return 1;
+        if (dateA && !dateB) return -1;
         if (Number(b.year || 0) !== Number(a.year || 0)) return Number(b.year || 0) - Number(a.year || 0);
         return Number(b.citations || 0) - Number(a.citations || 0);
       })
-      .slice(0, 4)
       .map(function (pub) {
+        var date = newsDateFromItem(pub);
         var title = pub.short_title || pub.title;
         var citation = typeof pub.citations === "number" ? " Scholar citations: " + pub.citations + "." : "";
-        return "<li><strong>" + escapeHtml(pub.year) + ":</strong> " + escapeHtml(title) + "." + escapeHtml(citation) + "</li>";
+        return {
+          date: date,
+          html: "<li><strong>" + escapeHtml(newsDateLabel(date) || pub.year) + ":</strong> " + escapeHtml(title) + "." + escapeHtml(citation) + "</li>"
+        };
+      })
+      .filter(function (item) {
+        return isRecentNewsDate(item.date);
       });
-    var updated = scholarData && scholarData.updated
-      ? "<p class=\"auto-note\">Publication metadata synced from Google Scholar. Last Scholar crawler update: " + escapeHtml(scholarData.updated) + ".</p>"
-      : "<p class=\"auto-note\">Showing curated publication data. Google Scholar metadata will appear here when the crawler data is reachable.</p>";
-    target.innerHTML = updated + "<ul>" + pinned.concat(scholarNews).join("") + "</ul>";
+    var items = pinned.concat(scholarNews).slice(0, 6).map(function (item) {
+      return item.html;
+    });
+    var updated = "<p class=\"auto-note\">Showing updates from the last 6 months.</p>";
+    target.innerHTML = items.length
+      ? updated + "<ul>" + items.join("") + "</ul>"
+      : updated + "<p class=\"auto-note\">No public updates in this window yet.</p>";
   }
 
   function countPublicationTags(publications) {
@@ -316,9 +359,12 @@
     var target = document.getElementById("scholar-summary");
     if (!target || !scholarData) return;
     target.innerHTML = [
-      "<span><strong>" + escapeHtml(scholarData.citedby || 0) + "</strong> citations</span>",
-      "<span><strong>" + escapeHtml(scholarData.hindex || 0) + "</strong> h-index</span>",
-      "<span><strong>" + escapeHtml(Object.keys(scholarData.publications || {}).length) + "</strong> Scholar items</span>"
+      "<a class=\"scholar-matrix__cell scholar-matrix__cell--profile\" href=\"https://scholar.google.com/citations?user=cNanG64AAAAJ\">",
+      "  <strong>Google Scholar</strong><span>Publication profile</span>",
+      "</a>",
+      "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(scholarData.citedby || 0) + "</strong><em>citations</em></span>",
+      "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(scholarData.hindex || 0) + "</strong><em>h-index</em></span>",
+      "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(Object.keys(scholarData.publications || {}).length) + "</strong><em>Scholar items</em></span>"
     ].join("");
   }
 

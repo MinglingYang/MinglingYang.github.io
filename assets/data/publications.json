@@ -19,7 +19,8 @@
       "image": "images/publications/hapin-growth.png",
       "tags": ["LPG intervention", "Child growth", "Linear trajectories", "Puno, Peru"],
       "focus": "Modeled linear growth trajectories after long-term follow-up of clean cooking intervention exposure in Puno, Peru.",
-      "summary": "A key gap was whether household energy interventions could produce benefits that persist beyond infancy into preschool growth. This study followed children in Puno, Peru after LPG or biomass cooking exposure and modeled longitudinal height trajectories across early childhood. The analysis links long-term clean cooking exposure with patterns in linear growth and identifies subgroups where intervention timing and household context may matter. The findings extend HAPIN evidence from exposure reduction toward child growth outcomes relevant for policy.",
+      "summary": "A key gap was whether clean cooking interventions could affect child growth beyond infancy. Using longitudinal HAPIN follow-up in Puno, Peru, this study modeled preschool height trajectories and extended clean-fuel evidence from exposure reduction to child growth outcomes.",
+      "news_date": "2026-05-01",
       "featured_order": 1
     },
     {
@@ -35,7 +36,8 @@
       "image": "images/publications/erj-2026-chronic-bronchitis.png",
       "tags": ["Chronic bronchitis", "LMIC cohorts", "Risk factors", "Clinical outcomes"],
       "focus": "Evaluated chronic bronchitis prevalence, risk factors, lung function, and clinical outcomes across low-and middle-income country cohorts.",
-      "summary": "Chronic bronchitis is understudied in low- and middle-income countries, where risk factors and downstream clinical burden may differ from high-income settings. This multi-country GECo cohort analysis estimated prevalence and evaluated demographic, environmental, respiratory, lung function, and clinical outcome patterns. By pooling harmonized data across LMIC sites, the study clarifies which exposures and symptoms are most strongly associated with chronic bronchitis. The results support more targeted prevention and symptom recognition in global COPD and chronic respiratory disease programs.",
+      "summary": "Chronic bronchitis is understudied in LMIC cohorts despite its clinical burden. This GECo analysis pooled harmonized multi-country data to evaluate prevalence, risk factors, lung function, and outcomes, supporting more targeted chronic respiratory disease prevention.",
+      "news_date": "2026-03-01",
       "featured_order": 2
     },
     {
@@ -52,7 +54,7 @@
       "image": "images/publications/copd-screening.png",
       "tags": ["COPD screening", "SGRQ", "Spirometry", "Resource-limited settings"],
       "focus": "Evaluated a low-cost SGRQ-based COPD screening strategy for places where spirometry access is limited.",
-      "summary": "Spirometry is often unavailable in resource-limited settings, leaving a gap in practical COPD case-finding. This study evaluated whether the St. George's Respiratory Questionnaire, with simple clinical information such as peak expiratory flow, could screen population-based cohorts for COPD. The analysis compared questionnaire-based strategies against spirometry-defined disease across multiple LMIC sites. It identifies a lower-cost screening pathway that can help prioritize confirmatory testing where respiratory diagnostic capacity is limited.",
+      "summary": "COPD case-finding is difficult where spirometry access is limited. This study tested SGRQ-based screening against spirometry-defined COPD across LMIC cohorts and identified a practical pathway for prioritizing confirmatory testing.",
       "featured_order": 3
     },
     {
@@ -69,7 +71,7 @@
       "image": "images/publications/hapin-neurodevelopment.png",
       "tags": ["LPG intervention", "PM2.5 exposure", "Bayley-III", "Neurodevelopment"],
       "focus": "Assessed LPG intervention and PM2.5 exposure-response relationships with Bayley-III neurodevelopmental outcomes.",
-      "summary": "Evidence was limited on whether clean cooking interventions and measured PM2.5 exposure relate to preschool neurodevelopment after early-life household air pollution exposure. This study followed HAPIN children in Puno, Peru and assessed cognitive, language, and motor outcomes using standardized developmental testing. It combined intervention assignment and exposure-response analyses to evaluate how cooking fuel and pollution levels mapped onto Bayley-III outcomes. The findings connect household energy interventions with child development endpoints beyond respiratory health.",
+      "summary": "Evidence linking household air pollution interventions to preschool neurodevelopment remains limited. This HAPIN follow-up in Puno, Peru combined intervention and exposure-response analyses with Bayley-III testing to connect clean cooking exposure with child development outcomes.",
       "featured_order": 4
     },
     {
@@ -86,7 +88,7 @@
       "image": "images/publications/hapin-pneumonia.png",
       "tags": ["Household air pollution", "Biomass cooking", "Severe pneumonia", "Infant health"],
       "focus": "Connected household biomass cooking exposure with severe pneumonia risk in infant health analyses.",
-      "summary": "Severe infant pneumonia remains a major concern, but the exposure threshold and real-world contribution of household biomass cooking are difficult to quantify. This HAPIN analysis examined infant pneumonia outcomes in relation to household air pollution from biomass cooking and cleaner cooking conditions. It used intervention and exposure data across trial settings to connect cooking practices with clinically important respiratory illness. The results strengthen evidence that reducing household air pollution can support infant respiratory health.",
+      "summary": "The contribution of biomass cooking to severe infant pneumonia is difficult to quantify in real-world settings. This HAPIN analysis used intervention and exposure data to link household air pollution with clinically important infant respiratory illness.",
       "featured_order": 5
     },
     {
@@ -101,7 +103,7 @@
       "image": "images/publications/ers-2025-chronic-bronchitis-abstract.png",
       "tags": ["Chronic bronchitis", "GECo cohorts", "Risk factors", "Oral talk"],
       "focus": "Published abstract and oral talk on chronic bronchitis risk factors, respiratory symptoms, lung function, and outcomes across multinational LMIC cohorts.",
-      "summary": "Multinational evidence on chronic bronchitis risk factors and outcomes in LMIC cohorts was limited before the full journal analysis. This ERS Congress abstract presented early GECo findings on risk factors, respiratory symptoms, lung function, and outcome burden across participating countries. The work used harmonized cohort data to identify population-level patterns that warranted deeper clinical analysis. It helped frame chronic bronchitis as a measurable and consequential phenotype in global respiratory health research.",
+      "summary": "Before the full journal analysis, multinational LMIC evidence on chronic bronchitis was limited. This ERS Congress abstract used harmonized GECo data to present early patterns in risk factors, symptoms, lung function, and outcomes.",
       "featured_order": 6
     },
     {
@@ -116,7 +118,7 @@
       "image": "images/publications/ats-copd-screening.png",
       "tags": ["COPD screening", "SGRQ", "PEF", "ATS poster"],
       "focus": "Published abstract and poster presenting a low-cost SGRQ-based COPD screening strategy for resource-limited settings.",
-      "summary": "COPD screening tools that are affordable and feasible outside high-resource clinical settings remain a major implementation gap. This ATS abstract and poster evaluated SGRQ-based screening, with supporting clinical measures, as a pragmatic approach for LMIC cohorts. The work compared questionnaire performance with physiologic assessment to identify efficient case-finding strategies. It supports scalable COPD screening workflows that can guide referral and confirmatory spirometry.",
+      "summary": "Affordable COPD screening remains a major implementation gap in resource-limited settings. This ATS abstract and poster evaluated SGRQ with supporting clinical measures to identify scalable case-finding workflows for LMIC cohorts.",
       "featured_order": 7
     }
   ],
