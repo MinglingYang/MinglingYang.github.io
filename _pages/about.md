@@ -271,46 +271,116 @@ My publication profile is on <a href="https://scholar.google.com/citations?user=
 
 ## Research Experience
 
-Johns Hopkins University School of Medicine
+<section class="experience-timeline" aria-label="Research and professional experience timeline">
+  <article class="experience-node experience-node--left">
+    <div class="experience-node__marker"><span>EU</span></div>
+    <div class="experience-node__card">
+      <span class="experience-node__date">Jan 2025 - Present</span>
+      <h3>Data Analyst @ Rollins School of Public Health, Emory University</h3>
+      <p class="experience-node__advisor">Collaborator: Kyle Steenland, Professor of Environmental Health &amp; Epidemiology</p>
+      <div class="experience-project">
+        <strong>HAPIN Trial: Guatemala, India, Peru, Rwanda</strong>
+        <ul>
+          <li>Led data management, visualization, and socioeconomic index construction using Multiple Correspondence Analysis across four country sites.</li>
+          <li>Replicated analyses in R Markdown and cross-validated results with original SAS outputs.</li>
+          <li>Prepared manuscript materials and contributed to peer-review responses for household air pollution and infant health analyses.</li>
+          <li><b>Output:</b> Contributed to “Exposures to Household Pollution From Biomass Cooking and Severe Pneumonia in Infants,” JAMA Network Open, 2025.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
 
-<div class="experience-role">
-  <span>Senior Research Data Analyst, Prof. William Checkley</span>
-  <span class="experience-role__date">Sep 2023 - Present</span>
-</div>
+  <article class="experience-node experience-node--right">
+    <div class="experience-node__marker"><span>JH</span></div>
+    <div class="experience-node__card">
+      <span class="experience-node__date">Dec 2023 - Present</span>
+      <h3>Research Assistant @ Johns Hopkins Bloomberg School of Public Health</h3>
+      <p class="experience-node__advisor">Advisor: Laura Nicolaou, Professor of Environmental Health &amp; Engineering</p>
+      <div class="experience-project">
+        <strong>Alliance for a Healthier World: ambient air pollution in Nepal and Peru</strong>
+        <ul>
+          <li>Led ambient air pollution projects using four years of monitoring network and E-Sampler data, covering about 75 million records.</li>
+          <li>Developed cross-regional calibration models for PurpleAir PM2.5 sensors against MetOne E-Sampler monitors using kriging, random forest, and XGBoost.</li>
+          <li>Built dynamic spatiotemporal models with meteorological covariates to generate hourly PM2.5 maps and study seasonal and urban-rural disparities.</li>
+          <li><b>Output:</b> Manuscript in preparation on high-resolution PM2.5 mapping for Bhaktapur, Nepal.</li>
+        </ul>
+      </div>
+      <div class="experience-project">
+        <strong>HAPIN longitudinal study of early child growth, Puno, Peru</strong>
+        <ul>
+          <li>Developed a DAG-based causal framework for PM2.5, CO, and early childhood growth outcomes.</li>
+          <li>Modeled height-for-age trajectories using longitudinal mixed-effects models in a three-year follow-up trial cohort.</li>
+          <li><b>Output:</b> Co-author, The Lancet Regional Health - Americas, 2026.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
 
-- Serve as lead analyst across multinational environmental and respiratory health studies, harmonizing more than 100 million data points spanning exposure, clinical, questionnaire, biomarker, sensor, and social-network datasets.
-- Build reproducible R/SQL/Python workflows and internal tools for data integration, quality control, calibration, visualization, and statistical reporting across study sites.
-- Apply linear mixed models, Bayesian and multilevel models, causal DAGs, functional data analysis, geostatistics, random forests, and XGBoost to multi-level environmental health questions.
-- Design and maintain REDCap systems linking household, individual, facility, and clinical forms; train collaborators on data quality workflows and reporting.
+  <article class="experience-node experience-node--left">
+    <div class="experience-node__marker"><span>SM</span></div>
+    <div class="experience-node__card">
+      <span class="experience-node__date">Sep 2023 - Present</span>
+      <h3>Senior Research Data Analyst @ Johns Hopkins University School of Medicine</h3>
+      <p class="experience-node__advisor">Advisor: William Checkley, Professor of Medicine, Epidemiology &amp; Biostatistics</p>
+      <div class="experience-project">
+        <strong>CHAP social network study, Peru</strong>
+        <ul>
+          <li>Led the CHAP Social Network Project and developed harmonized behavioral, household, exposure, and relational databases.</li>
+          <li>Studied how network structure, tie strength, and aspirational ties shape sustained LPG stove use in rural communities.</li>
+          <li><b>Output:</b> Manuscript in preparation on social networks and clean fuel use behaviours in rural Peru.</li>
+        </ul>
+      </div>
+      <div class="experience-project">
+        <strong>GECo chronic bronchitis and COPD outcomes, Nepal, Peru, Uganda</strong>
+        <ul>
+          <li>Modeled COPD and chronic bronchitis risk factors in diverse LMIC populations using harmonized survey and spirometry data.</li>
+          <li>Applied logistic regression, random forest, cross-validation, sensitivity testing, and population attributable fraction workflows.</li>
+          <li><b>Outputs:</b> Co-author in European Respiratory Journal and American Journal of Respiratory and Critical Care Medicine, plus ERS and ATS presentations.</li>
+        </ul>
+      </div>
+      <div class="experience-project">
+        <strong>HAPIN neurodevelopment and eye-health substudies, Puno, Peru</strong>
+        <ul>
+          <li>Linked prenatal and postnatal PM2.5 and CO exposure with Bayley-III cognitive, motor, and language scores.</li>
+          <li>Integrated ophthalmologic exams, nutrition biomarkers, and environmental exposure records for ocular disease mapping.</li>
+          <li><b>Output:</b> Co-author in Environmental Health Perspectives, 2025, and poster presentation at Global Ophthalmology Summit 2025.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
 
-Selected JHU projects
+  <article class="experience-node experience-node--right">
+    <div class="experience-node__marker"><span>DS</span></div>
+    <div class="experience-node__card">
+      <span class="experience-node__date">Jan 2021 - Sep 2021</span>
+      <h3>Data Scientist @ Qiangyuan Sporting Goods Co.</h3>
+      <p class="experience-node__advisor">Zhuhai, China</p>
+      <div class="experience-project">
+        <ul>
+          <li>Mapped production workflows, improved data integrity, and built Python and R validation scripts for manufacturing datasets.</li>
+          <li>Applied forecasting and machine learning models to inventory dynamics, reducing excess inventory and storage costs by about 20%.</li>
+          <li>Designed SQL databases integrating procurement, production, and sales data into a centralized analytics platform.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
 
-- GECo - COPD and chronic bronchitis, Nepal, Peru, and Uganda: quantified COPD burden, chronic bronchitis risk factors, population attributable fractions, and SGRQ-based screening performance in large LMIC cohorts.
-- HAPIN - child growth and neurodevelopment, Puno, Peru: evaluated PM2.5/CO exposure-response relationships for early child growth and Bayley-III neurodevelopmental outcomes using longitudinal and causal inference frameworks.
-- CHAP - social networks and clean fuel adoption, Peru: analyzed how network structure, tie strength, and aspirational ties shape sustained LPG stove use in rural communities.
-- Global Lung Health / Chiesi projects, Nepal and Peru: supported spirometry and oscillometry screening among brick-kiln workers through REDCap architecture, data quality control, and visualization workflows.
-- Nocturnal hypoxia and cardiometabolic risk, Puno, Peru: applied functional principal component analysis to continuous SpO2 curves to identify hypoxia phenotypes and their cardiometabolic correlates.
-
-Johns Hopkins Bloomberg School of Public Health
-
-<div class="experience-role">
-  <span>Research Assistant, Dr. Laura Nicolaou</span>
-  <span class="experience-role__date">Dec 2023 - Present</span>
-</div>
-
-- Lead ambient air pollution projects using four years of monitoring-network and E-Sampler data in Nepal and Peru.
-- Develop cross-regional calibration models for co-located PurpleAir low-cost PM2.5 sensors against MetOne E-Sampler reference monitors using kriging, random forest, and XGBoost.
-- Generate hourly PM2.5 exposure maps integrating meteorological covariates to study seasonal variation and urban-rural disparities in LMIC settings.
-
-Rollins School of Public Health, Emory University
-
-<div class="experience-role">
-  <span>Data Analyst, Prof. Kyle Steenland</span>
-  <span class="experience-role__date">Jan 2025 - Present</span>
-</div>
-
-- Conduct HAPIN data management and socioeconomic index construction using Multiple Correspondence Analysis across Guatemala, India, Peru, and Rwanda.
-- Reproduce and validate analytic workflows in R Markdown and contribute to manuscript development for household air pollution and child health analyses.
+  <article class="experience-node experience-node--left">
+    <div class="experience-node__marker"><span>TA</span></div>
+    <div class="experience-node__card">
+      <span class="experience-node__date">Jan 2022 - Dec 2022</span>
+      <h3>Teaching Assistant @ Johns Hopkins University</h3>
+      <p class="experience-node__advisor">Department of Applied Mathematics and Statistics</p>
+      <div class="experience-project">
+        <ul>
+          <li>Supported Introduction to Data Science through labs, assignments, project grading, and Python-based statistical learning support.</li>
+          <li>Taught Computing for Applied Mathematics sessions covering Python programming, numerical methods, and data manipulation.</li>
+          <li>Held office hours, designed quizzes, graded weekly assignments, and provided detailed feedback on code correctness and style.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</section>
 
 <span class='anchor' id='education'></span>
 
