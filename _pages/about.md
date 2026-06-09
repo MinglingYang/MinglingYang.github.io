@@ -54,50 +54,37 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 ## Research Interests
 
 <section class="research-interest">
-  <div class="research-interest__thrust">
-    <span>Research Thrust</span>
-    <p>My research connects environmental epidemiology, exposure science, and data science to understand how chemical and air pollution exposures shape health across vulnerable populations and across the life course.</p>
-  </div>
-
-  <div class="research-interest__tiles" aria-label="Research interest areas">
-    <a class="research-interest-tile research-interest-tile--pfas" href="#interest-pfas" target="_self">
-      <span>Future Ph.D. Direction</span>
-      <strong>PFAS &amp; Exposomics</strong>
-    </a>
-    <a class="research-interest-tile research-interest-tile--air" href="#interest-air" target="_self">
-      <span>Research Portfolio</span>
-      <strong>Air Pollution &amp; Respiratory Health</strong>
-    </a>
-    <a class="research-interest-tile research-interest-tile--maternal" href="#interest-maternal" target="_self">
-      <span>Vulnerable Populations</span>
-      <strong>Maternal, Child &amp; Adolescent Health</strong>
-    </a>
-    <a class="research-interest-tile research-interest-tile--data" href="#interest-data" target="_self">
-      <span>Methods &amp; Infrastructure</span>
-      <strong>Data Science &amp; Statistics</strong>
-    </a>
-  </div>
-
-  <div class="research-interest__details">
-    <article id="interest-pfas">
-      <span>01</span>
+  <div class="research-interest__cards" aria-label="Research interest areas">
+    <article class="research-interest-card research-interest-card--pfas" id="interest-pfas">
+      <span class="research-interest-card__number">01</span>
+      <span class="research-interest-card__icon" aria-hidden="true"><i class="fas fa-flask"></i></span>
       <h3>PFAS, exposomics, and environmental mixtures</h3>
-      <p>Fall 2026 onward, I hope to develop this direction through USC doctoral training, with attention to PFAS, endocrine-disrupting chemicals, exposomics, multi-omics, metabolic health, liver disease, and life-course epidemiology.</p>
+      <p>Investigating PFAS and multi-component exposures using exposomics approaches to inform environmental health risk assessment and policy.</p>
+      <a class="research-interest-card__arrow" href="#interest-pfas" aria-label="PFAS, exposomics, and environmental mixtures">→</a>
     </article>
-    <article id="interest-air">
-      <span>02</span>
+
+    <article class="research-interest-card research-interest-card--air" id="interest-air">
+      <span class="research-interest-card__number">02</span>
+      <span class="research-interest-card__icon" aria-hidden="true"><i class="fas fa-cloud"></i></span>
       <h3>Air pollution and respiratory health</h3>
-      <p>This direction reflects three years of applied work on household and ambient air pollution, PM2.5 exposure assessment, low-cost sensor calibration, COPD screening, chronic bronchitis, lung function, and global respiratory health.</p>
+      <p>Examining the impacts of air pollution on respiratory outcomes across the life course using advanced epidemiologic and statistical methods.</p>
+      <a class="research-interest-card__arrow" href="#interest-air" aria-label="Air pollution and respiratory health">→</a>
     </article>
-    <article id="interest-maternal">
-      <span>03</span>
+
+    <article class="research-interest-card research-interest-card--maternal" id="interest-maternal">
+      <span class="research-interest-card__number">03</span>
+      <span class="research-interest-card__icon" aria-hidden="true"><i class="fas fa-user-md"></i></span>
       <h3>Maternal, child, and adolescent health</h3>
-      <p>I am interested in how environmental exposures affect pregnancy, early childhood, adolescence, neurodevelopment, growth, cardiometabolic risk, and long-term health across sensitive developmental windows.</p>
+      <p>Exploring environmental and social determinants that influence growth, development, and long-term health in vulnerable populations.</p>
+      <a class="research-interest-card__arrow" href="#interest-maternal" aria-label="Maternal, child, and adolescent health">→</a>
     </article>
-    <article id="interest-data">
-      <span>04</span>
+
+    <article class="research-interest-card research-interest-card--data" id="interest-data">
+      <span class="research-interest-card__number">04</span>
+      <span class="research-interest-card__icon" aria-hidden="true"><i class="fas fa-chart-bar"></i></span>
       <h3>Data science, statistics, and reproducible research</h3>
-      <p>This methods direction brings together my undergraduate and graduate training, internship experience, teaching assistant work, and applied research practice in R, Python, SQL, causal inference, machine learning, GIS, longitudinal models, database harmonization, and reproducible pipelines.</p>
+      <p>Developing reproducible workflows and applying modern data science techniques to generate robust, transparent, and actionable evidence.</p>
+      <a class="research-interest-card__arrow" href="#interest-data" aria-label="Data science, statistics, and reproducible research">→</a>
     </article>
   </div>
 </section>
