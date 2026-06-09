@@ -253,12 +253,9 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
 <span class='anchor' id='research-experience'></span>
 
-<section class="experience-list" aria-label="Research and work experience">
-  <div class="experience-list__header">
-    <h2>Research/ Work Experience</h2>
-    <a href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">View all <span>→</span></a>
-  </div>
+## Research/ Work Experience
 
+<section class="experience-list" aria-label="Research and work experience">
   <div class="experience-list__items">
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
@@ -324,11 +321,9 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
 <span class='anchor' id='education'></span>
 
-<section class="experience-list education-list" aria-label="Education">
-  <div class="experience-list__header">
-    <h2>Education</h2>
-  </div>
+## Education
 
+<section class="experience-list education-list" aria-label="Education">
   <div class="experience-list__items">
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
