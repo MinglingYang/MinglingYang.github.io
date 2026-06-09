@@ -17,11 +17,11 @@ redirect_from:
       <p class="home-landing__role">Incoming Ph.D. Student in Epidemiology</p>
       <p>Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
-        <a href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">CV</a>
-        <a href="mailto:mingling493790100@gmail.com">Email</a>
-        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview">ResearchGate</a>
-        <a href="https://github.com/MinglingYang">GitHub</a>
-        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ">Google Scholar</a>
+        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><i class="fas fa-file-alt"></i>CV</a>
+        <a href="mailto:mingling493790100@gmail.com"><i class="far fa-envelope"></i>Email</a>
+        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><i class="fab fa-researchgate"></i>ResearchGate</a>
+        <a href="https://github.com/MinglingYang"><i class="fab fa-github"></i>GitHub</a>
+        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ"><i class="fas fa-graduation-cap"></i>Google Scholar</a>
       </div>
     </div>
   </div>
@@ -253,62 +253,79 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
 <span class='anchor' id='research-experience'></span>
 
-## Research/ Work Experience
+<section class="experience-list" aria-label="Research and work experience">
+  <div class="experience-list__header">
+    <h2>Research/ Work Experience</h2>
+    <a href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">View all <span>→</span></a>
+  </div>
 
-<section class="experience-timeline" aria-label="Research and professional experience timeline">
-  <article class="experience-node experience-node--left">
-    <div class="experience-node__marker"><span>EU</span></div>
-    <div class="experience-node__card">
-      <span class="experience-node__date">Jan 2025 - May 2026</span>
-      <h3>Data Analyst @ Rollins School of Public Health, Emory University</h3>
-      <p class="experience-node__advisor">Collaborator: Kyle Steenland, Professor of Environmental Health &amp; Epidemiology</p>
-    </div>
-  </article>
+  <div class="experience-list__items">
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--emory">EU</span>
+      <div class="experience-list__content">
+        <h3>Rollins School of Public Health, Emory University</h3>
+        <p>Data Analyst - Environmental Health &amp; Epidemiology</p>
+      </div>
+      <time>Jan 2025 - May 2026</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
 
-  <article class="experience-node experience-node--right">
-    <div class="experience-node__marker"><span>JH</span></div>
-    <div class="experience-node__card">
-      <span class="experience-node__date">Dec 2023 - May 2026</span>
-      <h3>Research Assistant @ Johns Hopkins Bloomberg School of Public Health</h3>
-      <p class="experience-node__advisor">Advisor: Laura Nicolaou, Professor of Environmental Health &amp; Engineering</p>
-    </div>
-  </article>
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--jhu">JH</span>
+      <div class="experience-list__content">
+        <h3>Johns Hopkins Bloomberg School of Public Health</h3>
+        <p>Research Assistant - Department of Environmental Health and Engineering</p>
+      </div>
+      <time>Dec 2023 - May 2026</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
 
-  <article class="experience-node experience-node--left">
-    <div class="experience-node__marker"><span>SM</span></div>
-    <div class="experience-node__card">
-      <span class="experience-node__date">Sep 2023 - May 2026</span>
-      <h3>Senior Research Data Analyst @ Johns Hopkins University School of Medicine</h3>
-      <p class="experience-node__advisor">Advisor: William Checkley, Professor of Medicine, Epidemiology &amp; Biostatistics</p>
-    </div>
-  </article>
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--medicine">JH</span>
+      <div class="experience-list__content">
+        <h3>Johns Hopkins University School of Medicine</h3>
+        <p>Senior Research Data Analyst - Medicine, Epidemiology and Biostatistics</p>
+      </div>
+      <time>Sep 2023 - May 2026</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
 
-  <article class="experience-node experience-node--right">
-    <div class="experience-node__marker"><span>TA</span></div>
-    <div class="experience-node__card">
-      <span class="experience-node__date">Jan 2022 - Dec 2022</span>
-      <h3>Teaching Assistant @ Johns Hopkins University</h3>
-      <p class="experience-node__advisor">Department of Applied Mathematics and Statistics</p>
-    </div>
-  </article>
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--teaching">TA</span>
+      <div class="experience-list__content">
+        <h3>Johns Hopkins University</h3>
+        <p>Teaching Assistant - Department of Applied Mathematics and Statistics</p>
+      </div>
+      <time>Jan 2022 - Dec 2022</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
 
-  <article class="experience-node experience-node--left">
-    <div class="experience-node__marker"><span>DS</span></div>
-    <div class="experience-node__card">
-      <span class="experience-node__date">May 2020 - Aug 2021</span>
-      <h3>Data Scientist @ Qiangyuan Sporting Goods Co.</h3>
-      <p class="experience-node__advisor">Zhuhai, China</p>
-    </div>
-  </article>
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--data">DS</span>
+      <div class="experience-list__content">
+        <h3>Qiangyuan Sporting Goods Co.</h3>
+        <p>Data Scientist - Zhuhai, China</p>
+      </div>
+      <time>May 2020 - Aug 2021</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
 
-  <article class="experience-node experience-node--right">
-    <div class="experience-node__marker"><span>SD</span></div>
-    <div class="experience-node__card">
-      <span class="experience-node__date">Jan 2021 - May 2021</span>
-      <h3>Research Assistant @ Shandong University, Shandong Big Data Research Association</h3>
-      <p class="experience-node__advisor">Full-time, Prof. Yufeng Shi: Statistics &amp; Finance, Jinan, China</p>
-    </div>
-  </article>
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--shandong">SD</span>
+      <div class="experience-list__content">
+        <h3>Shandong University, Shandong Big Data Research Association</h3>
+        <p>Research Assistant - Statistics and Finance, Jinan, China</p>
+      </div>
+      <time>Jan 2021 - May 2021</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
+  </div>
 </section>
 
 <span class='anchor' id='education'></span>
