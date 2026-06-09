@@ -40,6 +40,26 @@
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
 
+$font-signature: "Virgolate", "Cormorant Garamond", "Bodoni 72", Georgia, "Times New Roman", serif;
+$font-hero: "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-card-title: "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-card-number: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+$font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+$font-nav: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+$font-label: "IBM Plex Mono", Monaco, Consolas, "Lucida Console", monospace;
+$mona-blue: #0a1e3e;
+$mona-pearl: #fafbfd;
+$mona-silver: #bcccdf;
+$mona-gold: #c9a646;
+$mona-border: rgba(188, 204, 223, .85);
+$mona-card-bg: rgba(255, 255, 255, .88);
+$mona-card-shadow: 0 14px 38px rgba(7, 17, 31, .08);
+$mona-hover-shadow: 0 20px 50px rgba(7, 17, 31, .16);
+$mona-card-radius: 24px;
+$mona-profile-radius: 28px;
+$mona-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, .85);
+$mona-gold-edge: inset 0 0 0 1px rgba(201, 166, 70, .35);
+
 .paper-box {
     display: flex;
     justify-content: left;
@@ -105,7 +125,9 @@ h1:before, .anchor:before {
     margin-left: -.5em;
     color: white;
     background-color: #00369f;
+    font-family: $font-label;
     font-size: .8em;
+    font-weight: 500;
 }
 
 .scholar-summary,
@@ -131,14 +153,15 @@ h1:before, .anchor:before {
     align-content: center;
     padding: .78rem .9rem;
     overflow: hidden;
-    border: 1px solid rgba(142, 163, 187, .38);
-    border-radius: 8px;
+    border: 1.5px solid $mona-border;
+    border-radius: $mona-card-radius;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(238, 246, 251, .94)),
+        linear-gradient(135deg, $mona-card-bg, rgba(250, 251, 253, .9)),
         radial-gradient(circle at 18% 12%, rgba(91, 192, 226, .2), rgba(91, 192, 226, 0) 42%);
-    box-shadow: 0 12px 26px rgba(38, 66, 94, .09), inset 0 1px 0 rgba(255, 255, 255, .88);
-    color: #183650;
+    box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
+    color: $mona-blue;
     text-decoration: none !important;
+    backdrop-filter: saturate(140%) blur(6px);
 
     &::before {
         content: "";
@@ -147,12 +170,14 @@ h1:before, .anchor:before {
         left: 0;
         width: 100%;
         height: 3px;
-        background: linear-gradient(90deg, #2f7db7, #74d7ef, #d5a438);
+        background: linear-gradient(90deg, rgba(10, 30, 62, 0), $mona-gold 50%, rgba(10, 30, 62, 0));
     }
 
     strong {
-        color: #102235;
+        color: $mona-blue;
+        font-family: $font-card-number;
         font-size: 1.28rem;
+        font-weight: 600;
         line-height: 1;
     }
 
@@ -160,9 +185,10 @@ h1:before, .anchor:before {
     em {
         margin-top: .3rem;
         color: #53677b;
+        font-family: $font-label;
         font-size: .76em;
         font-style: normal;
-        font-weight: 800;
+        font-weight: 500;
         letter-spacing: 0;
         text-transform: uppercase;
     }
@@ -171,7 +197,7 @@ h1:before, .anchor:before {
 .scholar-matrix__cell--profile {
     background:
         radial-gradient(circle at 15% 16%, rgba(116, 215, 239, .32), rgba(116, 215, 239, 0) 44%),
-        linear-gradient(135deg, #071b34, #123c5c 58%, #1e6f9d);
+        linear-gradient(135deg, $mona-blue, #123c5c 58%, #1e6f9d);
     color: #effbff;
     box-shadow: 0 14px 30px rgba(16, 44, 72, .18), inset 0 1px 0 rgba(255, 255, 255, .18);
 
@@ -257,8 +283,9 @@ h1:before, .anchor:before {
         border-radius: 6px;
         background: rgba(7, 27, 52, .86);
         color: #c9f2ff;
+        font-family: $font-nav;
         font-size: .76em;
-        font-weight: 700;
+        font-weight: 600;
         cursor: pointer;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
     }
@@ -485,7 +512,7 @@ h1:before, .anchor:before {
         border-radius: 8px;
         background: transparent;
         color: #eaffff;
-        font-family: "Courier New", monospace;
+        font-family: $font-label;
         font-size: .86em;
         font-weight: 800;
         letter-spacing: 0;
@@ -544,24 +571,28 @@ h1:before, .anchor:before {
         display: block;
         margin-bottom: .18rem;
         color: #00d5ff;
+        font-family: $font-label;
         font-size: .78em;
-        font-weight: 700;
+        font-weight: 500;
     }
 
     em {
         display: inline-block;
         margin-bottom: .22rem;
         color: #8fbaca;
+        font-family: $font-label;
         font-size: .68em;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 500;
         text-transform: uppercase;
     }
 
     strong {
         display: block;
         color: #f3fdff;
+        font-family: $font-card-title;
         font-size: .82em;
+        font-weight: 700;
         line-height: 1.35;
 
         a {
@@ -717,7 +748,8 @@ h1:before, .anchor:before {
 
             a {
                 color: #7ff0ff;
-                font-weight: 700;
+                font-family: $font-nav;
+                font-weight: 600;
                 text-decoration: none;
             }
 
@@ -735,8 +767,9 @@ h1:before, .anchor:before {
             border-radius: 5px;
             background: rgba(0, 213, 255, .1);
             color: #eaffff;
+            font-family: $font-label;
             font-size: .68em;
-            font-weight: 800;
+            font-weight: 500;
             text-decoration: none;
         }
     }
@@ -753,8 +786,9 @@ h1:before, .anchor:before {
             border-radius: 5px;
             background: rgba(255, 90, 179, .14);
             color: #f3fdff;
+            font-family: $font-label;
             font-size: .68em;
-            font-weight: 800;
+            font-weight: 500;
             text-decoration: none;
         }
     }
@@ -827,14 +861,15 @@ h1:before, .anchor:before {
 .experience-list {
     position: relative;
     margin: 1.25rem 0 2.4rem;
-    padding: .82rem .95rem .78rem;
-    border: 1px solid rgba(189, 207, 226, .78);
-    border-radius: 12px;
+    padding: .95rem 1.05rem .9rem;
+    border: 1.5px solid $mona-border;
+    border-radius: $mona-card-radius;
     background:
         radial-gradient(circle at 10% 0%, rgba(111, 205, 239, .18), transparent 18rem),
         radial-gradient(circle at 96% 12%, rgba(213, 164, 56, .12), transparent 12rem),
-        linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(239, 247, 252, .92));
-    box-shadow: 0 18px 38px rgba(36, 61, 86, .14), inset 0 1px 0 rgba(255, 255, 255, .92);
+        linear-gradient(145deg, $mona-card-bg, rgba(250, 251, 253, .9));
+    box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
+    backdrop-filter: saturate(140%) blur(6px);
     overflow: hidden;
 }
 
@@ -849,7 +884,7 @@ h1:before, .anchor:before {
     h2 {
         margin: 0;
         color: #132d55;
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: $font-card-title;
         font-size: 1.34rem;
         line-height: 1.1;
 
@@ -902,29 +937,29 @@ h1:before, .anchor:before {
     gap: .36rem;
     min-height: 1.85rem;
     padding: .28rem .66rem;
-    border: 1px solid rgba(173, 198, 219, .82);
-    border-radius: 999px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(244, 249, 253, .92));
-    color: #173c63;
-    font-family: Georgia, "Times New Roman", serif;
+    border: 1.5px solid $mona-border;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .9);
+    color: $mona-blue;
+    font-family: $font-label;
     font-size: .76rem;
     font-weight: 900;
     letter-spacing: .02em;
     line-height: 1;
     text-decoration: none !important;
-    box-shadow: 0 8px 18px rgba(36, 61, 86, .1), inset 0 1px 0 rgba(255, 255, 255, .92);
+    box-shadow: 0 6px 18px rgba(7, 17, 31, .08), inset 0 1px 0 rgba(255, 255, 255, .85);
     transition: border-color .18s ease, box-shadow .18s ease, color .18s ease, transform .18s ease;
 
     span {
-        color: #d5a438;
+        color: $mona-gold;
         font-size: .9rem;
         line-height: 1;
     }
 
     &:hover {
-        border-color: rgba(213, 164, 56, .58);
-        color: #102235;
-        box-shadow: 0 10px 20px rgba(36, 61, 86, .14), inset 0 1px 0 rgba(255, 255, 255, .94);
+        border-color: rgba(201, 166, 70, .45);
+        color: $mona-blue;
+        box-shadow: 0 6px 18px rgba(7, 17, 31, .12), inset 0 1px 0 rgba(255, 255, 255, .85);
         transform: translateY(-1px);
     }
 }
@@ -937,10 +972,10 @@ h1:before, .anchor:before {
     gap: .72rem;
     min-height: 4.05rem;
     padding: .52rem .7rem .52rem .85rem;
-    border: 1px solid rgba(197, 211, 225, .84);
-    border-radius: 10px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, .99), rgba(248, 251, 253, .94));
-    box-shadow: 0 8px 18px rgba(37, 60, 83, .08), inset 0 1px 0 rgba(255, 255, 255, .92);
+    border: 1.5px solid rgba(188, 204, 223, .7);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(250, 251, 253, .9));
+    box-shadow: 0 8px 18px rgba(7, 17, 31, .06), inset 0 1px 0 rgba(255, 255, 255, .85);
 }
 
 .experience-list__item:not(:has(.experience-list__chevron)) {
@@ -1019,7 +1054,9 @@ h1:before, .anchor:before {
 
     h3 {
         margin: 0;
-        color: #132d55;
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-weight: 700;
         font-size: .98rem;
         line-height: 1.2;
     }
@@ -1033,9 +1070,10 @@ h1:before, .anchor:before {
 }
 
 .experience-list__item time {
-    color: #b58424;
+    color: $mona-gold;
+    font-family: $font-label;
     font-size: .84em;
-    font-weight: 900;
+    font-weight: 500;
     white-space: nowrap;
 }
 
@@ -1084,13 +1122,14 @@ h1:before, .anchor:before {
 .skill-matrix {
     display: grid;
     margin: 1.15rem 0 2.4rem;
-    padding: .18rem .6rem;
-    border: 1px solid rgba(189, 207, 226, .72);
-    border-radius: 12px;
+    padding: .3rem .7rem;
+    border: 1.5px solid $mona-border;
+    border-radius: $mona-card-radius;
     background:
         radial-gradient(circle at 4% 0%, rgba(111, 205, 239, .14), transparent 15rem),
-        linear-gradient(145deg, rgba(255, 255, 255, .97), rgba(244, 249, 252, .92));
-    box-shadow: 0 18px 38px rgba(36, 61, 86, .12), inset 0 1px 0 rgba(255, 255, 255, .94);
+        linear-gradient(145deg, $mona-card-bg, rgba(250, 251, 253, .9));
+    box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
+    backdrop-filter: saturate(140%) blur(6px);
 }
 
 .skill-row {
@@ -1111,8 +1150,8 @@ h1:before, .anchor:before {
     min-width: 0;
     align-items: center;
     gap: .58rem;
-    color: #132d55;
-    font-family: Georgia, "Times New Roman", serif;
+    color: $mona-blue;
+    font-family: $font-card-title;
     font-size: .98rem;
     line-height: 1.1;
 
@@ -1143,13 +1182,13 @@ h1:before, .anchor:before {
 
 .skill-row__icon--programming::before {
     content: "{}";
-    font-family: "Courier New", monospace;
+    font-family: $font-label;
     font-size: .58rem;
 }
 
 .skill-row__icon--biostatistics::before {
     content: "β";
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: $font-card-number;
 }
 
 .skill-row__icon--exposure::before {
@@ -1160,7 +1199,7 @@ h1:before, .anchor:before {
 
 .skill-row__icon--omics::before {
     content: "Ω";
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: $font-card-number;
 }
 
 .skill-row__icon--tools::before {
@@ -1182,12 +1221,12 @@ h1:before, .anchor:before {
         justify-content: center;
         padding: .24rem .7rem;
         border: 1px solid rgba(182, 197, 212, .72);
-        border-radius: 9px;
-        background: linear-gradient(135deg, #ffffff, #f5f8fb);
-        color: #173c63;
-        font-family: Georgia, "Times New Roman", serif;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #ffffff, $mona-pearl);
+        color: $mona-blue;
+        font-family: $font-label;
         font-size: .86rem;
-        font-weight: 800;
+        font-weight: 500;
         line-height: 1.1;
         box-shadow: 0 5px 12px rgba(36, 61, 86, .08), inset 0 1px 0 rgba(255, 255, 255, .94);
         white-space: nowrap;
@@ -1240,12 +1279,13 @@ h1:before, .anchor:before {
     align-items: center;
     gap: .28rem;
     padding: .38rem .78rem;
-    border: 1px solid rgba(142, 163, 187, .34);
+    border: 1.5px solid rgba(188, 204, 223, .72);
     border-radius: 999px;
-    background: linear-gradient(135deg, #f7fafc, #edf3f8);
-    color: #334b62;
-    font-size: .78em;
-    font-weight: 800;
+    background: rgba(255, 255, 255, .86);
+    color: $mona-blue;
+    font-family: $font-label;
+    font-size: .74em;
+    font-weight: 500;
     line-height: 1;
     cursor: pointer;
     transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
@@ -1258,8 +1298,8 @@ h1:before, .anchor:before {
     &:hover,
     &.is-active {
         border-color: rgba(213, 164, 56, .56);
-        background: linear-gradient(135deg, #eaf6fc, #fff7e7);
-        color: #173c63;
+        background: linear-gradient(135deg, #eaf6fc, #fff8e8);
+        color: $mona-blue;
         box-shadow: 0 8px 18px rgba(47, 125, 183, .14);
     }
 }
@@ -1268,8 +1308,8 @@ h1:before, .anchor:before {
     grid-column: 1 / -1;
     margin: .5rem 0 0;
     padding: 1rem;
-    border: 1px dashed rgba(142, 163, 187, .5);
-    border-radius: 8px;
+    border: 1.5px dashed rgba(188, 204, 223, .7);
+    border-radius: $mona-card-radius;
     background: rgba(248, 251, 253, .82);
     color: #536577;
     text-align: center;
@@ -1281,14 +1321,22 @@ h1:before, .anchor:before {
     gap: 1.25rem;
     align-items: stretch;
     padding: .9rem;
-    border: 1px solid #dce5ee;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #ffffff 0%, #fbfdff 100%);
-    box-shadow: 0 10px 28px rgba(24, 43, 67, .08);
+    border: 1.5px solid $mona-border;
+    border-radius: $mona-card-radius;
+    background: linear-gradient(135deg, $mona-card-bg 0%, rgba(250, 251, 253, .94) 100%);
+    box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
+    backdrop-filter: saturate(140%) blur(6px);
     scroll-margin-top: 6rem;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 
     @include breakpoint(max-width $medium) {
         grid-template-columns: 1fr;
+    }
+
+    &:hover {
+        border-color: rgba(201, 166, 70, .45);
+        box-shadow: $mona-hover-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
+        transform: translateY(-2px);
     }
 }
 
@@ -1298,7 +1346,7 @@ h1:before, .anchor:before {
 
 .pub-card__image-wrap {
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 18px;
     min-height: 230px;
     background: #eef4f8;
 
@@ -1321,7 +1369,10 @@ h1:before, .anchor:before {
 
     h3 {
         margin: .35rem 0 .45rem;
+        color: $mona-blue;
+        font-family: $font-card-title;
         font-size: 1.05em;
+        font-weight: 700;
         line-height: 1.35;
     }
 
@@ -1336,7 +1387,9 @@ h1:before, .anchor:before {
     gap: .45rem;
     align-items: center;
     color: #51677d;
+    font-family: $font-label;
     font-size: .78em;
+    font-weight: 500;
 
     span {
         padding: .22rem .5rem;
@@ -1383,12 +1436,13 @@ h1:before, .anchor:before {
 
     .pub-card__tag {
         padding: .24rem .5rem;
-        border: 1px solid transparent;
-        border-radius: 6px;
-        background: #f4f7fa;
+        border: 1px solid rgba(188, 204, 223, .58);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .78);
         color: #526476;
+        font-family: $font-label;
         font-size: .72em;
-        font-weight: 700;
+        font-weight: 500;
         line-height: 1.2;
         cursor: pointer;
     }
@@ -1408,24 +1462,22 @@ h1:before, .anchor:before {
     right: 0;
     left: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(185, 138, 36, .44);
-    background:
-        radial-gradient(circle at 8% 0%, rgba(116, 215, 239, .16), rgba(116, 215, 239, 0) 18rem),
-        linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(246, 250, 253, .96));
-    box-shadow: 0 12px 30px rgba(40, 66, 92, .14), inset 0 1px 0 rgba(255, 255, 255, .96);
-    backdrop-filter: blur(18px);
+    border-bottom: 0;
+    background: rgba(250, 251, 253, .96);
+    box-shadow: none;
+    backdrop-filter: saturate(150%) blur(10px);
 }
 
 .masthead__inner-wrap {
     width: min(96vw, 96rem);
     max-width: none !important;
-    margin: 0 auto;
-    padding: .46rem .78rem .4rem !important;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
+    margin: .55rem auto .38rem;
+    padding: .42rem .78rem !important;
+    border: 1.5px solid rgba(188, 204, 223, .75);
+    border-radius: 40px;
+    background: rgba(255, 255, 255, .72);
+    box-shadow: 0 10px 24px rgba(7, 17, 31, .06), $mona-inner-highlight;
+    backdrop-filter: saturate(140%) blur(10px);
 }
 
 .masthead__menu {
@@ -1461,10 +1513,10 @@ h1:before, .anchor:before {
     .visible-links a {
         margin: 0;
         padding: .52rem .34rem .48rem;
-        color: #20364f;
-        font-family: Georgia, "Times New Roman", serif;
+        color: $mona-blue;
+        font-family: $font-nav;
         font-size: clamp(.68rem, .82vw, .82rem);
-        font-weight: 700;
+        font-weight: 600;
         letter-spacing: 0;
         line-height: 1;
 
@@ -1474,7 +1526,7 @@ h1:before, .anchor:before {
     }
 
     .visible-links > .masthead__menu-item:nth-child(2) > a {
-        color: #102235;
+        color: $mona-blue;
 
         &::after {
             content: "";
@@ -1484,7 +1536,7 @@ h1:before, .anchor:before {
             left: .35rem;
             height: 3px;
             border-radius: 999px;
-            background: linear-gradient(90deg, #d5a438, #b98a24);
+            background: linear-gradient(90deg, rgba(201, 166, 70, 0), $mona-gold 50%, rgba(201, 166, 70, 0));
         }
     }
 }
@@ -1495,9 +1547,9 @@ h1:before, .anchor:before {
 }
 
 .masthead__signature {
-    color: #102235 !important;
-    font-family: "Virgolate", "Cormorant Garamond", "Bodoni 72", Georgia, "Times New Roman", serif !important;
-    font-size: clamp(1.24rem, 1.62vw, 1.7rem) !important;
+    color: $mona-blue !important;
+    font-family: $font-signature !important;
+    font-size: clamp(1.32rem, 1.72vw, 1.82rem) !important;
     font-weight: 900 !important;
     letter-spacing: .015em !important;
     line-height: 1 !important;
@@ -1507,41 +1559,40 @@ h1:before, .anchor:before {
 .masthead__language-toggle {
     display: inline-flex !important;
     align-items: center;
-    gap: .12rem;
-    min-height: 1.9rem;
+    gap: .18rem;
+    min-height: 2.1rem;
     margin-left: auto;
-    padding: 0 0 0 .65rem !important;
-    border: 0;
-    border-left: 1px solid rgba(180, 192, 205, .58);
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
+    padding: .18rem !important;
+    border: 1.5px solid rgba(188, 204, 223, .72);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .86);
+    box-shadow: 0 8px 20px rgba(7, 17, 31, .06), $mona-inner-highlight;
+    backdrop-filter: saturate(150%) blur(8px);
 
     a {
         display: inline-flex !important;
-        min-width: 2.2rem;
-        min-height: 1.4rem;
+        min-width: 2.25rem;
+        min-height: 1.58rem;
         align-items: center;
         justify-content: center;
         margin: 0 !important;
-        padding: .18rem .24rem !important;
+        padding: .22rem .38rem !important;
         border: 0;
-        border-radius: 0;
+        border-radius: 999px;
         background: transparent;
-        color: #8a99a9 !important;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: .78rem;
-        font-weight: 900;
+        color: rgba(10, 30, 62, .52) !important;
+        font-family: $font-nav;
+        font-size: .76rem;
+        font-weight: 600;
         line-height: 1;
         text-decoration: none !important;
-        transition: color .18s ease;
+        transition: background .18s ease, color .18s ease, box-shadow .18s ease;
     }
 
     a.is-active {
-        background: transparent;
-        color: #173c63 !important;
-        box-shadow: none;
+        background: $mona-blue;
+        color: $mona-pearl !important;
+        box-shadow: 0 6px 14px rgba(7, 17, 31, .18), $mona-gold-edge;
         transform: none;
     }
 }
@@ -1558,8 +1609,9 @@ body.home-page {
     background:
         radial-gradient(circle at 12% 0%, rgba(117, 197, 226, .24), rgba(117, 197, 226, 0) 24rem),
         radial-gradient(circle at 88% 16%, rgba(214, 170, 68, .14), rgba(214, 170, 68, 0) 18rem),
-        linear-gradient(180deg, #ffffff 0%, #f6f9fc 39%, #edf3f7 100%);
-    color: #1f2f3f;
+        linear-gradient(180deg, $mona-pearl 0%, #f6f9fc 39%, #edf3f7 100%);
+    color: $mona-blue;
+    font-family: $font-body;
 }
 
 body.home-page #main {
@@ -1591,7 +1643,7 @@ body.home-page .page__content {
     align-items: center;
     justify-content: flex-start;
     margin: 0;
-    padding: 2.85rem clamp(1.2rem, 4vw, 3.4rem) clamp(1.8rem, 3vw, 2.8rem);
+    padding: 4.55rem clamp(1.2rem, 4vw, 3.4rem) clamp(1.8rem, 3vw, 2.8rem);
     scroll-margin-top: 5rem;
 }
 
@@ -1610,14 +1662,14 @@ body.home-page .page__content {
     aspect-ratio: 1916 / 821;
     min-height: 0;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 24px;
     background-image:
         linear-gradient(180deg, rgba(247, 252, 255, .02) 0%, rgba(47, 125, 183, .04) 54%, rgba(15, 35, 55, .08) 100%),
         url("/images/MyWeb_background_main.png");
     background-position: center;
     background-size: cover;
-    border: 1px solid rgba(214, 224, 234, .58);
-    box-shadow: 0 26px 58px rgba(48, 75, 103, .18), 0 0 0 1px rgba(255, 255, 255, .66);
+    border: 1.5px solid rgba(188, 204, 223, .55);
+    box-shadow: 0 26px 58px rgba(7, 17, 31, .12), inset 0 1px 0 rgba(255, 255, 255, .65);
 }
 
 body.home-page.is-home-panel-transition .home-landing__hero,
@@ -1644,43 +1696,62 @@ body.home-page.is-home-panel-transition .home-after-landing {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 9.4rem minmax(0, 1fr);
-    gap: 1.18rem;
+    grid-template-columns: 9.7rem minmax(0, 1fr);
+    gap: 1.32rem;
     align-items: center;
-    width: min(66rem, 66vw);
+    width: min(66rem, 64vw);
     max-width: calc(100% - 2rem);
     margin: -2.05rem auto 0;
-    padding: 1.12rem 1.3rem;
-    border: 1px solid rgba(154, 188, 215, .42);
-    border-radius: 12px;
+    padding: 1.12rem 1.36rem;
+    overflow: hidden;
+    border: 2px solid rgba(188, 204, 223, .95);
+    border-radius: $mona-profile-radius;
     background:
-        radial-gradient(circle at 92% 0%, rgba(111, 205, 239, .16), transparent 22rem),
-        linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(242, 249, 253, .9));
-    box-shadow: 0 26px 52px rgba(43, 65, 87, .18), inset 0 1px 0 rgba(255, 255, 255, .94);
-    backdrop-filter: blur(18px);
+        radial-gradient(circle at 92% 0%, rgba(188, 204, 223, .2), transparent 22rem),
+        linear-gradient(135deg, rgba(255, 255, 255, .88), rgba(250, 251, 253, .82));
+    box-shadow: 0 24px 60px rgba(7, 17, 31, .12), 0 0 0 1px rgba(255, 255, 255, .6), $mona-inner-highlight, $mona-gold-edge;
+    backdrop-filter: saturate(150%) blur(10px);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 1.05rem;
+        left: 1.3rem;
+        width: 12rem;
+        height: 1px;
+        background: linear-gradient(90deg, $mona-gold, rgba(201, 166, 70, 0));
+        pointer-events: none;
+    }
 
     img {
-        width: 9.4rem;
-        height: 9.4rem;
-        border: 6px solid #ffffff;
+        width: 9.7rem;
+        height: 9.7rem;
+        border: 2px solid rgba(188, 204, 223, .9);
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 0 14px 32px rgba(36, 52, 78, .2), 0 0 0 2px rgba(116, 215, 239, .42);
+        box-shadow: 0 14px 32px rgba(7, 17, 31, .12), 0 0 0 6px rgba(250, 251, 253, .95), 0 0 0 8px rgba(201, 166, 70, .32), $mona-inner-highlight;
     }
 
     h1 {
         margin: 0 0 .18rem;
         padding-bottom: 0;
         border-bottom: 0;
-        color: #102235;
-        font-size: clamp(1.72rem, 2.35vw, 2.5rem);
-        font-weight: 900;
+        color: $mona-blue;
+        font-family: $font-hero;
+        font-size: clamp(1.82rem, 2.5vw, 2.72rem);
+        font-weight: 600;
         line-height: 1;
+
+        &::before {
+            display: none;
+            content: none;
+        }
     }
 
     p {
         margin: .2rem 0;
-        color: #4d6072;
+        color: rgba(10, 30, 62, .74);
+        font-family: $font-body;
         font-size: clamp(.88rem, 1.08vw, 1.02rem);
         line-height: 1.32;
     }
@@ -1688,13 +1759,13 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .home-landing__role {
     margin-top: 0 !important;
-    color: #1d6fa8 !important;
-    font-weight: 900;
+    color: #1f6ba1 !important;
+    font-weight: 700;
 }
 
 .home-landing__track {
     margin-top: .1rem !important;
-    color: #4d6072 !important;
+    color: rgba(10, 30, 62, .68) !important;
     font-size: clamp(.84rem, 1.02vw, .96rem) !important;
     line-height: 1.28 !important;
 }
@@ -1702,9 +1773,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-landing__links {
     display: flex;
     flex-wrap: wrap;
-    gap: .52rem;
+    gap: .58rem;
     align-items: center;
-    margin-top: .86rem;
+    margin-top: .9rem;
     padding-top: 0;
     border-top: 0;
 
@@ -1714,40 +1785,41 @@ body.home-page.is-home-panel-transition .home-after-landing {
         justify-content: center;
         gap: .55rem;
         min-height: 2.45rem;
-        padding: .42rem .82rem;
-        border: 1px solid rgba(173, 198, 219, .72);
+        padding: .42rem .88rem;
+        border: 1.5px solid $mona-border;
         border-radius: 999px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(246, 251, 255, .94));
-        color: #102235;
+        background: rgba(255, 255, 255, .9);
+        color: $mona-blue;
+        font-family: $font-nav;
         font-size: clamp(.86rem, 1vw, .98rem);
-        font-weight: 900;
+        font-weight: 600;
         text-decoration: none !important;
-        box-shadow: 0 10px 20px rgba(24, 43, 67, .12), inset 0 1px 0 rgba(255, 255, 255, .94);
+        box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
         transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
     a:hover {
-        border-color: rgba(213, 164, 56, .62);
-        background: linear-gradient(135deg, #ffffff, #edf7ff);
-        color: #102235;
+        border-color: rgba(201, 166, 70, .45);
+        background: $mona-blue;
+        color: $mona-pearl;
         transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(24, 43, 67, .16), inset 0 1px 0 rgba(255, 255, 255, .92);
+        box-shadow: 0 6px 18px rgba(7, 17, 31, .12);
     }
 
     a:first-child:hover {
-        color: #102235;
-        background: linear-gradient(135deg, #ffffff, #edf7ff);
+        color: $mona-pearl;
+        background: $mona-blue;
     }
 }
 
 .home-link-icon {
     position: relative;
     display: inline-grid;
-    width: 1.42rem;
-    height: 1.42rem;
+    width: 1.34rem;
+    height: 1.34rem;
     flex: 0 0 auto;
     place-items: center;
-    color: #12365a;
+    color: $mona-blue;
     font-size: .95rem;
     font-weight: 900;
     line-height: 1;
@@ -1760,8 +1832,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     svg {
         display: block;
-        width: 1.32rem;
-        height: 1.32rem;
+        width: 1.18rem;
+        height: 1.18rem;
         fill: none;
         stroke: currentColor;
         stroke-linecap: round;
@@ -1772,7 +1844,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .home-link-icon--researchgate {
     width: 1.48rem;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: $font-card-number;
     font-size: 1.1rem;
     letter-spacing: -.03em;
 }
@@ -1803,11 +1875,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-link-icon--researchgate,
 .home-link-icon--github,
 .home-link-icon--scholar {
-    color: #12365a;
+    color: $mona-blue;
 }
 
 .home-link-icon--github {
-    color: #0f1720;
+    color: #05070a;
 }
 
 .home-after-landing {
@@ -1847,12 +1919,13 @@ body.home-page.is-home-panel-transition .home-after-landing {
         position: relative;
         overflow: hidden;
         padding: 1rem .95rem 1.1rem;
-        border: 1px solid rgba(116, 178, 213, .36);
-        border-radius: 8px;
+        border: 1.5px solid $mona-border;
+        border-radius: $mona-card-radius;
         background:
             radial-gradient(circle at 20% 0%, rgba(116, 215, 239, .28), rgba(116, 215, 239, 0) 42%),
             linear-gradient(160deg, rgba(255, 255, 255, .96), rgba(237, 246, 251, .92) 58%, rgba(225, 234, 241, .92));
-        box-shadow: 0 18px 34px rgba(24, 49, 75, .13), inset 0 1px 0 rgba(255, 255, 255, .9);
+        box-shadow: $mona-card-shadow, $mona-inner-highlight, $mona-gold-edge;
+        backdrop-filter: saturate(140%) blur(6px);
 
         &::before {
             content: "";
@@ -1889,15 +1962,17 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__avatar img {
         max-width: 11rem;
         padding: 4px;
-        border: 1px solid rgba(116, 215, 239, .58);
+        border: 2px solid rgba(188, 204, 223, .9);
         background: linear-gradient(135deg, #ffffff, #d8edf8);
-        box-shadow: 0 12px 28px rgba(50, 72, 92, .16), 0 0 0 5px rgba(255, 255, 255, .62);
+        box-shadow: 0 12px 28px rgba(50, 72, 92, .16), 0 0 0 5px rgba(255, 255, 255, .62), 0 0 0 7px rgba(201, 166, 70, .22);
     }
 
     .author__name {
         margin: .8rem 0 .5rem;
-        color: #102235;
+        color: $mona-blue;
+        font-family: $font-hero;
         font-size: $type-size-4;
+        font-weight: 600;
         line-height: 1.15;
     }
 
@@ -1926,10 +2001,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
         min-height: 2rem;
         margin: 0;
         padding: .34rem .52rem;
-        border: 1px solid rgba(142, 163, 187, .28);
-        border-radius: 7px;
+        border: 1px solid rgba(188, 204, 223, .65);
+        border-radius: 999px;
         background: rgba(255, 255, 255, .64);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
+        box-shadow: $mona-inner-highlight;
         font-size: .82em;
         line-height: 1.25;
     }
@@ -1955,7 +2030,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
     h2 {
         position: relative;
         margin-top: 2.2rem;
-        color: #102235;
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-weight: 700;
         letter-spacing: 0;
 
         &::after {
@@ -2006,8 +2083,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
         text-align: center;
 
         img {
-            width: 9.4rem;
-            height: 9.4rem;
+            width: 9.7rem;
+            height: 9.7rem;
         }
     }
 
@@ -2059,13 +2136,13 @@ body.home-page.is-home-panel-transition .home-after-landing {
     position: relative;
     min-height: 15rem;
     overflow: hidden;
-    padding: 1.25rem 1.15rem 1.2rem;
-    border: 1px solid rgba(201, 212, 224, .86);
-    border-radius: 8px;
+    padding: 1.28rem 1.2rem 1.25rem;
+    border: 1.5px solid $mona-border;
+    border-radius: $mona-card-radius;
     background:
         radial-gradient(circle at 86% 90%, rgba(76, 141, 190, .12), rgba(76, 141, 190, 0) 34%),
         linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(247, 250, 253, .95));
-    box-shadow: 0 18px 34px rgba(34, 55, 78, .12), inset 0 1px 0 rgba(255, 255, 255, .9);
+    box-shadow: $mona-card-shadow, $mona-inner-highlight;
     scroll-margin-top: 7rem;
     transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 
@@ -2100,9 +2177,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
         z-index: 1;
         margin: 1rem 0 .88rem;
         padding-bottom: .82rem;
-        color: #132d55;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 1.03rem;
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-size: 1.08rem;
+        font-weight: 700;
         line-height: 1.17;
 
         &::after {
@@ -2112,7 +2190,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
             bottom: 0;
             width: 2.15rem;
             height: 2px;
-            background: #d5a438;
+            background: $mona-gold;
         }
     }
 
@@ -2122,14 +2200,16 @@ body.home-page.is-home-panel-transition .home-after-landing {
         max-width: 15.5rem;
         margin: 0;
         color: #536273;
+        font-family: $font-body;
+        font-weight: 400;
         font-size: .82em;
         line-height: 1.46;
     }
 
     &:hover {
-        border-color: rgba(47, 125, 183, .38);
-        box-shadow: 0 22px 38px rgba(34, 55, 78, .15), 0 0 0 1px rgba(213, 164, 56, .14), inset 0 1px 0 rgba(255, 255, 255, .95);
-        transform: translateY(-3px);
+        border-color: rgba(201, 166, 70, .45);
+        box-shadow: $mona-hover-shadow, $mona-inner-highlight;
+        transform: translateY(-2px);
     }
 }
 
@@ -2137,9 +2217,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
     position: relative;
     z-index: 1;
     display: block;
-    color: #d5a438;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.7rem;
+    color: $mona-gold;
+    font-family: $font-card-number;
+    font-size: 2rem;
+    font-weight: 600;
     line-height: 1;
 }
 
@@ -2152,10 +2233,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
     width: 2.35rem;
     height: 2.35rem;
     place-items: center;
-    border: 1px solid rgba(190, 201, 214, .82);
+    border: 1.5px solid rgba(188, 204, 223, .82);
     border-radius: 50%;
     background: linear-gradient(145deg, #ffffff, #f2f6fa);
-    box-shadow: 0 4px 12px rgba(33, 53, 74, .08), inset 0 1px 0 rgba(255, 255, 255, .95);
+    box-shadow: 0 4px 12px rgba(33, 53, 74, .08), $mona-inner-highlight;
     color: #1a4d87;
     font-size: 1rem;
 }
@@ -2165,7 +2246,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     z-index: 2;
     right: 1rem;
     bottom: .92rem;
-    color: #d5a438;
+    color: $mona-gold;
     font-size: 1.18rem;
     font-weight: 800;
     line-height: 1;
