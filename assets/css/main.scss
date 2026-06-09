@@ -1708,10 +1708,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 10.45rem minmax(0, 1fr);
+    grid-template-columns: 10.45rem max-content;
     gap: 1.38rem;
     align-items: center;
-    width: min(66rem, 64vw);
+    width: fit-content;
     max-width: calc(100% - 2rem);
     margin: -2.8rem auto 0;
     padding: 1.12rem 1.36rem;
@@ -1756,6 +1756,12 @@ body.home-page.is-home-panel-transition .home-after-landing {
         font-size: $type-home-body;
         line-height: 1.32;
     }
+
+    > div {
+        width: max-content;
+        max-width: 100%;
+        min-width: 0;
+    }
 }
 
 .home-landing__role {
@@ -1776,9 +1782,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .home-landing__links {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: .46rem;
     align-items: center;
+    width: max-content;
+    max-width: 100%;
     margin-top: .76rem;
     padding-top: 0;
     border-top: 0;
@@ -2033,6 +2041,14 @@ body.home-page.is-home-panel-transition .home-after-landing {
         color: $mona-blue;
         font-size: .82rem;
 
+        i {
+            width: auto;
+            margin: 0;
+            color: currentColor;
+            font-size: inherit;
+            line-height: 1;
+        }
+
         svg {
             width: 1.02rem;
             height: 1.02rem;
@@ -2121,6 +2137,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
         padding: 1.2rem 1rem;
         text-align: center;
 
+        > div {
+            width: 100%;
+            max-width: 100%;
+        }
+
         img {
             width: 10.2rem;
             height: 10.2rem;
@@ -2128,6 +2149,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .home-landing__links {
+        width: 100%;
+        flex-wrap: wrap;
         justify-content: center;
     }
 }
