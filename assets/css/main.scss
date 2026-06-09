@@ -1777,9 +1777,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-landing__links {
     display: flex;
     flex-wrap: wrap;
-    gap: .58rem;
+    gap: .46rem;
     align-items: center;
-    margin-top: .9rem;
+    margin-top: .76rem;
     padding-top: 0;
     border-top: 0;
 
@@ -1787,9 +1787,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: .55rem;
-        min-height: 2.45rem;
-        padding: .42rem .88rem;
+        gap: .46rem;
+        min-height: 2.18rem;
+        padding: .32rem .72rem;
         border: 1.5px solid $mona-border;
         border-radius: 999px;
         background: rgba(255, 255, 255, .9);
@@ -1819,12 +1819,12 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-link-icon {
     position: relative;
     display: inline-grid;
-    width: 1.34rem;
-    height: 1.34rem;
+    width: 1.12rem;
+    height: 1.12rem;
     flex: 0 0 auto;
     place-items: center;
     color: $mona-blue;
-    font-size: .95rem;
+    font-size: .82rem;
     font-weight: 900;
     line-height: 1;
 
@@ -1836,8 +1836,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     svg {
         display: block;
-        width: 1.18rem;
-        height: 1.18rem;
+        width: 1.02rem;
+        height: 1.02rem;
         fill: none;
         stroke: currentColor;
         stroke-linecap: round;
@@ -1847,9 +1847,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
 }
 
 .home-link-icon--researchgate {
-    width: 1.48rem;
+    width: 1.24rem;
     font-family: $font-card-number;
-    font-size: 1.1rem;
+    font-size: .96rem;
     letter-spacing: -.03em;
 }
 
@@ -1871,7 +1871,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 }
 
 .home-link-icon--github {
-    font-size: 1.05rem;
+    font-size: .92rem;
 }
 
 .home-link-icon--cv,
@@ -1992,7 +1992,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     .author__urls {
         display: grid;
-        gap: .38rem;
+        gap: .42rem;
         position: static;
         width: 100%;
         margin-top: .65rem;
@@ -2002,14 +2002,14 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__urls li {
         display: flex;
         align-items: center;
-        min-height: 2rem;
+        min-height: 2.18rem;
         margin: 0;
-        padding: .34rem .52rem;
-        border: 1px solid rgba(188, 204, 223, .65);
+        padding: .32rem .72rem;
+        border: 1.5px solid $mona-border;
         border-radius: 999px;
-        background: rgba(255, 255, 255, .64);
-        box-shadow: $mona-inner-highlight;
-        font-size: .82em;
+        background: rgba(255, 255, 255, .9);
+        box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
+        font-size: $type-home-small;
         line-height: 1.25;
     }
 
@@ -2020,27 +2020,28 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__urls a {
         display: inline-flex;
         align-items: center;
-        gap: .48rem;
-        color: #173c63;
-        font-weight: 800;
+        gap: .46rem;
+        color: $mona-blue;
+        font-family: $font-nav;
+        font-weight: 600;
         text-decoration: none;
     }
 
     .author__urls .home-link-icon {
-        width: 1.18rem;
-        height: 1.18rem;
+        width: 1.12rem;
+        height: 1.12rem;
         color: $mona-blue;
-        font-size: .92rem;
+        font-size: .82rem;
 
         svg {
-            width: 1.08rem;
-            height: 1.08rem;
+            width: 1.02rem;
+            height: 1.02rem;
         }
     }
 
     .author__urls .home-link-icon--researchgate {
-        width: 1.22rem;
-        font-size: 1.02rem;
+        width: 1.24rem;
+        font-size: .96rem;
     }
 
     .author__urls_sm a {
@@ -2050,8 +2051,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .author__urls_sm .home-link-icon {
-        width: 1.18rem;
-        height: 1.18rem;
+        width: 1.12rem;
+        height: 1.12rem;
         color: $mona-blue;
     }
 
