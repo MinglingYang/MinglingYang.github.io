@@ -20,6 +20,7 @@
     "Incoming Ph.D. Student in Epidemiology": "流行病学博士新生",
     "Environmental Epidemiology · Exposure Science · Biostatistics": "环境流行病学 · 暴露科学 · 生物统计",
     "CV": "简历",
+    "View CV": "查看简历",
     "Email": "邮箱",
     "Google Scholar": "Google Scholar",
     "ResearchGate": "ResearchGate",

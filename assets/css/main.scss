@@ -888,6 +888,47 @@ h1:before, .anchor:before {
     }
 }
 
+.experience-list:has(.experience-list__cv-link) .experience-list__items {
+    padding-top: 1.55rem;
+}
+
+.experience-list__cv-link {
+    position: absolute;
+    top: .78rem;
+    right: 1rem;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: .36rem;
+    min-height: 1.85rem;
+    padding: .28rem .66rem;
+    border: 1px solid rgba(173, 198, 219, .82);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(244, 249, 253, .92));
+    color: #173c63;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: .76rem;
+    font-weight: 900;
+    letter-spacing: .02em;
+    line-height: 1;
+    text-decoration: none !important;
+    box-shadow: 0 8px 18px rgba(36, 61, 86, .1), inset 0 1px 0 rgba(255, 255, 255, .92);
+    transition: border-color .18s ease, box-shadow .18s ease, color .18s ease, transform .18s ease;
+
+    span {
+        color: #d5a438;
+        font-size: .9rem;
+        line-height: 1;
+    }
+
+    &:hover {
+        border-color: rgba(213, 164, 56, .58);
+        color: #102235;
+        box-shadow: 0 10px 20px rgba(36, 61, 86, .14), inset 0 1px 0 rgba(255, 255, 255, .94);
+        transform: translateY(-1px);
+    }
+}
+
 .experience-list__item {
     position: relative;
     display: grid;
@@ -1007,6 +1048,18 @@ h1:before, .anchor:before {
 @include breakpoint(max-width $medium) {
     .experience-list__header {
         align-items: flex-start;
+    }
+
+    .experience-list:has(.experience-list__cv-link) .experience-list__items {
+        padding-top: .45rem;
+    }
+
+    .experience-list__cv-link {
+        position: relative;
+        top: auto;
+        right: auto;
+        justify-self: end;
+        margin: 0 .25rem .55rem auto;
     }
 
     .experience-list__item {
@@ -2031,11 +2084,14 @@ body.home-page.is-home-panel-transition .home-after-landing {
     &::after {
         content: "";
         position: absolute;
-        right: .72rem;
-        bottom: 1.42rem;
-        width: 7rem;
-        height: 5.6rem;
-        opacity: .18;
+        right: 0;
+        bottom: 0;
+        width: 58%;
+        height: 56%;
+        opacity: .38;
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        background-size: contain;
         pointer-events: none;
     }
 
@@ -2122,20 +2178,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
         linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(248, 251, 253, .95));
 
     &::after {
-        width: 7.2rem;
-        height: 5.8rem;
-        opacity: .24;
-        background:
-            radial-gradient(circle at 1rem .8rem, #8fa9bc 0 .14rem, transparent .15rem),
-            radial-gradient(circle at 2.55rem 1.65rem, #8fa9bc 0 .13rem, transparent .14rem),
-            radial-gradient(circle at 4.15rem .9rem, #8fa9bc 0 .12rem, transparent .13rem),
-            radial-gradient(circle at 5.3rem 2.65rem, #8fa9bc 0 .13rem, transparent .14rem),
-            radial-gradient(circle at 2.2rem 3.85rem, #8fa9bc 0 .12rem, transparent .13rem),
-            radial-gradient(circle at 6.2rem 4.65rem, #8fa9bc 0 .11rem, transparent .12rem),
-            linear-gradient(29deg, transparent 33%, #c2cfda 34% 36%, transparent 37%),
-            linear-gradient(125deg, transparent 40%, #c2cfda 41% 43%, transparent 44%),
-            linear-gradient(72deg, transparent 50%, #c2cfda 51% 53%, transparent 54%),
-            linear-gradient(145deg, transparent 58%, #c2cfda 59% 61%, transparent 62%);
+        width: 64%;
+        height: 62%;
+        opacity: .5;
+        background-image: url("/images/patterns/interest-pfas.svg");
     }
 }
 
@@ -2144,18 +2190,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
         linear-gradient(180deg, rgba(255, 255, 255, .98) 0%, rgba(248, 251, 253, .94) 62%, rgba(233, 239, 245, .96) 100%);
 
     &::after {
-        right: .25rem;
-        bottom: .65rem;
-        width: 8.7rem;
-        height: 4.8rem;
-        opacity: .2;
-        background:
-            linear-gradient(to top, rgba(135, 160, 180, .42) 0 1.7rem, transparent 1.7rem),
-            linear-gradient(to top, transparent 0 1.7rem, rgba(135, 160, 180, .34) 1.7rem 3.2rem, transparent 3.2rem),
-            linear-gradient(to top, transparent 0 1.7rem, rgba(135, 160, 180, .28) 1.7rem 2.55rem, transparent 2.55rem),
-            radial-gradient(ellipse at 35% 78%, rgba(120, 150, 174, .3), transparent 48%),
-            radial-gradient(ellipse at 62% 78%, rgba(120, 150, 174, .28), transparent 50%);
-        clip-path: polygon(0 100%, 0 72%, 9% 72%, 9% 56%, 16% 56%, 16% 68%, 24% 68%, 24% 38%, 31% 38%, 31% 68%, 39% 68%, 39% 50%, 47% 50%, 47% 68%, 56% 68%, 56% 31%, 65% 31%, 65% 68%, 74% 68%, 74% 48%, 82% 48%, 82% 68%, 91% 68%, 91% 60%, 100% 60%, 100% 100%);
+        width: 72%;
+        height: 58%;
+        opacity: .42;
+        background-image: url("/images/patterns/interest-air.svg");
     }
 }
 
@@ -2165,18 +2203,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
         linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(247, 250, 253, .95));
 
     &::after {
-        right: .72rem;
-        bottom: .65rem;
-        width: 7.4rem;
-        height: 5.7rem;
-        opacity: .16;
-        background:
-            radial-gradient(circle at 24% 45%, #7088a1 0 .55rem, transparent .57rem),
-            radial-gradient(circle at 47% 31%, #7088a1 0 .67rem, transparent .69rem),
-            radial-gradient(circle at 74% 22%, #7088a1 0 .77rem, transparent .79rem),
-            radial-gradient(ellipse at 24% 88%, #7088a1 0 1.05rem, transparent 1.07rem),
-            radial-gradient(ellipse at 47% 82%, #7088a1 0 1.18rem, transparent 1.2rem),
-            radial-gradient(ellipse at 74% 78%, #7088a1 0 1.35rem, transparent 1.37rem);
+        width: 74%;
+        height: 61%;
+        opacity: .5;
+        background-image: url("/images/patterns/interest-maternal.svg");
     }
 }
 
@@ -2188,18 +2218,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
     background-size: 1rem 1rem, 1rem 1rem, auto;
 
     &::after {
-        right: .75rem;
-        bottom: .85rem;
-        width: 8.3rem;
-        height: 5.2rem;
-        opacity: .2;
-        background:
-            linear-gradient(to top, transparent 0 1.1rem, #9aafbf 1.1rem 3.4rem, transparent 3.4rem) 0 0 / 1.25rem 100% no-repeat,
-            linear-gradient(to top, transparent 0 .65rem, #9aafbf .65rem 4.35rem, transparent 4.35rem) 1.55rem 0 / 1.25rem 100% no-repeat,
-            linear-gradient(to top, transparent 0 1.95rem, #9aafbf 1.95rem 2.9rem, transparent 2.9rem) 3.1rem 0 / 1.25rem 100% no-repeat,
-            linear-gradient(to top, transparent 0 .25rem, #9aafbf .25rem 4.8rem, transparent 4.8rem) 4.65rem 0 / 1.25rem 100% no-repeat,
-            repeating-linear-gradient(90deg, rgba(154, 175, 191, .22) 0 .08rem, transparent .08rem .7rem),
-            repeating-linear-gradient(0deg, rgba(154, 175, 191, .2) 0 .08rem, transparent .08rem .7rem);
+        width: 68%;
+        height: 66%;
+        opacity: .42;
+        background-image: url("/images/patterns/interest-data.svg");
     }
 }
 

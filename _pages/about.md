@@ -250,6 +250,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 ## Research/ Work Experience
 
 <section class="experience-list" aria-label="Research and work experience">
+  <a class="experience-list__cv-link" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">View CV <span aria-hidden="true">→</span></a>
   <div class="experience-list__items">
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
