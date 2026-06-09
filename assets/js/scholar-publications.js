@@ -1,4 +1,10 @@
 (function () {
+  var METRICS_REFRESH_MS = 5 * 60 * 1000;
+  var PUBLICATION_REFRESH_MS = 24 * 60 * 60 * 1000;
+  var MAX_FILTER_TAGS = 15;
+  var publicationRefreshTimer = null;
+  var metricsRefreshTimer = null;
+
   function normalizeTitle(value) {
     return String(value || "")
       .toLowerCase()
@@ -34,6 +40,14 @@
     return "https://raw.githubusercontent.com/" + repository + "/";
   }
 
+  function scholarJsonUrl(filename, cacheBust) {
+    var baseUrl = scholarBaseUrl();
+    if (!baseUrl) return null;
+    var url = baseUrl + "google-scholar-stats/" + filename;
+    if (cacheBust) url += (url.indexOf("?") === -1 ? "?" : "&") + "v=" + Date.now();
+    return url;
+  }
+
   function assetVersion() {
     return window.MINGLING_ASSET_VERSION || "20260608";
   }
@@ -60,6 +74,72 @@
     if (pub.pmid) return "https://pubmed.ncbi.nlm.nih.gov/" + pub.pmid + "/";
     if (pub.citedby_url) return pub.citedby_url;
     return "";
+  }
+
+  var tagRules = [
+    { label: "Household air pollution", patterns: [/household air pollution/i, /biomass cooking/i, /clean cooking/i, /lpg/i], score: 8 },
+    { label: "Air pollution", patterns: [/air pollution/i, /pm2\.?5/i, /ambient/i, /pollution/i], score: 7 },
+    { label: "Respiratory health", patterns: [/respiratory/i, /pneumonia/i, /lung function/i, /spirometry/i], score: 7 },
+    { label: "COPD screening", patterns: [/copd/i, /st george/i, /sgrq/i, /screening/i], score: 8 },
+    { label: "Chronic bronchitis", patterns: [/chronic bronchitis/i], score: 8 },
+    { label: "Child health", patterns: [/child/i, /children/i, /infant/i, /preschool/i, /growth/i, /neurodevelopment/i], score: 7 },
+    { label: "Maternal health", patterns: [/maternal/i, /women/i, /pregnan/i], score: 5 },
+    { label: "Exposure assessment", patterns: [/exposure/i, /sensor/i, /calibration/i, /monitoring/i], score: 6 },
+    { label: "Life course", patterns: [/birth/i, /life course/i, /longitudinal/i, /trajector/i], score: 5 },
+    { label: "LMIC cohorts", patterns: [/lmic/i, /low-and middle-income/i, /resource-limited/i, /multi-country/i, /multinational/i], score: 7 },
+    { label: "HAPIN", patterns: [/hapin/i], score: 7 },
+    { label: "GECo", patterns: [/geco/i, /global excellence in copd/i], score: 7 },
+    { label: "Peru", patterns: [/peru/i, /puno/i], score: 4 },
+    { label: "Nepal", patterns: [/nepal/i, /bhaktapur/i, /kathmandu/i], score: 4 },
+    { label: "Uganda", patterns: [/uganda/i, /kampala/i], score: 4 },
+    { label: "Guatemala", patterns: [/guatemala/i], score: 4 },
+    { label: "India", patterns: [/\bindia\b/i], score: 4 },
+    { label: "Rwanda", patterns: [/rwanda/i], score: 4 },
+    { label: "Data science", patterns: [/machine learning/i, /random forest/i, /xgboost/i, /model/i, /algorithm/i], score: 5 },
+    { label: "Reproducible research", patterns: [/r markdown/i, /reproduc/i, /workflow/i, /database/i], score: 5 },
+    { label: "PFAS", patterns: [/pfas/i], score: 6 },
+    { label: "Exposomics", patterns: [/exposomic/i, /multi-omics/i, /omics/i], score: 6 }
+  ];
+
+  function publicationSearchText(pub) {
+    return [
+      pub.title,
+      pub.short_title,
+      pub.summary,
+      pub.focus,
+      pub.venue,
+      pub.authors,
+      (pub.tags || []).join(" ")
+    ].join(" ");
+  }
+
+  function derivedTagObjects(pub) {
+    var byKey = {};
+    function add(label, score) {
+      var key = tagKey(label);
+      if (!key) return;
+      if (!byKey[key]) byKey[key] = { key: key, label: label, score: 0 };
+      byKey[key].score += score || 1;
+    }
+    (pub.tags || []).forEach(function (tag) {
+      add(tag, 6);
+    });
+    var text = publicationSearchText(pub);
+    tagRules.forEach(function (rule) {
+      if (rule.patterns.some(function (pattern) { return pattern.test(text); })) {
+        add(rule.label, rule.score);
+      }
+    });
+    if (pub.source === "scholar-auto") add("Google Scholar", 2);
+    return Object.keys(byKey).map(function (key) { return byKey[key]; })
+      .sort(function (a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.label.localeCompare(b.label);
+      });
+  }
+
+  function derivedTags(pub) {
+    return derivedTagObjects(pub).map(function (tag) { return tag.label; });
   }
 
   function publicationId(pub) {
@@ -130,8 +210,10 @@
     });
   }
 
-  function renderTags(tags) {
-    return (tags || []).map(function (tag) {
+  function renderTags(tags, allowedKeys) {
+    return (tags || []).filter(function (tag) {
+      return !allowedKeys || allowedKeys[tagKey(tag)];
+    }).map(function (tag) {
       return "<button type=\"button\" class=\"pub-card__tag\" data-publication-tag=\"" + escapeHtml(tagKey(tag)) + "\">" + escapeHtml(tag) + "</button>";
     }).join("");
   }
@@ -141,14 +223,14 @@
   }
 
   function publicationTagKeys(pub) {
-    return (pub.tags || []).map(tagKey).filter(Boolean);
+    return derivedTags(pub).map(tagKey).filter(Boolean);
   }
 
   function renderAuthors(authors) {
     return escapeHtml(authors || "").replace(/\b(Yang M|Mingling Yang)\b/g, "<strong class=\"pub-card__author-me\">$1</strong>");
   }
 
-  function renderPublicationCard(pub) {
+  function renderPublicationCard(pub, allowedTagKeys) {
     var url = publicationUrl(pub);
     var title = pub.short_title || pub.title;
     var id = publicationId(pub);
@@ -176,7 +258,7 @@
       "    <h3>" + linkOpen + escapeHtml(title) + linkClose + "</h3>",
       "    <p class=\"pub-card__authors\">" + renderAuthors(pub.authors) + "</p>",
       focusHtml,
-      "    <div class=\"pub-card__tags\">" + renderTags(pub.tags) + "</div>",
+      "    <div class=\"pub-card__tags\">" + renderTags(derivedTags(pub), allowedTagKeys) + "</div>",
       "  </div>",
       "</article>"
     ].join("");
@@ -263,23 +345,27 @@
   function countPublicationTags(publications) {
     var byKey = {};
     publications.forEach(function (pub) {
-      (pub.tags || []).forEach(function (tag) {
-        var key = tagKey(tag);
+      var citationWeight = Math.min(Number(pub.citations || 0), 30) / 30;
+      var recencyWeight = Math.max(0, Number(pub.year || 0) - 2023) * .18;
+      derivedTagObjects(pub).forEach(function (tag) {
+        var key = tag.key;
         if (!key) return;
-        if (!byKey[key]) byKey[key] = { key: key, label: tag, count: 0 };
+        if (!byKey[key]) byKey[key] = { key: key, label: tag.label, count: 0, score: 0 };
         byKey[key].count += 1;
+        byKey[key].score += tag.score + citationWeight + recencyWeight;
       });
     });
     return Object.keys(byKey).map(function (key) {
       return byKey[key];
     }).sort(function (a, b) {
+      if (b.score !== a.score) return b.score - a.score;
       if (b.count !== a.count) return b.count - a.count;
       return a.label.localeCompare(b.label);
     });
   }
 
   function renderPublicationFilters(publications) {
-    var tags = countPublicationTags(publications);
+    var tags = countPublicationTags(publications).slice(0, MAX_FILTER_TAGS);
     if (!tags.length) return "";
     return [
       "<div class=\"publication-filter\" id=\"publication-filter\" aria-label=\"Publication tag filters\">",
@@ -342,9 +428,13 @@
   function renderPublications(publications) {
     var target = document.getElementById("scholar-publications");
     if (!target) return;
+    var allowedTagKeys = {};
+    countPublicationTags(publications).slice(0, MAX_FILTER_TAGS).forEach(function (tag) {
+      allowedTagKeys[tag.key] = true;
+    });
     target.innerHTML = [
       renderPublicationFilters(publications),
-      publications.map(renderPublicationCard).join(""),
+      publications.map(function (pub) { return renderPublicationCard(pub, allowedTagKeys); }).join(""),
       "<p class=\"publication-filter__empty\" id=\"publication-filter-empty\" hidden>No publications match the selected tags.</p>"
     ].join("");
     bindPublicationFilters(target);
@@ -358,30 +448,103 @@
   function renderScholarSummary(scholarData) {
     var target = document.getElementById("scholar-summary");
     if (!target || !scholarData) return;
+    var scholarItems = scholarData.publications_count || scholarData.publication_count || Object.keys(scholarData.publications || {}).length;
     target.innerHTML = [
       "<a class=\"scholar-matrix__cell scholar-matrix__cell--profile\" href=\"https://scholar.google.com/citations?user=cNanG64AAAAJ\">",
       "  <strong>Google Scholar</strong><span>Publication profile</span>",
       "</a>",
       "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(scholarData.citedby || 0) + "</strong><em>citations</em></span>",
       "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(scholarData.hindex || 0) + "</strong><em>h-index</em></span>",
-      "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(Object.keys(scholarData.publications || {}).length) + "</strong><em>Scholar items</em></span>"
+      "<span class=\"scholar-matrix__cell\"><strong>" + escapeHtml(scholarItems) + "</strong><em>Scholar items</em></span>"
     ].join("");
   }
 
-  function initScholarPublications() {
+  function publicationCountries(pub) {
+    var text = publicationSearchText(pub);
+    var countries = [];
+    function add(country) {
+      if (countries.indexOf(country) === -1) countries.push(country);
+    }
+    if (/peru|puno|lima/i.test(text)) add("Peru");
+    if (/nepal|bhaktapur|kathmandu/i.test(text)) add("Nepal");
+    if (/uganda|kampala/i.test(text)) add("Uganda");
+    if (/guatemala/i.test(text)) add("Guatemala");
+    if (/\bindia\b/i.test(text)) add("India");
+    if (/rwanda/i.test(text)) add("Rwanda");
+    if (/geco|global excellence in copd|copd|chronic bronchitis|sgrq|st george/i.test(text)) {
+      add("Peru");
+      add("Nepal");
+      add("Uganda");
+    }
+    if (/hapin|household air pollution|biomass cooking|lpg|severe pneumonia/i.test(text)) {
+      add("Guatemala");
+      add("India");
+      add("Peru");
+      add("Rwanda");
+    }
+    return countries;
+  }
+
+  function publishGlobeData(publications) {
+    var globePublications = publications.map(function (pub) {
+      return Object.assign({}, pub, {
+        id: publicationId(pub),
+        display_title: pub.short_title || pub.title,
+        countries: publicationCountries(pub),
+        tag_keys: publicationTagKeys(pub)
+      });
+    });
+    window.MINGLING_SCHOLAR_PUBLICATIONS = globePublications;
+    if (window.MinglingResearchGlobe && window.MinglingResearchGlobe.syncPublications) {
+      window.MinglingResearchGlobe.syncPublications(globePublications);
+    }
+    window.dispatchEvent(new CustomEvent("scholar-publications-updated", {
+      detail: { publications: globePublications }
+    }));
+  }
+
+  function loadMetrics(cacheBust) {
+    var metricsUrl = scholarJsonUrl("gs_metrics.json", cacheBust);
+    var fallbackUrl = scholarJsonUrl("gs_data.json", cacheBust);
+    if (!metricsUrl && !fallbackUrl) return Promise.resolve(null);
+    return fetchJson(metricsUrl).catch(function () {
+      return fallbackUrl ? fetchJson(fallbackUrl).catch(function () { return null; }) : null;
+    }).then(function (metrics) {
+      if (metrics) renderScholarSummary(metrics);
+      return metrics;
+    });
+  }
+
+  function loadPublicationBundle(cacheBust) {
     var displayUrl = versionedAssetUrl("assets/data/publications.json");
-    var baseUrl = scholarBaseUrl();
-    var scholarUrl = baseUrl ? baseUrl + "google-scholar-stats/gs_data.json" : null;
-    Promise.all([
+    var scholarUrl = scholarJsonUrl("gs_data.json", cacheBust);
+    return Promise.all([
       fetchJson(displayUrl),
       scholarUrl ? fetchJson(scholarUrl).catch(function () { return null; }) : Promise.resolve(null)
     ]).then(function (values) {
       var displayData = values[0];
       var scholarData = values[1];
       var publications = mergePublications(displayData, scholarData);
-      renderScholarSummary(scholarData);
       renderNews(displayData, publications, scholarData);
       renderPublications(publications);
+      publishGlobeData(publications);
+      return { displayData: displayData, scholarData: scholarData, publications: publications };
+    });
+  }
+
+  function initScholarPublications() {
+    Promise.all([
+      loadMetrics(false),
+      loadPublicationBundle(false)
+    ]).then(function () {
+      if (metricsRefreshTimer) window.clearInterval(metricsRefreshTimer);
+      if (publicationRefreshTimer) window.clearInterval(publicationRefreshTimer);
+      metricsRefreshTimer = window.setInterval(function () {
+        loadMetrics(true);
+      }, METRICS_REFRESH_MS);
+      publicationRefreshTimer = window.setInterval(function () {
+        loadPublicationBundle(true).catch(function () {});
+      }, PUBLICATION_REFRESH_MS);
     }).catch(function () {
       var news = document.getElementById("scholar-news");
       var pubs = document.getElementById("scholar-publications");

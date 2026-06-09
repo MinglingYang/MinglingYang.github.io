@@ -1,9 +1,9 @@
-name: Update Google Scholar Publications
+name: Update Google Scholar Metrics
 
 on:
  workflow_dispatch:
  schedule:
-  - cron:  '0 8 * * *'
+  - cron:  '*/5 * * * *'
 
 concurrency:
   group: google-scholar-stats
@@ -22,7 +22,14 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y python3-setuptools
-    - name: Run
+    - name: Restore Existing Scholar Branch Files
+      run: |
+        mkdir -p ./google_scholar_crawler/results
+        git fetch origin google-scholar-stats:refs/remotes/origin/google-scholar-stats || true
+        for file in gs_data.json gs_metrics.json gs_data_shieldsio.json; do
+          git show "origin/google-scholar-stats:${file}" > "./google_scholar_crawler/results/${file}" 2>/dev/null || true
+        done
+    - name: Run Metrics Refresh
       run: |
         cd ./google_scholar_crawler
         pip3 install -r requirements.txt
@@ -33,8 +40,8 @@ jobs:
         git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         export remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
         git add *.json
-        git diff --cached --quiet && echo "No Scholar data changes" || git commit -m "Updated Google Scholar publication data"
+        git diff --cached --quiet && echo "No Scholar metric changes" || git commit -m "Updated Google Scholar metrics"
         git push "${remote_repo}" HEAD:google-scholar-stats --force
       env:
         GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
-        SCHOLAR_CRAWL_SCOPE: full
+        SCHOLAR_CRAWL_SCOPE: metrics

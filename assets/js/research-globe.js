@@ -45,7 +45,7 @@
     });
   }
 
-  var sites = cardNodes.map(function (card, index) {
+  function readSite(card, index) {
     return {
       id: card.getAttribute("data-location"),
       country: card.getAttribute("data-country") || "",
@@ -62,12 +62,21 @@
       card: card,
       index: index
     };
-  });
+  }
 
-  var countryCounts = sites.reduce(function (counts, site) {
-    if (site.count > 0) counts[site.country] = Math.max(counts[site.country] || 0, site.count);
-    return counts;
-  }, {});
+  function readSitesFromCards() {
+    return cardNodes.map(readSite);
+  }
+
+  function computeCountryCounts(items) {
+    return items.reduce(function (counts, site) {
+      if (site.count > 0) counts[site.country] = Math.max(counts[site.country] || 0, site.count);
+      return counts;
+    }, {});
+  }
+
+  var sites = readSitesFromCards();
+  var countryCounts = computeCountryCounts(sites);
 
   var focusTargets = {
     education: { rotation: 98, tilt: 37, zoom: 1.34, activeId: "education-south-carolina" },
@@ -814,17 +823,70 @@
     window.requestAnimationFrame(render);
   }
 
-  sites.forEach(function (site) {
-    site.card.setAttribute("tabindex", "0");
-    site.card.addEventListener("click", function () {
-      setActive(site.id);
+  function bindSiteCards() {
+    sites.forEach(function (site) {
+      if (site.card.getAttribute("data-globe-bound") === "true") return;
+      site.card.setAttribute("data-globe-bound", "true");
+      site.card.setAttribute("tabindex", "0");
+      site.card.addEventListener("click", function () {
+        setActive(site.card.getAttribute("data-location"));
+      });
+      site.card.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setActive(site.card.getAttribute("data-location"));
+        }
+      });
     });
-    site.card.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        setActive(site.id);
+  }
+
+  function publicationLinkHtml(publication) {
+    var title = publication.display_title || publication.short_title || publication.title || "Publication";
+    return "<li><a href=\"#" + publication.id + "\" target=\"_self\">" + title + ".</a></li>";
+  }
+
+  function syncPublications(publications) {
+    if (!publications || !publications.length) return;
+    var byCountry = publications.reduce(function (groups, publication) {
+      (publication.countries || []).forEach(function (country) {
+        if (!groups[country]) groups[country] = [];
+        groups[country].push(publication);
+      });
+      return groups;
+    }, {});
+    sites.forEach(function (site) {
+      if (!siteHasModule(site, "publication") || siteHasModule(site, "presentation")) return;
+      var countryPublications = (byCountry[site.country] || []).slice().sort(function (a, b) {
+        if (Number(b.year || 0) !== Number(a.year || 0)) return Number(b.year || 0) - Number(a.year || 0);
+        return String(a.display_title || a.title || "").localeCompare(String(b.display_title || b.title || ""));
+      });
+      if (!countryPublications.length) return;
+      site.count = countryPublications.length;
+      site.start = Math.min.apply(null, countryPublications.map(function (publication) { return Number(publication.year || site.start); }));
+      site.end = Math.max.apply(null, countryPublications.map(function (publication) { return Number(publication.year || site.end); }));
+      site.card.setAttribute("data-count", String(site.count));
+      site.card.setAttribute("data-start", String(site.start));
+      site.card.setAttribute("data-end", String(site.end));
+      var list = site.card.querySelector(".research-globe__article-list");
+      if (!list) {
+        list = document.createElement("ul");
+        list.className = "research-globe__article-list";
+        site.card.appendChild(list);
       }
+      list.innerHTML = countryPublications.map(publicationLinkHtml).join("");
     });
+    countryCounts = computeCountryCounts(sites);
+    applyFilters({ focusActive: state.module === "publication", zoom: state.module === "publication" ? 1.4 : 1.3 });
+  }
+
+  bindSiteCards();
+
+  window.MinglingResearchGlobe = {
+    syncPublications: syncPublications
+  };
+
+  window.addEventListener("scholar-publications-updated", function (event) {
+    syncPublications(event.detail && event.detail.publications);
   });
 
   if (globe) {
@@ -1016,6 +1078,9 @@
 
   resize();
   loadWorld();
+  if (window.MINGLING_SCHOLAR_PUBLICATIONS) {
+    syncPublications(window.MINGLING_SCHOLAR_PUBLICATIONS);
+  }
   applyFilters();
   window.requestAnimationFrame(render);
 })();
