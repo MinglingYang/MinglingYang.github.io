@@ -17,11 +17,11 @@ redirect_from:
       <p class="home-landing__role">Incoming Ph.D. Student in Epidemiology</p>
       <p>Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
-        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"></span><span>CV</span></a>
-        <a href="mailto:mingling493790100@gmail.com"><span class="home-link-icon home-link-icon--email" aria-hidden="true"></span><span>Email</span></a>
-        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><span class="home-link-icon home-link-icon--researchgate" aria-hidden="true">R<sup>G</sup></span><span>ResearchGate</span></a>
-        <a href="https://github.com/MinglingYang"><span class="home-link-icon home-link-icon--github" aria-hidden="true">GH</span><span>GitHub</span></a>
-        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ"><span class="home-link-icon home-link-icon--scholar" aria-hidden="true">g</span><span>Google Scholar</span></a>
+        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"><i class="far fa-file-alt"></i></span><span>CV</span></a>
+        <a href="mailto:mingling493790100@gmail.com"><span class="home-link-icon home-link-icon--email" aria-hidden="true"><i class="far fa-envelope"></i></span><span>Email</span></a>
+        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><span class="home-link-icon home-link-icon--researchgate" aria-hidden="true"><i class="fab fa-researchgate"></i></span><span>ResearchGate</span></a>
+        <a href="https://github.com/MinglingYang"><span class="home-link-icon home-link-icon--github" aria-hidden="true"><i class="fab fa-github"></i></span><span>GitHub</span></a>
+        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ"><span class="home-link-icon home-link-icon--scholar" aria-hidden="true"><i class="fas fa-graduation-cap"></i></span><span>Google Scholar</span></a>
       </div>
     </div>
   </div>
@@ -338,7 +338,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Ph.D. in Epidemiology, Environmental Health Track, Keck School of Medicine</p>
       </div>
       <time>Fall 2026</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -349,7 +348,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>M.S.E. in Applied Mathematics and Statistics, Whiting School of Engineering</p>
       </div>
       <time>2021 - 2023</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -360,7 +358,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>B.S. in Statistics; minor in Risk Management and Insurance</p>
       </div>
       <time>2017 - 2020</time>
-      <span class="experience-list__chevron">›</span>
     </article>
   </div>
 </section>
@@ -394,7 +391,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
   <div class="skill-row">
     <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--programming" aria-hidden="true"></span><strong>Programming</strong></div>
     <div class="skill-row__tags">
-      <span>R</span><span>Python</span><span>SQL</span><span>Bash</span><span>MATLAB</span><span>SAS</span>
+      <span>R</span><span>Python</span><span>SQL</span><span>Java</span><span>MATLAB</span><span>SAS</span>
     </div>
   </div>
 
@@ -408,21 +405,21 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
   <div class="skill-row">
     <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--exposure" aria-hidden="true"></span><strong>Exposure &amp; GIS</strong></div>
     <div class="skill-row__tags">
-      <span>PM2.5</span><span>Kriging</span><span>ArcGIS</span><span>sf</span><span>terra</span><span>Sensor Calibration</span>
+      <span>Kriging</span><span>ArcGIS</span><span>sf</span><span>terra</span><span>Sensor Calibration</span>
     </div>
   </div>
 
   <div class="skill-row">
     <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--omics" aria-hidden="true"></span><strong>Omics &amp; Data</strong></div>
     <div class="skill-row__tags">
-      <span>Exposomics</span><span>Multi-omics</span><span>Data Harmonization</span><span>REDCap</span><span>Codebooks</span>
+      <span>Exposomics</span><span>Multi-omics</span><span>Data Harmonization</span><span>REDCap</span>
     </div>
   </div>
 
   <div class="skill-row">
     <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--tools" aria-hidden="true"></span><strong>Tools</strong></div>
     <div class="skill-row__tags">
-      <span>Git</span><span>Docker</span><span>Linux</span><span>LaTeX</span><span>Tableau</span><span>R Markdown</span>
+      <span>Git</span><span>Linux</span><span>LaTeX</span><span>Tableau</span><span>R Markdown</span>
     </div>
   </div>
 </section>
