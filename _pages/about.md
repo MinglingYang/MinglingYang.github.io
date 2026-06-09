@@ -229,12 +229,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
   </div>
 </div>
 
-<div class="research-map-legend" aria-label="Article count legend">
-  <span><i class="research-map-legend__dot research-map-legend__dot--low"></i>0-1 article</span>
-  <span><i class="research-map-legend__dot research-map-legend__dot--mid"></i>2-3 articles</span>
-  <span><i class="research-map-legend__dot research-map-legend__dot--high"></i>4+ articles</span>
-</div>
-
 <span class='anchor' id='news'></span>
 
 ## News
