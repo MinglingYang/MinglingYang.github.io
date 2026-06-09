@@ -9,9 +9,6 @@ main:
   - title: "Geography"
     url: "/#research-geography"
 
-  - title: "News"
-    url: "/#news"
-
   - title: "Publications"
     url: "/#publications"
 

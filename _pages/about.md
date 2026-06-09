@@ -229,14 +229,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
   </div>
 </div>
 
-<span class='anchor' id='news'></span>
-
-## News
-
-<div id="scholar-news" class="auto-scholar-block" aria-live="polite">
-  <p class="auto-note">Loading Google Scholar updates...</p>
-</div>
-
 <span class='anchor' id='publications'></span>
 
 ## Publications

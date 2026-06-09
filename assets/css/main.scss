@@ -1376,12 +1376,12 @@ h1:before, .anchor:before {
     min-width: 0;
 
     h3 {
-        margin: .35rem 0 .45rem;
+        margin: .25rem 0 .5rem;
         color: $mona-blue;
         font-family: $font-card-title;
-        font-size: clamp(1.02rem, 1.08vw, 1.16rem);
+        font-size: clamp(1.22rem, 1.32vw, 1.42rem);
         font-weight: 700;
-        line-height: 1.35;
+        line-height: 1.22;
     }
 
     a {
@@ -1414,15 +1414,16 @@ h1:before, .anchor:before {
 .pub-card__authors,
 .pub-card__summary,
 .pub-card__focus {
-    margin-bottom: .55rem;
+    margin-bottom: .5rem;
     color: #45576a;
-    font-size: $type-home-body;
 }
 
 .pub-card__authors {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: clamp(.82rem, .84vw, .9rem);
+    line-height: 1.35;
 }
 
 .pub-card__author-me {
@@ -1433,7 +1434,8 @@ h1:before, .anchor:before {
 .pub-card__summary,
 .pub-card__focus {
     color: #25384b;
-    line-height: 1.6;
+    font-size: clamp(.88rem, .9vw, .96rem);
+    line-height: 1.54;
     max-width: 58rem;
 }
 
@@ -1449,7 +1451,7 @@ h1:before, .anchor:before {
         background: rgba(255, 255, 255, .78);
         color: #526476;
         font-family: $font-label;
-        font-size: clamp(.7rem, .72vw, .76rem);
+        font-size: clamp(.66rem, .68vw, .72rem);
         font-weight: 500;
         line-height: 1.2;
         cursor: pointer;
