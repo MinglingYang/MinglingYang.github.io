@@ -330,11 +330,46 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
 <span class='anchor' id='education'></span>
 
-## Education
+<section class="experience-list education-list" aria-label="Education">
+  <div class="experience-list__header">
+    <h2>Education</h2>
+  </div>
 
-- *Beginning Fall 2026*, **University of Southern California** - Ph.D. in Epidemiology, Environmental Health Track, Keck School of Medicine.
-- *2021 - 2023*, **Johns Hopkins University** - M.S.E. in Applied Mathematics and Statistics, Whiting School of Engineering.
-- *2017 - 2020*, **University of South Carolina** - B.S. in Statistics; minor in Risk Management and Insurance.
+  <div class="experience-list__items">
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--usc"><img src="images/logos/university-of-southern-california-seal.svg" alt="University of Southern California seal"></span>
+      <div class="experience-list__content">
+        <h3>University of Southern California</h3>
+        <p>Ph.D. in Epidemiology, Environmental Health Track, Keck School of Medicine</p>
+      </div>
+      <time>Fall 2026</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
+
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--jhu"><img src="images/logos/johns-hopkins-academic-seal.svg" alt="Johns Hopkins University seal"></span>
+      <div class="experience-list__content">
+        <h3>Johns Hopkins University</h3>
+        <p>M.S.E. in Applied Mathematics and Statistics, Whiting School of Engineering</p>
+      </div>
+      <time>2021 - 2023</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
+
+    <article class="experience-list__item">
+      <span class="experience-list__dot"></span>
+      <span class="experience-list__crest experience-list__crest--south-carolina"><img src="images/logos/university-of-south-carolina-seal.svg" alt="University of South Carolina seal"></span>
+      <div class="experience-list__content">
+        <h3>University of South Carolina</h3>
+        <p>B.S. in Statistics; minor in Risk Management and Insurance</p>
+      </div>
+      <time>2017 - 2020</time>
+      <span class="experience-list__chevron">›</span>
+    </article>
+  </div>
+</section>
 
 <span class='anchor' id='honors-awards'></span>
 
