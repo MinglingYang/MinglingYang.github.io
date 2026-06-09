@@ -1260,9 +1260,9 @@ h1:before, .anchor:before {
     }
 
     a.is-active {
-        background: linear-gradient(135deg, #6a21d1, #4e16b5);
+        background: linear-gradient(135deg, #2f7db7, #155f9d);
         color: #ffffff !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .32), 0 5px 12px rgba(78, 22, 181, .28);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .32), 0 5px 12px rgba(21, 95, 157, .28);
         transform: translateY(-1px);
     }
 }
