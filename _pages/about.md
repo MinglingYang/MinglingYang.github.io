@@ -17,11 +17,11 @@ redirect_from:
       <p class="home-landing__role">Incoming Ph.D. Student in Epidemiology</p>
       <p>Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
-        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><i class="fas fa-file-alt"></i>CV</a>
-        <a href="mailto:mingling493790100@gmail.com"><i class="far fa-envelope"></i>Email</a>
-        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><i class="fab fa-researchgate"></i>ResearchGate</a>
-        <a href="https://github.com/MinglingYang"><i class="fab fa-github"></i>GitHub</a>
-        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ"><i class="fas fa-graduation-cap"></i>Google Scholar</a>
+        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"></span><span>CV</span></a>
+        <a href="mailto:mingling493790100@gmail.com"><span class="home-link-icon home-link-icon--email" aria-hidden="true"></span><span>Email</span></a>
+        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><span class="home-link-icon home-link-icon--researchgate" aria-hidden="true">R<sup>G</sup></span><span>ResearchGate</span></a>
+        <a href="https://github.com/MinglingYang"><span class="home-link-icon home-link-icon--github" aria-hidden="true">GH</span><span>GitHub</span></a>
+        <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ"><span class="home-link-icon home-link-icon--scholar" aria-hidden="true">g</span><span>Google Scholar</span></a>
       </div>
     </div>
   </div>
@@ -262,7 +262,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
   <div class="experience-list__items">
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--emory">EU</span>
+      <span class="experience-list__crest experience-list__crest--emory"><img src="images/logos/emory-university-seal.svg" alt="Emory University seal"></span>
       <div class="experience-list__content">
         <h3>Rollins School of Public Health, Emory University</h3>
         <p>Data Analyst - Environmental Health &amp; Epidemiology</p>
@@ -273,7 +273,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--jhu">JH</span>
+      <span class="experience-list__crest experience-list__crest--jhu"><img src="images/logos/johns-hopkins-academic-seal.svg" alt="Johns Hopkins University seal"></span>
       <div class="experience-list__content">
         <h3>Johns Hopkins Bloomberg School of Public Health</h3>
         <p>Research Assistant - Department of Environmental Health and Engineering</p>
@@ -284,7 +284,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--medicine">JH</span>
+      <span class="experience-list__crest experience-list__crest--medicine"><img src="images/logos/johns-hopkins-academic-seal.svg" alt="Johns Hopkins University seal"></span>
       <div class="experience-list__content">
         <h3>Johns Hopkins University School of Medicine</h3>
         <p>Senior Research Data Analyst - Medicine, Epidemiology and Biostatistics</p>
@@ -295,7 +295,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--teaching">TA</span>
+      <span class="experience-list__crest experience-list__crest--teaching"><img src="images/logos/johns-hopkins-academic-seal.svg" alt="Johns Hopkins University seal"></span>
       <div class="experience-list__content">
         <h3>Johns Hopkins University</h3>
         <p>Teaching Assistant - Department of Applied Mathematics and Statistics</p>
@@ -306,7 +306,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--data">DS</span>
+      <span class="experience-list__crest experience-list__crest--data"><img src="images/qiangyuan_sign.png" alt="Qiangyuan Sporting Goods logo"></span>
       <div class="experience-list__content">
         <h3>Qiangyuan Sporting Goods Co.</h3>
         <p>Data Scientist - Zhuhai, China</p>
@@ -317,7 +317,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--shandong">SD</span>
+      <span class="experience-list__crest experience-list__crest--shandong"><img src="images/logos/shandong-university-emblem.svg" alt="Shandong University emblem"></span>
       <div class="experience-list__content">
         <h3>Shandong University, Shandong Big Data Research Association</h3>
         <p>Research Assistant - Statistics and Finance, Jinan, China</p>
