@@ -1594,7 +1594,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     grid-template-columns: 9.4rem minmax(0, 1fr);
     gap: 1.18rem;
     align-items: center;
-    width: min(49.2rem, 48vw);
+    width: min(66rem, 66vw);
     max-width: calc(100% - 2rem);
     margin: -1.3rem auto 0;
     padding: 1.12rem 1.3rem;
@@ -1639,23 +1639,23 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-landing__links {
     display: flex;
     flex-wrap: wrap;
-    gap: .62rem;
+    gap: .52rem;
     align-items: center;
-    margin-top: .82rem;
-    padding-top: .72rem;
-    border-top: 1px solid rgba(205, 215, 225, .64);
+    margin-top: .86rem;
+    padding-top: 0;
+    border-top: 0;
 
     a {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: .58rem;
+        gap: .55rem;
         min-height: 2.45rem;
-        padding: .42rem 1rem;
+        padding: .42rem .82rem;
         border: 1px solid rgba(173, 198, 219, .72);
         border-radius: 999px;
         background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(246, 251, 255, .94));
-        color: #173c63;
+        color: #102235;
         font-size: clamp(.86rem, 1vw, .98rem);
         font-weight: 900;
         text-decoration: none !important;
@@ -1684,7 +1684,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     height: 1.34rem;
     flex: 0 0 auto;
     place-items: center;
-    color: #173c63;
+    color: #0f1720;
     font-size: .95rem;
     font-weight: 900;
     line-height: 1;
@@ -1696,20 +1696,20 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 }
 
-.home-link-icon--cv,
-.home-link-icon--email,
-.home-link-icon--scholar {
-    color: #173c63;
-}
-
 .home-link-icon--researchgate {
-    color: #19a66b;
     font-size: 1.1rem;
 }
 
 .home-link-icon--github {
-    color: #05070a;
     font-size: 1.05rem;
+}
+
+.home-link-icon--cv,
+.home-link-icon--email,
+.home-link-icon--researchgate,
+.home-link-icon--github,
+.home-link-icon--scholar {
+    color: #0f1720;
 }
 
 .home-after-landing {
