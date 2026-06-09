@@ -1639,6 +1639,13 @@ body.home-page.is-home-panel-transition .home-after-landing {
     font-weight: 900;
 }
 
+.home-landing__track {
+    margin-top: .1rem !important;
+    color: #4d6072 !important;
+    font-size: clamp(.84rem, 1.02vw, .96rem) !important;
+    line-height: 1.28 !important;
+}
+
 .home-landing__links {
     display: flex;
     flex-wrap: wrap;
@@ -1683,11 +1690,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-link-icon {
     position: relative;
     display: inline-grid;
-    width: 1.34rem;
-    height: 1.34rem;
+    width: 1.42rem;
+    height: 1.42rem;
     flex: 0 0 auto;
     place-items: center;
-    color: #0f1720;
+    color: #12365a;
     font-size: .95rem;
     font-weight: 900;
     line-height: 1;
@@ -1697,10 +1704,41 @@ body.home-page.is-home-panel-transition .home-after-landing {
         color: currentColor;
         line-height: 1;
     }
+
+    svg {
+        display: block;
+        width: 1.32rem;
+        height: 1.32rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.9;
+    }
 }
 
 .home-link-icon--researchgate {
+    width: 1.48rem;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 1.1rem;
+    letter-spacing: -.03em;
+}
+
+.home-link-icon__rg {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    color: currentColor;
+    font-weight: 800;
+    line-height: 1;
+
+    sup {
+        position: relative;
+        top: -.18rem;
+        margin-left: -.04rem;
+        font-size: .54em;
+        line-height: 1;
+    }
 }
 
 .home-link-icon--github {
@@ -1712,6 +1750,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-link-icon--researchgate,
 .home-link-icon--github,
 .home-link-icon--scholar {
+    color: #12365a;
+}
+
+.home-link-icon--github {
     color: #0f1720;
 }
 

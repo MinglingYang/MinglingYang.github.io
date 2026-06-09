@@ -15,11 +15,11 @@ redirect_from:
     <div>
       <h1>Mingling (Mona) Yang</h1>
       <p class="home-landing__role">Incoming Ph.D. Student in Epidemiology</p>
-      <p>Environmental Epidemiology · Exposure Science · Biostatistics</p>
+      <p class="home-landing__track">Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
-        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"><i class="far fa-file-alt"></i></span><span>CV</span></a>
-        <a href="mailto:mingling493790100@gmail.com"><span class="home-link-icon home-link-icon--email" aria-hidden="true"><i class="far fa-envelope"></i></span><span>Email</span></a>
-        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><span class="home-link-icon home-link-icon--researchgate" aria-hidden="true"><i class="fab fa-researchgate"></i></span><span>ResearchGate</span></a>
+        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M7 3.75h8.25L19 7.5v12.75H7z"/><path d="M15 3.75V8h4"/><path d="M10 12h6M10 15h6M10 18h4"/></svg></span><span>CV</span></a>
+        <a href="mailto:mingling493790100@gmail.com"><span class="home-link-icon home-link-icon--email" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 6.5h16v11H4z"/><path d="m5 7.5 7 5.25 7-5.25"/></svg></span><span>Email</span></a>
+        <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview"><span class="home-link-icon home-link-icon--researchgate" aria-hidden="true"><span class="home-link-icon__rg">R<sup>G</sup></span></span><span>ResearchGate</span></a>
         <a href="https://github.com/MinglingYang"><span class="home-link-icon home-link-icon--github" aria-hidden="true"><i class="fab fa-github"></i></span><span>GitHub</span></a>
         <a href="https://scholar.google.com/citations?user=cNanG64AAAAJ"><span class="home-link-icon home-link-icon--scholar" aria-hidden="true"><i class="fas fa-graduation-cap"></i></span><span>Google Scholar</span></a>
       </div>
