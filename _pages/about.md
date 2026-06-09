@@ -268,7 +268,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Data Analyst - Environmental Health &amp; Epidemiology</p>
       </div>
       <time>Jan 2025 - May 2026</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -279,7 +278,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Research Assistant - Department of Environmental Health and Engineering</p>
       </div>
       <time>Dec 2023 - May 2026</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -290,7 +288,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Senior Research Data Analyst - Medicine, Epidemiology and Biostatistics</p>
       </div>
       <time>Sep 2023 - May 2026</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -301,7 +298,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Teaching Assistant - Department of Applied Mathematics and Statistics</p>
       </div>
       <time>Jan 2022 - Dec 2022</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -312,7 +308,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Data Scientist - Zhuhai, China</p>
       </div>
       <time>May 2020 - Aug 2021</time>
-      <span class="experience-list__chevron">›</span>
     </article>
 
     <article class="experience-list__item">
@@ -323,7 +318,6 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <p>Research Assistant - Statistics and Finance, Jinan, China</p>
       </div>
       <time>Jan 2021 - May 2021</time>
-      <span class="experience-list__chevron">›</span>
     </article>
   </div>
 </section>
@@ -396,10 +390,42 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
 ## Technical Skills
 
-- **Programming and statistical computing:** R, Python, MATLAB, SAS, SQL, Java, R Markdown, LaTeX, Git, AWS, REDCap, Tableau.
-- **Statistical methods:** causal inference, DAGs, mixed-effects models, Bayesian hierarchical models, functional data analysis, machine learning, random forest, XGBoost, simulation, and sensitivity analysis.
-- **Geospatial and exposure science:** ArcGIS, `sf`, `terra`, `raster`, kriging, spatial interpolation, exposure surface generation, PurpleAir sensor co-location, MetOne E-Sampler calibration, and LMIC monitoring-network quality control.
-- **Research infrastructure:** reproducible pipelines, codebooks, automated reporting, manuscript supplements, data harmonization, REDCap database design, and collaborative analysis workflows.
+<section class="skill-matrix" aria-label="Technical skills">
+  <div class="skill-row">
+    <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--programming" aria-hidden="true"></span><strong>Programming</strong></div>
+    <div class="skill-row__tags">
+      <span>R</span><span>Python</span><span>SQL</span><span>Bash</span><span>MATLAB</span><span>SAS</span>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--biostatistics" aria-hidden="true"></span><strong>Biostatistics</strong></div>
+    <div class="skill-row__tags">
+      <span>Mixed Models</span><span>Causal Inference</span><span>Survival Analysis</span><span>Bayesian Models</span><span>ML</span>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--exposure" aria-hidden="true"></span><strong>Exposure &amp; GIS</strong></div>
+    <div class="skill-row__tags">
+      <span>PM2.5</span><span>Kriging</span><span>ArcGIS</span><span>sf</span><span>terra</span><span>Sensor Calibration</span>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--omics" aria-hidden="true"></span><strong>Omics &amp; Data</strong></div>
+    <div class="skill-row__tags">
+      <span>Exposomics</span><span>Multi-omics</span><span>Data Harmonization</span><span>REDCap</span><span>Codebooks</span>
+    </div>
+  </div>
+
+  <div class="skill-row">
+    <div class="skill-row__label"><span class="skill-row__icon skill-row__icon--tools" aria-hidden="true"></span><strong>Tools</strong></div>
+    <div class="skill-row__tags">
+      <span>Git</span><span>Docker</span><span>Linux</span><span>LaTeX</span><span>Tableau</span><span>R Markdown</span>
+    </div>
+  </div>
+</section>
 
   </div>
 </div>
