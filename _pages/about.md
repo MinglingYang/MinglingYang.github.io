@@ -14,8 +14,8 @@ redirect_from:
     <img src="images/android-chrome-512x512.png" alt="Mingling Mona Yang">
     <div>
       <h1>Mingling (Mona) Yang</h1>
-      <p class="home-landing__role">Incoming USC Ph.D. Student in Epidemiology</p>
-      <p>Environmental Health Track, Keck School of Medicine</p>
+      <p class="home-landing__role">Incoming Ph.D. Student in Epidemiology</p>
+      <p>Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
         <a href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">CV</a>
         <a href="mailto:mingling493790100@gmail.com">Email</a>
@@ -33,9 +33,11 @@ redirect_from:
   </aside>
   <div class="home-after-content" markdown="1">
 
-I am Mingling (Mona) Yang, an incoming Ph.D. student in Epidemiology at USC Keck School of Medicine. My research connects environmental epidemiology, exposure science, and data systems to study how air pollution and chemical exposures shape respiratory, metabolic, and child health.
+Hi, I’m Mona Yang. Welcome to my personal website. I am an incoming PhD student in Epidemiology at the Keck School of Medicine at the University of Southern California. My commitment to environmental epidemiology began during my undergraduate studies at the University of South Carolina. Through participating in local flood relief efforts and witnessing the profound impact of the COVID-19 pandemic firsthand, I came to understand how structural inequalities can intensify environmental health risks.
 
-At Johns Hopkins, I have worked across HAPIN, GECo, CHAP, and ambient PM2.5 projects in Nepal, Peru, Uganda, Guatemala, India, and Rwanda. My doctoral work will build from this global air pollution portfolio toward PFAS, exposomics, multi-omics, and life-course environmental health with Dr. Vaia Lida Chatzi.
+These experiences motivated me to build a strong quantitative foundation through rigorous training in mathematics and statistics during my undergraduate and graduate studies. Later, during my three years as a biostatistician at Johns Hopkins University, I gained a deeper appreciation for how epidemiologic frameworks can translate complex exposure data into preventive strategies and public health policy.
+
+As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida Chatzi, I hope to broaden my research in environmental health, with a focus on PFAS, exposomics, multi-omics, and life-course approaches to environmental epidemiology.
 
 <div id="scholar-summary" class="scholar-summary scholar-matrix" aria-live="polite">
   <a class="scholar-matrix__cell scholar-matrix__cell--profile" href="https://scholar.google.com/citations?user=cNanG64AAAAJ">
@@ -264,7 +266,7 @@ At Johns Hopkins, I have worked across HAPIN, GECo, CHAP, and ambient PM2.5 proj
 
 <span class='anchor' id='research-experience'></span>
 
-## Research Experience
+## Research/ Work Experience
 
 <section class="experience-timeline" aria-label="Research and professional experience timeline">
   <article class="experience-node experience-node--left">
