@@ -59,6 +59,13 @@ $mona-card-radius: 24px;
 $mona-profile-radius: 28px;
 $mona-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, .85);
 $mona-gold-edge: inset 0 0 0 1px rgba(201, 166, 70, .35);
+$type-home-display: clamp(2.08rem, 2.95vw, 3.15rem);
+$type-home-role: clamp(1.04rem, 1.28vw, 1.22rem);
+$type-home-track: clamp(.86rem, .92vw, .94rem);
+$type-home-section: clamp(1.52rem, 1.85vw, 1.92rem);
+$type-home-card-title: clamp(1.02rem, 1.08vw, 1.14rem);
+$type-home-body: clamp(.94rem, .92vw, 1rem);
+$type-home-small: clamp(.74rem, .78vw, .82rem);
 
 .paper-box {
     display: flex;
@@ -885,7 +892,7 @@ h1:before, .anchor:before {
         margin: 0;
         color: #132d55;
         font-family: $font-card-title;
-        font-size: 1.34rem;
+        font-size: clamp(1.22rem, 1.36vw, 1.42rem);
         line-height: 1.1;
 
         &::after {
@@ -898,8 +905,9 @@ h1:before, .anchor:before {
         align-items: center;
         gap: .36rem;
         color: #2f6fa8;
-        font-size: .84em;
-        font-weight: 900;
+        font-family: $font-label;
+        font-size: $type-home-small;
+        font-weight: 500;
         text-decoration: none;
         white-space: nowrap;
     }
@@ -1057,22 +1065,22 @@ h1:before, .anchor:before {
         color: $mona-blue;
         font-family: $font-card-title;
         font-weight: 700;
-        font-size: .98rem;
-        line-height: 1.2;
+        font-size: clamp(.96rem, .98vw, 1.04rem);
+        line-height: 1.22;
     }
 
     p {
         margin: .12rem 0 0;
         color: #526273;
-        font-size: .82em;
-        line-height: 1.25;
+        font-size: $type-home-small;
+        line-height: 1.32;
     }
 }
 
 .experience-list__item time {
     color: $mona-gold;
     font-family: $font-label;
-    font-size: .84em;
+    font-size: $type-home-small;
     font-weight: 500;
     white-space: nowrap;
 }
@@ -1152,8 +1160,8 @@ h1:before, .anchor:before {
     gap: .58rem;
     color: $mona-blue;
     font-family: $font-card-title;
-    font-size: .98rem;
-    line-height: 1.1;
+    font-size: clamp(.95rem, .98vw, 1.02rem);
+    line-height: 1.12;
 
     strong {
         font-weight: 900;
@@ -1225,7 +1233,7 @@ h1:before, .anchor:before {
         background: linear-gradient(135deg, #ffffff, $mona-pearl);
         color: $mona-blue;
         font-family: $font-label;
-        font-size: .86rem;
+        font-size: $type-home-small;
         font-weight: 500;
         line-height: 1.1;
         box-shadow: 0 5px 12px rgba(36, 61, 86, .08), inset 0 1px 0 rgba(255, 255, 255, .94);
@@ -1284,7 +1292,7 @@ h1:before, .anchor:before {
     background: rgba(255, 255, 255, .86);
     color: $mona-blue;
     font-family: $font-label;
-    font-size: .74em;
+    font-size: $type-home-small;
     font-weight: 500;
     line-height: 1;
     cursor: pointer;
@@ -1371,7 +1379,7 @@ h1:before, .anchor:before {
         margin: .35rem 0 .45rem;
         color: $mona-blue;
         font-family: $font-card-title;
-        font-size: 1.05em;
+        font-size: clamp(1.02rem, 1.08vw, 1.16rem);
         font-weight: 700;
         line-height: 1.35;
     }
@@ -1388,7 +1396,7 @@ h1:before, .anchor:before {
     align-items: center;
     color: #51677d;
     font-family: $font-label;
-    font-size: .78em;
+    font-size: $type-home-small;
     font-weight: 500;
 
     span {
@@ -1408,7 +1416,7 @@ h1:before, .anchor:before {
 .pub-card__focus {
     margin-bottom: .55rem;
     color: #45576a;
-    font-size: .9em;
+    font-size: $type-home-body;
 }
 
 .pub-card__authors {
@@ -1425,7 +1433,7 @@ h1:before, .anchor:before {
 .pub-card__summary,
 .pub-card__focus {
     color: #25384b;
-    line-height: 1.55;
+    line-height: 1.6;
     max-width: 58rem;
 }
 
@@ -1441,7 +1449,7 @@ h1:before, .anchor:before {
         background: rgba(255, 255, 255, .78);
         color: #526476;
         font-family: $font-label;
-        font-size: .72em;
+        font-size: clamp(.7rem, .72vw, .76rem);
         font-weight: 500;
         line-height: 1.2;
         cursor: pointer;
@@ -1515,9 +1523,9 @@ h1:before, .anchor:before {
         padding: .52rem .34rem .48rem;
         color: $mona-blue;
         font-family: $font-nav;
-        font-size: clamp(.68rem, .82vw, .82rem);
+        font-size: clamp(.72rem, .78vw, .8rem);
         font-weight: 600;
-        letter-spacing: 0;
+        letter-spacing: .005em;
         line-height: 1;
 
         &::before {
@@ -1549,7 +1557,7 @@ h1:before, .anchor:before {
 .masthead__signature {
     color: $mona-blue !important;
     font-family: $font-signature !important;
-    font-size: clamp(1.32rem, 1.72vw, 1.82rem) !important;
+    font-size: clamp(1.38rem, 1.74vw, 1.9rem) !important;
     font-weight: 900 !important;
     letter-spacing: .015em !important;
     line-height: 1 !important;
@@ -1612,6 +1620,10 @@ body.home-page {
         linear-gradient(180deg, $mona-pearl 0%, #f6f9fc 39%, #edf3f7 100%);
     color: $mona-blue;
     font-family: $font-body;
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 body.home-page #main {
@@ -1712,17 +1724,6 @@ body.home-page.is-home-panel-transition .home-after-landing {
     box-shadow: 0 24px 60px rgba(7, 17, 31, .12), 0 0 0 1px rgba(255, 255, 255, .6), $mona-inner-highlight, $mona-gold-edge;
     backdrop-filter: saturate(150%) blur(10px);
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 1.05rem;
-        left: 1.3rem;
-        width: 12rem;
-        height: 1px;
-        background: linear-gradient(90deg, $mona-gold, rgba(201, 166, 70, 0));
-        pointer-events: none;
-    }
-
     img {
         width: 10.45rem;
         height: 10.45rem;
@@ -1738,7 +1739,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         border-bottom: 0;
         color: $mona-blue;
         font-family: $font-hero;
-        font-size: clamp(1.82rem, 2.5vw, 2.72rem);
+        font-size: $type-home-display;
         font-weight: 600;
         line-height: 1;
 
@@ -1752,7 +1753,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         margin: .2rem 0;
         color: rgba(10, 30, 62, .74);
         font-family: $font-body;
-        font-size: clamp(.88rem, 1.08vw, 1.02rem);
+        font-size: $type-home-body;
         line-height: 1.32;
     }
 }
@@ -1760,14 +1761,17 @@ body.home-page.is-home-panel-transition .home-after-landing {
 .home-landing__role {
     margin-top: 0 !important;
     color: #1f6ba1 !important;
+    font-size: $type-home-role !important;
     font-weight: 700;
+    line-height: 1.25 !important;
 }
 
 .home-landing__track {
     margin-top: .1rem !important;
     color: rgba(10, 30, 62, .68) !important;
-    font-size: clamp(.84rem, 1.02vw, .96rem) !important;
-    line-height: 1.28 !important;
+    font-size: $type-home-track !important;
+    font-weight: 500;
+    line-height: 1.32 !important;
 }
 
 .home-landing__links {
@@ -1791,7 +1795,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         background: rgba(255, 255, 255, .9);
         color: $mona-blue;
         font-family: $font-nav;
-        font-size: clamp(.86rem, 1vw, .98rem);
+        font-size: $type-home-small;
         font-weight: 600;
         text-decoration: none !important;
         box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
@@ -2064,7 +2068,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
         margin-top: 2.2rem;
         color: $mona-blue;
         font-family: $font-card-title;
+        font-size: $type-home-section;
         font-weight: 700;
+        line-height: 1.12;
         letter-spacing: 0;
 
         &::after {
@@ -2082,15 +2088,15 @@ body.home-page.is-home-panel-transition .home-after-landing {
     > p {
         max-width: 58rem;
         color: #2e4458;
-        font-size: .98em;
-        line-height: 1.68;
+        font-size: $type-home-body;
+        line-height: 1.76;
     }
 
     > p:first-of-type {
         margin-top: .25rem;
         color: #173c63;
-        font-size: 1.08em;
-        font-weight: 800;
+        font-size: clamp(1rem, .98vw, 1.06rem);
+        font-weight: 600;
     }
 }
 
@@ -2211,9 +2217,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
         padding-bottom: .82rem;
         color: $mona-blue;
         font-family: $font-card-title;
-        font-size: 1.08rem;
+        font-size: $type-home-card-title;
         font-weight: 700;
-        line-height: 1.17;
+        line-height: 1.18;
 
         &::after {
             content: "";
@@ -2234,8 +2240,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
         color: #536273;
         font-family: $font-body;
         font-weight: 400;
-        font-size: .82em;
-        line-height: 1.46;
+        font-size: $type-home-small;
+        line-height: 1.52;
     }
 
     &:hover {
@@ -2251,7 +2257,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     display: block;
     color: $mona-gold;
     font-family: $font-card-number;
-    font-size: 2rem;
+    font-size: clamp(2rem, 2.1vw, 2.28rem);
     font-weight: 600;
     line-height: 1;
 }
