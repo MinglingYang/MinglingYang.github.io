@@ -121,6 +121,16 @@
       "venue": "The ATS International Conference Abstract and Poster",
       "year": 2025,
       "url": "https://www.atsjournals.org/doi/abs/10.1164/ajrccm-conference.2025.211.1_MeetingAbstracts.A1247",
+      "links": [
+        {
+          "label": "View poster",
+          "url": "images/publications/ATS%202025%20poster_2025-05-13.pdf"
+        },
+        {
+          "label": "View abstract",
+          "url": "https://www.atsjournals.org/doi/abs/10.1164/ajrccm-conference.2025.211.1_MeetingAbstracts.A1247"
+        }
+      ],
       "image": "images/publications/ats-copd-screening.png",
       "cover": "images/publications/covers/ats-conference-2025.svg",
       "tags": ["COPD screening", "SGRQ", "PEF", "ATS poster"],

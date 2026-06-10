@@ -72,8 +72,35 @@
     if (pub.url) return pub.url;
     if (pub.doi) return doiUrl(pub.doi);
     if (pub.pmid) return "https://pubmed.ncbi.nlm.nih.gov/" + pub.pmid + "/";
+    if (Array.isArray(pub.links) && pub.links.length && pub.links[0].url) return pub.links[0].url;
     if (pub.citedby_url) return pub.citedby_url;
     return "";
+  }
+
+  function defaultPublicationActionLabel(pub) {
+    var text = [pub.venue, pub.title, pub.short_title, (pub.tags || []).join(" ")].join(" ").toLowerCase();
+    if (/poster/.test(text) && !/article|journal/.test(text)) return "View poster";
+    if (/abstract|conference|congress/.test(text) && !/journal/.test(text)) return "View abstract";
+    return "View article";
+  }
+
+  function publicationActions(pub) {
+    if (Array.isArray(pub.links) && pub.links.length) {
+      return pub.links.filter(function (link) {
+        return link && link.url;
+      }).map(function (link) {
+        return {
+          label: link.label || defaultPublicationActionLabel(pub),
+          url: link.url
+        };
+      });
+    }
+    var url = publicationUrl(pub);
+    if (!url) return [];
+    return [{
+      label: pub.action_label || defaultPublicationActionLabel(pub),
+      url: url
+    }];
   }
 
   var tagRules = [
@@ -293,6 +320,7 @@
 
   function renderPublicationCard(pub, allowedTagKeys) {
     var url = publicationUrl(pub);
+    var actions = publicationActions(pub);
     var title = pub.short_title || pub.title;
     var id = publicationId(pub);
     var citation = typeof pub.citations === "number" ? pub.citations : null;
@@ -305,8 +333,10 @@
       : "";
     var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\" target=\"_blank\" rel=\"noopener\">" : "";
     var linkClose = url ? "</a>" : "";
-    var actionHtml = url
-      ? "    <p class=\"pub-card__actions\"><a class=\"pub-card__action\" href=\"" + escapeHtml(url) + "\" target=\"_blank\" rel=\"noopener\">View publication</a></p>"
+    var actionHtml = actions.length
+      ? "    <p class=\"pub-card__actions\">" + actions.map(function (action) {
+        return "<a class=\"pub-card__action\" href=\"" + escapeHtml(action.url) + "\" target=\"_blank\" rel=\"noopener\">" + escapeHtml(action.label) + "</a>";
+      }).join("") + "</p>"
       : "";
     return [
       "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" data-publication-citations=\"" + escapeHtml(citation || 0) + "\" tabindex=\"0\" aria-expanded=\"false\">",
