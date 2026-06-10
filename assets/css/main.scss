@@ -2448,6 +2448,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
         align-items: center;
         justify-content: center;
         gap: .42rem;
+        width: 100%;
+        box-sizing: border-box;
         min-height: 2.18rem;
         margin: 0;
         padding: .32rem .72rem;
@@ -2458,6 +2460,13 @@ body.home-page.is-home-panel-transition .home-after-landing {
         font-size: $type-home-small;
         line-height: 1.25;
         text-align: left;
+    }
+
+    .author__urls li:has(a) {
+        height: 2.36rem;
+        min-height: 2.36rem;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .author__urls i {
@@ -2481,7 +2490,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
         align-items: center;
         justify-content: start;
         gap: .42rem;
-        width: auto;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
         white-space: nowrap;
         color: $mona-blue;
         font-family: $font-nav;
