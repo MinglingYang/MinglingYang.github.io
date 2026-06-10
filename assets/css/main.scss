@@ -809,59 +809,85 @@ h1:before, .anchor:before {
     scroll-margin-top: 6rem;
 }
 
-.home-after-content #honors-awards + h2 + ul {
+.award-card {
+    position: relative;
     display: grid;
-    gap: .56rem;
+    gap: 0;
     margin: 1rem 0 2.35rem;
-    padding: .92rem 1rem;
-    list-style: none;
+    padding: .86rem 1.1rem;
+    overflow: hidden;
     border: 1px solid $mona-border;
     border-radius: $mona-card-radius;
     background:
-        radial-gradient(circle at 96% 8%, rgba(201, 166, 70, .12), transparent 12rem),
+        radial-gradient(circle at 96% 10%, rgba(201, 166, 70, .12), transparent 12rem),
+        radial-gradient(circle at 0% 100%, rgba(220, 235, 250, .62), transparent 17rem),
         linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(250, 251, 253, .9));
     box-shadow: $mona-card-shadow, $mona-inner-highlight;
 
-    li {
-        position: relative;
-        min-height: 2.7rem;
+    &::before {
+        content: "";
+        position: absolute;
+        top: .95rem;
+        bottom: .95rem;
+        left: 5.55rem;
+        width: 1px;
+        background: linear-gradient(180deg, rgba(188, 204, 223, 0), rgba(188, 204, 223, .86) 12%, rgba(188, 204, 223, .86) 88%, rgba(188, 204, 223, 0));
+    }
+}
+
+.award-card__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4.2rem minmax(0, 1fr);
+    gap: .95rem;
+    align-items: center;
+    min-height: 3.25rem;
+    padding: .46rem .2rem .46rem 0;
+    border-bottom: 1px solid rgba(188, 204, 223, .48);
+
+    &:last-child {
+        border-bottom: 0;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 4.33rem;
+        width: .48rem;
+        height: .48rem;
+        border: 2px solid rgba(255, 255, 255, .95);
+        border-radius: 50%;
+        background: $mona-gold;
+        box-shadow: 0 0 0 2px rgba(201, 166, 70, .22), 0 3px 8px rgba(74, 70, 38, .14);
+        transform: translateY(-50%);
+    }
+
+    time {
+        color: $mona-gold;
+        font-family: $font-card-number;
+        font-size: clamp(1.16rem, 1.35vw, 1.46rem);
+        font-weight: 600;
+        line-height: .92;
+        text-align: center;
+    }
+
+    h3 {
+        margin: 0 0 .12rem;
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-size: clamp(.88rem, .92vw, 1rem);
+        font-weight: 700;
+        line-height: 1.16;
+    }
+
+    p {
         margin: 0;
-        padding: .5rem .65rem .5rem 3.8rem;
-        border: 1px solid rgba(188, 204, 223, .58);
-        border-radius: 14px;
-        background: rgba(255, 255, 255, .74);
-        color: rgba(10, 30, 62, .72);
+        color: rgba(10, 30, 62, .58);
         font-family: $font-body;
-        font-size: $type-home-small;
-        line-height: 1.36;
-        box-shadow: 0 6px 16px rgba(7, 17, 31, .045), $mona-inner-highlight;
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 1.12rem;
-            width: .48rem;
-            height: .48rem;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            background: $mona-gold;
-            box-shadow: 0 0 0 2px rgba(201, 166, 70, .22), 0 3px 8px rgba(74, 70, 38, .16);
-            transform: translateY(-50%);
-        }
-
-        em:first-child {
-            position: absolute;
-            top: 50%;
-            left: 1.92rem;
-            color: $mona-gold;
-            font-family: $font-card-number;
-            font-size: .92rem;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1;
-            transform: translateY(-50%);
-        }
+        font-size: clamp(.68rem, .72vw, .78rem);
+        font-weight: 500;
+        line-height: 1.22;
     }
 }
 

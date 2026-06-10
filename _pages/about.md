@@ -348,11 +348,43 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
 
 ## Honors and Awards
 
-- *2026 - 2031*, Multi-Year Funding Offer, University of Southern California.
-- *2021 - 2023*, Departmental Tuition Fellowship, Johns Hopkins University.
-- *2019 - 2020*, University of South Carolina Undergraduate Nonresident Scholarship.
-- *2019 - 2020*, University of South Carolina Academic Achievement Scholarship.
-- *2017 - 2020*, Dean's Honor List / President's Honor List, University of South Carolina.
+<section class="award-card" aria-label="Honors and awards">
+  <article class="award-card__item">
+    <time>2026<br>2031</time>
+    <div>
+      <h3>Multi-Year Funding Offer</h3>
+      <p>University of Southern California</p>
+    </div>
+  </article>
+  <article class="award-card__item">
+    <time>2021<br>2023</time>
+    <div>
+      <h3>Departmental Tuition Fellowship</h3>
+      <p>Johns Hopkins University</p>
+    </div>
+  </article>
+  <article class="award-card__item">
+    <time>2019<br>2020</time>
+    <div>
+      <h3>Undergraduate Nonresident Scholarship</h3>
+      <p>University of South Carolina</p>
+    </div>
+  </article>
+  <article class="award-card__item">
+    <time>2019<br>2020</time>
+    <div>
+      <h3>Academic Achievement Scholarship</h3>
+      <p>University of South Carolina</p>
+    </div>
+  </article>
+  <article class="award-card__item">
+    <time>2017<br>2020</time>
+    <div>
+      <h3>Dean's Honor List / President's Honor List</h3>
+      <p>University of South Carolina</p>
+    </div>
+  </article>
+</section>
 
 <span class='anchor' id='presentations'></span>
 
