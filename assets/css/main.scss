@@ -63,9 +63,9 @@ $mona-card-radius: 24px;
 $mona-profile-radius: 28px;
 $mona-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, .85);
 $mona-gold-edge: inset 0 0 0 1px rgba(201, 166, 70, .35);
-$type-home-display: clamp(2.18rem, 3.15vw, 3.35rem);
-$type-home-role: clamp(1rem, 1.18vw, 1.16rem);
-$type-home-track: clamp(.82rem, .86vw, .9rem);
+$type-home-display: clamp(1.95rem, 2.65vw, 2.9rem);
+$type-home-role: clamp(.9rem, 1.02vw, 1.06rem);
+$type-home-track: clamp(.76rem, .8vw, .84rem);
 $type-home-section: clamp(1.48rem, 1.72vw, 1.82rem);
 $type-home-card-title: clamp(1rem, 1.04vw, 1.12rem);
 $type-home-body: clamp(.88rem, .9vw, .96rem);
@@ -1379,7 +1379,7 @@ h1:before, .anchor:before {
 
 .pub-grid {
     display: grid;
-    gap: 1.35rem;
+    gap: .62rem;
     margin-top: 1.1rem;
 }
 
@@ -1389,21 +1389,22 @@ h1:before, .anchor:before {
     flex-wrap: wrap;
     gap: .5rem;
     align-items: center;
-    margin-bottom: .1rem;
+    order: 0;
+    margin-bottom: .55rem;
 }
 
 .publication-filter__chip {
     display: inline-flex;
-    min-height: 2rem;
+    min-height: 1.82rem;
     align-items: center;
     gap: .28rem;
-    padding: .38rem .78rem;
+    padding: .32rem .74rem;
     border: 1px solid rgba(188, 204, 223, .72);
     border-radius: 999px;
-    background: rgba(255, 255, 255, .86);
+    background: rgba(255, 255, 255, .9);
     color: $mona-blue;
     font-family: $font-label;
-    font-size: $type-home-small;
+    font-size: 11px;
     font-weight: 500;
     line-height: 1;
     cursor: pointer;
@@ -1417,14 +1418,19 @@ h1:before, .anchor:before {
     &:hover,
     &.is-active {
         border-color: rgba(213, 164, 56, .56);
-        background: linear-gradient(135deg, $mona-soft-blue, #fff8e8);
-        color: $mona-blue;
+        background: $mona-blue;
+        color: $mona-pearl;
         box-shadow: 0 8px 18px rgba(47, 125, 183, .14);
+    }
+
+    &.is-active span {
+        color: rgba(250, 251, 253, .78);
     }
 }
 
 .publication-filter__empty {
     grid-column: 1 / -1;
+    order: 3;
     margin: .5rem 0 0;
     padding: 1rem;
     border: 1px dashed rgba(188, 204, 223, .7);
@@ -1436,17 +1442,22 @@ h1:before, .anchor:before {
 
 .pub-card {
     display: grid;
-    grid-template-columns: minmax(230px, 40%) 1fr;
-    gap: 1.25rem;
-    align-items: stretch;
-    padding: .9rem;
+    grid-template-columns: 5.15rem minmax(0, 1fr);
+    gap: .92rem;
+    align-items: center;
+    order: 2;
+    min-height: 5.25rem;
+    padding: .62rem .78rem;
     border: 1px solid $mona-border;
-    border-radius: $mona-card-radius;
-    background: linear-gradient(135deg, $mona-card-bg 0%, rgba(250, 251, 253, .94) 100%);
-    box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(220, 235, 250, .38), transparent 15rem),
+        linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(250, 251, 253, .9));
+    box-shadow: 0 8px 20px rgba(7, 17, 31, .055), inset 0 1px 0 rgba(255, 255, 255, .85);
     backdrop-filter: saturate(140%) blur(6px);
     scroll-margin-top: 6rem;
-    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background .2s ease;
 
     @include breakpoint(max-width $medium) {
         grid-template-columns: 1fr;
@@ -1457,6 +1468,46 @@ h1:before, .anchor:before {
         box-shadow: $mona-hover-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
         transform: translateY(-2px);
     }
+
+    &:focus-visible {
+        outline: 2px solid rgba(23, 74, 124, .42);
+        outline-offset: 3px;
+    }
+}
+
+.pub-card.is-featured {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 39%);
+    gap: clamp(1.2rem, 2vw, 2.1rem);
+    align-items: stretch;
+    order: 1;
+    min-height: 18rem;
+    padding: 3rem 1.2rem 1.2rem;
+    border-color: rgba(201, 166, 70, .62);
+    border-radius: $mona-card-radius;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(220, 235, 250, .72), transparent 19rem),
+        radial-gradient(circle at 12% 100%, rgba(201, 166, 70, .1), transparent 15rem),
+        linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(250, 251, 253, .92));
+    box-shadow: 0 18px 48px rgba(7, 17, 31, .08), inset 0 1px 0 rgba(255, 255, 255, .88);
+    cursor: default;
+
+    &::before {
+        content: "FEATURED PUBLICATION";
+        position: absolute;
+        top: 1rem;
+        left: 1.18rem;
+        color: $mona-gold;
+        font-family: $font-label;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .02em;
+    }
+
+    @include breakpoint(max-width $medium) {
+        grid-template-columns: 1fr;
+        padding-top: 2.8rem;
+    }
 }
 
 .pub-card.is-hidden-by-filter {
@@ -1465,12 +1516,35 @@ h1:before, .anchor:before {
 
 .pub-card__image-wrap {
     overflow: hidden;
-    border-radius: 18px;
-    min-height: 230px;
+    width: 5.15rem;
+    height: 5.15rem;
+    min-height: 0;
+    border: 1px solid rgba(188, 204, 223, .7);
+    border-radius: 8px;
     background: #eef4f8;
+    box-shadow: 0 6px 14px rgba(7, 17, 31, .08), inset 0 1px 0 rgba(255, 255, 255, .85);
 
     @include breakpoint(max-width $medium) {
-        min-height: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+}
+
+.pub-card.is-featured .pub-card__image-wrap {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 15.6rem;
+    border-radius: 18px;
+    background:
+        linear-gradient(135deg, rgba(250, 251, 253, .94), rgba(220, 235, 250, .52));
+
+    @include breakpoint(max-width $medium) {
+        grid-column: 1;
+        grid-row: auto;
+        min-height: 14rem;
     }
 }
 
@@ -1478,19 +1552,29 @@ h1:before, .anchor:before {
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 230px;
-    object-fit: contain;
+    min-height: 0;
+    object-fit: cover;
     background: #f6f9fc;
+}
+
+.pub-card.is-featured .pub-card__image {
+    object-fit: contain;
+    padding: .42rem;
 }
 
 .pub-card__body {
     min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .24rem .8rem;
+    align-items: center;
 
     h3 {
-        margin: .25rem 0 .5rem;
+        grid-column: 1;
+        margin: 0;
         color: $mona-blue;
         font-family: $font-card-title;
-        font-size: clamp(1.08rem, 1.16vw, 1.28rem);
+        font-size: clamp(16px, 1.02vw, 18px);
         font-weight: 700;
         line-height: 1.22;
     }
@@ -1500,21 +1584,43 @@ h1:before, .anchor:before {
     }
 }
 
+.pub-card.is-featured .pub-card__body {
+    grid-column: 1;
+    grid-row: 1;
+    display: block;
+    align-self: center;
+
+    h3 {
+        margin: .18rem 0 .5rem;
+        font-size: clamp(23px, 1.78vw, 31px);
+        line-height: 1.13;
+    }
+}
+
 .pub-card__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: .45rem;
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    gap: .32rem;
     align-items: center;
     color: rgba(10, 30, 62, .62);
     font-family: $font-label;
-    font-size: $type-home-small;
+    font-size: 10.5px;
     font-weight: 500;
 
     span {
-        padding: .22rem .5rem;
+        padding: .2rem .46rem;
         border-radius: 999px;
         background: #eef5fb;
     }
+}
+
+.pub-card.is-featured .pub-card__meta {
+    justify-content: flex-start;
+    margin-bottom: .55rem;
+    font-size: 11px;
 }
 
 .pub-card__metric {
@@ -1525,6 +1631,7 @@ h1:before, .anchor:before {
 .pub-card__authors,
 .pub-card__summary,
 .pub-card__focus {
+    grid-column: 1;
     margin-bottom: .5rem;
     color: rgba(10, 30, 62, .7);
 }
@@ -1533,8 +1640,9 @@ h1:before, .anchor:before {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: clamp(.82rem, .84vw, .9rem);
-    line-height: 1.35;
+    color: rgba(10, 30, 62, .64);
+    font-size: clamp(12.5px, .74vw, 14px) !important;
+    line-height: 1.3;
 }
 
 .pub-card__author-me {
@@ -1544,25 +1652,69 @@ h1:before, .anchor:before {
 
 .pub-card__summary,
 .pub-card__focus {
-    color: rgba(10, 30, 62, .82);
-    font-size: clamp(.88rem, .9vw, .96rem);
-    line-height: 1.54;
+    color: rgba(10, 30, 62, .74);
+    font-size: clamp(13px, .78vw, 14.5px);
+    line-height: 1.48;
     max-width: 58rem;
+}
+
+.pub-card:not(.is-featured) .pub-card__summary,
+.pub-card:not(.is-featured) .pub-card__focus,
+.pub-card:not(.is-featured) .pub-card__actions {
+    display: none;
+}
+
+.pub-card.is-featured .pub-card__summary,
+.pub-card.is-featured .pub-card__focus {
+    max-width: 42rem;
+    margin: .72rem 0 .85rem;
+    font-size: clamp(14px, .86vw, 16px);
+    line-height: 1.56;
+}
+
+.pub-card__actions {
+    margin: .9rem 0 .9rem;
+}
+
+.pub-card__action {
+    display: inline-flex;
+    min-height: 2.32rem;
+    align-items: center;
+    justify-content: center;
+    padding: .45rem .95rem;
+    border: 1px solid rgba(10, 30, 62, .8);
+    border-radius: 8px;
+    background: $mona-blue;
+    color: $mona-pearl !important;
+    font-family: $font-nav;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 8px 18px rgba(7, 17, 31, .14), $mona-inner-highlight;
+
+    &::after {
+        content: "↗";
+        margin-left: .42rem;
+        font-size: .92em;
+    }
 }
 
 .pub-card__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: .35rem;
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-end;
+    gap: .3rem;
 
     .pub-card__tag {
-        padding: .24rem .5rem;
+        padding: .22rem .46rem;
         border: 1px solid rgba(188, 204, 223, .58);
         border-radius: 999px;
         background: rgba(255, 255, 255, .78);
         color: #526476;
         font-family: $font-label;
-        font-size: clamp(.66rem, .68vw, .72rem);
+        font-size: 10px;
         font-weight: 500;
         line-height: 1.2;
         cursor: pointer;
@@ -1574,6 +1726,28 @@ h1:before, .anchor:before {
         background: linear-gradient(135deg, #e7f5fb, #fff8e8);
         color: #173c63;
         box-shadow: 0 4px 10px rgba(47, 125, 183, .1);
+    }
+}
+
+.pub-card:not(.is-featured) .pub-card__tag:nth-child(n+5) {
+    display: none;
+}
+
+.pub-card.is-featured .pub-card__tags {
+    justify-content: flex-start;
+    margin-top: .75rem;
+}
+
+@include breakpoint(max-width $medium) {
+    .pub-card__body,
+    .pub-card.is-featured .pub-card__body {
+        display: block;
+    }
+
+    .pub-card__meta,
+    .pub-card__tags {
+        justify-content: flex-start;
+        margin-top: .45rem;
     }
 }
 
@@ -2103,8 +2277,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     .author__bio {
         color: $mona-academic-blue;
-        font-weight: 800;
-        line-height: 1.42;
+        font-size: clamp(.88rem, .92vw, .98rem);
+        font-weight: 700;
+        line-height: 1.34;
     }
 
     .author__urls li {
@@ -2123,6 +2298,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__urls li {
         display: flex;
         align-items: center;
+        gap: .46rem;
         min-height: 2.18rem;
         margin: 0;
         padding: .32rem .72rem;
@@ -2135,7 +2311,16 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .author__urls i {
-        color: #2f7db7;
+        display: inline-grid;
+        width: 1.12rem !important;
+        min-width: 1.12rem;
+        height: 1.12rem;
+        flex: 0 0 1.12rem;
+        place-items: center;
+        margin: 0 !important;
+        color: $mona-blue;
+        font-size: 1.02rem;
+        line-height: 1;
     }
 
     .author__urls a {

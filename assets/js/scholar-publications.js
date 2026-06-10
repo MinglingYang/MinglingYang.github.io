@@ -244,8 +244,11 @@
       : "";
     var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\">" : "";
     var linkClose = url ? "</a>" : "";
+    var actionHtml = url
+      ? "    <p class=\"pub-card__actions\"><a class=\"pub-card__action\" href=\"" + escapeHtml(url) + "\">View publication</a></p>"
+      : "";
     return [
-      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\">",
+      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" tabindex=\"0\" aria-expanded=\"false\">",
       "  <div class=\"pub-card__image-wrap\">",
       "    <img class=\"pub-card__image\" src=\"" + escapeHtml(versionedAssetUrl(pub.image || "images/publications/scholar-update.svg")) + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
       "  </div>",
@@ -258,6 +261,7 @@
       "    <h3>" + linkOpen + escapeHtml(title) + linkClose + "</h3>",
       "    <p class=\"pub-card__authors\">" + renderAuthors(pub.authors) + "</p>",
       focusHtml,
+      actionHtml,
       "    <div class=\"pub-card__tags\">" + renderTags(derivedTags(pub), allowedTagKeys) + "</div>",
       "  </div>",
       "</article>"
@@ -396,6 +400,8 @@
       });
     });
 
+    ensureFeaturedPublication(container);
+
     Array.prototype.slice.call(document.querySelectorAll("[data-publication-filter]")).forEach(function (button) {
       var key = button.getAttribute("data-publication-filter");
       button.classList.toggle("is-active", key === "__all" ? !hasFilters : !!activeTags[key]);
@@ -403,6 +409,44 @@
 
     var empty = document.getElementById("publication-filter-empty");
     if (empty) empty.hidden = visibleCount !== 0;
+  }
+
+  function setFeaturedPublication(container, card, scrollIntoView) {
+    if (!container || !card || card.classList.contains("is-hidden-by-filter")) return;
+    Array.prototype.slice.call(container.querySelectorAll(".pub-card")).forEach(function (item) {
+      var isFeatured = item === card;
+      item.classList.toggle("is-featured", isFeatured);
+      item.setAttribute("aria-expanded", isFeatured ? "true" : "false");
+    });
+    if (scrollIntoView) {
+      window.setTimeout(function () {
+        scrollToHashTarget(card.id);
+      }, 30);
+    }
+  }
+
+  function ensureFeaturedPublication(container) {
+    if (!container) return;
+    var featured = container.querySelector(".pub-card.is-featured:not(.is-hidden-by-filter)");
+    if (featured) return;
+    var firstVisible = container.querySelector(".pub-card:not(.is-hidden-by-filter)");
+    if (firstVisible) setFeaturedPublication(container, firstVisible, false);
+  }
+
+  function bindPublicationFeatureCards(target) {
+    target.addEventListener("click", function (event) {
+      var card = event.target.closest(".pub-card");
+      if (!card || !target.contains(card)) return;
+      if (event.target.closest("a, button, [data-publication-filter], [data-publication-tag]")) return;
+      setFeaturedPublication(target, card, true);
+    });
+    target.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      var card = event.target.closest(".pub-card");
+      if (!card || !target.contains(card)) return;
+      event.preventDefault();
+      setFeaturedPublication(target, card, true);
+    });
   }
 
   function bindPublicationFilters(target) {
@@ -437,6 +481,9 @@
       publications.map(function (pub) { return renderPublicationCard(pub, allowedTagKeys); }).join(""),
       "<p class=\"publication-filter__empty\" id=\"publication-filter-empty\" hidden>No publications match the selected tags.</p>"
     ].join("");
+    var hashCard = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+    setFeaturedPublication(target, hashCard && hashCard.classList.contains("pub-card") ? hashCard : target.querySelector(".pub-card"), false);
+    bindPublicationFeatureCards(target);
     bindPublicationFilters(target);
     if (window.location.hash && document.getElementById(window.location.hash.slice(1))) {
       window.setTimeout(function () {
