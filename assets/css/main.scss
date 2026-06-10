@@ -1471,7 +1471,6 @@ h1:before, .anchor:before {
     grid-template-columns: 5.15rem minmax(0, 1fr);
     gap: .92rem;
     align-items: center;
-    order: 2;
     min-height: 5.25rem;
     padding: .62rem .78rem;
     border: 1px solid $mona-border;
@@ -1506,7 +1505,6 @@ h1:before, .anchor:before {
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 39%);
     gap: clamp(1.2rem, 2vw, 2.1rem);
     align-items: stretch;
-    order: 1;
     min-height: 18rem;
     padding: 3rem 1.2rem 1.2rem;
     border-color: rgba(201, 166, 70, .62);
@@ -1540,6 +1538,102 @@ h1:before, .anchor:before {
     display: none;
 }
 
+.pub-card__compact-mark {
+    position: relative;
+    display: grid;
+    width: 5.15rem;
+    height: 5.15rem;
+    align-content: space-between;
+    padding: .54rem .5rem .46rem;
+    overflow: hidden;
+    border: 1px solid rgba(188, 204, 223, .76);
+    border-radius: 8px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(220, 235, 250, .58), transparent 3.5rem),
+        linear-gradient(145deg, #ffffff, rgba(250, 251, 253, .96));
+    box-shadow: 0 6px 14px rgba(7, 17, 31, .08), inset 0 1px 0 rgba(255, 255, 255, .9);
+
+    &::before {
+        content: "";
+        position: absolute;
+        right: -.6rem;
+        bottom: -.75rem;
+        width: 3.6rem;
+        height: 3.6rem;
+        border: 1px solid rgba(23, 74, 124, .13);
+        border-radius: 50%;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: .46rem;
+        left: .5rem;
+        width: 1.72rem;
+        height: 2px;
+        border-radius: 999px;
+        background: $mona-gold;
+    }
+
+    span,
+    strong,
+    em {
+        position: relative;
+        z-index: 1;
+        display: block;
+    }
+
+    span {
+        margin-top: .24rem;
+        color: rgba(10, 30, 62, .58);
+        font-family: $font-label;
+        font-size: 8.8px;
+        font-weight: 600;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    strong {
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.05;
+    }
+
+    em {
+        color: $mona-gold;
+        font-family: $font-label;
+        font-size: 9px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1;
+    }
+}
+
+.pub-card__compact-mark--conference {
+    background:
+        radial-gradient(circle at 100% 0%, rgba(201, 166, 70, .22), transparent 3.5rem),
+        linear-gradient(145deg, $mona-blue, $mona-academic-blue);
+
+    span,
+    strong {
+        color: $mona-pearl;
+    }
+
+    em {
+        color: #f5d279;
+    }
+
+    &::before {
+        border-color: rgba(255, 255, 255, .18);
+    }
+}
+
+.pub-card.is-featured .pub-card__compact-mark {
+    display: none;
+}
+
 .pub-card__image-wrap {
     overflow: hidden;
     width: 5.15rem;
@@ -1555,6 +1649,10 @@ h1:before, .anchor:before {
         height: auto;
         aspect-ratio: 16 / 9;
     }
+}
+
+.pub-card:not(.is-featured) .pub-card__image-wrap {
+    display: none;
 }
 
 .pub-card.is-featured .pub-card__image-wrap {
@@ -2324,6 +2422,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__urls li {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: .46rem;
         min-height: 2.18rem;
         margin: 0;
@@ -2350,9 +2449,13 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .author__urls a {
-        display: inline-flex;
+        display: grid;
+        grid-template-columns: 1.34rem 7.2rem;
         align-items: center;
-        gap: .46rem;
+        justify-content: center;
+        gap: .42rem;
+        width: 100%;
+        white-space: nowrap;
         color: $mona-blue;
         font-family: $font-nav;
         font-weight: 600;
@@ -2364,6 +2467,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         height: 1.12rem;
         color: $mona-blue;
         font-size: .82rem;
+        justify-self: center;
 
         i {
             width: auto;
@@ -2380,7 +2484,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .author__urls .home-link-icon--researchgate {
-        width: 1.24rem;
+        width: 1.12rem;
         font-size: .96rem;
     }
 

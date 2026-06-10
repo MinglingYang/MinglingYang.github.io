@@ -227,7 +227,57 @@
   }
 
   function renderAuthors(authors) {
-    return escapeHtml(authors || "").replace(/\b(Yang M|Mingling Yang)\b/g, "<strong class=\"pub-card__author-me\">$1</strong>");
+    var value = String(authors || "");
+    var match = value.match(/\b(Yang M|Mingling Yang)\b/);
+    if (match && match.index + match[0].length < value.length) {
+      value = value.slice(0, match.index + match[0].length).replace(/[,\s]+$/, "") + ", et al.";
+    }
+    return escapeHtml(value).replace(/\b(Yang M|Mingling Yang)\b/g, "<strong class=\"pub-card__author-me\">$1</strong>");
+  }
+
+  function compactPublicationMark(pub) {
+    var venue = String(pub.venue || "");
+    var title = String(pub.title || pub.short_title || "");
+    var text = (venue + " " + title).toLowerCase();
+    var year = escapeHtml(pub.year || "");
+    var kind = /conference|congress|poster|abstract|ats|ers/i.test(venue + " " + title) ? "conference" : "journal";
+    var eyebrow = "Journal";
+    var main = "Publication";
+    var sub = year;
+
+    if (/lancet/.test(text)) {
+      eyebrow = "The Lancet";
+      main = "Regional Health";
+    } else if (/european respiratory journal|ers/.test(text)) {
+      eyebrow = /congress|abstract/.test(text) ? "ERS" : "ERJ";
+      main = /congress|abstract/.test(text) ? "Congress" : "Respiratory Journal";
+      kind = /congress|abstract/.test(text) ? "conference" : "journal";
+    } else if (/american journal of respiratory|ajrccm|ats/.test(text)) {
+      eyebrow = /ats|conference|abstract|poster/.test(text) ? "ATS" : "AJRCCM";
+      main = /ats|conference|abstract|poster/.test(text) ? "Conference" : "Respiratory Care";
+      kind = /ats|conference|abstract|poster/.test(text) ? "conference" : "journal";
+    } else if (/environmental health perspectives/.test(text)) {
+      eyebrow = "EHP";
+      main = "Environmental Health";
+    } else if (/jama network open/.test(text)) {
+      eyebrow = "JAMA";
+      main = "Network Open";
+    } else if (/google scholar/.test(text)) {
+      eyebrow = "Scholar";
+      main = "Auto update";
+    } else if (venue) {
+      var words = venue.split(/\s+/).filter(Boolean);
+      eyebrow = words.slice(0, 2).join(" ");
+      main = words.slice(2, 5).join(" ") || "Publication";
+    }
+
+    return [
+      "<div class=\"pub-card__compact-mark pub-card__compact-mark--" + escapeHtml(kind) + "\" aria-hidden=\"true\">",
+      "  <span>" + escapeHtml(eyebrow) + "</span>",
+      "  <strong>" + escapeHtml(main) + "</strong>",
+      "  <em>" + sub + "</em>",
+      "</div>"
+    ].join("");
   }
 
   function renderPublicationCard(pub, allowedTagKeys) {
@@ -248,7 +298,8 @@
       ? "    <p class=\"pub-card__actions\"><a class=\"pub-card__action\" href=\"" + escapeHtml(url) + "\">View publication</a></p>"
       : "";
     return [
-      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" tabindex=\"0\" aria-expanded=\"false\">",
+      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" data-publication-citations=\"" + escapeHtml(citation || 0) + "\" tabindex=\"0\" aria-expanded=\"false\">",
+      compactPublicationMark(pub),
       "  <div class=\"pub-card__image-wrap\">",
       "    <img class=\"pub-card__image\" src=\"" + escapeHtml(versionedAssetUrl(pub.image || "images/publications/scholar-update.svg")) + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
       "  </div>",
@@ -425,12 +476,22 @@
     }
   }
 
+  function highestCitationCard(container) {
+    var visibleCards = Array.prototype.slice.call(container.querySelectorAll(".pub-card:not(.is-hidden-by-filter)"));
+    if (!visibleCards.length) return null;
+    return visibleCards.reduce(function (best, card) {
+      var bestCitations = Number(best.getAttribute("data-publication-citations") || 0);
+      var cardCitations = Number(card.getAttribute("data-publication-citations") || 0);
+      return cardCitations > bestCitations ? card : best;
+    }, visibleCards[0]);
+  }
+
   function ensureFeaturedPublication(container) {
     if (!container) return;
     var featured = container.querySelector(".pub-card.is-featured:not(.is-hidden-by-filter)");
     if (featured) return;
-    var firstVisible = container.querySelector(".pub-card:not(.is-hidden-by-filter)");
-    if (firstVisible) setFeaturedPublication(container, firstVisible, false);
+    var defaultCard = highestCitationCard(container);
+    if (defaultCard) setFeaturedPublication(container, defaultCard, false);
   }
 
   function bindPublicationFeatureCards(target) {
@@ -438,14 +499,14 @@
       var card = event.target.closest(".pub-card");
       if (!card || !target.contains(card)) return;
       if (event.target.closest("a, button, [data-publication-filter], [data-publication-tag]")) return;
-      setFeaturedPublication(target, card, true);
+      setFeaturedPublication(target, card, false);
     });
     target.addEventListener("keydown", function (event) {
       if (event.key !== "Enter" && event.key !== " ") return;
       var card = event.target.closest(".pub-card");
       if (!card || !target.contains(card)) return;
       event.preventDefault();
-      setFeaturedPublication(target, card, true);
+      setFeaturedPublication(target, card, false);
     });
   }
 
@@ -482,7 +543,7 @@
       "<p class=\"publication-filter__empty\" id=\"publication-filter-empty\" hidden>No publications match the selected tags.</p>"
     ].join("");
     var hashCard = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
-    setFeaturedPublication(target, hashCard && hashCard.classList.contains("pub-card") ? hashCard : target.querySelector(".pub-card"), false);
+    setFeaturedPublication(target, hashCard && hashCard.classList.contains("pub-card") ? hashCard : highestCitationCard(target), false);
     bindPublicationFeatureCards(target);
     bindPublicationFilters(target);
     if (window.location.hash && document.getElementById(window.location.hash.slice(1))) {
