@@ -280,6 +280,17 @@
     ].join("");
   }
 
+  function compactPublicationVisual(pub) {
+    if (pub.cover) {
+      return [
+        "<div class=\"pub-card__compact-cover\" aria-hidden=\"true\">",
+        "  <img src=\"" + escapeHtml(versionedAssetUrl(pub.cover)) + "\" alt=\"\" loading=\"lazy\">",
+        "</div>"
+      ].join("");
+    }
+    return compactPublicationMark(pub);
+  }
+
   function renderPublicationCard(pub, allowedTagKeys) {
     var url = publicationUrl(pub);
     var title = pub.short_title || pub.title;
@@ -292,14 +303,14 @@
     var focusHtml = summary
       ? "    <p class=\"pub-card__summary\">" + escapeHtml(summary) + "</p>"
       : "";
-    var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\">" : "";
+    var linkOpen = url ? "<a href=\"" + escapeHtml(url) + "\" target=\"_blank\" rel=\"noopener\">" : "";
     var linkClose = url ? "</a>" : "";
     var actionHtml = url
-      ? "    <p class=\"pub-card__actions\"><a class=\"pub-card__action\" href=\"" + escapeHtml(url) + "\">View publication</a></p>"
+      ? "    <p class=\"pub-card__actions\"><a class=\"pub-card__action\" href=\"" + escapeHtml(url) + "\" target=\"_blank\" rel=\"noopener\">View publication</a></p>"
       : "";
     return [
       "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" data-publication-citations=\"" + escapeHtml(citation || 0) + "\" tabindex=\"0\" aria-expanded=\"false\">",
-      compactPublicationMark(pub),
+      compactPublicationVisual(pub),
       "  <div class=\"pub-card__image-wrap\">",
       "    <img class=\"pub-card__image\" src=\"" + escapeHtml(versionedAssetUrl(pub.image || "images/publications/scholar-update.svg")) + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
       "  </div>",

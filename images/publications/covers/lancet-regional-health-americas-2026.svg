@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 300" role="img" aria-labelledby="title desc">
+  <title id="title">The Lancet Regional Health Americas cover thumbnail</title>
+  <desc id="desc">Cover-style thumbnail for The Lancet Regional Health Americas, Volume 55, March 2026.</desc>
+  <defs>
+    <linearGradient id="coverSky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fbfaf4"/>
+      <stop offset=".32" stop-color="#d8e7d6"/>
+      <stop offset=".68" stop-color="#afc7ae"/>
+      <stop offset="1" stop-color="#e9ddbe"/>
+    </linearGradient>
+    <radialGradient id="warm" cx=".36" cy=".5" r=".7">
+      <stop offset="0" stop-color="#fff1cc" stop-opacity=".78"/>
+      <stop offset=".48" stop-color="#d19c6b" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#52374e" stop-opacity=".18"/>
+    </radialGradient>
+    <linearGradient id="blueBand" x1="0" x2="1">
+      <stop offset="0" stop-color="#002c67"/>
+      <stop offset="1" stop-color="#0066b3"/>
+    </linearGradient>
+  </defs>
+  <rect width="220" height="300" fill="#fff"/>
+  <rect x="0" y="0" width="220" height="63" fill="#fff"/>
+  <text x="12" y="25" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#050505">THE LANCET</text>
+  <text x="118" y="25" font-family="Georgia, 'Times New Roman', serif" font-size="14" font-style="italic" fill="#111">Regional Health</text>
+  <text x="12" y="47" font-family="Georgia, 'Times New Roman', serif" font-size="19" fill="#0064b7">Americas</text>
+  <rect x="0" y="63" width="220" height="8" fill="url(#blueBand)"/>
+  <text x="9" y="69" font-family="Arial, sans-serif" font-size="4.8" font-weight="700" fill="#fff">Volume 55 · March 2026</text>
+  <rect x="0" y="71" width="220" height="190" fill="url(#coverSky)"/>
+  <rect x="0" y="71" width="220" height="190" fill="url(#warm)"/>
+  <path d="M105 98c-15 5-24 20-25 39-2 29 8 60-14 80 28 11 72 8 89-20 14-24 4-61-7-78-9-14-25-26-43-21z" fill="#463044" opacity=".78"/>
+  <path d="M116 121c-14 8-25 24-31 43-9 28-2 47 17 56 18 9 48 6 61-11 13-18 10-45-6-66-12-16-26-28-41-22z" fill="#a15e54" opacity=".9"/>
+  <path d="M115 108c-12 6-20 20-17 34 3 13 20 18 33 9 13-9 14-30 4-40-5-5-13-6-20-3z" fill="#6c3f39"/>
+  <path d="M79 187c18-19 50-25 75-12 25 12 43 27 53 48-22 19-79 31-119 14-16-7-23-28-9-50z" fill="#f1d5d9" opacity=".92"/>
+  <path d="M113 188c18-9 51-6 74 18 4 5 9 10 15 17-16 14-58 21-87 9-17-7-19-35-2-44z" fill="#edd5df"/>
+  <path d="M143 178c14 4 24 18 24 31 0 9-8 15-20 15-17 0-28-8-35-19 5-16 16-31 31-27z" fill="#4c2f38" opacity=".6"/>
+  <path d="M0 222c28-18 61-19 87-6 49 26 89 19 133-10v55H0z" fill="#243f59" opacity=".15"/>
+  <rect x="0" y="261" width="220" height="39" fill="#fff"/>
+  <text x="10" y="276" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#111">Articles</text>
+  <line x1="10" y1="279" x2="76" y2="279" stroke="#0064b7" stroke-width="1"/>
+  <text x="10" y="289" font-family="Arial, sans-serif" font-size="5.7" fill="#111">Long-term clean-fuel intervention</text>
+  <text x="10" y="296" font-family="Arial, sans-serif" font-size="5.7" fill="#111">and child growth trajectories</text>
+  <path d="M196 261h24v39h-39z" fill="#005ca8"/>
+  <text x="193" y="286" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#fff">oa</text>
+</svg>
