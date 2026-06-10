@@ -2420,10 +2420,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .author__urls li {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1.34rem 7.2rem;
         align-items: center;
         justify-content: center;
-        gap: .46rem;
+        gap: .42rem;
         min-height: 2.18rem;
         margin: 0;
         padding: .32rem .72rem;
@@ -2433,6 +2434,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
         font-size: $type-home-small;
         line-height: 1.25;
+        text-align: left;
     }
 
     .author__urls i {
@@ -2445,21 +2447,29 @@ body.home-page.is-home-panel-transition .home-after-landing {
         margin: 0 !important;
         color: $mona-blue;
         font-size: 1.02rem;
+        justify-self: center;
         line-height: 1;
     }
 
     .author__urls a {
+        grid-column: 1 / -1;
         display: grid;
         grid-template-columns: 1.34rem 7.2rem;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
         gap: .42rem;
-        width: 100%;
+        width: auto;
         white-space: nowrap;
         color: $mona-blue;
         font-family: $font-nav;
         font-weight: 600;
         text-decoration: none;
+    }
+
+    .author__url-text {
+        justify-self: start;
+        min-width: 0;
+        text-align: left;
     }
 
     .author__urls .home-link-icon {
