@@ -1,6 +1,8 @@
 ---
 ---
 
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap");
+
 /*
  *    Minimal Mistakes Jekyll Theme
  *
@@ -40,7 +42,7 @@
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
 
-$font-signature: "Virgolate", "Cormorant Garamond", "Bodoni 72", Georgia, "Times New Roman", serif;
+$font-signature: "Virgolate", "Snell Roundhand", "Bradley Hand", "Apple Chancery", "Cormorant Garamond", "Bodoni 72", Georgia, "Times New Roman", serif;
 $font-hero: "Source Serif 4", Georgia, "Times New Roman", serif;
 $font-card-title: "Source Serif 4", Georgia, "Times New Roman", serif;
 $font-card-number: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -48,24 +50,26 @@ $font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, A
 $font-nav: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 $font-label: "IBM Plex Mono", Monaco, Consolas, "Lucida Console", monospace;
 $mona-blue: #0a1e3e;
+$mona-academic-blue: #174a7c;
+$mona-soft-blue: #dcebfa;
 $mona-pearl: #fafbfd;
 $mona-silver: #bcccdf;
 $mona-gold: #c9a646;
 $mona-border: rgba(188, 204, 223, .85);
-$mona-card-bg: rgba(255, 255, 255, .88);
-$mona-card-shadow: 0 14px 38px rgba(7, 17, 31, .08);
+$mona-card-bg: rgba(255, 255, 255, .9);
+$mona-card-shadow: 0 18px 48px rgba(7, 17, 31, .07);
 $mona-hover-shadow: 0 20px 50px rgba(7, 17, 31, .16);
 $mona-card-radius: 24px;
 $mona-profile-radius: 28px;
 $mona-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, .85);
 $mona-gold-edge: inset 0 0 0 1px rgba(201, 166, 70, .35);
-$type-home-display: clamp(2.08rem, 2.95vw, 3.15rem);
-$type-home-role: clamp(1.04rem, 1.28vw, 1.22rem);
-$type-home-track: clamp(.86rem, .92vw, .94rem);
-$type-home-section: clamp(1.52rem, 1.85vw, 1.92rem);
-$type-home-card-title: clamp(1.02rem, 1.08vw, 1.14rem);
-$type-home-body: clamp(.94rem, .92vw, 1rem);
-$type-home-small: clamp(.74rem, .78vw, .82rem);
+$type-home-display: clamp(2.18rem, 3.15vw, 3.35rem);
+$type-home-role: clamp(1rem, 1.18vw, 1.16rem);
+$type-home-track: clamp(.82rem, .86vw, .9rem);
+$type-home-section: clamp(1.48rem, 1.72vw, 1.82rem);
+$type-home-card-title: clamp(1rem, 1.04vw, 1.12rem);
+$type-home-body: clamp(.88rem, .9vw, .96rem);
+$type-home-small: clamp(.68rem, .72vw, .78rem);
 
 .paper-box {
     display: flex;
@@ -160,7 +164,7 @@ h1:before, .anchor:before {
     align-content: center;
     padding: .78rem .9rem;
     overflow: hidden;
-    border: 1.5px solid $mona-border;
+    border: 1px solid $mona-border;
     border-radius: $mona-card-radius;
     background:
         linear-gradient(135deg, $mona-card-bg, rgba(250, 251, 253, .9)),
@@ -191,7 +195,7 @@ h1:before, .anchor:before {
     span,
     em {
         margin-top: .3rem;
-        color: #53677b;
+        color: rgba(10, 30, 62, .62);
         font-family: $font-label;
         font-size: .76em;
         font-style: normal;
@@ -203,8 +207,8 @@ h1:before, .anchor:before {
 
 .scholar-matrix__cell--profile {
     background:
-        radial-gradient(circle at 15% 16%, rgba(116, 215, 239, .32), rgba(116, 215, 239, 0) 44%),
-        linear-gradient(135deg, $mona-blue, #123c5c 58%, #1e6f9d);
+        radial-gradient(circle at 15% 16%, rgba(220, 235, 250, .28), rgba(220, 235, 250, 0) 44%),
+        linear-gradient(135deg, $mona-blue, $mona-academic-blue 58%, #2f7db7);
     color: #effbff;
     box-shadow: 0 14px 30px rgba(16, 44, 72, .18), inset 0 1px 0 rgba(255, 255, 255, .18);
 
@@ -805,6 +809,113 @@ h1:before, .anchor:before {
     scroll-margin-top: 6rem;
 }
 
+.home-after-content #honors-awards + h2 + ul {
+    display: grid;
+    gap: .56rem;
+    margin: 1rem 0 2.35rem;
+    padding: .92rem 1rem;
+    list-style: none;
+    border: 1px solid $mona-border;
+    border-radius: $mona-card-radius;
+    background:
+        radial-gradient(circle at 96% 8%, rgba(201, 166, 70, .12), transparent 12rem),
+        linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(250, 251, 253, .9));
+    box-shadow: $mona-card-shadow, $mona-inner-highlight;
+
+    li {
+        position: relative;
+        min-height: 2.7rem;
+        margin: 0;
+        padding: .5rem .65rem .5rem 3.8rem;
+        border: 1px solid rgba(188, 204, 223, .58);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .74);
+        color: rgba(10, 30, 62, .72);
+        font-family: $font-body;
+        font-size: $type-home-small;
+        line-height: 1.36;
+        box-shadow: 0 6px 16px rgba(7, 17, 31, .045), $mona-inner-highlight;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 1.12rem;
+            width: .48rem;
+            height: .48rem;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            background: $mona-gold;
+            box-shadow: 0 0 0 2px rgba(201, 166, 70, .22), 0 3px 8px rgba(74, 70, 38, .16);
+            transform: translateY(-50%);
+        }
+
+        em:first-child {
+            position: absolute;
+            top: 50%;
+            left: 1.92rem;
+            color: $mona-gold;
+            font-family: $font-card-number;
+            font-size: .92rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+.presentation-list {
+    display: grid;
+    gap: .72rem;
+    margin: 1rem 0 2.4rem;
+    padding: 0;
+    list-style: none;
+
+    li {
+        position: relative;
+        margin: 0;
+        padding: .86rem 1rem .86rem 1.12rem;
+        border: 1px solid $mona-border;
+        border-radius: 16px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(250, 251, 253, .9));
+        box-shadow: 0 8px 20px rgba(7, 17, 31, .055), $mona-inner-highlight;
+        color: rgba(10, 30, 62, .7);
+        font-family: $font-body;
+        font-size: clamp(.8rem, .84vw, .9rem);
+        line-height: 1.48;
+    }
+
+    li::before {
+        content: "";
+        position: absolute;
+        top: .92rem;
+        bottom: .92rem;
+        left: 0;
+        width: 3px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, $mona-blue, $mona-academic-blue 58%, $mona-gold);
+    }
+
+    strong {
+        color: $mona-blue;
+        font-weight: 800;
+    }
+
+    em {
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-style: normal;
+        font-weight: 700;
+    }
+
+    a {
+        color: $mona-academic-blue;
+        font-weight: 700;
+        text-decoration: none;
+    }
+}
+
 @include breakpoint(max-width $medium) {
     .research-globe__connectors {
         display: none;
@@ -869,10 +980,10 @@ h1:before, .anchor:before {
     position: relative;
     margin: 1.25rem 0 2.4rem;
     padding: .95rem 1.05rem .9rem;
-    border: 1.5px solid $mona-border;
+    border: 1px solid $mona-border;
     border-radius: $mona-card-radius;
     background:
-        radial-gradient(circle at 10% 0%, rgba(111, 205, 239, .18), transparent 18rem),
+        radial-gradient(circle at 10% 0%, rgba(220, 235, 250, .7), transparent 18rem),
         radial-gradient(circle at 96% 12%, rgba(213, 164, 56, .12), transparent 12rem),
         linear-gradient(145deg, $mona-card-bg, rgba(250, 251, 253, .9));
     box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
@@ -890,7 +1001,7 @@ h1:before, .anchor:before {
 
     h2 {
         margin: 0;
-        color: #132d55;
+        color: $mona-blue;
         font-family: $font-card-title;
         font-size: clamp(1.22rem, 1.36vw, 1.42rem);
         line-height: 1.1;
@@ -945,7 +1056,7 @@ h1:before, .anchor:before {
     gap: .36rem;
     min-height: 1.85rem;
     padding: .28rem .66rem;
-    border: 1.5px solid $mona-border;
+    border: 1px solid $mona-border;
     border-radius: 12px;
     background: rgba(255, 255, 255, .9);
     color: $mona-blue;
@@ -980,10 +1091,10 @@ h1:before, .anchor:before {
     gap: .72rem;
     min-height: 4.05rem;
     padding: .52rem .7rem .52rem .85rem;
-    border: 1.5px solid rgba(188, 204, 223, .7);
+    border: 1px solid rgba(188, 204, 223, .74);
     border-radius: 16px;
     background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(250, 251, 253, .9));
-    box-shadow: 0 8px 18px rgba(7, 17, 31, .06), inset 0 1px 0 rgba(255, 255, 255, .85);
+    box-shadow: 0 8px 20px rgba(7, 17, 31, .055), inset 0 1px 0 rgba(255, 255, 255, .85);
 }
 
 .experience-list__item:not(:has(.experience-list__chevron)) {
@@ -1071,7 +1182,7 @@ h1:before, .anchor:before {
 
     p {
         margin: .12rem 0 0;
-        color: #526273;
+        color: rgba(10, 30, 62, .64);
         font-size: $type-home-small;
         line-height: 1.32;
     }
@@ -1131,10 +1242,10 @@ h1:before, .anchor:before {
     display: grid;
     margin: 1.15rem 0 2.4rem;
     padding: .3rem .7rem;
-    border: 1.5px solid $mona-border;
+    border: 1px solid $mona-border;
     border-radius: $mona-card-radius;
     background:
-        radial-gradient(circle at 4% 0%, rgba(111, 205, 239, .14), transparent 15rem),
+        radial-gradient(circle at 4% 0%, rgba(220, 235, 250, .76), transparent 15rem),
         linear-gradient(145deg, $mona-card-bg, rgba(250, 251, 253, .9));
     box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
     backdrop-filter: saturate(140%) blur(6px);
@@ -1146,7 +1257,7 @@ h1:before, .anchor:before {
     gap: .58rem;
     align-items: center;
     padding: .72rem .18rem;
-    border-bottom: 1px solid rgba(181, 195, 210, .58);
+    border-bottom: 1px solid rgba(188, 204, 223, .56);
 
     &:last-child {
         border-bottom: 0;
@@ -1160,7 +1271,7 @@ h1:before, .anchor:before {
     gap: .58rem;
     color: $mona-blue;
     font-family: $font-card-title;
-    font-size: clamp(.95rem, .98vw, 1.02rem);
+    font-size: clamp(.88rem, .92vw, .98rem);
     line-height: 1.12;
 
     strong {
@@ -1175,14 +1286,14 @@ h1:before, .anchor:before {
     height: 1.24rem;
     flex: 0 0 auto;
     place-items: center;
-    border: 1px solid rgba(47, 83, 126, .28);
+    border: 1px solid rgba(188, 204, 223, .9);
     border-radius: .24rem;
-    background: linear-gradient(135deg, #ffffff, #edf6fb);
+    background: linear-gradient(135deg, #ffffff, $mona-soft-blue);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .92), 0 4px 10px rgba(24, 43, 67, .09);
 }
 
 .skill-row__icon::before {
-    color: #173c63;
+    color: $mona-academic-blue;
     font-size: .72rem;
     font-weight: 900;
     line-height: 1;
@@ -1228,7 +1339,7 @@ h1:before, .anchor:before {
         align-items: center;
         justify-content: center;
         padding: .24rem .7rem;
-        border: 1px solid rgba(182, 197, 212, .72);
+        border: 1px solid rgba(188, 204, 223, .72);
         border-radius: 12px;
         background: linear-gradient(135deg, #ffffff, $mona-pearl);
         color: $mona-blue;
@@ -1287,7 +1398,7 @@ h1:before, .anchor:before {
     align-items: center;
     gap: .28rem;
     padding: .38rem .78rem;
-    border: 1.5px solid rgba(188, 204, 223, .72);
+    border: 1px solid rgba(188, 204, 223, .72);
     border-radius: 999px;
     background: rgba(255, 255, 255, .86);
     color: $mona-blue;
@@ -1306,7 +1417,7 @@ h1:before, .anchor:before {
     &:hover,
     &.is-active {
         border-color: rgba(213, 164, 56, .56);
-        background: linear-gradient(135deg, #eaf6fc, #fff8e8);
+        background: linear-gradient(135deg, $mona-soft-blue, #fff8e8);
         color: $mona-blue;
         box-shadow: 0 8px 18px rgba(47, 125, 183, .14);
     }
@@ -1316,7 +1427,7 @@ h1:before, .anchor:before {
     grid-column: 1 / -1;
     margin: .5rem 0 0;
     padding: 1rem;
-    border: 1.5px dashed rgba(188, 204, 223, .7);
+    border: 1px dashed rgba(188, 204, 223, .7);
     border-radius: $mona-card-radius;
     background: rgba(248, 251, 253, .82);
     color: #536577;
@@ -1329,7 +1440,7 @@ h1:before, .anchor:before {
     gap: 1.25rem;
     align-items: stretch;
     padding: .9rem;
-    border: 1.5px solid $mona-border;
+    border: 1px solid $mona-border;
     border-radius: $mona-card-radius;
     background: linear-gradient(135deg, $mona-card-bg 0%, rgba(250, 251, 253, .94) 100%);
     box-shadow: $mona-card-shadow, inset 0 1px 0 rgba(255, 255, 255, .85);
@@ -1379,7 +1490,7 @@ h1:before, .anchor:before {
         margin: .25rem 0 .5rem;
         color: $mona-blue;
         font-family: $font-card-title;
-        font-size: clamp(1.22rem, 1.32vw, 1.42rem);
+        font-size: clamp(1.08rem, 1.16vw, 1.28rem);
         font-weight: 700;
         line-height: 1.22;
     }
@@ -1394,7 +1505,7 @@ h1:before, .anchor:before {
     flex-wrap: wrap;
     gap: .45rem;
     align-items: center;
-    color: #51677d;
+    color: rgba(10, 30, 62, .62);
     font-family: $font-label;
     font-size: $type-home-small;
     font-weight: 500;
@@ -1415,7 +1526,7 @@ h1:before, .anchor:before {
 .pub-card__summary,
 .pub-card__focus {
     margin-bottom: .5rem;
-    color: #45576a;
+    color: rgba(10, 30, 62, .7);
 }
 
 .pub-card__authors {
@@ -1433,7 +1544,7 @@ h1:before, .anchor:before {
 
 .pub-card__summary,
 .pub-card__focus {
-    color: #25384b;
+    color: rgba(10, 30, 62, .82);
     font-size: clamp(.88rem, .9vw, .96rem);
     line-height: 1.54;
     max-width: 58rem;
@@ -1473,7 +1584,7 @@ h1:before, .anchor:before {
     left: 0;
     z-index: 1000;
     border-bottom: 0;
-    background: rgba(250, 251, 253, .96);
+    background: rgba(250, 251, 253, .98);
     box-shadow: none;
     backdrop-filter: saturate(150%) blur(10px);
 }
@@ -1481,12 +1592,12 @@ h1:before, .anchor:before {
 .masthead__inner-wrap {
     width: min(96vw, 96rem);
     max-width: none !important;
-    margin: .55rem auto .38rem;
-    padding: .42rem .78rem !important;
-    border: 1.5px solid rgba(188, 204, 223, .75);
+    margin: .38rem auto .28rem;
+    padding: .36rem .72rem !important;
+    border: 1px solid rgba(188, 204, 223, .78);
     border-radius: 40px;
-    background: rgba(255, 255, 255, .72);
-    box-shadow: 0 10px 24px rgba(7, 17, 31, .06), $mona-inner-highlight;
+    background: rgba(255, 255, 255, .78);
+    box-shadow: 0 10px 24px rgba(7, 17, 31, .055), $mona-inner-highlight;
     backdrop-filter: saturate(140%) blur(10px);
 }
 
@@ -1522,10 +1633,10 @@ h1:before, .anchor:before {
 
     .visible-links a {
         margin: 0;
-        padding: .52rem .34rem .48rem;
+        padding: .48rem .34rem .46rem;
         color: $mona-blue;
         font-family: $font-nav;
-        font-size: clamp(.72rem, .78vw, .8rem);
+        font-size: clamp(.68rem, .72vw, .76rem);
         font-weight: 600;
         letter-spacing: .005em;
         line-height: 1;
@@ -1559,21 +1670,21 @@ h1:before, .anchor:before {
 .masthead__signature {
     color: $mona-blue !important;
     font-family: $font-signature !important;
-    font-size: clamp(1.38rem, 1.74vw, 1.9rem) !important;
-    font-weight: 900 !important;
-    letter-spacing: .015em !important;
+    font-size: clamp(1.34rem, 1.8vw, 1.92rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0 !important;
     line-height: 1 !important;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .masthead__language-toggle {
     display: inline-flex !important;
     align-items: center;
     gap: .18rem;
-    min-height: 2.1rem;
+    min-height: 1.95rem;
     margin-left: auto;
     padding: .18rem !important;
-    border: 1.5px solid rgba(188, 204, 223, .72);
+    border: 1px solid rgba(188, 204, 223, .72);
     border-radius: 999px;
     background: rgba(255, 255, 255, .86);
     box-shadow: 0 8px 20px rgba(7, 17, 31, .06), $mona-inner-highlight;
@@ -1582,7 +1693,7 @@ h1:before, .anchor:before {
     a {
         display: inline-flex !important;
         min-width: 2.25rem;
-        min-height: 1.58rem;
+        min-height: 1.48rem;
         align-items: center;
         justify-content: center;
         margin: 0 !important;
@@ -1592,7 +1703,7 @@ h1:before, .anchor:before {
         background: transparent;
         color: rgba(10, 30, 62, .52) !important;
         font-family: $font-nav;
-        font-size: .76rem;
+        font-size: .72rem;
         font-weight: 600;
         line-height: 1;
         text-decoration: none !important;
@@ -1617,9 +1728,9 @@ h1:before, .anchor:before {
 
 body.home-page {
     background:
-        radial-gradient(circle at 12% 0%, rgba(117, 197, 226, .24), rgba(117, 197, 226, 0) 24rem),
+        radial-gradient(circle at 12% 0%, rgba(220, 235, 250, .9), rgba(220, 235, 250, 0) 24rem),
         radial-gradient(circle at 88% 16%, rgba(214, 170, 68, .14), rgba(214, 170, 68, 0) 18rem),
-        linear-gradient(180deg, $mona-pearl 0%, #f6f9fc 39%, #edf3f7 100%);
+        linear-gradient(180deg, $mona-pearl 0%, #f6f9fc 39%, #eef5fb 100%);
     color: $mona-blue;
     font-family: $font-body;
     font-size: 16px;
@@ -1657,7 +1768,7 @@ body.home-page .page__content {
     align-items: center;
     justify-content: flex-start;
     margin: 0;
-    padding: 4.55rem clamp(1.2rem, 4vw, 3.4rem) clamp(1.8rem, 3vw, 2.8rem);
+    padding: 4.25rem clamp(1.2rem, 4vw, 3.4rem) clamp(1.8rem, 3vw, 2.8rem);
     scroll-margin-top: 5rem;
 }
 
@@ -1682,8 +1793,8 @@ body.home-page .page__content {
         url("/images/MyWeb_background_main.png");
     background-position: center;
     background-size: cover;
-    border: 1.5px solid rgba(188, 204, 223, .55);
-    box-shadow: 0 26px 58px rgba(7, 17, 31, .12), inset 0 1px 0 rgba(255, 255, 255, .65);
+    border: 1px solid rgba(188, 204, 223, .62);
+    box-shadow: 0 26px 58px rgba(7, 17, 31, .1), inset 0 1px 0 rgba(255, 255, 255, .65);
 }
 
 body.home-page.is-home-panel-transition .home-landing__hero,
@@ -1721,9 +1832,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
     border: 2px solid rgba(188, 204, 223, .95);
     border-radius: $mona-profile-radius;
     background:
-        radial-gradient(circle at 92% 0%, rgba(188, 204, 223, .2), transparent 22rem),
-        linear-gradient(135deg, rgba(255, 255, 255, .88), rgba(250, 251, 253, .82));
-    box-shadow: 0 24px 60px rgba(7, 17, 31, .12), 0 0 0 1px rgba(255, 255, 255, .6), $mona-inner-highlight, $mona-gold-edge;
+        radial-gradient(circle at 92% 0%, rgba(220, 235, 250, .42), transparent 22rem),
+        linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(250, 251, 253, .84));
+    box-shadow: 0 24px 60px rgba(7, 17, 31, .1), 0 0 0 1px rgba(255, 255, 255, .6), $mona-inner-highlight;
     backdrop-filter: saturate(150%) blur(10px);
 
     img {
@@ -1732,7 +1843,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         border: 2px solid rgba(188, 204, 223, .9);
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 0 14px 32px rgba(7, 17, 31, .12), 0 0 0 6px rgba(250, 251, 253, .95), 0 0 0 8px rgba(201, 166, 70, .32), $mona-inner-highlight;
+        box-shadow: 0 14px 32px rgba(7, 17, 31, .12), 0 0 0 6px rgba(250, 251, 253, .95), 0 0 0 8px rgba(201, 166, 70, .25), $mona-inner-highlight;
     }
 
     h1 {
@@ -1768,7 +1879,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .home-landing__role {
     margin-top: 0 !important;
-    color: #1f6ba1 !important;
+    color: $mona-academic-blue !important;
     font-size: $type-home-role !important;
     font-weight: 700;
     line-height: 1.25 !important;
@@ -1776,7 +1887,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .home-landing__track {
     margin-top: .1rem !important;
-    color: rgba(10, 30, 62, .68) !important;
+    color: rgba(10, 30, 62, .64) !important;
     font-size: $type-home-track !important;
     font-weight: 500;
     line-height: 1.32 !important;
@@ -1800,7 +1911,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         gap: .46rem;
         min-height: 2.18rem;
         padding: .32rem .72rem;
-        border: 1.5px solid $mona-border;
+        border: 1px solid $mona-border;
         border-radius: 999px;
         background: rgba(255, 255, 255, .9);
         color: $mona-blue;
@@ -1808,7 +1919,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         font-size: $type-home-small;
         font-weight: 600;
         text-decoration: none !important;
-        box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
+        box-shadow: 0 6px 18px rgba(7, 17, 31, .075), $mona-inner-highlight;
         transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
@@ -1905,9 +2016,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
     max-width: $x-large;
     margin: 0 auto;
     padding: clamp(4rem, 7vh, 5.5rem) 1rem 3rem;
-    border-top: 1px solid rgba(142, 163, 187, .32);
-    background: linear-gradient(180deg, rgba(255, 255, 255, .99), rgba(242, 248, 252, .95));
-    box-shadow: 0 -28px 60px rgba(54, 84, 112, .11);
+    border-top: 1px solid rgba(188, 204, 223, .36);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .99), rgba(244, 249, 253, .96));
+    box-shadow: 0 -28px 60px rgba(54, 84, 112, .095);
     scroll-margin-top: 0;
 
     &::before {
@@ -1918,7 +2029,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         right: 1rem;
         height: .42rem;
         border-radius: 999px;
-        background: linear-gradient(90deg, rgba(47, 125, 183, 0), rgba(47, 125, 183, .48), rgba(213, 164, 56, .42), rgba(47, 125, 183, 0));
+        background: linear-gradient(90deg, rgba(23, 74, 124, 0), rgba(23, 74, 124, .42), rgba(201, 166, 70, .38), rgba(23, 74, 124, 0));
         box-shadow: 0 0 24px rgba(47, 125, 183, .18);
     }
 }
@@ -1933,12 +2044,12 @@ body.home-page.is-home-panel-transition .home-after-landing {
         position: relative;
         overflow: hidden;
         padding: 1rem .95rem 1.1rem;
-        border: 1.5px solid $mona-border;
+        border: 1px solid $mona-border;
         border-radius: $mona-card-radius;
         background:
-            radial-gradient(circle at 20% 0%, rgba(116, 215, 239, .28), rgba(116, 215, 239, 0) 42%),
-            linear-gradient(160deg, rgba(255, 255, 255, .96), rgba(237, 246, 251, .92) 58%, rgba(225, 234, 241, .92));
-        box-shadow: $mona-card-shadow, $mona-inner-highlight, $mona-gold-edge;
+            radial-gradient(circle at 20% 0%, rgba(220, 235, 250, .72), rgba(220, 235, 250, 0) 42%),
+            linear-gradient(160deg, rgba(255, 255, 255, .96), rgba(245, 249, 253, .92) 58%, rgba(235, 242, 248, .92));
+        box-shadow: $mona-card-shadow, $mona-inner-highlight;
         backdrop-filter: saturate(140%) blur(6px);
 
         &::before {
@@ -1948,7 +2059,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #173c63, #60c6e7, #d5a438);
+            background: linear-gradient(90deg, $mona-blue, $mona-academic-blue, $mona-gold);
         }
 
         &::after {
@@ -1978,7 +2089,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         padding: 4px;
         border: 2px solid rgba(188, 204, 223, .9);
         background: linear-gradient(135deg, #ffffff, #d8edf8);
-        box-shadow: 0 12px 28px rgba(50, 72, 92, .16), 0 0 0 5px rgba(255, 255, 255, .62), 0 0 0 7px rgba(201, 166, 70, .22);
+        box-shadow: 0 12px 28px rgba(50, 72, 92, .14), 0 0 0 5px rgba(255, 255, 255, .62), 0 0 0 7px rgba(201, 166, 70, .18);
     }
 
     .author__name {
@@ -1991,7 +2102,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     }
 
     .author__bio {
-        color: #1d6fa8;
+        color: $mona-academic-blue;
         font-weight: 800;
         line-height: 1.42;
     }
@@ -2015,7 +2126,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
         min-height: 2.18rem;
         margin: 0;
         padding: .32rem .72rem;
-        border: 1.5px solid $mona-border;
+        border: 1px solid $mona-border;
         border-radius: 999px;
         background: rgba(255, 255, 255, .9);
         box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
@@ -2095,25 +2206,25 @@ body.home-page.is-home-panel-transition .home-after-landing {
         &::after {
             content: "";
             display: block;
-            width: 3.2rem;
-            height: .26rem;
+            width: 3rem;
+            height: .16rem;
             margin-top: .34rem;
             border-radius: 999px;
-            background: linear-gradient(90deg, #2f7db7, #74d7ef, #d5a438);
-            box-shadow: 0 0 14px rgba(47, 125, 183, .25);
+            background: linear-gradient(90deg, $mona-blue, $mona-academic-blue 56%, $mona-gold);
+            box-shadow: 0 0 14px rgba(23, 74, 124, .14);
         }
     }
 
     > p {
         max-width: 58rem;
-        color: #2e4458;
+        color: rgba(10, 30, 62, .72);
         font-size: $type-home-body;
         line-height: 1.76;
     }
 
     > p:first-of-type {
         margin-top: .25rem;
-        color: #173c63;
+        color: $mona-academic-blue;
         font-size: clamp(1rem, .98vw, 1.06rem);
         font-weight: 600;
     }
@@ -2198,10 +2309,10 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .research-interest-card {
     position: relative;
-    min-height: 15rem;
+    min-height: 15.75rem;
     overflow: hidden;
-    padding: 1.28rem 1.2rem 1.25rem;
-    border: 1.5px solid $mona-border;
+    padding: 1.32rem 1.26rem 1.28rem;
+    border: 1px solid $mona-border;
     border-radius: $mona-card-radius;
     background:
         radial-gradient(circle at 86% 90%, rgba(76, 141, 190, .12), rgba(76, 141, 190, 0) 34%),
@@ -2239,11 +2350,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
     h3 {
         position: relative;
         z-index: 1;
-        margin: 1rem 0 .88rem;
-        padding-bottom: .82rem;
+        margin: .92rem 0 .82rem;
+        padding-bottom: .78rem;
         color: $mona-blue;
         font-family: $font-card-title;
-        font-size: $type-home-card-title;
+        font-size: clamp(1.08rem, 1.16vw, 1.24rem);
         font-weight: 700;
         line-height: 1.18;
 
@@ -2263,11 +2374,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
         z-index: 1;
         max-width: 15.5rem;
         margin: 0;
-        color: #536273;
+        color: rgba(10, 30, 62, .68);
         font-family: $font-body;
         font-weight: 400;
-        font-size: $type-home-small;
-        line-height: 1.52;
+        font-size: clamp(.78rem, .82vw, .88rem);
+        line-height: 1.56;
     }
 
     &:hover {
@@ -2283,7 +2394,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     display: block;
     color: $mona-gold;
     font-family: $font-card-number;
-    font-size: clamp(2rem, 2.1vw, 2.28rem);
+    font-size: clamp(2.18rem, 2.34vw, 2.54rem);
     font-weight: 600;
     line-height: 1;
 }
@@ -2297,11 +2408,11 @@ body.home-page.is-home-panel-transition .home-after-landing {
     width: 2.35rem;
     height: 2.35rem;
     place-items: center;
-    border: 1.5px solid rgba(188, 204, 223, .82);
+    border: 1px solid rgba(188, 204, 223, .9);
     border-radius: 50%;
     background: linear-gradient(145deg, #ffffff, #f2f6fa);
     box-shadow: 0 4px 12px rgba(33, 53, 74, .08), $mona-inner-highlight;
-    color: #1a4d87;
+    color: $mona-academic-blue;
     font-size: 1rem;
 }
 
@@ -2332,7 +2443,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
 .research-interest-card--air {
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, .98) 0%, rgba(248, 251, 253, .94) 62%, rgba(233, 239, 245, .96) 100%);
+        linear-gradient(180deg, rgba(255, 255, 255, .98) 0%, rgba(248, 251, 253, .94) 62%, rgba(220, 235, 250, .36) 100%);
 
     &::after {
         width: 72%;
