@@ -8,6 +8,8 @@
 # Site Settings
 title                    : "Mingling (Mona) Yang"
 description              : "Environmental epidemiology, exposure science, PFAS/exposomics, global health, data science, data management, statistics, and machine learning"
+url                      : "https://minglingyang.github.io"
+baseurl                  : ""
 repository               : "MinglingYang/MinglingYang.github.io"
 google_scholar_stats_use_cdn : true
 
@@ -23,7 +25,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Mingling (Mona) Yang"
   avatar           : "images/android-chrome-512x512.png"
-  bio              : "Incoming Ph.D. Student in Epidemiology"
+  bio              : "Ph.D. Student in Epidemiology"
   location         : "Los Angeles, CA"
   employer         :  "USC Keck School<br>of Medicine"
   pubmed           : 

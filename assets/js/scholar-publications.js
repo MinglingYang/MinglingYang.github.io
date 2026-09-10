@@ -1,6 +1,7 @@
 (function () {
-  var METRICS_REFRESH_MS = 5 * 60 * 1000;
-  var PUBLICATION_REFRESH_MS = 24 * 60 * 60 * 1000;
+  var WEEKLY_REFRESH_MS = 7 * 24 * 60 * 60 * 1000;
+  var METRICS_REFRESH_MS = WEEKLY_REFRESH_MS;
+  var PUBLICATION_REFRESH_MS = WEEKLY_REFRESH_MS;
   var MAX_FILTER_TAGS = 15;
   var publicationRefreshTimer = null;
   var metricsRefreshTimer = null;

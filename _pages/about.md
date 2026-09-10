@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "Mingling (Mona) Yang"
-excerpt: "Incoming Ph.D. student in Epidemiology at USC; environmental epidemiology, exposure science, PFAS/exposomics, and global respiratory health."
+excerpt: "Ph.D. student in Epidemiology at USC; environmental epidemiology, exposure science, PFAS/exposomics, and global respiratory health."
 author_profile: true
 redirect_from:
   - /about/
@@ -14,7 +14,7 @@ redirect_from:
     <img src="images/android-chrome-512x512.png" alt="Mingling Mona Yang">
     <div>
       <h1>Mingling (Mona) Yang</h1>
-      <p class="home-landing__role">Incoming Ph.D. Student in Epidemiology</p>
+      <p class="home-landing__role">Ph.D. Student in Epidemiology</p>
       <p class="home-landing__track">Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
         <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M7 3.75h8.25L19 7.5v12.75H7z"/><path d="M15 3.75V8h4"/><path d="M10 12h6M10 15h6M10 18h4"/></svg></span><span>CV</span></a>
@@ -33,11 +33,11 @@ redirect_from:
   </aside>
   <div class="home-after-content" markdown="1">
 
-Hi, I’m Mona Yang. Welcome to my personal website. I am an incoming PhD student in Epidemiology at the Keck School of Medicine at the University of Southern California. My commitment to environmental epidemiology began during my undergraduate studies at the University of South Carolina. Through participating in local flood relief efforts and witnessing the profound impact of the COVID-19 pandemic firsthand, I came to understand how structural inequalities can intensify environmental health risks.
+Hi, I’m Mona Yang. Welcome to my personal website. I am a Ph.D. student in Epidemiology at the Keck School of Medicine at the University of Southern California. My commitment to environmental epidemiology began during my undergraduate studies at the University of South Carolina. Through participating in local flood relief efforts and witnessing the profound impact of the COVID-19 pandemic firsthand, I came to understand how structural inequalities can intensify environmental health risks.
 
 These experiences motivated me to build a strong quantitative foundation through rigorous training in mathematics and statistics during my undergraduate and graduate studies. Later, during my three years as a biostatistician at Johns Hopkins University, I gained a deeper appreciation for how epidemiologic frameworks can translate complex exposure data into preventive strategies and public health policy.
 
-As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida Chatzi, I hope to broaden my research in environmental health, with a focus on PFAS, exposomics, multi-omics, and life-course approaches to environmental epidemiology.
+As a Ph.D. student in Epidemiology at USC under the mentorship of Dr. Vaia Lida Chatzi, I am broadening my research in environmental health, with a focus on PFAS, exposomics, multi-omics, and life-course approaches to environmental epidemiology.
 
 <div id="scholar-summary" class="scholar-summary scholar-matrix" aria-live="polite">
   <a class="scholar-matrix__cell scholar-matrix__cell--profile" href="https://scholar.google.com/citations?user=cNanG64AAAAJ">
@@ -121,8 +121,8 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
     <article data-location="education-usc" data-country="United States" data-region="North America" data-modules="education" data-count="0" data-start="2026" data-end="2031" data-order="3" data-lat="34.02" data-lon="-118.29">
       <span>University of Southern California</span>
       <em>Los Angeles, California</em>
-      <strong>Incoming Ph.D. student in Epidemiology.</strong>
-      <p>Environmental Health Track at the Keck School of Medicine, beginning Fall 2026.</p>
+      <strong>Ph.D. student in Epidemiology.</strong>
+      <p>Environmental Health Track at the Keck School of Medicine, since Fall 2026.</p>
     </article>
     <article data-location="peru" data-country="Peru" data-region="Latin America" data-modules="project publication" data-count="4" data-start="2023" data-end="2026" data-lat="-9.19" data-lon="-75.02" data-cities="Puno|-15.84|-70.02;Lima|-12.05|-77.04">
       <span>Peru</span>
@@ -319,7 +319,7 @@ As I begin my PhD in Epidemiology at USC under the mentorship of Dr. Vaia Lida C
         <h3>University of Southern California</h3>
         <p>Ph.D. in Epidemiology, Environmental Health Track, Keck School of Medicine</p>
       </div>
-      <time>Fall 2026</time>
+      <time>2026 - Present</time>
     </article>
 
     <article class="experience-list__item">
