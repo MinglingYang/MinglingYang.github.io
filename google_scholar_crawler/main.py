@@ -34,6 +34,8 @@ def metric_payload(author, publications):
 
 
 scope = os.environ.get("SCHOLAR_CRAWL_SCOPE", "full").strip().lower()
+scholarly.set_timeout(20)
+scholarly.set_retries(2)
 author: dict = scholarly.search_author_id(os.environ["GOOGLE_SCHOLAR_ID"])
 scholarly.fill(author, sections=["basics", "indices", "counts", "publications"])
 author["updated"] = now_stamp()

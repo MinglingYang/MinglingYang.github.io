@@ -92,6 +92,8 @@ data-lon="-118.29"
 
 定时任务每周一 08:00 UTC 运行，并把 JSON 数据发布到 `google-scholar-stats` 分支。
 
+Google Scholar 没有提供正式的公开个人主页 API，有时会暂时限制 GitHub 服务器的请求。单次失败不会删除分支中上一次成功的数据；可以稍后手动重试，不建议通过增加运行频率解决。
+
 ## 8. 可选：只让自己查看 Google Analytics
 
 Analytics 后台默认不公开。访客可能向 Analytics 发送匿名访问事件，但不能打开你的统计后台。

@@ -96,6 +96,8 @@ If you only need English, remove the language buttons from `_includes/masthead.h
 
 The scheduled workflow runs every Monday at 08:00 UTC and publishes JSON files to the `google-scholar-stats` branch.
 
+Google Scholar does not provide an official public profile API and may temporarily throttle GitHub-hosted requests. A failed run leaves the previously published branch data in place; wait and run the workflow manually later rather than increasing its frequency.
+
 ## 8. Optional private Google Analytics reporting
 
 Analytics reports are private by default. Site visitors can send anonymous usage events, but they cannot open your Analytics dashboard.
