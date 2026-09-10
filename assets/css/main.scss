@@ -2445,20 +2445,20 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__urls li {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         gap: .5rem;
         width: 100%;
         box-sizing: border-box;
         min-height: 2.18rem;
         margin: 0;
-        padding: .32rem .72rem;
+        padding: .32rem 1.25rem;
         border: 1px solid $mona-border;
         border-radius: 999px;
         background: rgba(255, 255, 255, .9);
         box-shadow: 0 6px 18px rgba(7, 17, 31, .08), $mona-inner-highlight;
         font-size: $type-home-small;
         line-height: 1.25;
-        text-align: center;
+        text-align: left;
     }
 
     .author__urls li:has(a) {
@@ -2484,7 +2484,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     .author__urls a {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         gap: .5rem;
         width: 100%;
         height: 100%;
@@ -2500,7 +2500,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     .author__url-text {
         min-width: 0;
-        text-align: center;
+        text-align: left;
     }
 
     .author__urls .home-link-icon {
