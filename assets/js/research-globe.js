@@ -21,6 +21,8 @@
   var moduleButtons = Array.prototype.slice.call(document.querySelectorAll("[data-globe-module]"));
   var cardNodes = Array.prototype.slice.call(document.querySelectorAll("#research-globe-left [data-location], #research-globe-right [data-location]"));
   var worldFeatures = [];
+  var adminFeatures = [];
+  var adminDataRequested = false;
   var minYear = yearInput ? Number(yearInput.getAttribute("min") || 2017) : 2017;
   var maxYear = Math.max(new Date().getFullYear(), minYear);
 
@@ -625,6 +627,26 @@
     ctx.restore();
   }
 
+  function drawAdminBoundaries(width, height, radius) {
+    if (zoom < 1.8 || !adminFeatures.length) return;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
+    ctx.clip();
+    var opacity = Math.min(.68, .22 + (zoom - 1.8) * .22);
+    var strokeStyle = "rgba(225, 241, 255, " + opacity.toFixed(2) + ")";
+    var lineWidth = Math.min(1.05, .55 + (zoom - 1.8) * .16);
+    adminFeatures.forEach(function (feature) {
+      if (!feature.geometry) return;
+      var polygons = feature.geometry.type === "Polygon" ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+      polygons.forEach(function (polygon) {
+        if (!polygon || !polygon[0]) return;
+        drawGeoRing(polygon[0], width, height, radius, "rgba(0, 0, 0, 0)", strokeStyle, lineWidth);
+      });
+    });
+    ctx.restore();
+  }
+
   function drawArrowHead(from, to, color) {
     var angle = Math.atan2(to.y - from.y, to.x - from.x);
     var size = 8.5;
@@ -816,6 +838,7 @@
     drawEarthTexture(width, height, radius);
     drawGlobeLighting(width, height, radius);
     drawLand(width, height, radius);
+    drawAdminBoundaries(width, height, radius);
     drawGraticule(width, height, radius);
     drawEducationPath(width, height, radius);
     drawSites(width, height, radius);
@@ -1007,12 +1030,13 @@
 
   function changeZoom(delta) {
     pauseSpin(3000);
-    zoom = clamp(zoom + delta, .82, 1.72);
+    zoom = clamp(zoom + delta, .82, 3.2);
+    if (zoom >= 1.8) loadAdminBoundaries();
     syncInputs();
   }
 
-  if (zoomIn) zoomIn.addEventListener("click", function () { changeZoom(.08); });
-  if (zoomOut) zoomOut.addEventListener("click", function () { changeZoom(-.08); });
+  if (zoomIn) zoomIn.addEventListener("click", function () { changeZoom(.12); });
+  if (zoomOut) zoomOut.addEventListener("click", function () { changeZoom(-.12); });
 
   canvas.addEventListener("pointerdown", function (event) {
     pauseSpin(8000);
@@ -1073,6 +1097,22 @@
       })
       .catch(function () {
         worldFeatures = [];
+      });
+  }
+
+  function loadAdminBoundaries() {
+    if (!window.fetch || adminDataRequested) return;
+    adminDataRequested = true;
+    window.fetch("https://cdn.jsdelivr.net/gh/nvkelso/natural-earth-vector@v5.1.2/geojson/ne_50m_admin_1_states_provinces.geojson")
+      .then(function (response) {
+        if (!response.ok) throw new Error("Administrative boundary data unavailable");
+        return response.json();
+      })
+      .then(function (data) {
+        adminFeatures = data.features || [];
+      })
+      .catch(function () {
+        adminFeatures = [];
       });
   }
 

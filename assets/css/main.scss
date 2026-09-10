@@ -1337,9 +1337,8 @@ h1:before, .anchor:before {
 }
 
 .skill-row__icon--exposure::before {
-    content: "GIS";
-    font-size: .42rem;
-    letter-spacing: -.02em;
+    content: "G";
+    font-family: $font-card-number;
 }
 
 .skill-row__icon--omics::before {
@@ -2266,7 +2265,7 @@ body.home-page.is-home-panel-transition .home-after-landing {
     flex: 0 0 auto;
     place-items: center;
     color: $mona-blue;
-    font-size: .82rem;
+    font-size: .9rem;
     font-weight: 900;
     line-height: 1;
 
@@ -2278,8 +2277,8 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     svg {
         display: block;
-        width: 1.02rem;
-        height: 1.02rem;
+        width: 1rem;
+        height: 1rem;
         fill: none;
         stroke: currentColor;
         stroke-linecap: round;
@@ -2289,9 +2288,9 @@ body.home-page.is-home-panel-transition .home-after-landing {
 }
 
 .home-link-icon--researchgate {
-    width: 1.24rem;
+    width: 1.12rem;
     font-family: $font-card-number;
-    font-size: .96rem;
+    font-size: .9rem;
     letter-spacing: -.03em;
 }
 
@@ -2305,15 +2304,15 @@ body.home-page.is-home-panel-transition .home-after-landing {
 
     sup {
         position: relative;
-        top: -.18rem;
-        margin-left: -.04rem;
-        font-size: .54em;
+        top: -.16rem;
+        margin-left: -.05rem;
+        font-size: .42em;
         line-height: 1;
     }
 }
 
 .home-link-icon--github {
-    font-size: .92rem;
+    font-size: .9rem;
 }
 
 .home-link-icon--cv,

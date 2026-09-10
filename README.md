@@ -94,4 +94,6 @@ The generated `_site/` directory is ignored by Git.
 
 Originally based on [AcadHomepage](https://github.com/RayeRen/acad-homepage.github.io), with work derived from [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) and [Academic Pages](https://github.com/academicpages/academicpages.github.io). This version includes substantial custom design, mapping, publication, and bilingual functionality.
 
+Country and first-level administrative boundary data are provided by [Natural Earth](https://www.naturalearthdata.com/) and are in the public domain.
+
 Distributed under the [MIT License](LICENSE). Keep the original attribution when redistributing the template.

@@ -87,4 +87,6 @@ bundle exec jekyll build
 
 本网站最初基于 [AcadHomepage](https://github.com/RayeRen/acad-homepage.github.io)，并参考了 [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) 和 [Academic Pages](https://github.com/academicpages/academicpages.github.io)。当前版本已加入大量定制的视觉、地图、论文和双语功能。
 
+国家与一级行政区边界数据来自 [Natural Earth](https://www.naturalearthdata.com/)，属于公共领域数据。
+
 项目使用 [MIT License](../LICENSE)。
