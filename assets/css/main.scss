@@ -2033,7 +2033,7 @@ h1:before, .anchor:before {
     a.is-active {
         background: $mona-blue;
         color: $mona-pearl !important;
-        box-shadow: 0 6px 14px rgba(7, 17, 31, .18), $mona-gold-edge;
+        box-shadow: 0 6px 14px rgba(7, 17, 31, .18);
         transform: none;
     }
 }
