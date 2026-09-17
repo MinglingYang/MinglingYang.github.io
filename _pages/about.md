@@ -441,5 +441,17 @@ As a Ph.D. student in Epidemiology at USC under the mentorship of Dr. Vaia Lida 
   </div>
 </section>
 
+<section class="home-template-cta" aria-label="Open-source academic website template">
+  <div>
+    <span>Open-source teaching template</span>
+    <h2>Build your own academic website</h2>
+    <p>Reuse this bilingual GitHub Pages template with Google Scholar updates, an interactive research globe, SEO, and complete English and Chinese setup guides.</p>
+  </div>
+  <div class="home-template-cta__actions">
+    <a href="/academic-website-template/" target="_self">Explore the template</a>
+    <a href="https://github.com/new?template_name=MinglingYang.github.io&amp;template_owner=MinglingYang" target="_blank" rel="noopener">Use this template</a>
+  </div>
+</section>
+
   </div>
 </div>

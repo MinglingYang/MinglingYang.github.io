@@ -4,14 +4,16 @@
       <nav id="site-nav-static" class="site-nav-static">
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a class="masthead__signature" href="#about-me" target="_self">Mona Yang</a></li>
+          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a class="masthead__signature" href="{{ '/' | relative_url }}#about-me" target="_self">Mona Yang</a></li>
           {% for link in site.data.navigation.main %}
             <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}" target="_self">{{ link.title }}</a></li>
           {% endfor %}
-          <li class="masthead__menu-item masthead__language-toggle" aria-label="Language toggle">
-            <a class="is-active" href="#lang-en" data-language-choice="en" target="_self">EN</a>
-            <a href="#lang-zh" data-language-choice="zh" target="_self">中文</a>
-          </li>
+          {% unless page.language_toggle == false %}
+            <li class="masthead__menu-item masthead__language-toggle" aria-label="Language toggle">
+              <a class="is-active" href="#lang-en" data-language-choice="en" target="_self">EN</a>
+              <a href="#lang-zh" data-language-choice="zh" target="_self">中文</a>
+            </li>
+          {% endunless %}
         </ul>
         <ul class="hidden-links hidden"></ul>
       </nav>

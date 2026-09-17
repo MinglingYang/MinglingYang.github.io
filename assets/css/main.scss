@@ -2849,3 +2849,416 @@ body.home-page.is-home-panel-transition .home-after-landing {
         box-shadow: 0 0 0 16px rgba(83, 202, 246, 0);
     }
 }
+
+.home-template-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: center;
+    margin: 2.6rem 0 1rem;
+    padding: clamp(1.35rem, 2.8vw, 2.2rem);
+    border: 1px solid rgba(188, 204, 223, .88);
+    border-radius: $mona-card-radius;
+    background:
+        radial-gradient(circle at 88% 18%, rgba(201, 166, 70, .15), rgba(201, 166, 70, 0) 32%),
+        linear-gradient(135deg, rgba(9, 31, 65, .98), rgba(18, 63, 107, .96));
+    box-shadow: $mona-card-shadow;
+    color: $mona-pearl;
+
+    span {
+        display: block;
+        margin-bottom: .45rem;
+        color: #e5c86e;
+        font-family: $font-nav;
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        margin: 0 0 .55rem !important;
+        padding: 0 !important;
+        border: 0 !important;
+        color: #fff !important;
+        font-family: $font-card-title !important;
+        font-size: clamp(1.55rem, 2.4vw, 2.25rem) !important;
+        line-height: 1.08;
+    }
+
+    p {
+        max-width: 46rem;
+        margin: 0 !important;
+        color: rgba(246, 249, 253, .8);
+        font-size: .92rem;
+        line-height: 1.62;
+    }
+
+    @include breakpoint(max-width $medium) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.home-template-cta__actions {
+    display: flex;
+    min-width: 11.5rem;
+    flex-direction: column;
+    gap: .58rem;
+
+    a {
+        display: inline-flex;
+        min-height: 2.7rem;
+        align-items: center;
+        justify-content: center;
+        padding: .66rem 1rem;
+        border: 1px solid rgba(255, 255, 255, .3);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .08);
+        color: #fff !important;
+        font-family: $font-nav;
+        font-size: .78rem;
+        font-weight: 800;
+        text-decoration: none !important;
+        transition: transform .18s ease, background .18s ease;
+
+        &:first-child {
+            border-color: #e5c86e;
+            background: #e5c86e;
+            color: #102b50 !important;
+        }
+
+        &:hover {
+            background: #fff;
+            color: #102b50 !important;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+body.template-page {
+    background:
+        radial-gradient(circle at 8% 8%, rgba(47, 125, 183, .1), transparent 30rem),
+        linear-gradient(180deg, #f8fbfe 0%, #ffffff 36rem);
+
+    #main {
+        max-width: 78rem;
+        margin-top: 0;
+        padding: 2rem clamp(1rem, 3vw, 2rem) 4rem;
+    }
+
+    .page {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        float: none;
+    }
+
+    @include breakpoint(max-width $medium) {
+        .masthead .visible-links {
+            justify-content: center;
+        }
+
+        .masthead .visible-links .masthead__menu-item {
+            display: none !important;
+        }
+
+        .masthead .visible-links .masthead__menu-home-item {
+            display: block !important;
+            padding: .3rem 0 !important;
+        }
+
+        .masthead__signature {
+            font-size: 1.45rem !important;
+        }
+    }
+}
+
+.template-guide {
+    color: rgba(10, 30, 62, .78);
+    font-family: $font-body;
+
+    h1,
+    h2 {
+        border: 0 !important;
+        color: $mona-blue;
+        font-family: $font-card-title;
+    }
+
+    h1 {
+        max-width: 58rem;
+        margin: 0 auto .9rem !important;
+        padding: 0 !important;
+        font-size: clamp(2.35rem, 5vw, 4.7rem);
+        line-height: .98;
+        letter-spacing: -.035em;
+    }
+
+    h2 {
+        margin: 0 0 1.25rem !important;
+        padding: 0 !important;
+        font-size: clamp(1.65rem, 2.8vw, 2.6rem);
+        line-height: 1.08;
+    }
+}
+
+.template-guide__hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(3rem, 8vw, 6.8rem) clamp(1.3rem, 5vw, 4.6rem);
+    border: 1px solid rgba(188, 204, 223, .9);
+    border-radius: clamp(1.2rem, 3vw, 2.3rem);
+    background:
+        radial-gradient(circle at 82% 18%, rgba(229, 200, 110, .22), transparent 24rem),
+        radial-gradient(circle at 8% 90%, rgba(71, 145, 199, .18), transparent 28rem),
+        linear-gradient(145deg, #ffffff, #edf5fb);
+    box-shadow: 0 24px 55px rgba(7, 17, 31, .11), $mona-inner-highlight;
+    text-align: center;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: -8rem;
+        bottom: -11rem;
+        width: 25rem;
+        height: 25rem;
+        border: 1px solid rgba(17, 62, 107, .12);
+        border-radius: 50%;
+        box-shadow: 0 0 0 3rem rgba(17, 62, 107, .035), 0 0 0 6rem rgba(17, 62, 107, .025);
+        pointer-events: none;
+    }
+}
+
+.template-guide__eyebrow {
+    margin: 0 0 .8rem !important;
+    color: #9c7418;
+    font-family: $font-nav;
+    font-size: .76rem !important;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.template-guide__lead {
+    max-width: 50rem;
+    margin: 0 auto 1.7rem !important;
+    color: rgba(10, 30, 62, .66);
+    font-size: clamp(1rem, 1.6vw, 1.23rem) !important;
+    line-height: 1.65;
+}
+
+.template-guide__actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .65rem;
+}
+
+.template-guide .template-guide__button {
+    display: inline-flex;
+    min-height: 2.85rem;
+    align-items: center;
+    justify-content: center;
+    padding: .68rem 1.15rem;
+    border: 1px solid rgba(17, 62, 107, .22);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .78);
+    box-shadow: 0 7px 18px rgba(7, 17, 31, .07);
+    color: $mona-blue;
+    font-family: $font-nav;
+    font-size: .8rem;
+    font-weight: 800;
+    text-decoration: none !important;
+    transition: transform .18s ease, box-shadow .18s ease;
+
+    &:hover {
+        box-shadow: 0 11px 22px rgba(7, 17, 31, .12);
+        transform: translateY(-2px);
+    }
+}
+
+.template-guide .template-guide__button--primary {
+    border-color: $mona-blue;
+    background: $mona-blue;
+    color: #fff;
+}
+
+.template-guide__section {
+    margin-top: clamp(2.8rem, 6vw, 5.2rem);
+}
+
+.template-guide__features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+
+    article {
+        min-height: 10.5rem;
+        padding: 1.4rem;
+        border: 1px solid $mona-border;
+        border-radius: $mona-card-radius;
+        background: rgba(255, 255, 255, .88);
+        box-shadow: $mona-card-shadow, $mona-inner-highlight;
+    }
+
+    strong {
+        display: block;
+        margin-bottom: .7rem;
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-size: 1.06rem;
+    }
+
+    span {
+        color: rgba(10, 30, 62, .66);
+        font-size: .88rem;
+        line-height: 1.6;
+    }
+
+    @include breakpoint(max-width $large) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include breakpoint(max-width $small) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.template-guide__section--steps {
+    padding: clamp(1.4rem, 4vw, 3.4rem);
+    border-radius: $mona-card-radius;
+    background: $mona-blue;
+    color: rgba(255, 255, 255, .8);
+
+    h2 {
+        color: #fff;
+    }
+
+    ol {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 0 0 1.7rem;
+        padding: 0;
+        counter-reset: guide-step;
+        list-style: none;
+    }
+
+    li {
+        position: relative;
+        padding: 3.2rem 1rem 1rem;
+        border: 1px solid rgba(255, 255, 255, .14);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, .06);
+        counter-increment: guide-step;
+
+        &::before {
+            content: "0" counter(guide-step);
+            position: absolute;
+            top: .85rem;
+            left: 1rem;
+            color: #e5c86e;
+            font-family: $font-card-number;
+            font-size: 1.45rem;
+            font-weight: 700;
+        }
+    }
+
+    strong,
+    span {
+        display: block;
+    }
+
+    strong {
+        margin-bottom: .45rem;
+        color: #fff;
+    }
+
+    span {
+        font-size: .84rem;
+        line-height: 1.55;
+    }
+
+    .template-guide__button {
+        border-color: rgba(255, 255, 255, .24);
+        background: rgba(255, 255, 255, .1);
+        color: #fff;
+    }
+
+    .template-guide__button--primary {
+        border-color: #e5c86e;
+        background: #e5c86e;
+        color: #102b50;
+    }
+
+    @include breakpoint(max-width $large) {
+        ol {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @include breakpoint(max-width $small) {
+        ol {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.template-guide__section--zh {
+    padding: clamp(1.4rem, 4vw, 3.2rem);
+    border: 1px solid rgba(201, 166, 70, .36);
+    border-radius: $mona-card-radius;
+    background: linear-gradient(145deg, rgba(255, 253, 246, .96), rgba(248, 251, 253, .96));
+
+    p:not(.template-guide__eyebrow) {
+        max-width: 62rem;
+        line-height: 1.85;
+    }
+}
+
+.template-guide__faq {
+    max-width: 62rem;
+    margin-right: auto;
+    margin-left: auto;
+
+    details {
+        border-top: 1px solid $mona-border;
+        padding: 1rem .15rem;
+    }
+
+    details:last-child {
+        border-bottom: 1px solid $mona-border;
+    }
+
+    summary {
+        cursor: pointer;
+        color: $mona-blue;
+        font-family: $font-card-title;
+        font-weight: 700;
+    }
+
+    p {
+        margin: .8rem 0 0 !important;
+        color: rgba(10, 30, 62, .66);
+        line-height: 1.65;
+    }
+}
+
+.template-guide__footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid $mona-border;
+    color: rgba(10, 30, 62, .56);
+    text-align: center;
+
+    p {
+        margin-bottom: .35rem !important;
+        font-size: .82rem !important;
+    }
+
+    a {
+        color: $mona-academic-blue;
+        font-size: .82rem;
+    }
+}
