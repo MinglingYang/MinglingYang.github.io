@@ -1,7 +1,10 @@
 ---
 permalink: /
 title: "Mingling (Mona) Yang"
-excerpt: "Ph.D. student in Epidemiology at USC; environmental epidemiology, exposure science, PFAS/exposomics, and global respiratory health."
+seo_title: "Mingling (Mona) Yang | Environmental Epidemiology"
+description: "Mingling (Mona) Yang is a USC Epidemiology Ph.D. student researching environmental epidemiology, exposure science, PFAS, exposomics, and global respiratory health."
+excerpt: "Mingling (Mona) Yang is a USC Epidemiology Ph.D. student researching environmental epidemiology, exposure science, PFAS/exposomics, and global respiratory health."
+image: "/images/social-preview.png"
 author_profile: true
 redirect_from:
   - /about/

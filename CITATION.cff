@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If this template helps you build an academic website, please cite or link to the repository."
+title: "Bilingual Academic Website Template with Research Globe and Google Scholar Integration"
+type: software
+authors:
+  - family-names: "Yang"
+    given-names: "Mingling"
+    alias: "Mona Yang"
+repository-code: "https://github.com/MinglingYang/MinglingYang.github.io"
+url: "https://minglingyang.github.io/"
+license: MIT
+keywords:
+  - academic website
+  - academic portfolio
+  - GitHub Pages
+  - Jekyll
+  - Google Scholar
+  - bilingual website
+  - research visualization

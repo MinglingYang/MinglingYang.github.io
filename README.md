@@ -1,15 +1,18 @@
-# Mingling (Mona) Yang — Academic Homepage
+# Mingling (Mona) Yang — Bilingual Academic Website & Template
 
 [![Website](https://img.shields.io/badge/website-minglingyang.github.io-174a7c?style=flat-square)](https://minglingyang.github.io/)
+[![Use this template](https://img.shields.io/badge/use_this-template-c9a646?style=flat-square&logo=github)](https://github.com/new?template_name=MinglingYang.github.io&template_owner=MinglingYang)
 [![Last commit](https://img.shields.io/github/last-commit/MinglingYang/MinglingYang.github.io?style=flat-square)](https://github.com/MinglingYang/MinglingYang.github.io/commits/main)
 [![License: MIT](https://img.shields.io/badge/license-MIT-c9a646?style=flat-square)](LICENSE)
 [![Google Scholar](https://img.shields.io/badge/Google-Scholar-4285F4?style=flat-square&logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=cNanG64AAAAJ)
 
-Personal academic website of **Mingling (Mona) Yang**, a Ph.D. student in Epidemiology on the Environmental Health Track at the Keck School of Medicine of the University of Southern California.
+![Mingling (Mona) Yang bilingual academic website preview](images/social-preview.png)
 
-Live site: [https://minglingyang.github.io/](https://minglingyang.github.io/)
+The personal academic website of **Mingling (Mona) Yang**, a Ph.D. student in Epidemiology on the Environmental Health Track at the Keck School of Medicine of the University of Southern California—and a reusable, open-source Jekyll template for students and researchers.
 
-[Chinese documentation / 中文说明](docs/README-zh.md)
+**[View the live website](https://minglingyang.github.io/)** · **[Use this template](https://github.com/new?template_name=MinglingYang.github.io&template_owner=MinglingYang)** · **[中文说明](docs/README-zh.md)**
+
+No paid hosting is required. The template includes bilingual content, an interactive research globe, Google Scholar automation, responsive design, SEO metadata, and GitHub Pages deployment.
 
 ## Build your own academic website
 
@@ -17,8 +20,11 @@ This repository is both Mona's live website and a reusable teaching example. Aft
 
 - [Complete English tutorial](docs/TUTORIAL.md)
 - [完整中文教程](docs/TUTORIAL-zh.md)
+- [SEO、发布与曝光增长指南](docs/SEO-LAUNCH-GUIDE-zh.md)
 
 The tutorials cover personalization, publications, the research globe, bilingual text, Google Scholar automation, optional private Google Analytics reporting, local preview, and GitHub Pages deployment.
+
+Questions, fixes, and reusable improvements are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## Research focus
 

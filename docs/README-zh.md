@@ -1,15 +1,18 @@
-# Mingling (Mona) Yang 学术主页
+# Mingling (Mona) Yang 双语学术主页与开源模板
 
 [![个人网站](https://img.shields.io/badge/website-minglingyang.github.io-174a7c?style=flat-square)](https://minglingyang.github.io/)
+[![使用模板](https://img.shields.io/badge/使用此模板-c9a646?style=flat-square&logo=github)](https://github.com/new?template_name=MinglingYang.github.io&template_owner=MinglingYang)
 [![最近提交](https://img.shields.io/github/last-commit/MinglingYang/MinglingYang.github.io?style=flat-square)](https://github.com/MinglingYang/MinglingYang.github.io/commits/main)
 [![MIT License](https://img.shields.io/badge/license-MIT-c9a646?style=flat-square)](../LICENSE)
 [![Google Scholar](https://img.shields.io/badge/Google-Scholar-4285F4?style=flat-square&logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=cNanG64AAAAJ)
 
-这是 **Mingling (Mona) Yang** 的个人学术网站。Mona 现为南加州大学凯克医学院环境健康方向流行病学博士生。
+![Mingling (Mona) Yang 双语学术网站预览](../images/social-preview.png)
 
-网站：[https://minglingyang.github.io/](https://minglingyang.github.io/)
+这是 **Mingling (Mona) Yang** 的个人学术网站，也是面向学生与研究人员的开源 Jekyll 教学模板。Mona 现为南加州大学凯克医学院环境健康方向流行病学博士生。
 
-[英文说明](../README.md)
+**[查看网站](https://minglingyang.github.io/)** · **[使用此模板](https://github.com/new?template_name=MinglingYang.github.io&template_owner=MinglingYang)** · **[英文说明](../README.md)**
+
+无需付费主机。模板包含双语内容、交互式研究地球、Google Scholar 自动更新、响应式设计、SEO 元数据和 GitHub Pages 部署。
 
 ## 用它制作你的个人网站
 
@@ -17,6 +20,7 @@
 
 - [完整中文教程](TUTORIAL-zh.md)
 - [Complete English tutorial](TUTORIAL.md)
+- [SEO、发布与曝光增长指南](SEO-LAUNCH-GUIDE-zh.md)
 
 教程包含个人信息替换、论文与研究地图、双语文本、Google Scholar 自动更新、仅管理员可见的 Google Analytics、本地预览和 GitHub Pages 发布。
 
