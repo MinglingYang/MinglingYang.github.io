@@ -58,6 +58,7 @@
       "tags": ["COPD screening", "SGRQ", "Spirometry", "Resource-limited settings"],
       "focus": "Evaluated a low-cost SGRQ-based COPD screening strategy for places where spirometry access is limited.",
       "summary": "COPD case-finding is difficult where spirometry access is limited. This study tested SGRQ-based screening against spirometry-defined COPD across LMIC cohorts and identified a practical pathway for prioritizing confirmatory testing.",
+      "featured": true,
       "featured_order": 3
     },
     {
@@ -93,7 +94,7 @@
       "cover": "images/publications/covers/jama-network-open-cover.svg",
       "tags": ["Household air pollution", "Biomass cooking", "Severe pneumonia", "Infant health"],
       "focus": "Connected household biomass cooking exposure with severe pneumonia risk in infant health analyses.",
-      "summary": "The contribution of biomass cooking to severe infant pneumonia is difficult to quantify in real-world settings. This HAPIN analysis used intervention and exposure data to link household air pollution with clinically important infant respiratory illness.",
+      "summary": "I contributed to data visualization, replicated parts of the analysis in R, and created an R Markdown report to present the results.",
       "featured_order": 5
     },
     {
