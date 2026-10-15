@@ -249,26 +249,6 @@ As a Ph.D. student in Epidemiology at USC under the mentorship of Dr. Vaia Lida 
   <div class="experience-list__items">
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--emory"><img src="images/logos/emory-university-seal.svg" alt="Emory University seal"></span>
-      <div class="experience-list__content">
-        <h3>Rollins School of Public Health, Emory University</h3>
-        <p>Data Analyst - Environmental Health &amp; Epidemiology</p>
-      </div>
-      <time>Jan 2025 - May 2026</time>
-    </article>
-
-    <article class="experience-list__item">
-      <span class="experience-list__dot"></span>
-      <span class="experience-list__crest experience-list__crest--jhu"><img src="images/logos/johns-hopkins-academic-seal.svg" alt="Johns Hopkins University seal"></span>
-      <div class="experience-list__content">
-        <h3>Johns Hopkins Bloomberg School of Public Health</h3>
-        <p>Research Assistant - Department of Environmental Health and Engineering</p>
-      </div>
-      <time>Dec 2023 - May 2026</time>
-    </article>
-
-    <article class="experience-list__item">
-      <span class="experience-list__dot"></span>
       <span class="experience-list__crest experience-list__crest--medicine"><img src="images/logos/johns-hopkins-academic-seal.svg" alt="Johns Hopkins University seal"></span>
       <div class="experience-list__content">
         <h3>Johns Hopkins University School of Medicine</h3>
