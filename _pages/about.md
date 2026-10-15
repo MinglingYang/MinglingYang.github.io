@@ -38,7 +38,7 @@ redirect_from:
 
 Hi, I’m Mona Yang. Welcome to my personal website. I am a Ph.D. student in Epidemiology at the Keck School of Medicine at the University of Southern California. My commitment to environmental epidemiology began during my undergraduate studies at the University of South Carolina. Through participating in local flood relief efforts and witnessing the profound impact of the COVID-19 pandemic firsthand, I came to understand how structural inequalities can intensify environmental health risks.
 
-These experiences motivated me to build a strong quantitative foundation through rigorous training in mathematics and statistics during my undergraduate and graduate studies. Later, during my three years as a biostatistician at Johns Hopkins University, I gained a deeper appreciation for how epidemiologic frameworks can translate complex exposure data into preventive strategies and public health policy.
+These experiences motivated me to build a strong quantitative foundation through rigorous training in mathematics and statistics during my undergraduate and graduate studies. Later, during my three years as a Senior Research Data Analyst at Johns Hopkins University, I gained a deeper appreciation for how epidemiologic frameworks can translate complex exposure data into preventive strategies and public health policy.
 
 As a Ph.D. student in Epidemiology at USC under the mentorship of Dr. Vaia Lida Chatzi, I am broadening my research in environmental health, with a focus on PFAS, exposomics, multi-omics, and life-course approaches to environmental epidemiology.
 
