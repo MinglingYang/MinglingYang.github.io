@@ -1505,7 +1505,7 @@ h1:before, .anchor:before {
     gap: clamp(1.2rem, 2vw, 2.1rem);
     align-items: stretch;
     min-height: 18rem;
-    padding: 3rem 1.2rem 1.2rem;
+    padding: 1.2rem;
     border-color: rgba(201, 166, 70, .62);
     border-radius: $mona-card-radius;
     background:
@@ -1514,6 +1514,14 @@ h1:before, .anchor:before {
         linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(250, 251, 253, .92));
     box-shadow: 0 18px 48px rgba(7, 17, 31, .08), inset 0 1px 0 rgba(255, 255, 255, .88);
     cursor: default;
+
+    @include breakpoint(max-width $medium) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pub-card.is-featured.is-primary-featured {
+    padding-top: 3rem;
 
     &::before {
         content: "FEATURED PUBLICATION";
@@ -1528,7 +1536,6 @@ h1:before, .anchor:before {
     }
 
     @include breakpoint(max-width $medium) {
-        grid-template-columns: 1fr;
         padding-top: 2.8rem;
     }
 }
