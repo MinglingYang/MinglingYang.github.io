@@ -340,7 +340,7 @@
       }).join("") + "</p>"
       : "";
     return [
-      "<article class=\"pub-card\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" data-publication-citations=\"" + escapeHtml(citation || 0) + "\" tabindex=\"0\" aria-expanded=\"false\">",
+      "<article class=\"pub-card" + (pub.featured ? " is-primary-featured" : "") + "\" id=\"" + escapeHtml(id) + "\" data-publication-tags=\"" + escapeHtml(publicationTagKeys(pub).join("|")) + "\" data-publication-citations=\"" + escapeHtml(citation || 0) + "\" tabindex=\"0\" aria-expanded=\"false\">",
       compactPublicationVisual(pub),
       "  <div class=\"pub-card__image-wrap\">",
       "    <img class=\"pub-card__image\" src=\"" + escapeHtml(versionedAssetUrl(pub.image || "images/publications/scholar-update.svg")) + "\" alt=\"Representative visual for " + escapeHtml(title) + "\" loading=\"lazy\">",
@@ -528,11 +528,16 @@
     }, visibleCards[0]);
   }
 
+  function preferredFeaturedCard(container) {
+    if (!container) return null;
+    return container.querySelector(".pub-card.is-primary-featured:not(.is-hidden-by-filter)") || highestCitationCard(container);
+  }
+
   function ensureFeaturedPublication(container) {
     if (!container) return;
     var featured = container.querySelector(".pub-card.is-featured:not(.is-hidden-by-filter)");
     if (featured) return;
-    var defaultCard = highestCitationCard(container);
+    var defaultCard = preferredFeaturedCard(container);
     if (defaultCard) setFeaturedPublication(container, defaultCard, false);
   }
 
@@ -585,7 +590,7 @@
       "<p class=\"publication-filter__empty\" id=\"publication-filter-empty\" hidden>No publications match the selected tags.</p>"
     ].join("");
     var hashCard = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
-    setFeaturedPublication(target, hashCard && hashCard.classList.contains("pub-card") ? hashCard : highestCitationCard(target), false);
+    setFeaturedPublication(target, hashCard && hashCard.classList.contains("pub-card") ? hashCard : preferredFeaturedCard(target), false);
     bindPublicationFeatureCards(target);
     bindPublicationFilters(target);
     if (window.location.hash && document.getElementById(window.location.hash.slice(1))) {
