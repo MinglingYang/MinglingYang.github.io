@@ -20,7 +20,6 @@ redirect_from:
       <p class="home-landing__role">Ph.D. Student in Epidemiology</p>
       <p class="home-landing__track">Environmental Epidemiology · Exposure Science · Biostatistics</p>
       <div class="home-landing__links">
-        <a class="home-landing__link--primary" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--cv" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M7 3.75h8.25L19 7.5v12.75H7z"/><path d="M15 3.75V8h4"/><path d="M10 12h6M10 15h6M10 18h4"/></svg></span><span>CV</span></a>
         <a href="mailto:mingling@usc.edu" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--email" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 6.5h16v11H4z"/><path d="m5 7.5 7 5.25 7-5.25"/></svg></span><span>Email</span></a>
         <a href="https://www.researchgate.net/profile/Mingling-Yang-2?ev=prf_overview" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--researchgate" aria-hidden="true"><span class="home-link-icon__rg">R<sup>G</sup></span></span><span>ResearchGate</span></a>
         <a href="https://github.com/MinglingYang" target="_blank" rel="noopener"><span class="home-link-icon home-link-icon--github" aria-hidden="true"><i class="fab fa-github"></i></span><span>GitHub</span></a>
@@ -245,7 +244,6 @@ As a Ph.D. student in Epidemiology at USC under the mentorship of Dr. Vaia Lida 
 ## Research/ Work Experience
 
 <section class="experience-list" aria-label="Research and work experience">
-  <a class="experience-list__cv-link" href="files/mingling_CV_2026-6-5.pdf" target="_blank" rel="noopener">View CV <span aria-hidden="true">→</span></a>
   <div class="experience-list__items">
     <article class="experience-list__item">
       <span class="experience-list__dot"></span>
